@@ -1,11 +1,11 @@
 const themeColors = {
+  background: "var(--color-background)",
+  backgroundLight: "var(--color-background-light)",
+
   primary: "var(--color-primary)",
   primaryDark: "var(--color-primary-dark)",
   primaryLight: "var(--color-primary-light)",
-
-  secondary: "var(--color-secondary)",
-  secondaryDark: "var(--color-secondary-dark)",
-  secondaryLight: "var(--color-secondary-light)",
+  primaryLighter: "var(--color-primary-lighter)",
 
   accent: "var(--color-accent)",
   accentDark: "var(--color-accent-dark)",
@@ -20,6 +20,7 @@ const themeColors = {
 export default {
   mode: "jit",
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  darkMode: "class",
   theme: {
     extend: {
       colors: themeColors,
