@@ -1,6 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   font-family: "Noto Sans", sans-serif;
   line-height: 1.5;
@@ -11,6 +15,22 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  --color-primary: #ff6f00;
+  --color-primary-dark: #c43e00;
+  --color-primary-light: #ffa040;
+
+  --color-secondary: #ff8f00;
+  --color-secondary-dark: #c56000;
+  --color-secondary-light: #ffc046;
+
+  --color-accent: #ff6f00;
+  --color-accent-dark: #c43e00;
+  --color-accent-light: #ffa040;
+
+  --color-error: #d32f2f;
+  --color-error-dark: #9a0007;
+  --color-error-light: #ff6659;
 }
 
 * {
