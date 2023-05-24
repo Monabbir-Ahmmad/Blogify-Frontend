@@ -24,9 +24,6 @@ export default {
   theme: {
     extend: {
       colors: themeColors,
-      backgroundColor: themeColors,
-      borderColor: themeColors,
-      ringColor: themeColors,
     },
   },
 };

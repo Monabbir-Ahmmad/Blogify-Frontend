@@ -4,11 +4,17 @@
 
 @layer components {
   .btn-base {
-    @apply font-medium rounded-lg text-sm px-5 py-2.5 outline-none text-zinc-500 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900 focus:ring-2 focus:ring-zinc-200 dark:focus:ring-zinc-700;
+    @apply text-center rounded-lg text-sm font-semibold px-4 py-3 outline-none text-zinc-800 bg-zinc-100 transition
+          duration-200 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-900 focus:ring-2 focus:ring-zinc-200 dark:focus:ring-zinc-700;
   }
 
   .icon-btn-base {
-    @apply rounded-lg text-sm p-2.5 outline-none text-zinc-500 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900 focus:ring-4 focus:ring-zinc-200 dark:focus:ring-zinc-700;
+    @apply font-semibold rounded-lg text-center text-sm p-2.5 outline-none text-zinc-800 bg-zinc-100 transition
+          duration-200 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-900 focus:ring-2 focus:ring-zinc-200 dark:focus:ring-zinc-700;
+  }
+
+  .icon-btn-primary {
+    @apply icon-btn-base text-white bg-primary hover:bg-primaryDark focus:ring-primaryLight dark:bg-primary dark:hover:bg-primaryDark dark:focus:ring-primaryLight;
   }
 
   .btn-primary {
