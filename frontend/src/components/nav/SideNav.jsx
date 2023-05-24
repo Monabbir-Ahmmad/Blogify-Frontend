@@ -65,10 +65,10 @@ function SideNav({ toggleMenu }) {
         </NavLink>
       </div>
       <div className="mt-auto flex flex-col gap-3 py-4">
-        <NavLink className="block btn-base" to="/">
+        <NavLink className="block btn-base" to="/signin">
           Sign In
         </NavLink>
-        <NavLink className="block btn-primary" to="/">
+        <NavLink className="block btn-primary" to="/signup">
           Sign Up
         </NavLink>
         <p className=" text-xs text-center text-gray-400">

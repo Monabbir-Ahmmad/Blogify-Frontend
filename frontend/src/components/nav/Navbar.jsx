@@ -24,7 +24,7 @@ function Navbar() {
       <nav className="border-b border-gray-200 relative w-full gap-2 p-4 inline-flex items-center bg-white">
         <NavLogo className="mr-4" />
 
-        <NavSearchbar className="hidden sm:block"/>
+        <NavSearchbar className="hidden sm:block" />
 
         <div className="hidden text-md text-gray-400  absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 xl:flex mx-auto items-center gap-10 w-auto">
           <NavLink
@@ -65,10 +65,13 @@ function Navbar() {
             <span>Profile</span>
           </NavLink>
         </div>
-        <NavLink className="hidden xl:inline-block xl:ml-auto btn-base" to="/">
+        <NavLink
+          className="hidden xl:inline-block xl:ml-auto btn-base"
+          to="/signin"
+        >
           Sign In
         </NavLink>
-        <NavLink className="hidden xl:inline-block btn-primary" to="/">
+        <NavLink className="hidden xl:inline-block btn-primary" to="/signup">
           Sign Up
         </NavLink>
 
