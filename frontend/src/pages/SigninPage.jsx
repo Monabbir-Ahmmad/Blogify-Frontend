@@ -1,13 +1,9 @@
-import Input from "../components/common/Input";
+import FormInput from "../components/common/FormInput";
 import React from "react";
 import { useForm } from "react-hook-form";
 
 function SigninPage() {
-  const {
-    handleSubmit,
-    register,
-    formState: { errors },
-  } = useForm();
+  const { handleSubmit, control } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
@@ -16,10 +12,10 @@ function SigninPage() {
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Input
+        <FormInput
           label="Email"
           name="email"
-          register={register}
+          control={control}
           rules={{
             required: "Email is required",
             pattern: {
@@ -29,7 +25,7 @@ function SigninPage() {
           }}
           type="email"
           placeholder="Enter your email"
-          errors={errors}
+          onChange={(e) => console.log(e.target.value)}
         />
 
         <button type="submit">Submit</button>
