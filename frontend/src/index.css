@@ -12,7 +12,7 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 
-  --color-primary: hsl(16, 86%, 54%);
+  --color-primary: #ef5b25;
   --color-primary-dark: hsl(16, 79%, 46%);
   --color-primary-light: hsl(16, 86%, 75%);
   --color-primary-lighter: hsl(16, 86%, 97%);
@@ -24,9 +24,9 @@
   --color-accent-dark: #c43e00;
   --color-accent-light: #ffa040;
 
-  --color-error: #d32f2f;
-  --color-error-dark: #9a0007;
-  --color-error-light: #ff6659;
+  --color-error: hsl(0, 69%, 54%);
+  --color-error-dark: hwb(0 22% 14%);
+  --color-error-light: #db3939;
 }
 
 * {

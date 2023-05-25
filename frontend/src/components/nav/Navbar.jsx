@@ -1,15 +1,15 @@
 import {
-  FiX as CloseIcon,
   FiHome as HomeIcon,
   FiMenu as MenuIcon,
   FiUser as ProfileIcon,
   FiFeather as WriteIcon,
 } from "react-icons/fi";
 
+import AppLogo from "../common/AppLogo";
 import { NavLink } from "react-router-dom";
-import NavLogo from "./NavLogo";
 import NavSearchbar from "./NavSearchbar";
 import SideNav from "./SideNav";
+import { twMerge } from "tailwind-merge";
 import { useState } from "react";
 
 function Navbar() {
@@ -22,7 +22,7 @@ function Navbar() {
   return (
     <>
       <nav className="border-b border-gray-200 relative w-full gap-2 p-4 inline-flex items-center bg-white">
-        <NavLogo className="mr-4" />
+        <AppLogo className="mr-4" />
 
         <NavSearchbar className="hidden sm:block" />
 
@@ -30,9 +30,10 @@ function Navbar() {
           <NavLink
             to="/write"
             className={({ isActive }) =>
-              `${
+              twMerge(
+                "inline-flex gap-2",
                 isActive ? "text-primary" : "text-gray-500 hover:text-gray-700"
-              } inline-flex gap-2`
+              )
             }
           >
             <WriteIcon size={20} />
@@ -44,9 +45,10 @@ function Navbar() {
           <NavLink
             to="/"
             className={({ isActive }) =>
-              `${
+              twMerge(
+                "inline-flex gap-2",
                 isActive ? "text-primary" : "text-gray-500 hover:text-gray-700"
-              } inline-flex gap-2`
+              )
             }
           >
             <HomeIcon size={20} />
@@ -56,9 +58,10 @@ function Navbar() {
           <NavLink
             to="/profile"
             className={({ isActive }) =>
-              `${
+              twMerge(
+                "inline-flex gap-2",
                 isActive ? "text-primary" : "text-gray-500 hover:text-gray-700"
-              } inline-flex gap-2`
+              )
             }
           >
             <ProfileIcon size={20} />
@@ -80,7 +83,10 @@ function Navbar() {
         </button>
       </nav>
       <div
-        className={`relative z-50 xl:hidden ${isMenuOpen ? "block" : "hidden"}`}
+        className={twMerge(
+          "relative z-50 hidden xl:hidden",
+          isMenuOpen && "block"
+        )}
       >
         <div className="fixed inset-0 bg-gray-800 opacity-25"></div>
 

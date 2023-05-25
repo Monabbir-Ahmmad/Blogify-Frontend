@@ -1,8 +1,9 @@
 import { FiSearch as SearchIcon } from "react-icons/fi";
+import { twMerge } from "tailwind-merge";
 
 function NavSearchbar({ className }) {
   return (
-    <form className={`relative max-w-lg ${className}`}>
+    <form className={twMerge("relative max-w-lg", className)}>
       <button
         type="submit"
         className="icon-btn-base flex absolute inset-y-0 left-0 items-center p-2.5 m-[2px]"
