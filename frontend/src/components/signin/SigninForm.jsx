@@ -22,7 +22,7 @@ function SigninForm({ onSubmit }) {
         rules={{
           required: "Email is required",
           pattern: {
-            value: /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/i,
+            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
             message: "Email is invalid",
           },
         }}

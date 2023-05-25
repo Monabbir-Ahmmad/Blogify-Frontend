@@ -16,10 +16,9 @@ function SigninPage() {
   const signupMutation = useMutation({
     mutationFn: authService.signin,
     onSuccess: (data) => {
-      authContext.setAuthState(data);
-      navigate("/");
+      authContext.setAuthData(data);
     },
-    onError: (error) => toast.error(error.message),
+    onError: (error) => toast.error(error.response.data.message),
   });
 
   const onSignin = (data) => signupMutation.mutate(data);
@@ -34,10 +33,6 @@ function SigninPage() {
         <p className="text-center text-gray-600">
           Sign in to your account to continue
         </p>
-
-        {signupMutation.isLoading && (
-          <p className="text-gray-600">Loading...</p>
-        )}
 
         <div className="w-5/6 md:w-4/6">
           <SigninForm onSubmit={onSignin} />

@@ -1,5 +1,5 @@
 const apiUrl = {
-  host: import.meta.env.VITE_API_URL,
+  base: import.meta.env.VITE_API,
   auth: {
     signin: "/auth/signin",
     signup: "/auth/signup",
@@ -40,7 +40,5 @@ const apiUrl = {
     getBlog: "/search/blog",
   },
 };
-
-console.log(apiUrl);
 
 export default apiUrl;

@@ -2,6 +2,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastContainer, toast } from "react-toastify";
 
 import ContextWrapper from "./contexts/ContextWrapper";
+import LoadingOverlay from "./components/common/loader/LoadingOverlay";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Router from "./Router";
 
@@ -13,6 +14,9 @@ function App() {
       <ContextWrapper>
         <Router />
       </ContextWrapper>
+
+      <LoadingOverlay />
+
       <ToastContainer
         position={toast.POSITION.BOTTOM_CENTER}
         autoClose={5000}
@@ -25,6 +29,7 @@ function App() {
         pauseOnHover
         theme="colored"
       />
+
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
