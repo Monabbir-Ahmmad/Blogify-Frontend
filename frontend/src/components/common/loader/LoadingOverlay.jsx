@@ -15,7 +15,7 @@ const LoadingOverlay = () => {
         data={loadingIcon}
         className="max-w-xs w-full"
       />
-      <span className="text-2xl text-primaryLight">Loading</span>
+      <span className="text-2xl text-primaryLighter">Loading</span>
     </div>
   );
 };

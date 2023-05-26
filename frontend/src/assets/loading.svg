@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><svg
+<svg
   id="eGLNm5OzxB71"
   xmlns="http://www.w3.org/2000/svg"
   xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -243,7 +243,7 @@
       d="M-180,0C-180,-99.411255,-99.411255,-180,0,-180C99.411255,-180,180,-99.411255,180,0C180,99.411255,99.411255,180,0,180C-99.411255,180,-180,99.411255,-180,0Z"
       transform="matrix(0 -1 -1 -0 300 299.59000475000005)"
       fill="none"
-      stroke="#f6a688"
+      stroke="#eee6ff"
       stroke-width="20.100000"
       stroke-linecap="round"
       stroke-dasharray="0,1131.130000"
@@ -253,7 +253,7 @@
       d="M-180,0C-180,-99.411255,-99.411255,-180,0,-180C99.411255,-180,180,-99.411255,180,0C180,99.411255,99.411255,180,0,180C-99.411255,180,-180,99.411255,-180,0Z"
       transform="matrix(0 -1 -1 -0 300 300)"
       fill="none"
-      stroke="#ff8146"
+      stroke="#a981fd"
       stroke-width="20.100000"
       stroke-linecap="round"
       stroke-dasharray="0,1131.130000"
@@ -263,7 +263,7 @@
       d="M-180,0C-180,-99.411255,-99.411255,-180,0,-180C99.411255,-180,180,-99.411255,180,0C180,99.411255,99.411255,180,0,180C-99.411255,180,-180,99.411255,-180,0Z"
       transform="matrix(0 -1 -1 -0 300 300)"
       fill="none"
-      stroke="#ff8146"
+      stroke="#a981fd"
       stroke-width="20.100000"
       stroke-linecap="round"
       stroke-dasharray="0,1131.130000"
@@ -273,7 +273,7 @@
         <path
           id="eGLNm5OzxB77"
           d="M280,450L320,450L300,480L280,450Z"
-          fill="#ff8146"
+          fill="#a981fd"
           stroke="none"
           stroke-width="1.200000"
         />
@@ -282,7 +282,7 @@
           d="M0,60.413939L0,20C0,8.954305,8.954305,0,20,0L60,0C71.045695,0,80,8.954305,80,20L80,60.413939"
           transform="matrix(1 0 0 1 260 179.99999999999997)"
           fill="none"
-          stroke="#ff8146"
+          stroke="#a981fd"
           stroke-width="20"
           stroke-linejoin="round"
         />
@@ -294,7 +294,7 @@
           ry="0"
           transform="matrix(1 0 0 1 260 240.02680600000002)"
           fill="none"
-          stroke="#ff8146"
+          stroke="#a981fd"
           stroke-width="20"
           stroke-linejoin="round"
         />
@@ -302,7 +302,7 @@
           id="eGLNm5OzxB710"
           d="M260,420L340,420L300,480L260,420Z"
           fill="none"
-          stroke="#ff8146"
+          stroke="#a981fd"
           stroke-width="20"
           stroke-linejoin="round"
         />

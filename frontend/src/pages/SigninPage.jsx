@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import AppLogo from "../components/common/AppLogo";
 import { AuthContext } from "../contexts/AuthContext";
@@ -13,38 +13,36 @@ function SigninPage() {
   const navigate = useNavigate();
   const authContext = useContext(AuthContext);
 
-  const signupMutation = useMutation({
+  const signinMutation = useMutation({
     mutationFn: authService.signin,
-    onSuccess: (data) => {
-      authContext.setAuthData(data);
-    },
+    onSuccess: () => authContext.setIsAuthenticated(true),
     onError: (error) => toast.error(error.response.data.message),
   });
 
-  const onSignin = (data) => signupMutation.mutate(data);
+  const onSignin = (data) => signinMutation.mutate(data);
 
   return (
     <div className="flex">
-      <section className="flex flex-col px-6 py-5 gap-5 items-center justify-center flex-1 h-screen bg-gray-100">
-        <AppLogo className="text-5xl" size={60} />
-        <h1 className="text-center text-5xl font-bold text-gray-800">
+      <section className="flex flex-col px-6 py-20 gap-5 items-center justify-center flex-1 min-h-screen ">
+        <AppLogo className="text-4xl" size={50} />
+        <h1 className="text-center text-4xl font-bold text-gray-800">
           Welcome Back!
         </h1>
-        <p className="text-center text-gray-600">
+        <p className="text-center text-gray-600 text-xl">
           Sign in to your account to continue
         </p>
 
-        <div className="w-5/6 md:w-4/6">
+        <div className="w-5/6 md:w-4/6 mt-5">
           <SigninForm onSubmit={onSignin} />
         </div>
         <p className="mt-4 text-gray-600">
           Don't have an account?{" "}
-          <NavLink className="text-primary font-semibold" to="/signup">
+          <Link className="text-primary font-semibold" to="/signup">
             Sign Up
-          </NavLink>
+          </Link>
         </p>
       </section>
-      <section className="flex-1 p-4 h-screen bg-primaryLight lg:flex items-center justify-center hidden ">
+      <section className="flex-[1.5] p-4 min-h-screen bg-gray-100 border-x border-gray-200 lg:flex items-center justify-center hidden ">
         <object type="image/svg+xml" data={signinImage} className="w-3/4" />
       </section>
     </div>

@@ -11,7 +11,7 @@ import NavSearchbar from "./NavSearchbar";
 import React from "react";
 import { twMerge } from "tailwind-merge";
 
-function SideNav({ toggleMenu }) {
+function SideNav({ toggleMenu, userId }) {
   return (
     <nav className="fixed top-0 left-0 bottom-0 gap-5 flex flex-col w-5/6 max-w-sm p-6 bg-white border-r overflow-y-auto">
       <div className="inline-flex items-center mb-8">
@@ -28,7 +28,7 @@ function SideNav({ toggleMenu }) {
         <NavLink
           className={({ isActive }) =>
             twMerge(
-              "border inline-flex gap-7 p-4 hover:bg-primaryLighter hover:text-primary rounded",
+              "border inline-flex gap-7 p-4 hover:bg-primaryLighter hover:text-primary rounded transition",
               isActive
                 ? "border-primary bg-primaryLighter text-primary"
                 : "border-transparent"
@@ -42,7 +42,7 @@ function SideNav({ toggleMenu }) {
         <NavLink
           className={({ isActive }) =>
             twMerge(
-              "border inline-flex gap-7 p-4 hover:bg-primaryLighter hover:text-primary rounded",
+              "border inline-flex gap-7 p-4 hover:bg-primaryLighter hover:text-primary rounded transition",
               isActive
                 ? "border-primary bg-primaryLighter text-primary"
                 : "border-transparent"
@@ -56,13 +56,13 @@ function SideNav({ toggleMenu }) {
         <NavLink
           className={({ isActive }) =>
             twMerge(
-              "border inline-flex gap-7 p-4 hover:bg-primaryLighter hover:text-primary rounded",
+              "border inline-flex gap-7 p-4 hover:bg-primaryLighter hover:text-primary rounded transition",
               isActive
                 ? "border-primary bg-primaryLighter text-primary"
                 : "border-transparent"
             )
           }
-          to="/profile"
+          to={"/profile/" + userId}
         >
           <ProfileIcon size={20} />
           <span>Profile</span>

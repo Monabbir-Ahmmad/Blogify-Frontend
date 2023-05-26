@@ -12,10 +12,10 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 
-  --color-primary: #ef5b25;
-  --color-primary-dark: hsl(16, 79%, 46%);
-  --color-primary-light: hsl(16, 86%, 75%);
-  --color-primary-lighter: hsl(16, 86%, 97%);
+  --color-primary: #864ffc;
+  --color-primary-dark: #7536fc;
+  --color-primary-light: #a981fd;
+  --color-primary-lighter: #eee6ff;
 
   --color-background: #212121;
   --color-background-light: #303030;

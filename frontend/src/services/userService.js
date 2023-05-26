@@ -3,48 +3,62 @@ import httpClient from "../utils/httpClient";
 
 class UserService {
   async getUser(id) {
-    return await httpClient.get(apiUrl.user.get + `/${id}`);
+    const res = await httpClient.get(apiUrl.user.get + `/${id}`);
+
+    return res.data;
   }
 
   async updateProfile({ id, name, email, gender, birthDate, bio }) {
-    return await httpClient.put(apiUrl.user.update + `/${id}`, {
+    const res = await httpClient.put(apiUrl.user.update + `/${id}`, {
       name,
       email,
       gender,
       birthDate,
       bio,
     });
+
+    return res.data;
   }
 
   async updatePassword(id, oldPassword, newPassword) {
-    return await httpClient.put(apiUrl.user.updatePassword + `/${id}`, {
+    const res = await httpClient.put(apiUrl.user.updatePassword + `/${id}`, {
       oldPassword,
       newPassword,
     });
+
+    return res.data;
   }
 
   async updateProfileImage(id, profileImage) {
     const formData = new FormData();
     formData.append("profileImage", profileImage);
 
-    return await httpClient.put(
+    const res = await httpClient.put(
       apiUrl.user.updateProfileImage + `/${id}`,
       formData
     );
+
+    return res.data;
   }
 
   async updateCoverImage(id, coverImage) {
     const formData = new FormData();
     formData.append("coverImage", coverImage);
 
-    return await httpClient.put(
+    const res = await httpClient.put(
       apiUrl.user.updateCoverImage + `/${id}`,
       formData
     );
+
+    return res.data;
   }
 
   async deleteProfile(id, password) {
-    return await httpClient.post(apiUrl.user.delete + `/${id}`, { password });
+    const res = await httpClient.post(apiUrl.user.delete + `/${id}`, {
+      password,
+    });
+
+    return res.data;
   }
 }
 

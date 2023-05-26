@@ -8,11 +8,19 @@ class AuthService {
 
     tokenService.setUser(res.data);
 
-    return res;
+    return res.data;
   }
 
   async signup({ name, email, password }) {
-    return await httpClient.post(apiUrl.auth.signup, { name, email, password });
+    const res = await httpClient.post(apiUrl.auth.signup, {
+      name,
+      email,
+      password,
+    });
+
+    tokenService.setUser(res.data);
+
+    return res.data;
   }
 
   async signout() {
