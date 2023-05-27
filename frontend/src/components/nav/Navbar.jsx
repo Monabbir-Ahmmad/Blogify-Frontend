@@ -66,6 +66,7 @@ function Navbar() {
               title={authData?.name}
               subtitle={authData?.email}
               image={authData?.profileImage}
+              className={"max-w-[300px]"}
             />
 
             <button

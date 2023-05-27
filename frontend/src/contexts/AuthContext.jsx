@@ -1,5 +1,6 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
+import authService from "../services/authService";
 import tokenService from "../services/tokenService";
 import { useQuery } from "@tanstack/react-query";
 import userService from "../services/userService";
@@ -12,18 +13,21 @@ function AuthContextProvider({ children, ...rest }) {
     !!tokenService.getUser()
   );
 
-  const user = tokenService.getUser();
-
   useQuery({
     enabled: isAuthenticated,
-    queryKey: ["auth", user?.userId],
+    queryKey: ["getCurrentUser"],
     queryFn: async () => {
-      let data = null;
-      if (user) data = await userService.getUser(user.userId);
+      const data = await userService.getCurrentUser();
       setAuthData(data);
       return data;
     },
   });
+
+  useEffect(() => {
+    try {
+      authService.refreshAccessToken();
+    } catch (error) {}
+  }, []);
 
   return (
     <AuthContext.Provider

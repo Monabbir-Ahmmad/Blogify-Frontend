@@ -7,12 +7,14 @@ function NavAvatar({
   title = "Example Name",
   subtitle = "example@email.com",
   reversed = false,
+  className,
 }) {
   return (
     <div
       className={twMerge(
         "flex items-center gap-4",
-        reversed && "flex-row-reverse text-right"
+        reversed && "flex-row-reverse text-right",
+        className
       )}
     >
       <img
@@ -20,9 +22,9 @@ function NavAvatar({
         src={image}
         alt={title}
       />
-      <div className="font-semibold">
+      <div className="font-semibold truncate">
         <div>{title}</div>
-        <div className="text-sm opacity-70">{subtitle}</div>
+        <div className="text-sm opacity-70 truncate">{subtitle}</div>
       </div>
     </div>
   );

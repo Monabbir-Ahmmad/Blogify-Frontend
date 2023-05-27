@@ -27,6 +27,24 @@ class AuthService {
     await httpClient.post(apiUrl.auth.signout);
     tokenService.removeUser();
   }
+
+  async forgotPassword({ email }) {
+    await httpClient.post(apiUrl.auth.forgotPassword, { email });
+  }
+
+  async resetPassword({ password, token }) {
+    await httpClient.post(apiUrl.auth.resetPassword, { password, token });
+  }
+
+  async refreshAccessToken() {
+    const refreshToken = tokenService.getLocalRefreshToken();
+
+    if (!refreshToken) return await this.signout();
+
+    await httpClient.post(apiUrl.auth.refreshToken, {
+      refreshToken,
+    });
+  }
 }
 
 export default new AuthService();

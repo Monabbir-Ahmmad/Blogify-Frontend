@@ -1,4 +1,5 @@
 import apiUrl from "../constants/apiUrl";
+import authService from "../services/authService";
 import axios from "axios";
 import tokenService from "../services/tokenService";
 
@@ -9,11 +10,7 @@ const refreshTokenInterceptor = async (err) => {
     originalConfig._retry = true;
 
     try {
-      const refreshToken = tokenService.getLocalRefreshToken();
-
-      await httpClient.post(apiUrl.auth.refreshToken, {
-        refreshToken,
-      });
+      await authService.refreshAccessToken();
 
       return httpClient(originalConfig);
     } catch (error) {

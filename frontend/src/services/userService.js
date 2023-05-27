@@ -1,7 +1,17 @@
 import apiUrl from "../constants/apiUrl";
 import httpClient from "../utils/httpClient";
+import tokenService from "./tokenService";
 
 class UserService {
+  async getCurrentUser() {
+    const user = tokenService.getUser();
+    if (!user) return null;
+
+    const res = await httpClient.get(apiUrl.user.get + `/${user.userId}`);
+
+    return res.data;
+  }
+
   async getUser(id) {
     const res = await httpClient.get(apiUrl.user.get + `/${id}`);
 
