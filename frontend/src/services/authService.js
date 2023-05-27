@@ -3,10 +3,10 @@ import httpClient from "../utils/httpClient";
 import tokenService from "./tokenService";
 
 class AuthService {
-  async signin({ email, password }) {
+  async signin({ email, password, remember }) {
     const res = await httpClient.post(apiUrl.auth.signin, { email, password });
 
-    tokenService.setUser(res.data);
+    tokenService.setUser(res.data, remember);
 
     return res.data;
   }

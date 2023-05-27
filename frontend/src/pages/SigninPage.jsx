@@ -5,7 +5,6 @@ import { AuthContext } from "../contexts/AuthContext";
 import SigninForm from "../components/signin/SigninForm";
 import authService from "../services/authService";
 import signinImage from "../assets/signinImage.svg";
-import { toast } from "react-toastify";
 import { useContext } from "react";
 import { useMutation } from "@tanstack/react-query";
 
@@ -19,7 +18,6 @@ function SigninPage() {
       authContext.setIsAuthenticated(true);
       navigate("/");
     },
-    onError: (error) => toast.error(error.response.data.message),
   });
 
   const onSignin = (data) => signinMutation.mutate(data);

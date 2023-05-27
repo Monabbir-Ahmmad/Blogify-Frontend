@@ -4,23 +4,24 @@
 
 @layer components {
   .btn-base {
-    @apply hover:tracking-[0.3em] text-center rounded-lg text-sm font-semibold px-4 py-3 outline-none bg-slate-100 transition-all
-          duration-200 hover:bg-slate-200 focus:bg-slate-200 dark:hover:bg-slate-900 shadow-md hover:shadow-lg focus:shadow-lg active:shadow-none;
+    @apply text-center bg-slate-100 rounded-lg text-sm font-semibold px-4 py-3 outline-none shadow-md transition-all duration-200
+    hover:tracking-[0.3em] hover:bg-slate-200 focus:bg-slate-200 hover:shadow-lg focus:shadow-lg
+    active:shadow-none active:bg-slate-200;
   }
 
   .icon-btn-base {
     @apply btn-base flex items-center justify-center p-2;
   }
 
-  .icon-btn-primary {
-    @apply icon-btn-base text-white bg-primary hover:bg-primaryDark focus:ring-primaryLight dark:bg-primary dark:hover:bg-primaryDark dark:focus:ring-primaryLight;
+  .btn-primary {
+    @apply btn-base text-white bg-primary hover:bg-primaryDark focus:bg-primaryDark active:bg-primaryDark;
   }
 
-  .btn-primary {
-    @apply btn-base text-white bg-primary hover:bg-primaryDark focus:ring-primaryLight dark:bg-primary dark:hover:bg-primaryDark dark:focus:ring-primaryLight;
+  .icon-btn-primary {
+    @apply icon-btn-base btn-primary;
   }
 
   .btn-primary-outlined {
-    @apply btn-primary text-primary border border-primary bg-transparent hover:bg-primaryLighter dark:hover:bg-primaryLighter dark:focus:ring-primary;
+    @apply btn-primary text-primary border border-primary bg-transparent hover:bg-primaryLighter focus:bg-primaryLighter active:bg-primaryLighter;
   }
 }

@@ -16,8 +16,7 @@ function AuthContextProvider({ children, ...rest }) {
 
   useQuery({
     enabled: isAuthenticated,
-    refetchOnWindowFocus: false,
-    queryKey: ["user", user?.userId],
+    queryKey: ["auth", user?.userId],
     queryFn: async () => {
       let data = null;
       if (user) data = await userService.getUser(user.userId);

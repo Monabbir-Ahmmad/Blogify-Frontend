@@ -1,13 +1,14 @@
 import { Controller, useForm } from "react-hook-form";
-import { FiLock as LockIcon, FiMail as MailIcon } from "react-icons/fi";
+import {
+  FiLock as LockIcon,
+  FiMail as MailIcon,
+  FiUser as UserIcon,
+} from "react-icons/fi";
 
-import Checkbox from "../common/checkbox/Checkbox";
 import Input from "../common/input/Input";
-import { useState } from "react";
 
 function SignupForm({ onSubmit }) {
   const { control, watch, handleSubmit } = useForm();
-  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <form
@@ -31,7 +32,7 @@ function SignupForm({ onSubmit }) {
             type="text"
             label="Name"
             placeholder="Enter your name"
-            startIcon={MailIcon}
+            startIcon={UserIcon}
             error={error}
             helperText={error?.message}
           />
@@ -73,8 +74,7 @@ function SignupForm({ onSubmit }) {
             message: "Password must have at least 8 characters",
           },
           pattern: {
-            value:
-              /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[\w!@#$%^&*]+$/i,
+            value: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^\w\s]).*$/i,
             message:
               "Password must contain at least one uppercase, one lowercase, one number and one special character",
           },
@@ -82,7 +82,7 @@ function SignupForm({ onSubmit }) {
         render={({ field, fieldState: { error } }) => (
           <Input
             {...field}
-            type={showPassword ? "text" : "password"}
+            type="password"
             label="Password"
             placeholder="Enter a strong password"
             startIcon={LockIcon}
@@ -104,7 +104,7 @@ function SignupForm({ onSubmit }) {
         render={({ field, fieldState: { error } }) => (
           <Input
             {...field}
-            type={showPassword ? "text" : "password"}
+            type="password"
             label="Confirm Password"
             placeholder="Enter your password again"
             startIcon={LockIcon}
@@ -114,14 +114,7 @@ function SignupForm({ onSubmit }) {
         )}
       />
 
-      <Checkbox
-        label="Show password"
-        name="showPassword"
-        value={showPassword}
-        onChange={() => setShowPassword((prev) => !prev)}
-      />
-
-      <button className="btn-primary">Create Account</button>
+      <button className="btn-primary mt-5">Create Account</button>
     </form>
   );
 }

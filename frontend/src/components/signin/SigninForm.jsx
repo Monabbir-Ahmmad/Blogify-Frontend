@@ -4,11 +4,9 @@ import { FiLock as LockIcon, FiMail as MailIcon } from "react-icons/fi";
 import Checkbox from "../common/checkbox/Checkbox";
 import Input from "../common/input/Input";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 
 function SigninForm({ onSubmit }) {
   const { control, handleSubmit } = useForm();
-  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <form
@@ -50,8 +48,7 @@ function SigninForm({ onSubmit }) {
             message: "Password must have at least 8 characters",
           },
           pattern: {
-            value:
-              /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[\w!@#$%^&*]+$/i,
+            value: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^\w\s]).*$/i,
             message:
               "Password must contain at least one uppercase, one lowercase, one number and one special character",
           },
@@ -59,7 +56,7 @@ function SigninForm({ onSubmit }) {
         render={({ field, fieldState: { error } }) => (
           <Input
             {...field}
-            type={showPassword ? "text" : "password"}
+            type="password"
             label="Password"
             placeholder="Enter your password"
             startIcon={LockIcon}
@@ -70,12 +67,13 @@ function SigninForm({ onSubmit }) {
       />
 
       <div className="flex flex-col sm:flex-row justify-between gap-4 py-2">
-        <Checkbox
-          label="Show password"
-          name="showPassword"
-          value={showPassword}
-          onChange={() => setShowPassword((prev) => !prev)}
+        <Controller
+          name="remember"
+          control={control}
+          defaultValue={false}
+          render={({ field }) => <Checkbox label="Remember me" {...field} />}
         />
+
         <Link className="text-primary font-semibold" to="/forgot-password">
           Forgot Password?
         </Link>

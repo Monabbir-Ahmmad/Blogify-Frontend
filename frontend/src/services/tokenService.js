@@ -1,18 +1,22 @@
 class TokenService {
+  getUser() {
+    const data = sessionStorage.getItem("user") || localStorage.getItem("user");
+    return JSON.parse(data);
+  }
+
+  setUser(user, remember = false) {
+    if (!remember) return sessionStorage.setItem("user", JSON.stringify(user));
+
+    return localStorage.setItem("user", JSON.stringify(user));
+  }
+
   getLocalRefreshToken() {
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = this.getUser();
     return user?.refreshToken;
   }
 
-  getUser() {
-    return JSON.parse(localStorage.getItem("user"));
-  }
-
-  setUser(user) {
-    localStorage.setItem("user", JSON.stringify(user));
-  }
-
   removeUser() {
+    sessionStorage.removeItem("user");
     localStorage.removeItem("user");
   }
 }

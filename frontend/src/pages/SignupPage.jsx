@@ -5,7 +5,6 @@ import { AuthContext } from "../contexts/AuthContext";
 import SignupForm from "../components/signup/SignupForm";
 import authService from "../services/authService";
 import signupImage from "../assets/signupImage.svg";
-import { toast } from "react-toastify";
 import { useContext } from "react";
 import { useMutation } from "@tanstack/react-query";
 
@@ -16,11 +15,9 @@ function SignupPage() {
   const signupMutation = useMutation({
     mutationFn: authService.signup,
     onSuccess: () => {
-      authContext.setIsAuthenticated(true)
+      authContext.setIsAuthenticated(true);
       navigate("/");
-    
     },
-    onError: (error) => toast.error(error.response.data.message),
   });
 
   const onSignup = (data) => signupMutation.mutate(data);
