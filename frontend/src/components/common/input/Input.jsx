@@ -21,7 +21,7 @@ const Input = forwardRef(
         {label && (
           <label
             htmlFor={name}
-            className="block uppercase tracking-wide text-gray-700 text-sm font-bold mb-2"
+            className="block uppercase text-sm font-bold mb-2"
           >
             {label}
           </label>
@@ -30,7 +30,7 @@ const Input = forwardRef(
           {StartIcon && (
             <div
               className={twMerge(
-                "absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500",
+                "absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-500",
                 error && "text-error"
               )}
             >
@@ -45,7 +45,7 @@ const Input = forwardRef(
             ref={ref}
             {...rest}
             className={twMerge(
-              "outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-gray-500 focus:border-gray-500 focus:ring-1 block w-full p-3",
+              "placeholder:text-slate-400 outline-none bg-slate-50 border border-slate-300 text-sm rounded focus:ring-slate-400 focus:border-slate-400 focus:ring-1 block w-full p-3",
               className,
               StartIcon && "pl-10",
               error && "border-error focus:border-error focus:ring-error"
@@ -54,9 +54,7 @@ const Input = forwardRef(
         </div>
 
         {helperText && (
-          <p
-            className={twMerge("text-sm text-gray-700", error && "text-error")}
-          >
+          <p className={twMerge("text-sm", error && "text-error")}>
             {helperText}
           </p>
         )}

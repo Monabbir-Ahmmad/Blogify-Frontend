@@ -11,7 +11,7 @@ function SignupForm({ onSubmit }) {
 
   return (
     <form
-      className="flex flex-col gap-4 w-full"
+      className="flex flex-col gap-5 w-full"
       onSubmit={handleSubmit(onSubmit)}
     >
       <Controller

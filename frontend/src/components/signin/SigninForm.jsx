@@ -1,9 +1,9 @@
 import { Controller, useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
 import { FiLock as LockIcon, FiMail as MailIcon } from "react-icons/fi";
 
 import Checkbox from "../common/checkbox/Checkbox";
 import Input from "../common/input/Input";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 
 function SigninForm({ onSubmit }) {
@@ -12,7 +12,7 @@ function SigninForm({ onSubmit }) {
 
   return (
     <form
-      className="flex flex-col gap-4 w-full"
+      className="flex flex-col gap-5 w-full"
       onSubmit={handleSubmit(onSubmit)}
     >
       <Controller

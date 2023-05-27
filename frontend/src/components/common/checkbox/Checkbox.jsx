@@ -12,10 +12,7 @@ const Checkbox = forwardRef(
           {...rest}
           className="w-5 h-5 accent-primary"
         />
-        <label
-          htmlFor={name}
-          className="font-medium text-gray-900 dark:text-gray-300"
-        >
+        <label htmlFor={name} className="font-medium">
           {label}
         </label>
       </div>

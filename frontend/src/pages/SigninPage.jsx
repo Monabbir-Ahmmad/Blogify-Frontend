@@ -15,7 +15,10 @@ function SigninPage() {
 
   const signinMutation = useMutation({
     mutationFn: authService.signin,
-    onSuccess: () => authContext.setIsAuthenticated(true),
+    onSuccess: () => {
+      authContext.setIsAuthenticated(true);
+      navigate("/");
+    },
     onError: (error) => toast.error(error.response.data.message),
   });
 
@@ -25,24 +28,22 @@ function SigninPage() {
     <div className="flex">
       <section className="flex flex-col px-6 py-20 gap-5 items-center justify-center flex-1 min-h-screen ">
         <AppLogo className="text-4xl" size={50} />
-        <h1 className="text-center text-4xl font-bold text-gray-800">
-          Welcome Back!
-        </h1>
-        <p className="text-center text-gray-600 text-xl">
+        <h1 className="text-center text-4xl font-bold">Welcome Back!</h1>
+        <p className="text-center text-xl opacity-80">
           Sign in to your account to continue
         </p>
 
         <div className="w-5/6 md:w-4/6 mt-5">
           <SigninForm onSubmit={onSignin} />
         </div>
-        <p className="mt-4 text-gray-600">
+        <p className="mt-4">
           Don't have an account?{" "}
           <Link className="text-primary font-semibold" to="/signup">
             Sign Up
           </Link>
         </p>
       </section>
-      <section className="flex-[1.5] p-4 min-h-screen bg-gray-100 border-x border-gray-200 lg:flex items-center justify-center hidden ">
+      <section className="flex-[1.5] p-4 min-h-screen bg-slate-50 border-x border-slate-200 lg:flex items-center justify-center hidden ">
         <object type="image/svg+xml" data={signinImage} className="w-3/4" />
       </section>
     </div>

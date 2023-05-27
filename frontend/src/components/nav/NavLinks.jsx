@@ -1,53 +1,29 @@
-import {
-  FiHome as HomeIcon,
-  FiUser as ProfileIcon,
-  FiFeather as WriteIcon,
-} from "react-icons/fi";
-
 import { NavLink } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
 
-function NavLinks({ userId }) {
+function NavLinks({ links = [] }) {
   return (
     <>
-      <NavLink
-        to="/write"
-        className={({ isActive }) =>
-          twMerge(
-            "inline-flex gap-2 transition",
-            isActive ? "text-primary" : "text-gray-500 hover:text-gray-700"
-          )
-        }
-      >
-        <WriteIcon size={20} />
-        <span>Write</span>
-      </NavLink>
-      <span>|</span>
-      <NavLink
-        to="/"
-        className={({ isActive }) =>
-          twMerge(
-            "inline-flex gap-2 transition",
-            isActive ? "text-primary" : "text-gray-500 hover:text-gray-700"
-          )
-        }
-      >
-        <HomeIcon size={20} />
-        <span>Home</span>
-      </NavLink>
-      <span>|</span>
-      <NavLink
-        to={"/profile/" + userId}
-        className={({ isActive }) =>
-          twMerge(
-            "inline-flex gap-2 transition",
-            isActive ? "text-primary" : "text-gray-500 hover:text-gray-700"
-          )
-        }
-      >
-        <ProfileIcon size={20} />
-        <span>Profile</span>
-      </NavLink>
+      {links.map(({ to, icon: Icon, text }, index) => (
+        <div key={text} className="inline-flex items-center">
+          <NavLink
+            to={to}
+            className={({ isActive }) =>
+              twMerge(
+                "inline-flex gap-2 transition-all rounded-full py-2.5 px-5 hover:text-primary",
+                "nav-link after:bg-primary",
+                isActive && "text-primary nav-link-active"
+              )
+            }
+          >
+            <Icon size={20} />
+            <span>{text}</span>
+          </NavLink>
+          {index < links.length - 1 && (
+            <div className="mx-8 inline-block h-full min-h-[1.3rem] border-r border-slate-300 dark:opacity-50"></div>
+          )}
+        </div>
+      ))}
     </>
   );
 }
