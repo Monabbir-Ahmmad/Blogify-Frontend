@@ -1,11 +1,28 @@
+import { Outlet, useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
+
+import { AuthContext } from "../contexts/AuthContext";
 import Navbar from "../components/nav/Navbar";
-import { Outlet } from "react-router-dom";
-import React from "react";
+import authService from "../services/authService";
+import { useMutation } from "@tanstack/react-query";
 
 function LandingPage() {
+  const navigate = useNavigate();
+  const { setIsAuthenticated } = useContext(AuthContext);
+
+  const logoutMutation = useMutation({
+    mutationFn: authService.signout,
+    onMutate: () => {
+      setIsAuthenticated(false);
+      navigate("/signin");
+    },
+  });
+
+  const onLogout = () => logoutMutation.mutate();
+
   return (
     <div>
-      <Navbar />
+      <Navbar onLogout={onLogout} />
       <Outlet />
     </div>
   );

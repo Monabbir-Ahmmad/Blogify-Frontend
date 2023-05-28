@@ -13,22 +13,12 @@ import { NavLink } from "react-router-dom";
 import NavLinks from "./NavLinks";
 import NavSearchbar from "./NavSearchbar";
 import SideNav from "./SideNav";
-import authService from "../../services/authService";
-import { useMutation } from "@tanstack/react-query";
 
-function Navbar() {
+function Navbar({ onLogout }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { isAuthenticated, setIsAuthenticated, authData } =
-    useContext(AuthContext);
-
-  const logoutMutation = useMutation({
-    mutationFn: authService.signout,
-    onMutate: () => setIsAuthenticated(false),
-  });
+  const { isAuthenticated, authData } = useContext(AuthContext);
 
   const toggleMenu = () => setSidebarOpen(!sidebarOpen);
-
-  const onLogout = () => logoutMutation.mutate();
 
   const links = [
     {

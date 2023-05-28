@@ -37,10 +37,17 @@ function SignupPage() {
         <div className="w-5/6 md:w-4/6 mt-5">
           <SignupForm onSubmit={onSignup} />
         </div>
-        <p className="mt-4">
+        <p>
           Already have an account?{" "}
           <Link className="text-primary font-semibold" to="/signin">
             Sign In
+          </Link>
+        </p>
+
+        <p>
+          Or{" "}
+          <Link className="text-primary font-semibold" to="/">
+            continue as Guest
           </Link>
         </p>
       </section>
