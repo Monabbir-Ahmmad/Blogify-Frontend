@@ -9,19 +9,27 @@
     active:shadow-none active:bg-slate-200;
   }
 
-  .icon-btn-base {
-    @apply btn-base flex items-center justify-center p-2;
-  }
-
   .btn-primary {
     @apply btn-base text-white bg-primary hover:bg-primaryDark focus:bg-primaryDark active:bg-primaryDark;
+  }
+
+  .btn-primary-outlined {
+    @apply btn-primary text-primary border border-primary bg-transparent hover:bg-primaryLighter focus:bg-primaryLighter active:bg-primaryLighter;
+  }
+
+  .btn-error {
+    @apply btn-base text-white bg-error hover:bg-errorDark focus:bg-errorDark active:bg-errorDark;
+  }
+
+  .icon-btn-base {
+    @apply btn-base flex items-center justify-center p-2;
   }
 
   .icon-btn-primary {
     @apply icon-btn-base btn-primary;
   }
 
-  .btn-primary-outlined {
-    @apply btn-primary text-primary border border-primary bg-transparent hover:bg-primaryLighter focus:bg-primaryLighter active:bg-primaryLighter;
+  .icon-btn-error {
+    @apply icon-btn-base text-white bg-error hover:bg-errorDark focus:bg-errorDark active:bg-errorDark;
   }
 }
