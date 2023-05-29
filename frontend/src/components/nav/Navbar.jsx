@@ -45,7 +45,7 @@ function Navbar({ onLogout }) {
 
         <NavSearchbar className="hidden sm:block" userId={authData?.id} />
 
-        <div className="hidden text-md absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 xl:flex mx-auto items-center w-auto">
+        <div className="hidden text-base absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 xl:flex mx-auto items-center w-auto">
           <NavLinks links={links} />
         </div>
 

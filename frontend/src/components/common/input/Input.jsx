@@ -34,16 +34,6 @@ const Input = forwardRef(
           </label>
         )}
         <div className="relative">
-          {StartIcon && (
-            <span
-              className={twMerge(
-                "absolute inset-y-0 left-0 inline-flex items-center ml-3 text-slate-500",
-                error && "text-error"
-              )}
-            >
-              <StartIcon size={20} />
-            </span>
-          )}
           <input
             id={name}
             name={name}
@@ -52,13 +42,24 @@ const Input = forwardRef(
             ref={ref}
             {...rest}
             className={twMerge(
-              "placeholder:text-slate-400 outline-none bg-slate-50 border border-slate-300 text-sm rounded focus:ring-slate-400 focus:border-slate-400 focus:ring-1 block w-full p-3",
+              "peer transition-all placeholder:text-slate-300 outline-none bg-slate-50 border border-slate-300 text-sm rounded focus:ring-slate-400 focus:border-slate-400 focus:ring-1 block w-full p-3",
               className,
               StartIcon && "pl-10",
               type === "password" && "pr-12",
-              error && "border-error focus:border-error focus:ring-error"
+              error &&
+                "is-invalid border-error focus:border-error focus:ring-error"
             )}
           />
+
+          {StartIcon && (
+            <span
+              className={twMerge(
+                "peer-focus:text-slate-400 peer-[.is-invalid]:text-error absolute inset-y-0 left-0 inline-flex items-center ml-3 text-slate-300 transition-all"
+              )}
+            >
+              <StartIcon size={20} />
+            </span>
+          )}
 
           {type === "password" && (
             <span className="p-1 absolute inset-y-0 right-0 inline-flex items-center mr-1">

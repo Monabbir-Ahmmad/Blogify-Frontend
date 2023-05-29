@@ -49,7 +49,7 @@ function SideNav({ toggleMenu, links = [], open = false, onLogout }) {
 
         <hr />
 
-        <div className="flex flex-col items-stretch gap-3 text-md font-semibold">
+        <div className="flex flex-col items-stretch gap-3 text-base font-semibold">
           {links.map(({ to, icon: Icon, text }) => (
             <NavLink
               key={text}

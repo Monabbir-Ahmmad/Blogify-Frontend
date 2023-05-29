@@ -19,7 +19,7 @@
   --color-primary-light: #a981fd;
   --color-primary-lighter: #eee6ff;
 
-  --color-background: #212121;
+  --color-background: hsl(210, 40%, 99%);
   --color-background-light: #303030;
 
   --color-accent: #ff6f00;
@@ -41,6 +41,7 @@ html,
 body {
   min-height: 100vh;
   overflow-x: hidden;
+  background: var(--color-background);
 }
 
 input[value=""]::-webkit-datetime-edit {

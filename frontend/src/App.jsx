@@ -10,6 +10,10 @@ import ContextWrapper from "./contexts/ContextWrapper";
 import LoadingOverlay from "./components/common/loader/LoadingOverlay";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Router from "./Router";
+import TimeAgo from "javascript-time-ago";
+import en from "javascript-time-ago/locale/en.json";
+
+TimeAgo.addDefaultLocale(en);
 
 const onHttpError = (error, _variables, _context, mutation) => {
   // If this has an onError defined, skip this
