@@ -41,6 +41,7 @@
 html,
 body {
   min-height: 100vh;
+  height: 100%;
   overflow-x: hidden;
   background: var(--color-background);
 }

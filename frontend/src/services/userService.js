@@ -1,13 +1,15 @@
 import apiUrl from "../constants/apiUrl";
 import httpClient from "../utils/httpClient";
-import tokenService from "./tokenService";
+import storageService from "./storageService";
 
 class UserService {
   async getCurrentUser() {
-    const user = tokenService.getUser();
-    if (!user) return null;
+    const authData = storageService.getAuthData();
+    if (!authData) return null;
 
-    const res = await httpClient.get(apiUrl.user.get + `/${user.userId}`);
+    const res = await httpClient.get(apiUrl.user.get + `/${authData.userId}`);
+
+    storageService.setCurrentUser(res.data);
 
     return res.data;
   }

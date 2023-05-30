@@ -1,12 +1,12 @@
 import apiUrl from "../constants/apiUrl";
 import httpClient from "../utils/httpClient";
-import tokenService from "./tokenService";
+import storageService from "./storageService";
 
 class AuthService {
   async signin({ email, password, remember }) {
     const res = await httpClient.post(apiUrl.auth.signin, { email, password });
 
-    tokenService.setUser(res.data, remember);
+    storageService.setAuthData(res.data, remember);
 
     return res.data;
   }
@@ -18,14 +18,14 @@ class AuthService {
       password,
     });
 
-    tokenService.setUser(res.data);
+    storageService.setAuthData(res.data);
 
     return res.data;
   }
 
   async signout() {
     await httpClient.post(apiUrl.auth.signout);
-    tokenService.removeUser();
+    storageService.removeAuthData();
   }
 
   async forgotPassword({ email }) {
@@ -37,7 +37,7 @@ class AuthService {
   }
 
   async refreshAccessToken() {
-    const refreshToken = tokenService.getLocalRefreshToken();
+    const refreshToken = storageService.getLocalRefreshToken();
 
     if (!refreshToken) return await this.signout();
 

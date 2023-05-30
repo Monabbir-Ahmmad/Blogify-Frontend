@@ -1,16 +1,16 @@
 import { createContext, useEffect, useState } from "react";
 
 import authService from "../services/authService";
-import tokenService from "../services/tokenService";
+import storageService from "../services/storageService";
 import { useQuery } from "@tanstack/react-query";
 import userService from "../services/userService";
 
 const AuthContext = createContext();
 
-function AuthContextProvider({ children, ...rest }) {
-  const [authData, setAuthData] = useState(null);
+function AuthContextProvider({ children }) {
+  const [authData, setAuthData] = useState(storageService.getCurrentUser());
   const [isAuthenticated, setIsAuthenticated] = useState(
-    !!tokenService.getUser()
+    !!storageService.getAuthData()
   );
 
   useQuery({

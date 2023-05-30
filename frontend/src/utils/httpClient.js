@@ -1,7 +1,7 @@
 import apiUrl from "../constants/apiUrl";
 import authService from "../services/authService";
 import axios from "axios";
-import tokenService from "../services/tokenService";
+import storageService from "../services/storageService";
 
 const refreshTokenInterceptor = async (err) => {
   const originalConfig = err.config;
@@ -14,7 +14,7 @@ const refreshTokenInterceptor = async (err) => {
 
       return httpClient(originalConfig);
     } catch (error) {
-      tokenService.removeUser();
+      storageService.removeAuthData();
 
       return Promise.reject(error);
     }
