@@ -3,23 +3,21 @@ import httpClient from "../utils/httpClient";
 
 class AuthService {
   async post({ title, content, coverImage }) {
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("content", content);
-    formData.append("coverImage", coverImage);
-
-    const res = await httpClient.post(apiUrl.blog.create, formData);
+    const res = await httpClient.postForm(apiUrl.blog.create, {
+      title,
+      content,
+      coverImage,
+    });
 
     return res.data;
   }
 
   async update(id, { title, content, coverImage }) {
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("content", content);
-    formData.append("coverImage", coverImage);
-
-    const res = await httpClient.put(apiUrl.blog.update + `/${id}`, formData);
+    const res = await httpClient.putForm(apiUrl.blog.update + `/${id}`, {
+      title,
+      content,
+      coverImage,
+    });
 
     return res.data;
   }

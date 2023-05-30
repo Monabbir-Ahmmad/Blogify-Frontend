@@ -42,24 +42,18 @@ class UserService {
   }
 
   async updateProfileImage(id, profileImage) {
-    const formData = new FormData();
-    formData.append("profileImage", profileImage);
-
-    const res = await httpClient.put(
+    const res = await httpClient.putForm(
       apiUrl.user.updateProfileImage + `/${id}`,
-      formData
+      { profileImage }
     );
 
     return res.data;
   }
 
   async updateCoverImage(id, coverImage) {
-    const formData = new FormData();
-    formData.append("coverImage", coverImage);
-
-    const res = await httpClient.put(
+    const res = await httpClient.putForm(
       apiUrl.user.updateCoverImage + `/${id}`,
-      formData
+      { coverImage }
     );
 
     return res.data;

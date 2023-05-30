@@ -22,7 +22,7 @@ const apiUrl = {
     update: "/blog",
     delete: "/blog",
     like: "/blog",
-    getList: "/blog/list",
+    getList: "/blog",
     getListByUser: "/blog/user",
   },
 

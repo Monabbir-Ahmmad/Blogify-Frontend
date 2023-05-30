@@ -6,6 +6,7 @@ import {
 import BlogAuthor from "./BlogAuthor";
 import React from "react";
 import ReactTimeAgo from "react-time-ago";
+import RichContentRenderer from "../common/richEditor/RichContentRenderer";
 import { useNavigate } from "react-router-dom";
 
 function BlogItem({ blog }) {
@@ -37,7 +38,10 @@ function BlogItem({ blog }) {
       </button>
 
       <img
-        src={blog?.coverImage}
+        src={
+          blog?.coverImage ??
+          `https://picsum.photos/seed/abstract=${blog?.id}/500/300`
+        }
         alt={blog?.title}
         className="absolute inset-x-0 top-0 w-full h-3/5 object-cover rounded-t-3xl z-0"
       />
@@ -45,15 +49,18 @@ function BlogItem({ blog }) {
       <div className="flex flex-col gap-4 p-6 mt-auto z-10 bg-white rounded-3xl">
         <h1 className="text-base font-semibold">{blog?.title}</h1>
 
-        <p className="text-sm opacity-70 min-h-[3em] text-ellipsis line-clamp-2">
-          {blog?.content}
-        </p>
+        <RichContentRenderer
+          className="!text-sm !opacity-70 !min-h-[3em] ![&>*]:text-ellipsis !line-clamp-2"
+          content={blog?.content}
+        />
 
         <div className="flex gap-2 justify-between">
           <div className="hover:underline w-fit" onClick={onAuthorClick}>
             <BlogAuthor
               title={blog?.user?.name}
-              subtitle={<ReactTimeAgo date={blog?.createdAt} locale="en-US" />}
+              subtitle={
+                <ReactTimeAgo date={new Date(blog?.createdAt)} locale="en-US" />
+              }
               image={blog?.user?.profileImage}
             />
           </div>

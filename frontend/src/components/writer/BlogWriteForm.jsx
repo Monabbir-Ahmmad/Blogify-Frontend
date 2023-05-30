@@ -1,9 +1,10 @@
+import { Controller, useForm } from "react-hook-form";
 import { useEffect, useRef, useState } from "react";
-import { FiUpload as PublishIcon } from "react-icons/fi";
+
 import FileDrop from "../common/input/FileDrop";
 import Input from "../common/input/Input";
+import { FiUpload as PublishIcon } from "react-icons/fi";
 import RichEditor from "../common/richEditor/RichEditor";
-import { Controller, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 function BlogWriteForm({ onSubmit, resetForm, onFormReset }) {
@@ -17,8 +18,6 @@ function BlogWriteForm({ onSubmit, resetForm, onFormReset }) {
       onFormReset();
     }
   }, [resetForm]);
-
-  const getEditorInstance = (instance) => (editorRef.current = instance);
 
   const onCoverImageChange = (file) => setCoverImage(file);
 
@@ -70,7 +69,7 @@ function BlogWriteForm({ onSubmit, resetForm, onFormReset }) {
         )}
       />
 
-      <RichEditor getEditorInstance={getEditorInstance} />
+      <RichEditor ref={editorRef} />
     </form>
   );
 }

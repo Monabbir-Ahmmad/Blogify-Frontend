@@ -1,6 +1,19 @@
 import BlogItem from "../components/blog/blogItem";
+import blogService from "../services/blogService";
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 
 function HomePage() {
+  const [pagination, setPagination] = useState({
+    page: 1,
+    limit: 12,
+  });
+
+  const { data } = useQuery({
+    queryKey: ["getBlogs", pagination.page, pagination.limit],
+    queryFn: async () => await blogService.getList(pagination),
+  });
+
   return (
     <section className="p-5 w-full inline-flex justify-center">
       <div className="max-w-6xl w-full space-y-5">
@@ -13,23 +26,8 @@ function HomePage() {
         <hr />
 
         <div className="grid grid-cols-3 gap-4">
-          {[1, 23, 4, 5, 6, 78, 4].map((item) => (
-            <BlogItem
-              key={item}
-              blog={{
-                title: "Blog Title",
-                content:
-                  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum!",
-                coverImage: "https://picsum.photos/seed/picsum/200/300",
-                createdAt: new Date(),
-
-                user: {
-                  id: 1,
-                  name: "John Doe",
-                  profileImage: "https://picsum.photos/seed/picsum/200/300",
-                },
-              }}
-            />
+          {data?.data.map((blog) => (
+            <BlogItem key={blog.id} blog={blog} />
           ))}
         </div>
       </div>
