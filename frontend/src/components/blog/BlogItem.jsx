@@ -29,9 +29,9 @@ function BlogItem({ blog }) {
         <MoreIcon size={20} />
       </button>
 
-      <button className="absolute icon-btn-base group bg-white hover:bg-primaryLighter hover:text-primary flex gap-4 top-4 left-4 z-10 rounded-full">
+      <button className="absolute btn-base p-2 bg-white hover:bg-primaryLighter hover:text-primary flex gap-2 top-4 left-4 z-10 rounded-full">
         <LikeIcon size={20} />
-        <p className="hidden group-hover:block">
+        <p>
           {blog?.likes?.length ?? 0}{" "}
           {blog?.likes?.length > 1 ? "likes" : "like"}
         </p>
