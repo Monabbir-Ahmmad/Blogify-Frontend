@@ -6,8 +6,9 @@ import { useState } from "react";
 function FileDrop({
   maxSizeKB = 1024 * 5,
   allowedMimeTypes = ["image/png", "image/jpg", "image/jpeg"],
+  onChange,
+  value,
 }) {
-  const [selectedFile, setSelectedFile] = useState(null);
   const [dragging, setDragging] = useState(false);
 
   const handleDragEnter = (e) => {
@@ -43,7 +44,7 @@ function FileDrop({
   const validateFile = (file) => {
     if (file.size <= maxSizeKB * 1024) {
       if (allowedMimeTypes.includes(file.type)) {
-        setSelectedFile(file);
+        onChange(file);
       } else {
         alert("Invalid file type. Please choose a valid file type.");
       }
@@ -53,7 +54,7 @@ function FileDrop({
   };
 
   const handleRemoveImage = () => {
-    setSelectedFile(null);
+    onChange(null);
   };
 
   return (
@@ -64,10 +65,10 @@ function FileDrop({
       onDragOver={handleDragOver}
       onDrop={handleDrop}
     >
-      {selectedFile ? (
+      {value ? (
         <div className="relative">
           <img
-            src={URL.createObjectURL(selectedFile)}
+            src={URL.createObjectURL(value)}
             alt="Selected"
             className="object-cover h-64 w-full rounded-xl"
           />

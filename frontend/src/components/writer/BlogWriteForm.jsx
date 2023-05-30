@@ -1,23 +1,77 @@
+import { useEffect, useRef, useState } from "react";
+import { FiUpload as PublishIcon } from "react-icons/fi";
 import FileDrop from "../common/input/FileDrop";
 import Input from "../common/input/Input";
-import React from "react";
 import RichEditor from "../common/richEditor/RichEditor";
+import { Controller, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
-function BlogWriteForm() {
+function BlogWriteForm({ onSubmit, resetForm, onFormReset }) {
+  const { control, handleSubmit, reset } = useForm();
+  const editorRef = useRef();
+  const [coverImage, setCoverImage] = useState();
+
+  useEffect(() => {
+    if (resetForm) {
+      resetFields();
+      onFormReset();
+    }
+  }, [resetForm]);
+
+  const getEditorInstance = (instance) => (editorRef.current = instance);
+
+  const onCoverImageChange = (file) => setCoverImage(file);
+
+  const onFormSubmit = (data) => {
+    if (!editorRef.current.getCharCount()) {
+      toast.error("Blog content is required", {
+        toastId: "Blog content is required",
+      });
+      return;
+    }
+
+    onSubmit({ ...data, content: editorRef.current.getContents(), coverImage });
+  };
+
+  const resetFields = () => {
+    reset();
+    editorRef.current.setContents("");
+    setCoverImage(null);
+  };
+
   return (
-    <div className="flex flex-col gap-6 p-4">
+    <form
+      onSubmit={handleSubmit(onFormSubmit)}
+      className="flex flex-col gap-6 p-4"
+    >
       <div className="flex gap-4 items-center justify-between">
         <h1 className="text-3xl font-semibold">Write a new blog</h1>
-        <button className="btn-primary px-10">Publish</button>
+        <button type="submit" className="btn-primary px-10">
+          Publish <PublishIcon size={20} />
+        </button>
       </div>
-      <FileDrop />
-      <Input
-        type="text"
-        placeholder="Enter your title"
-        className="text-3xl bg-transparent border-0 border-b-8 focus:ring-0"
+
+      <FileDrop onChange={onCoverImageChange} value={coverImage} />
+
+      <Controller
+        name="title"
+        control={control}
+        defaultValue=""
+        rules={{ required: "Title is required" }}
+        render={({ field, fieldState: { error } }) => (
+          <Input
+            {...field}
+            type="text"
+            placeholder="Enter your title"
+            className="text-3xl bg-transparent border-0 border-b-8 focus:ring-0"
+            error={error}
+            helperText={error?.message}
+          />
+        )}
       />
-      <RichEditor />
-    </div>
+
+      <RichEditor getEditorInstance={getEditorInstance} />
+    </form>
   );
 }
 

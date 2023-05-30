@@ -59,11 +59,8 @@ function Navbar({ onLogout }) {
               className={"max-w-[300px]"}
             />
 
-            <button
-              className="inline-flex gap-2 btn-primary rounded-full"
-              onClick={onLogout}
-            >
-              <span>Logout</span>
+            <button className="btn-primary rounded-full" onClick={onLogout}>
+              Logout
               <LogoutIcon size={20} />
             </button>
           </div>

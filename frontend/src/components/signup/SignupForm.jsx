@@ -74,7 +74,8 @@ function SignupForm({ onSubmit }) {
             message: "Password must have at least 8 characters",
           },
           pattern: {
-            value: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^\w\s]).*$/i,
+            value:
+              /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#.,;+_=\/\\\$%\^&\*\-])/,
             message:
               "Password must contain at least one uppercase, one lowercase, one number and one special character",
           },

@@ -9,8 +9,7 @@ import NavSearchbar from "./NavSearchbar";
 import { twMerge } from "tailwind-merge";
 
 function SideNav({ toggleMenu, links = [], open = false, onLogout }) {
-  const { isAuthenticated, setIsAuthenticated, authData } =
-    useContext(AuthContext);
+  const { isAuthenticated, authData } = useContext(AuthContext);
 
   return (
     <>
@@ -35,11 +34,13 @@ function SideNav({ toggleMenu, links = [], open = false, onLogout }) {
           </button>
         </div>
 
-        <NavAvatar
-          title={authData?.name}
-          subtitle={authData?.email}
-          image={authData?.profileImage}
-        />
+        {isAuthenticated && (
+          <NavAvatar
+            title={authData?.name}
+            subtitle={authData?.email}
+            image={authData?.profileImage}
+          />
+        )}
 
         <NavSearchbar className="sm:hidden mt-6" />
 
@@ -70,7 +71,7 @@ function SideNav({ toggleMenu, links = [], open = false, onLogout }) {
         <div className="mt-auto flex flex-col gap-3 py-4">
           {isAuthenticated ? (
             <button
-              className="inline-flex items-center gap-4 justify-center btn-base"
+              className="btn-base gap-4"
               onClick={() => {
                 onLogout();
                 toggleMenu();
@@ -81,10 +82,10 @@ function SideNav({ toggleMenu, links = [], open = false, onLogout }) {
             </button>
           ) : (
             <>
-              <NavLink className="block btn-base" to="/signin">
+              <NavLink className="btn-base" to="/signin">
                 Sign In
               </NavLink>
-              <NavLink className="block btn-primary" to="/signup">
+              <NavLink className="btn-primary" to="/signup">
                 Sign Up
               </NavLink>
             </>

@@ -5,8 +5,7 @@ import { buttonListResponsive } from "./buttonList";
 
 function RichEditor({
   buttons = buttonListResponsive,
-  editorRef,
-  onChange,
+  getEditorInstance,
   options = {
     minHeight: "50vh",
     maxHeight: "80vh",
@@ -17,8 +16,7 @@ function RichEditor({
 }) {
   return (
     <Editor
-      onChange={onChange}
-      getSunEditorInstance={editorRef}
+      getSunEditorInstance={getEditorInstance}
       setOptions={{
         placeholder: "Start writing here...",
         defaultStyle: "font-size:16px; font-family:'Poppins';",
