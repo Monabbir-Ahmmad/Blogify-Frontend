@@ -1,4 +1,4 @@
-import { FiX as RemoveIcon } from "react-icons/fi";
+import { RiCloseLine as RemoveIcon } from "react-icons/ri";
 import imageUpload from "../../../assets/imageUpload.svg";
 import { twMerge } from "tailwind-merge";
 import { useState } from "react";

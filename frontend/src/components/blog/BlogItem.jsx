@@ -1,7 +1,13 @@
 import {
-  FiHeart as LikeIcon,
-  FiMoreVertical as MoreIcon,
-} from "react-icons/fi";
+  RiChat1Line as CommentIcon,
+  RiHeart2Line as LikeIcon,
+  RiHeart2Fill as LikedIcon,
+  RiMore2Fill as MoreIcon,
+} from "react-icons/ri";
+import {
+  estimateReadingTime,
+  extractTextFromHtml,
+} from "../../utils/commonUtil";
 import { useContext, useRef, useState } from "react";
 
 import { AuthContext } from "../../contexts/AuthContext";
@@ -40,7 +46,6 @@ function BlogItem({ blog, onLike }) {
   };
 
   const onMenuClose = (e) => {
-    e.stopPropagation();
     setMenuOpen(false);
   };
 
@@ -50,21 +55,22 @@ function BlogItem({ blog, onLike }) {
       className="relative cursor-pointer flex flex-col justify-between gap-3 w-full h-96 rounded-3xl bg-white shadow-md hover:shadow-lg transition-shadow"
     >
       <div className="flex p-2 gap-2 justify-between z-10">
-        <button
-          className={twMerge(
-            "flex gap-2 rounded-full",
-            isLiked
-              ? "btn-primary"
-              : "btn-base bg-white hover:bg-primaryLighter hover:text-primary"
-          )}
-          onClick={onLikeClick}
-        >
-          <LikeIcon size={20} />
-          <p>
-            {blog?.likes?.length ?? 0}{" "}
-            {blog?.likes?.length > 1 ? "likes" : "like"}
-          </p>
-        </button>
+        <div className="inline-flex items-center divide-x-2 rounded-full bg-white">
+          <span
+            className={twMerge(
+              "inline-flex items-center gap-2 p-2",
+              isLiked && "text-primary"
+            )}
+          >
+            {isLiked ? <LikedIcon size={18} /> : <LikeIcon size={18} />}
+            {blog?.likes?.length}
+          </span>
+
+          <span className="inline-flex items-center gap-2 p-2">
+            <CommentIcon size={18} />
+            {blog?.commentCount}
+          </span>
+        </div>
 
         <button
           ref={menuRef}
@@ -112,8 +118,7 @@ function BlogItem({ blog, onLike }) {
           </div>
 
           <span className="text-sm opacity-70 mt-auto font-semibold">
-            {blog?.commentCount ?? 0}{" "}
-            {blog?.commentCount > 1 ? "comments" : "comment"}
+            {estimateReadingTime(extractTextFromHtml(blog?.content))} min read
           </span>
         </div>
       </div>

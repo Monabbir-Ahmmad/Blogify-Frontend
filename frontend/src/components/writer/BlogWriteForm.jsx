@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 
 import FileDrop from "../common/input/FileDrop";
 import Input from "../common/input/Input";
-import { FiUpload as PublishIcon } from "react-icons/fi";
+import { RiUpload2Line as PublishIcon } from "react-icons/ri";
 import RichEditor from "../common/richEditor/RichEditor";
 import { toast } from "react-toastify";
 

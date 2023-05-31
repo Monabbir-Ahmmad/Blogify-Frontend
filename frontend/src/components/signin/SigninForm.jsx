@@ -1,5 +1,8 @@
 import { Controller, useForm } from "react-hook-form";
-import { FiLock as LockIcon, FiMail as MailIcon } from "react-icons/fi";
+import {
+  RiLock2Line as LockIcon,
+  RiMailLine as MailIcon,
+} from "react-icons/ri";
 
 import Checkbox from "../common/checkbox/Checkbox";
 import Input from "../common/input/Input";

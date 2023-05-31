@@ -1,7 +1,7 @@
 import {
-  FiEyeOff as InvisibleIcon,
-  FiEye as VisibleIcon,
-} from "react-icons/fi";
+  RiEyeOffLine as InvisibleIcon,
+  RiEyeLine as VisibleIcon,
+} from "react-icons/ri";
 import { forwardRef, useState } from "react";
 
 import { twMerge } from "tailwind-merge";

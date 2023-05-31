@@ -33,14 +33,25 @@ const Popover = ({ target, open = false, onClose, children }) => {
     };
 
     window.addEventListener("resize", updatePopoverPosition);
-    document.addEventListener("click", onClose);
+    document.addEventListener("click", onOutsideClick);
     updatePopoverPosition();
 
     return () => {
       window.removeEventListener("resize", updatePopoverPosition);
-      document.addEventListener("click", onClose);
+      document.addEventListener("click", onOutsideClick);
     };
   }, [target, open]);
+
+  const onOutsideClick = (e) => {
+    if (
+      popoverRef.current &&
+      !popoverRef.current.contains(e.target) &&
+      target.current &&
+      !target.current.contains(e.target)
+    ) {
+      onClose();
+    }
+  };
 
   return (
     <div

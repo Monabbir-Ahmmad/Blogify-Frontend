@@ -1,9 +1,9 @@
 import { Controller, useForm } from "react-hook-form";
 import {
-  FiLock as LockIcon,
-  FiMail as MailIcon,
-  FiUser as UserIcon,
-} from "react-icons/fi";
+  RiLock2Line as LockIcon,
+  RiMailLine as MailIcon,
+  RiUser6Line as UserIcon,
+} from "react-icons/ri";
 
 import Input from "../common/input/Input";
 

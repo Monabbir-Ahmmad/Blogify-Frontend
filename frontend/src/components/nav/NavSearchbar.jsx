@@ -1,4 +1,4 @@
-import { FiSearch as SearchIcon } from "react-icons/fi";
+import { RiSearchLine as SearchIcon } from "react-icons/ri";
 import { twMerge } from "tailwind-merge";
 
 function NavSearchbar({ className }) {

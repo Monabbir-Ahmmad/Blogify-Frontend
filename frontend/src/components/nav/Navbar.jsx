@@ -1,9 +1,10 @@
 import {
-  FiHome as HomeIcon,
-  FiUser as ProfileIcon,
-  FiFeather as WriteIcon,
-} from "react-icons/fi";
-import { FiLogOut as LogoutIcon, FiMenu as MenuIcon } from "react-icons/fi";
+  RiHome3Line as HomeIcon,
+  RiLogoutCircleRLine as LogoutIcon,
+  RiMenu3Line as MenuIcon,
+  RiUser6Line as ProfileIcon,
+  RiQuillPenLine as WriteIcon,
+} from "react-icons/ri";
 import { useContext, useState } from "react";
 
 import AppLogo from "../common/AppLogo";

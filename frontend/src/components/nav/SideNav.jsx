@@ -1,4 +1,7 @@
-import { FiX as CloseIcon, FiLogOut as LogoutIcon } from "react-icons/fi";
+import {
+  RiCloseLine as CloseIcon,
+  RiLogoutCircleRLine as LogoutIcon,
+} from "react-icons/ri";
 import React, { useContext } from "react";
 
 import AppLogo from "../common/AppLogo";
