@@ -50,10 +50,7 @@ function BlogItem({ blog, onLike }) {
   };
 
   return (
-    <div
-      onClick={onBlogClick}
-      className="relative cursor-pointer flex flex-col justify-between gap-3 w-full h-96 rounded-3xl bg-white shadow-md hover:shadow-lg transition-shadow"
-    >
+    <div className="relative flex flex-col justify-between gap-3 w-full h-96 rounded-3xl bg-white shadow-md hover:shadow-lg transition-shadow">
       <div className="flex p-2 gap-2 justify-between z-10">
         <div className="inline-flex items-center divide-x-2 rounded-full bg-white">
           <span
@@ -95,7 +92,10 @@ function BlogItem({ blog, onLike }) {
         className="absolute inset-x-0 top-0 w-full h-3/5 object-cover rounded-t-3xl z-0"
       />
 
-      <div className="group overflow-hidden flex flex-col gap-4 p-6 z-0 bg-white rounded-3xl">
+      <div
+        onClick={onBlogClick}
+        className="group cursor-pointer overflow-hidden flex flex-col gap-4 p-6 z-0 bg-white rounded-3xl"
+      >
         <h1 className="text-base font-semibold min-h-[4.5em] line-clamp-3">
           {blog?.title}
         </h1>
