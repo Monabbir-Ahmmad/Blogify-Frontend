@@ -6,7 +6,6 @@
   font-family: "Poppins", sans-serif;
   letter-spacing: 0.1em;
   font-weight: 500;
-  color: #475569;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -14,22 +13,9 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 
-  --color-primary: hsl(260, 97%, 65%);
-  --color-primary-dark: hsl(260, 97%, 60%);
-  --color-primary-light: hsl(260, 97%, 75%);
-  --color-primary-lighter: hsl(260, 100%, 95%);
+  color: #475569;
 
   --color-background: hsl(210, 40%, 99%);
-
-  --color-accent: hsl(16, 97%, 65%);
-  --color-accent-dark: hsl(16, 97%, 60%);
-  --color-accent-light: hsl(16, 97%, 75%);
-  --color-accent-lighter: hsl(16, 97%, 95%);
-
-  --color-error: hsl(0, 84%, 65%);
-  --color-error-dark: hsl(0, 84%, 45%);
-  --color-error-light: hsl(0, 84%, 75%);
-  --color-error-lighter: hsl(0, 84%, 95%);
 }
 
 * {

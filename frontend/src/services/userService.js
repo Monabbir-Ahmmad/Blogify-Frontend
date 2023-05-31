@@ -20,7 +20,12 @@ class UserService {
     return res.data;
   }
 
-  async updateProfile({ id, name, email, gender, birthDate, bio }) {
+  async updateProfile(id, { name, email, gender, birthDate, bio }) {
+    name = name.trim();
+    email = email.trim();
+    gender = gender.trim();
+    bio = bio.trim();
+
     const res = await httpClient.put(apiUrl.user.update + `/${id}`, {
       name,
       email,

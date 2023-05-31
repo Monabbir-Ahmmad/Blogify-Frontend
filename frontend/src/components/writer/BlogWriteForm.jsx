@@ -56,7 +56,13 @@ function BlogWriteForm({ onSubmit, resetForm, onFormReset }) {
         name="title"
         control={control}
         defaultValue=""
-        rules={{ required: "Title is required" }}
+        rules={{
+          validate: (value) => !!value.trim() || "Title is required",
+          maxLength: {
+            value: 200,
+            message: "Title must be between 1 to 200 characters",
+          },
+        }}
         render={({ field, fieldState: { error } }) => (
           <Input
             {...field}

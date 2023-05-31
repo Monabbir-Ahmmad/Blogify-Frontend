@@ -2,11 +2,11 @@ import "./RichContentRenderer.css";
 
 import { twMerge } from "tailwind-merge";
 
-function RichContentRenderer({ content, className }) {
+function RichContentRenderer({ content, className, unstylized = false }) {
   return (
     <div
       dangerouslySetInnerHTML={{ __html: content }}
-      className={twMerge("sun-editor-content-renderer", className)}
+      className={twMerge(className, unstylized ? "unstyled" : "rich-content")}
     ></div>
   );
 }

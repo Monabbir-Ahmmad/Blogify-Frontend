@@ -3,6 +3,8 @@ import httpClient from "../utils/httpClient";
 
 class AuthService {
   async post({ title, content, coverImage }) {
+    title = title.trim();
+
     const res = await httpClient.postForm(apiUrl.blog.create, {
       title,
       content,
@@ -13,6 +15,8 @@ class AuthService {
   }
 
   async update(id, { title, content, coverImage }) {
+    title = title.trim();
+
     const res = await httpClient.putForm(apiUrl.blog.update + `/${id}`, {
       title,
       content,
@@ -46,6 +50,12 @@ class AuthService {
     const res = await httpClient.get(
       apiUrl.blog.getListByUser + `/${id}?page=${page}&limit=${limit}`
     );
+
+    return res.data;
+  }
+
+  async like(id) {
+    const res = await httpClient.put(apiUrl.blog.like + `/${id}`);
 
     return res.data;
   }

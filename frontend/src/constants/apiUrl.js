@@ -21,7 +21,7 @@ const apiUrl = {
     create: "/blog",
     update: "/blog",
     delete: "/blog",
-    like: "/blog",
+    like: "/blog/like",
     getList: "/blog",
     getListByUser: "/blog/user",
   },

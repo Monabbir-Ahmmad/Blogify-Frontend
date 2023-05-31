@@ -24,14 +24,9 @@ const refreshTokenInterceptor = async (err) => {
 
 const httpClient = axios.create({
   baseURL: apiUrl.base,
-  headers: {
-    "Content-Type": "application/json",
-  },
   withCredentials: true,
 });
 
-httpClient.defaults.headers["Content-Type"] = "application/json";
-
-httpClient.interceptors.request.use((res) => res, refreshTokenInterceptor);
+httpClient.interceptors.response.use((res) => res, refreshTokenInterceptor);
 
 export default httpClient;

@@ -18,7 +18,7 @@ function SigninForm({ onSubmit }) {
         control={control}
         defaultValue=""
         rules={{
-          required: "Email is required",
+          validate: (value) => !!value.trim() || "Email is required",
           pattern: {
             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
             message: "Email is invalid",

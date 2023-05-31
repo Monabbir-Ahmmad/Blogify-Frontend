@@ -20,7 +20,7 @@
   }
 
   .icon-btn-base {
-    @apply btn-base flex items-center justify-center p-2;
+    @apply btn-base flex items-center justify-center p-2 aspect-square;
   }
 
   .icon-btn-primary {

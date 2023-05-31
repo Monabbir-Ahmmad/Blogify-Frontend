@@ -4,6 +4,8 @@ import storageService from "./storageService";
 
 class AuthService {
   async signin({ email, password, remember }) {
+    email = email.trim();
+
     const res = await httpClient.post(apiUrl.auth.signin, { email, password });
 
     storageService.setAuthData(res.data, remember);
@@ -12,6 +14,9 @@ class AuthService {
   }
 
   async signup({ name, email, password }) {
+    email = email.trim();
+    name = name.trim();
+
     const res = await httpClient.post(apiUrl.auth.signup, {
       name,
       email,

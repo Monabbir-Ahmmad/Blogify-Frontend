@@ -6,6 +6,10 @@ function BlogAuthor({
   title,
   subtitle,
   reversed = false,
+  rounded = "rounded-xl",
+  avatarSize = "h-10",
+  titleSize = "text-sm",
+  subtitleSize = "text-xs",
   className,
 }) {
   return (
@@ -17,13 +21,17 @@ function BlogAuthor({
       )}
     >
       <img
-        className="w-10 h-10 rounded-xl object-cover bg-slate-100"
+        className={twMerge(
+          "object-cover bg-slate-100 aspect-square",
+          rounded,
+          avatarSize
+        )}
         src={image}
         alt={title}
       />
       <div className="font-semibold truncate">
-        <h3 className="text-sm truncate">{title}</h3>
-        <h6 className="text-xs opacity-70 truncate">{subtitle}</h6>
+        <h3 className={twMerge("truncate", titleSize)}>{title}</h3>
+        <h6 className={twMerge("truncate", subtitleSize)}>{subtitle}</h6>
       </div>
     </div>
   );

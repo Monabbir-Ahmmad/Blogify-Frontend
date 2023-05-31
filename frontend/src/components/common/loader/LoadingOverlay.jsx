@@ -5,6 +5,9 @@ import loadingIcon from "../../../assets/loading.svg";
 const LoadingOverlay = () => {
   const isFetching = useIsFetching();
   const isMutating = useIsMutating();
+  const skipLoading = useIsMutating({ mutationKey: ["skipLoading"] });
+
+  if (skipLoading) return null;
 
   if (!isFetching && !isMutating) return null;
 
