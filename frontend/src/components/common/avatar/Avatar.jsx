@@ -1,7 +1,7 @@
-import avaterPlaceholder from "../../assets/avatar.svg";
+import avaterPlaceholder from "../../../assets/avatar.svg";
 import { twMerge } from "tailwind-merge";
 
-function BlogAuthor({
+function Avatar({
   image = avaterPlaceholder,
   title,
   subtitle,
@@ -11,6 +11,7 @@ function BlogAuthor({
   titleSize = "text-sm",
   subtitleSize = "text-xs",
   className,
+  ...rest
 }) {
   return (
     <div
@@ -19,6 +20,7 @@ function BlogAuthor({
         reversed && "flex-row-reverse text-right",
         className
       )}
+      {...rest}
     >
       <img
         className={twMerge(
@@ -30,11 +32,15 @@ function BlogAuthor({
         alt={title}
       />
       <div className="font-semibold truncate">
-        <h3 className={twMerge("truncate", titleSize)}>{title}</h3>
-        <h6 className={twMerge("truncate", subtitleSize)}>{subtitle}</h6>
+        {title && <h5 className={twMerge("truncate", titleSize)}>{title}</h5>}
+        {subtitle && (
+          <h6 className={twMerge("truncate opacity-70", subtitleSize)}>
+            {subtitle}
+          </h6>
+        )}
       </div>
     </div>
   );
 }
 
-export default BlogAuthor;
+export default Avatar;

@@ -5,7 +5,6 @@ import blogService from "../services/blogService";
 import { useState } from "react";
 
 function HomePage() {
-  const queryClient = useQueryClient();
   const [pagination, setPagination] = useState({
     page: 1,
     limit: 12,
@@ -15,19 +14,6 @@ function HomePage() {
     queryKey: ["getBlogs", pagination],
     queryFn: async () => await blogService.getList(pagination),
   });
-
-  const blogLikeMutation = useMutation({
-    mutationKey: ["skipLoading"],
-    mutationFn: blogService.like,
-    onSuccess: (data, variables) => {
-      queryClient.setQueryData(["getBlogs", pagination], (oldData) => ({
-        ...oldData,
-        data: oldData.data.map((blog) => (blog.id === data.id ? data : blog)),
-      }));
-    },
-  });
-
-  const onBlogLike = (blogId) => blogLikeMutation.mutate(blogId);
 
   return (
     <section className="p-5 w-full inline-flex justify-center">
@@ -42,7 +28,7 @@ function HomePage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {paginatedData?.data.map((blog) => (
-            <BlogItem key={blog.id} blog={blog} onLike={onBlogLike} />
+            <BlogItem key={blog.id} blog={blog} />
           ))}
         </div>
       </div>

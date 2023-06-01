@@ -7,18 +7,19 @@ import {
 import {
   estimateReadingTime,
   extractTextFromHtml,
+  getRandomImage,
 } from "../../utils/commonUtil";
 import { useContext, useRef, useState } from "react";
 
 import { AuthContext } from "../../contexts/AuthContext";
-import BlogAuthor from "./BlogAuthor";
+import Avatar from "../common/avatar/avatar";
 import Popover from "../common/popover/Popover";
-import ReactTimeAgo from "react-time-ago";
 import RichContentRenderer from "../common/richEditor/RichContentRenderer";
+import dayjs from "dayjs";
 import { twMerge } from "tailwind-merge";
 import { useNavigate } from "react-router-dom";
 
-function BlogItem({ blog, onLike }) {
+function BlogItem({ blog }) {
   const navigate = useNavigate();
   const menuRef = useRef();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -35,11 +36,6 @@ function BlogItem({ blog, onLike }) {
     navigate("/profile/" + blog?.user?.id);
   };
 
-  const onLikeClick = (e) => {
-    e.stopPropagation();
-    onLike(blog?.id);
-  };
-
   const onMenuClick = (e) => {
     e.stopPropagation();
     setMenuOpen((prev) => !prev);
@@ -52,7 +48,7 @@ function BlogItem({ blog, onLike }) {
   return (
     <div className="relative flex flex-col justify-between gap-3 w-full h-96 rounded-3xl bg-white shadow-md hover:shadow-lg transition-shadow">
       <div className="flex p-2 gap-2 justify-between z-10">
-        <div className="inline-flex items-center divide-x-2 rounded-full bg-white">
+        <div className="inline-flex items-center divide-x-2 rounded-full bg-white shadow-md">
           <span
             className={twMerge(
               "inline-flex items-center gap-2 p-2",
@@ -84,10 +80,7 @@ function BlogItem({ blog, onLike }) {
       </div>
 
       <img
-        src={
-          blog?.coverImage ??
-          `https://picsum.photos/seed/abstract=${blog?.id}/500/300`
-        }
+        src={blog?.coverImage ?? getRandomImage(blog.id, { width: 600 })}
         alt={blog?.title}
         className="absolute inset-x-0 top-0 w-full h-3/5 object-cover rounded-t-3xl z-0"
       />
@@ -106,19 +99,17 @@ function BlogItem({ blog, onLike }) {
           content={blog?.content}
         />
 
-        <div className="flex gap-2 justify-between">
-          <div className="hover:underline w-fit" onClick={onAuthorClick}>
-            <BlogAuthor
-              title={blog?.user?.name}
-              subtitle={
-                <ReactTimeAgo date={new Date(blog?.createdAt)} locale="en-US" />
-              }
-              image={blog?.user?.profileImage}
-            />
-          </div>
+        <div className="flex gap-2 justify-between items-end">
+          <Avatar
+            title={blog?.user?.name}
+            subtitle={dayjs(blog?.createdAt).format("DD MMM, YYYY, hh:mm a")}
+            image={blog?.user?.profileImage}
+            className="hover:underline w-fit"
+            onClick={onAuthorClick}
+          />
 
-          <span className="text-sm opacity-70 mt-auto font-semibold">
-            {estimateReadingTime(extractTextFromHtml(blog?.content))} min read
+          <span className="text-sm opacity-70 font-semibold">
+            {estimateReadingTime(extractTextFromHtml(blog?.content))}
           </span>
         </div>
       </div>

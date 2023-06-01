@@ -13,6 +13,17 @@ function AuthContextProvider({ children }) {
     !!storageService.getAuthData()
   );
 
+  useEffect(() => {
+    if (!isAuthenticated) setAuthData(null);
+    else setAuthData(storageService.getCurrentUser());
+  }, [isAuthenticated]);
+
+  useEffect(() => {
+    try {
+      authService.refreshAccessToken();
+    } catch (error) {}
+  }, []);
+
   useQuery({
     enabled: isAuthenticated,
     queryKey: ["getCurrentUser"],
@@ -21,13 +32,8 @@ function AuthContextProvider({ children }) {
       setAuthData(data);
       return data;
     },
+    staleTime: 0,
   });
-
-  useEffect(() => {
-    try {
-      authService.refreshAccessToken();
-    } catch (error) {}
-  }, []);
 
   return (
     <AuthContext.Provider

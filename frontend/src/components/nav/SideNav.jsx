@@ -6,7 +6,7 @@ import React, { useContext } from "react";
 
 import AppLogo from "../common/AppLogo";
 import { AuthContext } from "../../contexts/AuthContext";
-import NavAvatar from "./NavAvatar";
+import Avatar from "../common/avatar/avatar";
 import { NavLink } from "react-router-dom";
 import NavSearchbar from "./NavSearchbar";
 import { twMerge } from "tailwind-merge";
@@ -38,10 +38,10 @@ function SideNav({ toggleMenu, links = [], open = false, onLogout }) {
         </div>
 
         {isAuthenticated && (
-          <NavAvatar
+          <Avatar
             title={authData?.name}
-            subtitle={authData?.email}
             image={authData?.profileImage}
+            rounded="rounded-full"
           />
         )}
 

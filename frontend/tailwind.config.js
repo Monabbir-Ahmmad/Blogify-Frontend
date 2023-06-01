@@ -1,7 +1,7 @@
 import colors from "tailwindcss/colors";
 
 const themeColors = {
-  background: colors.slate[50],
+  background: "var(--color-background)",
 
   primary: colors.violet[500],
   primaryDark: colors.violet[700],

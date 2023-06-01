@@ -9,7 +9,7 @@ import { useContext, useState } from "react";
 
 import AppLogo from "../common/AppLogo";
 import { AuthContext } from "../../contexts/AuthContext";
-import NavAvatar from "./NavAvatar";
+import Avatar from "../common/avatar/avatar";
 import { NavLink } from "react-router-dom";
 import NavLinks from "./NavLinks";
 import NavSearchbar from "./NavSearchbar";
@@ -46,17 +46,17 @@ function Navbar({ onLogout }) {
 
         <NavSearchbar className="hidden sm:block" userId={authData?.id} />
 
-        <div className="hidden text-base absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 xl:flex mx-auto items-center w-auto">
+        <div className="hidden text-base absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 xl:flex mx-auto items-center w-auto">
           <NavLinks links={links} />
         </div>
 
         {isAuthenticated ? (
           <div className="hidden ml-auto xl:inline-flex gap-10">
-            <NavAvatar
+            <Avatar
               reversed={true}
               title={authData?.name}
-              subtitle={authData?.email}
               image={authData?.profileImage}
+              rounded="rounded-full"
               className={"max-w-[300px]"}
             />
 

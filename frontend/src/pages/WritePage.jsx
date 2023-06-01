@@ -1,7 +1,7 @@
-import BlogWriteForm from "../components/writer/BlogWriteForm";
-import { useMutation } from "@tanstack/react-query";
+import BlogWriteForm from "../components/blog/BlogWriteForm";
 import blogService from "../services/blogService";
 import { toast } from "react-toastify";
+import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 
 function WritePage() {
