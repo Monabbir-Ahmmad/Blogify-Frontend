@@ -5,7 +5,6 @@ import HomePage from "./pages/HomePage";
 import LandingPage from "./pages/LandingPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ProfilePage from "./pages/ProfilePage";
-import React from "react";
 import SearchPage from "./pages/SearchPage";
 import SigninPage from "./pages/SigninPage";
 import SignupPage from "./pages/SignupPage";

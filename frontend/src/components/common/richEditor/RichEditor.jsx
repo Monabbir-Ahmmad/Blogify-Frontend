@@ -8,12 +8,11 @@ const RichEditor = forwardRef(
   (
     {
       buttons = buttonListResponsive,
-      options = {
-        minHeight: "50vh",
-        maxHeight: "80vh",
-        height: "auto",
-        maxCharCount: 20000,
-      },
+      minHeight = "50vh",
+      maxHeight = "80vh",
+      height = "auto",
+      maxCharCount = 5000,
+      options = {},
       ...rest
     },
     ref
@@ -37,6 +36,10 @@ const RichEditor = forwardRef(
           formats: ["p", "div", "pre", "h1", "h2", "h3"],
           imageFileInput: false,
           buttonList: buttons,
+          height,
+          minHeight,
+          maxHeight,
+          maxCharCount,
           ...options,
         }}
         {...rest}

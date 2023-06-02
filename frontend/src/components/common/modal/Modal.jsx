@@ -37,7 +37,7 @@ const Modal = ({ isOpen, onClose, children }) => {
         aria-modal="true"
         ref={modalRef}
         className={twMerge(
-          "z-50 transition-transform",
+          "transition-transform",
           isOpen ? "scale-100" : "scale-0"
         )}
       >

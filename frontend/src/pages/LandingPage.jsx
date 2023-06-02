@@ -1,9 +1,9 @@
 import { Outlet, useNavigate } from "react-router-dom";
-import React, { useContext } from "react";
 
 import { AuthContext } from "../contexts/AuthContext";
 import Navbar from "../components/nav/Navbar";
 import authService from "../services/authService";
+import { useContext } from "react";
 import { useMutation } from "@tanstack/react-query";
 
 function LandingPage() {
