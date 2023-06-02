@@ -2,47 +2,68 @@ import { useEffect, useRef, useState } from "react";
 
 import { twMerge } from "tailwind-merge";
 
-const Popover = ({ target, open = false, onClose, children }) => {
-  const [popoverStyle, setPopoverStyle] = useState({});
+const getPopoverOrigin = (top, right) => {
+  if (top > 0) {
+    if (right > 0) {
+      return "origin-top-right";
+    }
+    return "origin-top-left";
+  } else {
+    if (right > 0) {
+      return "origin-bottom-right";
+    }
+    return "origin-bottom-left";
+  }
+};
+
+const Popover = ({ target, open = false, onClose, children, className }) => {
+  const [position, setPosition] = useState({
+    right: 0,
+    top: 0,
+  });
   const popoverRef = useRef(null);
 
   useEffect(() => {
-    const updatePopoverPosition = () => {
-      const targetRect = target.current.getBoundingClientRect();
-      const popoverRect = popoverRef.current.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-
-      let right;
-      let top;
-
-      // Calculate the right position
-      if (targetRect.left - popoverRect.width > 0) {
-        right = 0;
-      } else {
-        right = -(popoverRect.width - targetRect.width);
-      }
-
-      // Calculate the top position
-      if (targetRect.bottom + popoverRect.height > viewportHeight) {
-        top = -(popoverRect.height + 5);
-      } else {
-        top = targetRect.height + 5;
-      }
-
-      setPopoverStyle({ right, top });
-    };
-
-    window.addEventListener("resize", updatePopoverPosition);
-    document.addEventListener("click", onOutsideClick);
-    updatePopoverPosition();
+    document.addEventListener("click", handleOutsideClick);
 
     return () => {
-      window.removeEventListener("resize", updatePopoverPosition);
-      document.addEventListener("click", onOutsideClick);
+      document.addEventListener("click", handleOutsideClick);
     };
-  }, [target, open]);
+  }, []);
 
-  const onOutsideClick = (e) => {
+  useEffect(() => {
+    if (open) {
+      calculatePopoverPosition();
+    }
+  }, [open]);
+
+  const calculatePopoverPosition = () => {
+    if (!target.current || !popoverRef.current) return;
+
+    const targetRect = target.current.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
+
+    let right;
+    let top;
+
+    // Calculate the right position
+    if (targetRect.left - popoverRef.current.offsetWidth > 0) {
+      right = targetRect.width / 2;
+    } else {
+      right = -(popoverRef.current.offsetWidth - targetRect.width);
+    }
+
+    // Calculate the top position
+    if (targetRect.bottom + popoverRef.current.offsetHeight > viewportHeight) {
+      top = -(popoverRef.current.offsetHeight + 5);
+    } else {
+      top = targetRect.height + 5;
+    }
+
+    setPosition({ right, top });
+  };
+
+  const handleOutsideClick = (e) => {
     if (
       popoverRef.current &&
       !popoverRef.current.contains(e.target) &&
@@ -54,16 +75,21 @@ const Popover = ({ target, open = false, onClose, children }) => {
   };
 
   return (
-    <div
+    <menu
       ref={popoverRef}
       className={twMerge(
-        "absolute w-48 h-48 bg-white rounded-2xl shadow-md",
-        open ? "block" : "hidden"
+        "absolute overflow-hidden transition-transform",
+        className,
+        getPopoverOrigin(position.top, position.right),
+        open ? "scale-100" : "scale-0"
       )}
-      style={{ ...popoverStyle }}
+      style={{
+        top: position.top,
+        right: position.right,
+      }}
     >
       {children}
-    </div>
+    </menu>
   );
 };
 

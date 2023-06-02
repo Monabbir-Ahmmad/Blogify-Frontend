@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-import { Transition } from "@headlessui/react";
+import { twMerge } from "tailwind-merge";
 
 const Modal = ({ isOpen, onClose, children }) => {
   const modalRef = useRef(null);
@@ -25,25 +25,25 @@ const Modal = ({ isOpen, onClose, children }) => {
   }, []);
 
   return (
-    <Transition
-      show={isOpen}
-      as="div"
-      className="fixed inset-0 flex items-center justify-center z-10"
-      enter="ease duration-300"
-      enterFrom="opacity-0"
-      enterTo="opacity-100"
-      leave="ease duration-200"
-      leaveFrom="opacity-100"
-      leaveTo="opacity-0"
+    <div
+      className={twMerge(
+        "fixed inset-0 flex items-center justify-center z-50 transition-opacity bg-black bg-opacity-25",
+        isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+      )}
+      onClick={handleClickOutside}
     >
       <div
-        className="fixed inset-0 bg-black bg-opacity-25"
-        onClick={handleClickOutside}
-      />
-      <div role="dialog" aria-modal="true" ref={modalRef}>
+        role="dialog"
+        aria-modal="true"
+        ref={modalRef}
+        className={twMerge(
+          "z-50 transition-transform",
+          isOpen ? "scale-100" : "scale-0"
+        )}
+      >
         {children}
       </div>
-    </Transition>
+    </div>
   );
 };
 

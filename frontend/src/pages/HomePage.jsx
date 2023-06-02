@@ -1,10 +1,17 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import BlogItem from "../components/blog/BlogItem";
+import ConfirmationDialog from "../components/dialog/ConfirmationDialog";
 import blogService from "../services/blogService";
+import { toast } from "react-toastify";
+import { useModal } from "../components/common/modal/ModalService";
 import { useState } from "react";
 
 function HomePage() {
+  const queryClient = useQueryClient();
+
+  const { openModal, closeModal } = useModal();
+
   const [pagination, setPagination] = useState({
     page: 1,
     limit: 12,
@@ -14,6 +21,37 @@ function HomePage() {
     queryKey: ["getBlogs", pagination],
     queryFn: async () => await blogService.getList(pagination),
   });
+
+  const blogDeleteMutation = useMutation({
+    mutationKey: ["skipLoading"],
+    mutationFn: blogService.delete,
+    onSuccess: (data) => {
+      queryClient.setQueryData(["getBlogs", pagination], (oldData) => ({
+        ...oldData,
+        data: oldData.data.filter((blog) => blog.id !== data.id),
+      }));
+      toast.success("Blog deleted successfully");
+    },
+  });
+
+  const onEditClick = (id) => {};
+
+  const onDeleteClick = (id) => {
+    openModal(
+      <ConfirmationDialog
+        onConfirm={() => {
+          blogDeleteMutation.mutate(id);
+          closeModal();
+        }}
+        onCancel={closeModal}
+        title="Delete Blog"
+        description="Are you sure you want to delete this blog? This action cannot be undone."
+        confirmText="Delete"
+        cancelText="Cancel"
+        className="max-w-lg w-full"
+      />
+    );
+  };
 
   return (
     <section className="p-5 w-full inline-flex justify-center">
@@ -28,7 +66,12 @@ function HomePage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {paginatedData?.data.map((blog) => (
-            <BlogItem key={blog.id} blog={blog} />
+            <BlogItem
+              key={blog.id}
+              blog={blog}
+              onEditClick={onEditClick}
+              onDeleteClick={onDeleteClick}
+            />
           ))}
         </div>
       </div>

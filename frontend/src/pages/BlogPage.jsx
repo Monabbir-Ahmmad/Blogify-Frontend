@@ -62,12 +62,12 @@ function BlogPage() {
           <div className="inline-flex items-center bg-slate-50 border-l-4 border-slate-300 p-4">
             <span>
               <strong>Published</strong>{" "}
-              {dayjs(data?.createdAt).format("MMMM DD, YYYY, hh:mm a")}
+              {dayjs(data?.createdAt).format("MMMM DD, YYYY, hh:mma")}
               <br />
               {data?.updatedAt !== data?.createdAt && (
                 <>
                   <strong>Updated</strong>{" "}
-                  {dayjs(data?.updatedAt).format("MMMM DD, YYYY, hh:mm a")}
+                  {dayjs(data?.updatedAt).format("MMMM DD, YYYY, hh:mma")}
                 </>
               )}
             </span>

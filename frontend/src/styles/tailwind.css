@@ -4,19 +4,31 @@
 
 @layer components {
   .btn-base {
-    @apply flex gap-2 items-center justify-center text-center bg-slate-100 rounded-lg text-sm font-semibold px-4 py-3 outline-none shadow-md transition-all duration-200 hover:bg-slate-200 focus:bg-slate-200 hover:shadow-lg focus:shadow-lg active:shadow-none active:bg-slate-200;
+    @apply flex gap-2 items-center justify-center text-center bg-slate-100 rounded-lg text-sm font-semibold px-4 py-3 outline-none shadow-md transition-all duration-200 hover:bg-slate-200 hover:shadow-lg active:shadow-none active:bg-slate-300;
   }
 
   .btn-primary {
-    @apply btn-base text-white bg-primary hover:bg-primaryDark focus:bg-primaryDark active:bg-primaryDark;
+    @apply btn-base text-white bg-primary hover:bg-primaryDark active:bg-primaryDark;
   }
 
   .btn-primary-outlined {
-    @apply btn-primary text-primary border border-primary bg-transparent hover:bg-primaryLighter focus:bg-primaryLighter active:bg-primaryLighter;
+    @apply btn-primary text-primary border border-primary bg-transparent hover:bg-primaryLighter active:bg-primaryLighter;
+  }
+
+  .btn-primary-light {
+    @apply btn-base text-primary bg-primaryLighter hover:bg-primaryLighter active:bg-primaryLighter;
   }
 
   .btn-error {
-    @apply btn-base text-white bg-error hover:bg-errorDark focus:bg-errorDark active:bg-errorDark;
+    @apply btn-base text-white bg-error hover:bg-errorDark  active:bg-errorDark;
+  }
+
+  .btn-error-outlined {
+    @apply btn-base text-error border border-error bg-transparent hover:bg-errorLighter active:bg-errorLighter;
+  }
+
+  .btn-error-light {
+    @apply btn-base text-error bg-errorLighter hover:bg-errorLighter active:bg-errorLighter;
   }
 
   .icon-btn-base {
@@ -28,6 +40,6 @@
   }
 
   .icon-btn-error {
-    @apply icon-btn-base text-white bg-error hover:bg-errorDark focus:bg-errorDark active:bg-errorDark;
+    @apply icon-btn-base text-white bg-error hover:bg-errorDark active:bg-errorDark;
   }
 }

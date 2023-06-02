@@ -1,8 +1,10 @@
 import {
   RiChat1Line as CommentIcon,
+  RiDeleteBin6Line as DeleteIcon,
+  RiEdit2Line as EditIcon,
   RiHeart2Line as LikeIcon,
   RiHeart2Fill as LikedIcon,
-  RiMore2Fill as MoreIcon,
+  RiMore2Line as MoreIcon,
 } from "react-icons/ri";
 import {
   estimateReadingTime,
@@ -19,7 +21,7 @@ import dayjs from "dayjs";
 import { twMerge } from "tailwind-merge";
 import { useNavigate } from "react-router-dom";
 
-function BlogItem({ blog }) {
+function BlogItem({ blog, onEditClick, onDeleteClick }) {
   const navigate = useNavigate();
   const menuRef = useRef();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -37,7 +39,6 @@ function BlogItem({ blog }) {
   };
 
   const onMenuClick = (e) => {
-    e.stopPropagation();
     setMenuOpen((prev) => !prev);
   };
 
@@ -65,18 +66,38 @@ function BlogItem({ blog }) {
           </span>
         </div>
 
-        <button
-          ref={menuRef}
-          className="icon-btn-base relative bg-white rounded-full h-10"
-          onClick={onMenuClick}
-        >
-          <MoreIcon size={20} />
-          <Popover
-            target={menuRef}
-            open={menuOpen}
-            onClose={onMenuClose}
-          ></Popover>
-        </button>
+        {authData?.id === blog?.user?.id && (
+          <button
+            ref={menuRef}
+            className="icon-btn-base relative bg-white rounded-full h-10"
+            onClick={onMenuClick}
+          >
+            <MoreIcon size={20} />
+            <Popover
+              target={menuRef}
+              open={menuOpen}
+              onClose={onMenuClose}
+              className="bg-white rounded shadow"
+            >
+              <div className="text-lg flex flex-col w-44">
+                <span
+                  className="inline-flex items-center gap-5 py-4 px-5 hover:bg-primaryLighter hover:text-primary"
+                  onClick={() => onEditClick(blog.id)}
+                >
+                  <EditIcon size={24} />
+                  Edit
+                </span>
+                <span
+                  className="inline-flex items-center gap-5 py-4 px-5 hover:bg-errorLighter text-error"
+                  onClick={() => onDeleteClick(blog.id)}
+                >
+                  <DeleteIcon size={24} />
+                  Delete
+                </span>
+              </div>
+            </Popover>
+          </button>
+        )}
       </div>
 
       <img
@@ -102,13 +123,13 @@ function BlogItem({ blog }) {
         <div className="flex gap-2 justify-between items-end">
           <Avatar
             title={blog?.user?.name}
-            subtitle={dayjs(blog?.createdAt).format("DD MMM, YYYY, hh:mm a")}
+            subtitle={dayjs(blog?.createdAt).format("DD MMM, YYYY, hh:mma")}
             image={blog?.user?.profileImage}
-            className="hover:underline w-fit"
+            className="hover:underline"
             onClick={onAuthorClick}
           />
 
-          <span className="text-sm opacity-70 font-semibold">
+          <span className="text-sm opacity-70 font-semibold text-end w-full">
             {estimateReadingTime(extractTextFromHtml(blog?.content))}
           </span>
         </div>
