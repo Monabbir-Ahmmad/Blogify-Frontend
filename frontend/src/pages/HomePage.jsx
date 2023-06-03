@@ -5,13 +5,13 @@ import ConfirmationDialog from "../components/dialog/ConfirmationDialog";
 import blogService from "../services/blogService";
 import { toast } from "react-toastify";
 import { useModal } from "../components/common/modal/ModalService";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 function HomePage() {
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
-
   const { openModal, closeModal } = useModal();
-
   const [pagination, setPagination] = useState({
     page: 1,
     limit: 12,
@@ -23,18 +23,15 @@ function HomePage() {
   });
 
   const blogDeleteMutation = useMutation({
-    mutationKey: ["skipLoading"],
     mutationFn: blogService.delete,
-    onSuccess: (data) => {
-      queryClient.setQueryData(["getBlogs", pagination], (oldData) => ({
-        ...oldData,
-        data: oldData.data.filter((blog) => blog.id !== data.id),
-      }));
+    onSuccess: (data, variables) => {
       toast.success("Blog deleted successfully");
+      queryClient.invalidateQueries(["getBlogs", pagination]);
+      queryClient.removeQueries(["getBlog", variables]);
     },
   });
 
-  const onEditClick = (id) => {};
+  const onEditClick = (id) => navigate(`/blog/edit/${id}`);
 
   const onDeleteClick = (id) => {
     openModal(

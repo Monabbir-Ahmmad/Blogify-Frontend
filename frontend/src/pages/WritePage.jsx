@@ -1,16 +1,19 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+
 import BlogWriteForm from "../components/blog/BlogWriteForm";
 import blogService from "../services/blogService";
 import { toast } from "react-toastify";
-import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 
 function WritePage() {
+  const queryClient = useQueryClient();
   const [resetForm, setResetForm] = useState(false);
 
   const blogCreateMutation = useMutation({
     mutationFn: blogService.post,
     onSuccess: () => {
       toast.success("Blog created successfully");
+      queryClient.invalidateQueries("getBlogs");
       setResetForm(true);
     },
   });

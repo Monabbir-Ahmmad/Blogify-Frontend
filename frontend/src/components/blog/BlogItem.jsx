@@ -59,20 +59,20 @@ function BlogItem({ blog, onEditClick, onDeleteClick }) {
             {isLiked ? <LikedIcon size={18} /> : <LikeIcon size={18} />}
             {blog?.likes?.length}
           </span>
-
           <span className="inline-flex items-center gap-2 p-2">
             <CommentIcon size={18} />
             {blog?.commentCount}
           </span>
         </div>
-
         {authData?.id === blog?.user?.id && (
-          <button
-            ref={menuRef}
-            className="icon-btn-base relative bg-white rounded-full h-10"
-            onClick={onMenuClick}
-          >
-            <MoreIcon size={20} />
+          <>
+            <button
+              ref={menuRef}
+              className="icon-btn-base bg-white rounded-full h-10"
+              onClick={onMenuClick}
+            >
+              <MoreIcon size={20} />
+            </button>
             <Popover
               target={menuRef}
               open={menuOpen}
@@ -96,7 +96,7 @@ function BlogItem({ blog, onEditClick, onDeleteClick }) {
                 </span>
               </div>
             </Popover>
-          </button>
+          </>
         )}
       </div>
 

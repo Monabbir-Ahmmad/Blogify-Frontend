@@ -2,65 +2,104 @@ import { useEffect, useRef, useState } from "react";
 
 import { twMerge } from "tailwind-merge";
 
-const getPopoverOrigin = (top, right) => {
-  if (top > 0) {
-    if (right > 0) {
+const getPopoverOrigin = (targetPosition, popoverPosition, anchor) => {
+  if (!targetPosition || !popoverPosition) return;
+
+  if (anchor?.horizontal === "center" && anchor?.vertical === "center") {
+    return "origin-center";
+  }
+
+  const x = targetPosition.left - popoverPosition.left;
+  const y = targetPosition.top - popoverPosition.top;
+
+  if (anchor?.horizontal === "center") {
+    if (y >= 0) {
+      return "origin-bottom";
+    } else {
+      return "origin-top";
+    }
+  }
+
+  if (anchor?.vertical === "center") {
+    if (x >= 0) {
+      return "origin-right";
+    } else {
+      return "origin-left";
+    }
+  }
+
+  if (x >= 0) {
+    if (y >= 0) {
+      return "origin-bottom-right";
+    } else {
       return "origin-top-right";
     }
-    return "origin-top-left";
   } else {
-    if (right > 0) {
-      return "origin-bottom-right";
+    if (y >= 0) {
+      return "origin-bottom-left";
+    } else {
+      return "origin-top-left";
     }
-    return "origin-bottom-left";
   }
 };
 
-const Popover = ({ target, open = false, onClose, children, className }) => {
+const Popover = ({ target, open, onClose, children, anchor, className }) => {
   const [position, setPosition] = useState({
-    right: 0,
+    left: 0,
     top: 0,
   });
-  const popoverRef = useRef(null);
+  const popoverRef = useRef();
 
   useEffect(() => {
-    document.addEventListener("click", handleOutsideClick);
+    window.addEventListener("click", handleOutsideClick);
+    window.addEventListener("resize", onClose);
+    window.addEventListener("scroll", onClose);
 
     return () => {
-      document.addEventListener("click", handleOutsideClick);
+      window.removeEventListener("click", handleOutsideClick);
+      window.removeEventListener("resize", onClose);
+      window.removeEventListener("scroll", onClose);
     };
   }, []);
 
   useEffect(() => {
-    if (open) {
-      calculatePopoverPosition();
-    }
+    calculatePopoverPosition();
   }, [open]);
 
   const calculatePopoverPosition = () => {
-    if (!target.current || !popoverRef.current) return;
+    if (!open || !target.current || !popoverRef.current) return;
 
     const targetRect = target.current.getBoundingClientRect();
-    const viewportHeight = window.innerHeight;
 
-    let right;
-    let top;
+    let left = targetRect.left + targetRect.width / 2;
+    let top = targetRect.bottom + 5;
 
-    // Calculate the right position
     if (targetRect.left - popoverRef.current.offsetWidth > 0) {
-      right = targetRect.width / 2;
-    } else {
-      right = -(popoverRef.current.offsetWidth - targetRect.width);
+      left -= popoverRef.current.offsetWidth;
     }
 
-    // Calculate the top position
-    if (targetRect.bottom + popoverRef.current.offsetHeight > viewportHeight) {
-      top = -(popoverRef.current.offsetHeight + 5);
-    } else {
-      top = targetRect.height + 5;
+    if (
+      targetRect.bottom + popoverRef.current.offsetHeight >
+      window.innerHeight
+    ) {
+      top -= popoverRef.current.offsetHeight + targetRect.height + 10;
     }
 
-    setPosition({ right, top });
+    if (anchor?.horizontal === "center") {
+      left =
+        targetRect.left +
+        targetRect.width / 2 -
+        popoverRef.current.offsetWidth / 2;
+    }
+
+    if (anchor?.vertical === "center") {
+      top =
+        targetRect.top +
+        targetRect.height / 2 -
+        popoverRef.current.offsetHeight / 2;
+    }
+
+    setPosition({ left, top });
   };
 
   const handleOutsideClick = (e) => {
@@ -78,15 +117,16 @@ const Popover = ({ target, open = false, onClose, children, className }) => {
     <menu
       ref={popoverRef}
       className={twMerge(
-        "absolute overflow-hidden transition-transform",
+        "fixed z-50 overflow-hidden transition-transform cursor-pointer",
         className,
-        getPopoverOrigin(position.top, position.right),
+        getPopoverOrigin(
+          target?.current?.getBoundingClientRect(),
+          position,
+          anchor
+        ),
         open ? "scale-100" : "scale-0"
       )}
-      style={{
-        top: position.top,
-        right: position.right,
-      }}
+      style={{ ...position }}
     >
       {children}
     </menu>

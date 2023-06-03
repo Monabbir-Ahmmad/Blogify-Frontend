@@ -1,29 +1,22 @@
 import {
-  RiChat1Line as CommentIcon,
-  RiHeart2Line as LikeIcon,
-  RiHeart2Fill as LikedIcon,
-  RiMore2Fill as MoreIcon,
-} from "react-icons/ri";
-import {
   estimateReadingTime,
   extractTextFromHtml,
   getRandomImage,
 } from "../utils/commonUtil";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useNavigate, useParams } from "react-router-dom";
 
-import { AuthContext } from "../contexts/AuthContext";
 import Avatar from "../components/common/avatar/avatar";
+import BlogFloatingButton from "../components/blog/BlogFloatingButton";
 import RichContentRenderer from "../components/common/richEditor/RichContentRenderer";
 import blogService from "../services/blogService";
 import dayjs from "dayjs";
-import { twMerge } from "tailwind-merge";
-import { useContext } from "react";
-import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function BlogPage() {
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { blogId } = useParams();
-  const { authData } = useContext(AuthContext);
 
   const { data } = useQuery({
     enabled: !!blogId,
@@ -34,14 +27,27 @@ function BlogPage() {
   const blogLikeMutation = useMutation({
     mutationKey: ["skipLoading"],
     mutationFn: blogService.like,
-    onSuccess: (data) => {
-      queryClient.setQueryData(["getBlog", blogId], () => data);
+    onSuccess: (data) =>
+      queryClient.setQueryData(["getBlog", blogId], () => data),
+  });
+
+  const blogDeleteMutation = useMutation({
+    mutationFn: blogService.delete,
+    onSuccess: () => {
+      toast.success("Blog deleted successfully");
+      queryClient.invalidateQueries(["getBlogs"]);
+      queryClient.removeQueries(["getBlog", blogId]);
+      navigate("..");
     },
   });
 
   const onBlogLike = () => blogLikeMutation.mutate(blogId);
 
-  const isLiked = data?.likes?.some((like) => like?.userId === authData?.id);
+  const onBlogCommentClick = () => {};
+
+  const onBlogEditClick = () => navigate(`/blog/edit/${blogId}`);
+
+  const onBlogDelete = () => blogDeleteMutation.mutate(blogId);
 
   return (
     <div className="p-5 sm:p-10">
@@ -80,23 +86,13 @@ function BlogPage() {
           <RichContentRenderer content={data?.content} />
         </div>
       </div>
-
-      <div className="bg-white overflow-hidden z-10 shadow-lg border fixed bottom-0 left-0 w-full sm:w-fit sm:bottom-5 sm:left-1/2 sm:-translate-x-1/2 sm:rounded-full divide-x-2 [&>button]:bg-white [&>button]:rounded-none [&>button]:shadow-none [&>button]:btn-base [&>button]:text-lg flex [&>button]:flex-1">
-        <button
-          className={twMerge(isLiked && "text-primary")}
-          onClick={onBlogLike}
-        >
-          {isLiked ? <LikedIcon size={26} /> : <LikeIcon size={26} />}
-          {data?.likes?.length}
-        </button>
-        <button>
-          <MoreIcon size={26} />
-        </button>
-        <button>
-          <CommentIcon size={26} />
-          {data?.commentCount}
-        </button>
-      </div>
+      <BlogFloatingButton
+        blog={data}
+        onBlogLikeClick={onBlogLike}
+        onBlogCommentClick={onBlogCommentClick}
+        onBlogEditClick={onBlogEditClick}
+        onBlogDeleteClick={onBlogDelete}
+      />
     </div>
   );
 }
