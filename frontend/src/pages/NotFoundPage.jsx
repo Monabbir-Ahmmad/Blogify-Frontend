@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import notFoundSvg from "../assets/pageNotFound.svg";
 
-const NotFoundPage = () => {
+function NotFoundPage() {
   return (
     <div className="p-10 flex flex-col items-center min-h-screen bg-slate-50">
       <object
@@ -19,6 +19,6 @@ const NotFoundPage = () => {
       </Link>
     </div>
   );
-};
+}
 
 export default NotFoundPage;

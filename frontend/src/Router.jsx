@@ -1,6 +1,7 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import BlogPage from "./pages/BlogPage";
+import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage";
 import LandingPage from "./pages/LandingPage";
 import NotFoundPage from "./pages/NotFoundPage";
@@ -15,7 +16,7 @@ function Router() {
     {
       path: "/",
       element: <LandingPage />,
-      errorElement: <NotFoundPage />,
+      errorElement: <ErrorPage />,
       children: [
         {
           path: "/",
@@ -46,6 +47,10 @@ function Router() {
     {
       path: "/signin",
       element: <SigninPage />,
+    },
+    {
+      path: "*",
+      element: <NotFoundPage />,
     },
   ]);
 

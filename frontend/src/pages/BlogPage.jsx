@@ -62,12 +62,12 @@ function BlogPage() {
           <div className="inline-flex items-center bg-slate-50 border-l-4 border-slate-300 p-4">
             <span>
               <strong>Published</strong>{" "}
-              {dayjs(data?.createdAt).format("MMMM DD, YYYY, hh:mma")}
+              {dayjs(data?.createdAt).format("DD MMMM, YYYY hh:mma")}
               <br />
               {data?.updatedAt !== data?.createdAt && (
                 <>
                   <strong>Updated</strong>{" "}
-                  {dayjs(data?.updatedAt).format("MMMM DD, YYYY, hh:mma")}
+                  {dayjs(data?.updatedAt).format("DD MMMM, YYYY hh:mma")}
                 </>
               )}
             </span>
@@ -81,19 +81,19 @@ function BlogPage() {
         </div>
       </div>
 
-      <div className="bg-white overflow-hidden grid grid-cols-3 z-10 shadow-lg border fixed bottom-0 left-0 w-full sm:w-fit sm:bottom-5 sm:left-1/2 sm:-translate-x-1/2 sm:rounded-full [&>button]:bg-white [&>button]:rounded-none [&>button]:shadow-none text-lg divide-x-2">
+      <div className="bg-white overflow-hidden z-10 shadow-lg border fixed bottom-0 left-0 w-full sm:w-fit sm:bottom-5 sm:left-1/2 sm:-translate-x-1/2 sm:rounded-full divide-x-2 [&>button]:bg-white [&>button]:rounded-none [&>button]:shadow-none [&>button]:btn-base [&>button]:text-lg flex [&>button]:flex-1">
         <button
-          className={twMerge("btn-base text-lg", isLiked && "text-primary")}
+          className={twMerge(isLiked && "text-primary")}
           onClick={onBlogLike}
         >
-          {isLiked ? <LikedIcon size={30} /> : <LikeIcon size={30} />}
+          {isLiked ? <LikedIcon size={26} /> : <LikeIcon size={26} />}
           {data?.likes?.length}
         </button>
-        <button className="btn-base text-lg">
-          <MoreIcon size={30} />
+        <button>
+          <MoreIcon size={26} />
         </button>
-        <button className="btn-base text-lg">
-          <CommentIcon size={30} />
+        <button>
+          <CommentIcon size={26} />
           {data?.commentCount}
         </button>
       </div>

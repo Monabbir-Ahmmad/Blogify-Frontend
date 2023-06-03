@@ -4,7 +4,7 @@ import {
   RiEdit2Line as EditIcon,
   RiHeart2Line as LikeIcon,
   RiHeart2Fill as LikedIcon,
-  RiMore2Line as MoreIcon,
+  RiMore2Fill as MoreIcon,
 } from "react-icons/ri";
 import {
   estimateReadingTime,
@@ -123,13 +123,13 @@ function BlogItem({ blog, onEditClick, onDeleteClick }) {
         <div className="flex gap-2 justify-between items-end">
           <Avatar
             title={blog?.user?.name}
-            subtitle={dayjs(blog?.createdAt).format("DD MMM, YYYY, hh:mma")}
+            subtitle={dayjs(blog?.createdAt).format("DD MMM, YYYY hh:mma")}
             image={blog?.user?.profileImage}
-            className="hover:underline"
+            className="hover:underline flex-[2]"
             onClick={onAuthorClick}
           />
 
-          <span className="text-sm opacity-70 font-semibold text-end w-full">
+          <span className="text-sm opacity-70 font-semibold text-end flex-1">
             {estimateReadingTime(extractTextFromHtml(blog?.content))}
           </span>
         </div>
