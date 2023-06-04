@@ -2,6 +2,7 @@ import {
   RiCloseLine as CloseIcon,
   RiLogoutCircleRLine as LogoutIcon,
 } from "react-icons/ri";
+import { useContext, useRef } from "react";
 
 import AppLogo from "../common/AppLogo";
 import { AuthContext } from "../../contexts/AuthContext";
@@ -9,10 +10,16 @@ import Avatar from "../common/avatar/avatar";
 import { NavLink } from "react-router-dom";
 import NavSearchbar from "./NavSearchbar";
 import { twMerge } from "tailwind-merge";
-import { useContext } from "react";
 
 function SideNav({ toggleMenu, links = [], open = false, onLogout }) {
   const { isAuthenticated, authData } = useContext(AuthContext);
+  const navRef = useRef();
+
+  const onClickOutside = (e) => {
+    if (navRef.current && !navRef.current.contains(e.target)) {
+      toggleMenu();
+    }
+  };
 
   return (
     <div
@@ -20,9 +27,10 @@ function SideNav({ toggleMenu, links = [], open = false, onLogout }) {
         "z-50 xl:hidden fixed inset-0 bg-black bg-opacity-25 transition-opacity",
         open ? "opacity-100" : "opacity-0 pointer-events-none"
       )}
-      onClick={toggleMenu}
+      onClick={onClickOutside}
     >
       <nav
+        ref={navRef}
         className={twMerge(
           "h-screen gap-5 flex flex-col w-4/6 max-w-xs p-6 bg-white transition-transform",
           open ? "translate-x-0" : "-translate-x-full"

@@ -38,6 +38,15 @@ input:focus::-webkit-datetime-edit {
   color: #000;
 }
 
+button:disabled,
+button:disabled:hover,
+button:disabled:focus,
+button:disabled:active {
+  cursor: not-allowed;
+  background: hsl(215, 19%, 85%);
+  color: #fff;
+}
+
 [type="search"]::-webkit-search-cancel-button {
   -webkit-appearance: none;
   appearance: none;

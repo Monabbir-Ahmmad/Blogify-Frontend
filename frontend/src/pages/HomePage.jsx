@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import BlogItem from "../components/blog/BlogItem";
-import ConfirmationDialog from "../components/dialog/ConfirmationDialog";
+import ConfirmationDialog from "../components/common/dialog/ConfirmationDialog";
 import blogService from "../services/blogService";
 import { toast } from "react-toastify";
 import { useModal } from "../components/common/modal/ModalService";
@@ -33,7 +33,7 @@ function HomePage() {
 
   const onEditClick = (id) => navigate(`/blog/edit/${id}`);
 
-  const onDeleteClick = (id) => {
+  const onDeleteClick = (id) =>
     openModal(
       <ConfirmationDialog
         onConfirm={() => {
@@ -48,7 +48,6 @@ function HomePage() {
         className="max-w-lg w-full"
       />
     );
-  };
 
   return (
     <section className="p-5 w-full inline-flex justify-center">

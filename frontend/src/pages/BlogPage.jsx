@@ -8,15 +8,22 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import Avatar from "../components/common/avatar/avatar";
 import BlogFloatingButton from "../components/blog/BlogFloatingButton";
+import CommentPage from "./CommentPage";
+import ConfirmationDialog from "../components/common/dialog/ConfirmationDialog";
 import RichContentRenderer from "../components/common/richEditor/RichContentRenderer";
 import blogService from "../services/blogService";
 import dayjs from "dayjs";
 import { toast } from "react-toastify";
+import { useModal } from "../components/common/modal/ModalService";
+import { useState } from "react";
 
 function BlogPage() {
+  const { blogId } = useParams();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const { blogId } = useParams();
+  const { openModal, closeModal } = useModal();
+
+  const [openComments, setOpenComments] = useState(false);
 
   const { data } = useQuery({
     enabled: !!blogId,
@@ -43,14 +50,33 @@ function BlogPage() {
 
   const onBlogLike = () => blogLikeMutation.mutate(blogId);
 
-  const onBlogCommentClick = () => {};
-
   const onBlogEditClick = () => navigate(`/blog/edit/${blogId}`);
 
-  const onBlogDelete = () => blogDeleteMutation.mutate(blogId);
+  const onBlogDelete = () =>
+    openModal(
+      <ConfirmationDialog
+        onConfirm={() => {
+          blogDeleteMutation.mutate(blogId);
+          closeModal();
+        }}
+        onCancel={closeModal}
+        title="Delete Blog"
+        description="Are you sure you want to delete this blog? This action cannot be undone."
+        confirmText="Delete"
+        cancelText="Cancel"
+        className="max-w-lg w-full"
+      />
+    );
+
+  const toggleCommentView = () => setOpenComments((prev) => !prev);
 
   return (
     <div className="p-5 sm:p-10">
+      <CommentPage
+        blogId={blogId}
+        open={openComments}
+        toggleCommentView={toggleCommentView}
+      />
       <div className="flex flex-col items-center max-w-5xl mx-auto rounded-lg mb-14">
         <img
           src={data?.coverImage ?? getRandomImage(data?.id, { width: 1000 })}
@@ -89,7 +115,7 @@ function BlogPage() {
       <BlogFloatingButton
         blog={data}
         onBlogLikeClick={onBlogLike}
-        onBlogCommentClick={onBlogCommentClick}
+        onBlogCommentClick={toggleCommentView}
         onBlogEditClick={onBlogEditClick}
         onBlogDeleteClick={onBlogDelete}
       />

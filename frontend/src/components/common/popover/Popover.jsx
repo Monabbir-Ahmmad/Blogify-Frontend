@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
+import { createPortal } from "react-dom";
 import { twMerge } from "tailwind-merge";
 
 const getPopoverOrigin = (targetPosition, popoverPosition, anchor) => {
@@ -51,12 +52,12 @@ const Popover = ({ target, open, onClose, children, anchor, className }) => {
   const popoverRef = useRef();
 
   useEffect(() => {
-    window.addEventListener("click", handleOutsideClick);
+    window.addEventListener("mousedown", handleOutsideClick);
     window.addEventListener("resize", onClose);
     window.addEventListener("scroll", onClose);
 
     return () => {
-      window.removeEventListener("click", handleOutsideClick);
+      window.removeEventListener("mousedown", handleOutsideClick);
       window.removeEventListener("resize", onClose);
       window.removeEventListener("scroll", onClose);
     };
@@ -113,7 +114,7 @@ const Popover = ({ target, open, onClose, children, anchor, className }) => {
     }
   };
 
-  return (
+  return createPortal(
     <menu
       ref={popoverRef}
       className={twMerge(
@@ -129,7 +130,8 @@ const Popover = ({ target, open, onClose, children, anchor, className }) => {
       style={{ ...position }}
     >
       {children}
-    </menu>
+    </menu>,
+    document.body
   );
 };
 
