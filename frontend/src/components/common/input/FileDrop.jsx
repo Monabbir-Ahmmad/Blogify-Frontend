@@ -68,7 +68,7 @@ function FileDrop({
       {value ? (
         <div className="relative">
           <img
-            src={URL.createObjectURL(value)}
+            src={value instanceof File ? URL.createObjectURL(value) : value}
             alt="Selected"
             className="object-cover h-64 w-full rounded-xl"
           />

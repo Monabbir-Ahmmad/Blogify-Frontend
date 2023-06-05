@@ -1,6 +1,8 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
+import BlogEditPage from "./pages/BlogEditPage";
 import BlogPage from "./pages/BlogPage";
+import BlogWritingPage from "./pages/BlogWritingPage";
 import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage";
 import LandingPage from "./pages/LandingPage";
@@ -9,7 +11,6 @@ import ProfilePage from "./pages/ProfilePage";
 import SearchPage from "./pages/SearchPage";
 import SigninPage from "./pages/SigninPage";
 import SignupPage from "./pages/SignupPage";
-import WritePage from "./pages/WritePage";
 
 function Router() {
   const router = createBrowserRouter([
@@ -24,7 +25,11 @@ function Router() {
         },
         {
           path: "/write",
-          element: <WritePage />,
+          element: <BlogWritingPage />,
+        },
+        {
+          path: "/blog/edit/:blogId",
+          element: <BlogEditPage />,
         },
         {
           path: "/profile/:userId",

@@ -1,32 +1,34 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import BlogItem from "../components/blog/BlogItem";
 import ConfirmationDialog from "../components/common/dialog/ConfirmationDialog";
+import Pagination from "../components/common/pagination/Pagination";
 import blogService from "../services/blogService";
 import { toast } from "react-toastify";
 import { useModal } from "../components/common/modal/ModalService";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 function HomePage() {
+  const [searchParams] = useSearchParams();
+
+  const page = searchParams.get("page") || 1;
+  const limit = searchParams.get("limit") || 12;
+
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { openModal, closeModal } = useModal();
-  const [pagination, setPagination] = useState({
-    page: 1,
-    limit: 12,
-  });
 
   const { data: paginatedData } = useQuery({
-    queryKey: ["getBlogs", pagination],
-    queryFn: async () => await blogService.getList(pagination),
+    queryKey: ["getBlogs", { page, limit }],
+    queryFn: async () => await blogService.getList({ page, limit }),
   });
 
   const blogDeleteMutation = useMutation({
     mutationFn: blogService.delete,
     onSuccess: (data, variables) => {
       toast.success("Blog deleted successfully");
-      queryClient.invalidateQueries(["getBlogs", pagination]);
+      queryClient.invalidateQueries(["getBlogs", { page, limit }]);
       queryClient.removeQueries(["getBlog", variables]);
     },
   });
@@ -36,6 +38,7 @@ function HomePage() {
   const onDeleteClick = (id) =>
     openModal(
       <ConfirmationDialog
+        type="danger"
         onConfirm={() => {
           blogDeleteMutation.mutate(id);
           closeModal();
@@ -51,7 +54,7 @@ function HomePage() {
 
   return (
     <section className="p-5 w-full inline-flex justify-center">
-      <div className="max-w-7xl w-full space-y-5">
+      <div className="max-w-[1400px] w-full space-y-5">
         <h1 className="text-4xl font-semibold">
           Welcome to <span className="text-primary">Blogify</span>
         </h1>
@@ -69,6 +72,14 @@ function HomePage() {
               onDeleteClick={onDeleteClick}
             />
           ))}
+        </div>
+
+        <div className="py-4">
+          <Pagination
+            currentPage={page}
+            totalPages={paginatedData?.pageCount}
+            onPageChange={(nextPage) => navigate(`?page=${nextPage}`)}
+          />
         </div>
       </div>
     </section>

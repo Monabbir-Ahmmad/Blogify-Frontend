@@ -5,7 +5,7 @@ import blogService from "../services/blogService";
 import { toast } from "react-toastify";
 import { useState } from "react";
 
-function WritePage() {
+function BlogWritingPage() {
   const queryClient = useQueryClient();
   const [resetForm, setResetForm] = useState(false);
 
@@ -22,7 +22,7 @@ function WritePage() {
 
   return (
     <div className="w-full p-4">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         <BlogWriteForm
           onSubmit={onSubmit}
           resetForm={resetForm}
@@ -33,4 +33,4 @@ function WritePage() {
   );
 }
 
-export default WritePage;
+export default BlogWritingPage;

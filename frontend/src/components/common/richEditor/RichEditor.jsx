@@ -13,11 +13,13 @@ const RichEditor = forwardRef(
       height = "auto",
       maxCharCount = 5000,
       options = {},
+      defaultValue = "",
       ...rest
     },
     ref
   ) => {
     const getSunEditorInstance = (sunEditor) => {
+      sunEditor.setContents(defaultValue);
       if (ref) ref.current = sunEditor;
     };
 

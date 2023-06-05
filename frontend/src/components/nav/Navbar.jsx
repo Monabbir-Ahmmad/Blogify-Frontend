@@ -41,7 +41,7 @@ function Navbar({ onLogout }) {
 
   return (
     <>
-      <nav className="sticky top-0 z-50 border-b border-slate-200 w-full gap-2 p-4 inline-flex items-center bg-white">
+      <nav className="sticky top-0 z-50 border-b border-slate-200 w-screen gap-2 p-4 inline-flex items-center bg-white">
         <AppLogo className="mr-4" />
 
         <NavSearchbar className="hidden sm:block" userId={authData?.id} />

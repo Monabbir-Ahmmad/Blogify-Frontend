@@ -1,6 +1,7 @@
 import { twMerge } from "tailwind-merge";
 
 function ConfirmationDialog({
+  type = "danger",
   onCancel,
   onConfirm,
   title,

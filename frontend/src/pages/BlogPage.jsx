@@ -55,6 +55,7 @@ function BlogPage() {
   const onBlogDelete = () =>
     openModal(
       <ConfirmationDialog
+        type="danger"
         onConfirm={() => {
           blogDeleteMutation.mutate(blogId);
           closeModal();

@@ -7,10 +7,26 @@ import { RiUpload2Line as PublishIcon } from "react-icons/ri";
 import RichEditor from "../common/richEditor/RichEditor";
 import { toast } from "react-toastify";
 
-function BlogWriteForm({ onSubmit, resetForm, onFormReset }) {
+function BlogWriteForm({
+  onSubmit,
+  resetForm,
+  onFormReset,
+  isEditMode = false,
+  defaultValues,
+}) {
   const { control, handleSubmit, reset } = useForm();
   const editorRef = useRef();
   const [coverImage, setCoverImage] = useState();
+
+  useEffect(() => {
+    if (!defaultValues) return;
+
+    editorRef.current.setContents(defaultValues.content);
+    setCoverImage(defaultValues.coverImage);
+    reset({
+      title: defaultValues?.title,
+    });
+  }, [defaultValues]);
 
   useEffect(() => {
     if (resetForm) {
@@ -29,11 +45,15 @@ function BlogWriteForm({ onSubmit, resetForm, onFormReset }) {
       return;
     }
 
-    onSubmit({ ...data, content: editorRef.current.getContents(), coverImage });
+    onSubmit({
+      title: data.title,
+      content: editorRef.current.getContents(),
+      coverImage,
+    });
   };
 
   const resetFields = () => {
-    reset();
+    reset({ title: "" });
     editorRef.current.setContents("");
     setCoverImage(null);
   };
@@ -44,7 +64,9 @@ function BlogWriteForm({ onSubmit, resetForm, onFormReset }) {
       className="flex flex-col gap-6 p-4"
     >
       <div className="flex gap-4 items-center justify-between">
-        <h1 className="text-3xl font-semibold">Write a new blog</h1>
+        <h1 className="text-3xl font-semibold">
+          {isEditMode ? "Edit your blog" : "Write a new blog"}
+        </h1>
         <button type="submit" className="btn-primary px-10">
           Publish <PublishIcon size={20} />
         </button>
