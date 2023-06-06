@@ -8,13 +8,14 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import Avatar from "../components/common/avatar/avatar";
 import BlogFloatingButton from "../components/blog/BlogFloatingButton";
+import { CommentContextProvider } from "../contexts/CommentContext";
 import CommentPage from "./CommentPage";
 import ConfirmationDialog from "../components/common/dialog/ConfirmationDialog";
 import RichContentRenderer from "../components/common/richEditor/RichContentRenderer";
 import blogService from "../services/blogService";
 import dayjs from "dayjs";
 import { toast } from "react-toastify";
-import { useModal } from "../components/common/modal/ModalService";
+import { useModal } from "../contexts/ModalContext";
 import { useState } from "react";
 
 function BlogPage() {
@@ -73,11 +74,13 @@ function BlogPage() {
 
   return (
     <div className="p-5 sm:p-10">
-      <CommentPage
-        blogId={blogId}
-        open={openComments}
-        toggleCommentView={toggleCommentView}
-      />
+      <CommentContextProvider>
+        <CommentPage
+          blogId={blogId}
+          open={openComments}
+          toggleCommentView={toggleCommentView}
+        />
+      </CommentContextProvider>
       <div className="flex flex-col items-center max-w-5xl mx-auto rounded-lg mb-14">
         <img
           src={data?.coverImage ?? getRandomImage(data?.id, { width: 1000 })}

@@ -17,7 +17,7 @@ class CommentService {
   async update(id, text) {
     text = text.trim();
 
-    const res = await httpClient.putForm(apiUrl.comment.update + `/${id}`, {
+    const res = await httpClient.put(apiUrl.comment.update + `/${id}`, {
       text,
     });
 

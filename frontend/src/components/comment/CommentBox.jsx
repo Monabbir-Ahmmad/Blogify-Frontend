@@ -1,12 +1,17 @@
 import { useState } from "react";
 
-function CommentBox({ onSubmit, defaultValue = "" }) {
+function CommentBox({ onSubmit, defaultValue = "", onCancel }) {
   const [text, setText] = useState(defaultValue);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(text);
     setText("");
+  };
+
+  const handleCancel = () => {
+    setText("");
+    onCancel?.();
   };
 
   return (
@@ -18,13 +23,19 @@ function CommentBox({ onSubmit, defaultValue = "" }) {
         value={text}
         onChange={(e) => setText(e.target.value)}
       />
-      <button
-        type="submit"
-        className="btn-primary py-2"
-        disabled={!text.trim()}
-      >
-        Submit
-      </button>
+      <div className="flex gap-2">
+        <button
+          type="submit"
+          className="btn-primary py-2"
+          disabled={!text.trim()}
+        >
+          Submit
+        </button>
+
+        <button type="button" className="btn-base py-2" onClick={handleCancel}>
+          Cancel
+        </button>
+      </div>
     </form>
   );
 }

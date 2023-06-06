@@ -17,7 +17,7 @@ TimeAgo.addDefaultLocale(en);
 
 const onHttpError = (error, _variables, _context, mutation) => {
   // If this has an onError defined, skip this
-  if (mutation.options.onError) return;
+  if (mutation?.options?.onError) return;
 
   toast.error(error.response.data.message, {
     toastId: error.response.data.message,

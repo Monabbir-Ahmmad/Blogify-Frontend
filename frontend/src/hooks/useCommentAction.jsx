@@ -1,66 +1,158 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import commentService from "../services/commentService";
-import { toast } from "react-toastify";
-import { useState } from "react";
 
-function useCommentAction({ blogId }) {
+function useCommentAction({ setComments }) {
   const queryClient = useQueryClient();
-  const [comments, setComments] = useState(new Map());
 
-  const fetchComments = (blogId, { page, limit }) =>
+  const fetchComments = (blogId, { page = 1, limit = 12 }) =>
     useQuery({
-      enabled: !!blogId,
+      enabled: false,
       queryKey: ["getComments", { blogId, page, limit }],
-      queryFn: async ({ page, limit }) => {
+      queryFn: async () => {
         const { data, pageCount } = await commentService.getListByBlog(blogId, {
           page,
           limit,
         });
-        setComments(
-          (prev) => new Map([...prev, ...data.map((c) => [c.id, c])])
-        );
+        setComments((prev) => {
+          const newComments = { ...prev };
+          newComments.root.children = [
+            ...new Set([
+              ...newComments.root.children,
+              ...data.map((comment) => comment.id),
+            ]),
+          ];
+
+          data.forEach((comment) => {
+            newComments[comment.id] = { ...comment, children: [] };
+          });
+
+          return newComments;
+        });
         return { data, pageCount };
       },
     });
 
-  const commentCreateMutation = useMutation({
-    mutationFn: async (text) => await commentService.post(blogId, text),
-    onSuccess: (data) => {
-      setComments((prev) => new Map([[data.id, data], ...prev]));
+  const fetchReplies = (commentId, { page = 1, limit = 12 }) =>
+    useQuery({
+      enabled: false,
+      queryKey: ["getReplies", { commentId, page, limit }],
+      queryFn: async () => {
+        const { data, pageCount } = await commentService.getReplies(commentId, {
+          page,
+          limit,
+        });
+        setComments((prev) => {
+          const newComments = { ...prev };
+          newComments[commentId].children = [
+            ...new Set([
+              ...newComments[commentId].children,
+              ...data.map((comment) => comment.id),
+            ]),
+          ];
+
+          data.forEach((comment) => {
+            newComments[comment.id] = { ...comment, children: [] };
+          });
+
+          return newComments;
+        });
+        return { data, pageCount };
+      },
+    });
+
+  const commentPostMutation = useMutation({
+    mutationFn: async ({ blogId, text }) =>
+      await commentService.post(blogId, text),
+    onSuccess: (data, { blogId }) => {
+      setComments((prev) => {
+        const newComments = { ...prev };
+        newComments.root.children = [data.id, ...newComments.root.children];
+        newComments[data.id] = { ...data, children: [] };
+        return newComments;
+      });
       queryClient.invalidateQueries(["getBlog", blogId]);
+    },
+  });
+
+  const replyPostMutation = useMutation({
+    mutationFn: async ({ blogId, parentId, text }) =>
+      await commentService.post(blogId, text, parentId),
+    onSuccess: (data, variables) => {
+      setComments((prev) => {
+        const newComments = { ...prev };
+        newComments[variables.parentId].children = [
+          data.id,
+          ...newComments[variables.parentId].children,
+        ];
+        newComments[variables.parentId].replyCount++;
+        newComments[data.id] = { ...data, children: [] };
+        return newComments;
+      });
+
+      // queryClient.invalidateQueries([
+      //   "getReplies",
+      //   { commentId: variables.parentId },
+      // ]);
     },
   });
 
   const commentLikeMutation = useMutation({
     mutationKey: ["skipLoading"],
     mutationFn: commentService.like,
-    onSuccess: (data, id) => {
-      setComments((prev) => new Map(prev).set(id, data));
-      queryClient.setQueryData(["getComments", { blogId }], (oldData) =>
-        new Map(oldData).set(id, data)
-      );
+    onSuccess: (data, commentId) => {
+      setComments((prev) => {
+        const newComments = { ...prev };
+        newComments[commentId] = { ...newComments[commentId], ...data };
+        return newComments;
+      });
+      queryClient.removeQueries(["getComments"]);
+      queryClient.removeQueries(["getReplies"]);
     },
   });
 
   const commentDeleteMutation = useMutation({
     mutationFn: commentService.delete,
-    onSuccess: (data, id) => {
-      toast.success("Comment deleted successfully");
+    onSuccess: (data, commentId) => {
       setComments((prev) => {
-        const newComments = new Map(prev);
-        newComments.delete(id);
+        const newComments = { ...prev };
+        delete newComments[commentId];
+
+        if (data.parentId) newComments[data.parentId].replyCount--;
+
         return newComments;
       });
-      queryClient.invalidateQueries(["getBlog", blogId]);
+      queryClient.invalidateQueries(["getBlog", data.blogId]);
+      queryClient.removeQueries("getComments");
+      queryClient.removeQueries("getReplies");
     },
   });
+
+  const commentEditMutation = useMutation({
+    mutationFn: async ({ commentId, text }) =>
+      await commentService.update(commentId, text),
+    onSuccess: (data, variables) => {
+      setComments((prev) => {
+        const newComments = { ...prev };
+        newComments[variables.commentId] = {
+          ...newComments[variables.commentId],
+          ...data,
+        };
+        return newComments;
+      });
+      queryClient.removeQueries("getComments");
+      queryClient.removeQueries("getReplies");
+    },
+  });
+
   return {
-    comments,
     fetchComments,
-    commentCreateMutation,
+    fetchReplies,
+    commentPostMutation,
+    replyPostMutation,
     commentLikeMutation,
     commentDeleteMutation,
+    commentEditMutation,
   };
 }
 

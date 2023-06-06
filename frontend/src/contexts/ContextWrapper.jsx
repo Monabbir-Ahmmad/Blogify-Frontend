@@ -1,11 +1,11 @@
 import { AuthContextProvider } from "./AuthContext";
-import { ModalProvider } from "../components/common/modal/ModalService";
+import { ModalContextProvider } from "./ModalContext";
 
 function ContextWrapper({ children }) {
   return (
-    <ModalProvider>
+    <ModalContextProvider>
       <AuthContextProvider>{children}</AuthContextProvider>
-    </ModalProvider>
+    </ModalContextProvider>
   );
 }
 

@@ -60,8 +60,7 @@ button:disabled:active {
 /* total width */
 *::-webkit-scrollbar {
   background-color: transparent;
-  width: 8px;
-  height: 8px;
+  width: 5px;
 }
 
 /* background of the scrollbar except button or resizer */
@@ -71,7 +70,7 @@ button:disabled:active {
 
 /* scrollbar itself */
 *::-webkit-scrollbar-thumb {
-  background-color: grey;
+  background-color: slategray;
   border-radius: 50px;
 }
 

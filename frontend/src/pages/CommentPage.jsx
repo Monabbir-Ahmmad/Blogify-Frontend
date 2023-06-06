@@ -1,67 +1,29 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
+import { AuthContext } from "../contexts/AuthContext";
 import { RiCloseLine as CloseIcon } from "react-icons/ri";
 import CommentBox from "../components/comment/CommentBox";
-import CommentItem from "../components/comment/CommentItem";
-import ConfirmationDialog from "../components/common/dialog/ConfirmationDialog";
-import commentService from "../services/commentService";
-import { toast } from "react-toastify";
+import { CommentContext } from "../contexts/CommentContext";
+import CommentTree from "../components/comment/CommentTree";
 import { twMerge } from "tailwind-merge";
-import { useModal } from "../components/common/modal/ModalService";
+import useCommentAction from "../hooks/useCommentAction";
 
 function CommentPage({ blogId, toggleCommentView, open = false }) {
-  const queryClient = useQueryClient();
-  const { openModal, closeModal } = useModal();
-  const [comments, setComments] = useState(new Map());
   const [page, setPage] = useState(1);
   const limit = 12;
   const commentSectionRef = useRef();
+  const { isAuthenticated } = useContext(AuthContext);
 
-  useQuery({
-    enabled: !!blogId,
-    queryKey: ["getComments", { blogId, page, limit }],
-    queryFn: async () => {
-      const { data, pageCount } = await commentService.getListByBlog(blogId, {
-        page,
-        limit,
-      });
-      setComments((prev) => new Map([...prev, ...data.map((c) => [c.id, c])]));
-      return { data, pageCount };
-    },
-  });
+  const { comments } = useContext(CommentContext);
 
-  const commentCreateMutation = useMutation({
-    mutationFn: async (text) => await commentService.post(blogId, text),
-    onSuccess: (data) => {
-      setComments((prev) => new Map([[data.id, data], ...prev]));
-      queryClient.invalidateQueries(["getBlog", blogId]);
-    },
-  });
+  const { fetchComments, commentPostMutation } = useCommentAction(
+    useContext(CommentContext)
+  );
 
-  const commentLikeMutation = useMutation({
-    mutationKey: ["skipLoading"],
-    mutationFn: commentService.like,
-    onSuccess: (data, id) => {
-      setComments((prev) => new Map(prev).set(id, data));
-      queryClient.setQueryData(["getComments", { blogId }], (oldData) =>
-        new Map(oldData).set(id, data)
-      );
-    },
-  });
-
-  const commentDeleteMutation = useMutation({
-    mutationFn: commentService.delete,
-    onSuccess: (data, id) => {
-      toast.success("Comment deleted successfully");
-      setComments((prev) => {
-        const newComments = new Map(prev);
-        newComments.delete(id);
-        return newComments;
-      });
-      queryClient.invalidateQueries(["getBlog", blogId]);
-    },
-  });
+  const { data: paginatedData, refetch: refetchComments } = fetchComments(
+    blogId,
+    { page, limit }
+  );
 
   const onClickOutside = (e) => {
     const commentRect = commentSectionRef.current?.getBoundingClientRect();
@@ -78,26 +40,14 @@ function CommentPage({ blogId, toggleCommentView, open = false }) {
     }
   };
 
-  const onCommentSubmit = (text) => commentCreateMutation.mutate(text);
+  const onCommentSubmit = (text) =>
+    commentPostMutation.mutate({ blogId, text });
 
-  const onCommentLike = (commentId) => commentLikeMutation.mutate(commentId);
-
-  const onCommentDelete = (commentId) =>
-    openModal(
-      <ConfirmationDialog
-        type="danger"
-        onConfirm={() => {
-          commentDeleteMutation.mutate(commentId);
-          closeModal();
-        }}
-        onCancel={closeModal}
-        title="Delete Comment"
-        description="Are you sure you want to delete this comment? This action cannot be undone."
-        confirmText="Delete"
-        cancelText="Cancel"
-        className="max-w-lg w-full"
-      />
-    );
+  useEffect(() => {
+    if (open) {
+      refetchComments();
+    }
+  }, [open]);
 
   return (
     <div
@@ -110,7 +60,7 @@ function CommentPage({ blogId, toggleCommentView, open = false }) {
       <section
         ref={commentSectionRef}
         className={twMerge(
-          "overflow-y-auto float-right h-screen gap-5 flex flex-col w-full sm:w-5/6 sm:max-w-lg p-6 bg-white transition-transform",
+          "overflow-y-auto float-right h-screen gap-5 flex flex-col w-full sm:w-5/6 sm:max-w-2xl p-6 bg-white transition-transform",
           open ? "translate-x-0" : "translate-x-full"
         )}
       >
@@ -122,22 +72,9 @@ function CommentPage({ blogId, toggleCommentView, open = false }) {
           </button>
         </div>
 
-        <CommentBox onSubmit={onCommentSubmit} />
+        {isAuthenticated && <CommentBox onSubmit={onCommentSubmit} />}
 
-        <div className="divide-y">
-          {[...comments.keys()].map(
-            (commentId) =>
-              !comments.get(commentId)?.parentId && (
-                <div key={commentId} className="py-6">
-                  <CommentItem
-                    comment={comments.get(commentId)}
-                    onDelete={onCommentDelete}
-                    onLike={onCommentLike}
-                  />
-                </div>
-              )
-          )}
-        </div>
+        {open && <CommentTree commentIds={comments.root.children} />}
       </section>
     </div>
   );

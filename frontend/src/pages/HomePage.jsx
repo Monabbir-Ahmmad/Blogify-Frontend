@@ -3,10 +3,12 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 
 import BlogItem from "../components/blog/BlogItem";
 import ConfirmationDialog from "../components/common/dialog/ConfirmationDialog";
+import NoResult from "../components/emptyPlaceholder/NoResult";
 import Pagination from "../components/common/pagination/Pagination";
 import blogService from "../services/blogService";
+import emptyResult from "../assets/emptyResult.svg";
 import { toast } from "react-toastify";
-import { useModal } from "../components/common/modal/ModalService";
+import { useModal } from "../contexts/ModalContext";
 import { useState } from "react";
 
 function HomePage() {
@@ -62,6 +64,8 @@ function HomePage() {
         <p className="text-base opacity-80 uppercase">View recent blogs</p>
 
         <hr />
+
+        {paginatedData?.data.length === 0 && <NoResult />}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {paginatedData?.data.map((blog) => (
