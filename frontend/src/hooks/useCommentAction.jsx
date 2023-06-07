@@ -89,11 +89,6 @@ function useCommentAction({ setComments }) {
         newComments[data.id] = { ...data, children: [] };
         return newComments;
       });
-
-      // queryClient.invalidateQueries([
-      //   "getReplies",
-      //   { commentId: variables.parentId },
-      // ]);
     },
   });
 

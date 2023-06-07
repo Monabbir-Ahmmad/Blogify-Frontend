@@ -77,7 +77,7 @@ function BlogItem({ blog, onEditClick, onDeleteClick }) {
               target={menuRef}
               open={menuOpen}
               onClose={onMenuClose}
-              className="bg-white rounded shadow"
+              className="bg-white rounded shadow-xl"
             >
               <div className="text-lg flex flex-col w-44">
                 <span

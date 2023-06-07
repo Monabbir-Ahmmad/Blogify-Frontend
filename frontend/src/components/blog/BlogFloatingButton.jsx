@@ -56,7 +56,7 @@ function BlogFloatingButton({
         anchor={{
           horizontal: "center",
         }}
-        className="bg-white rounded shadow"
+        className="bg-white rounded shadow-xl"
       >
         <div className="text-lg flex flex-col w-44">
           <span

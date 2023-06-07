@@ -14,7 +14,7 @@ class UserService {
     return res.data;
   }
 
-  async getUser(id) {
+  async get(id) {
     const res = await httpClient.get(apiUrl.user.get + `/${id}`);
 
     return res.data;

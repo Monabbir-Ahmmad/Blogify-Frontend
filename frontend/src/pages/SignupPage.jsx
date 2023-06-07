@@ -23,7 +23,7 @@ function SignupPage() {
   const onSignup = (data) => signupMutation.mutate(data);
 
   return (
-    <div className="flex">
+    <main className="flex">
       <section className="flex-1 p-4 min-h-screen bg-slate-50 border-x border-slate-200 lg:flex items-center justify-center hidden ">
         <object type="image/svg+xml" data={signupImage} className="w-3/4" />
       </section>
@@ -51,7 +51,7 @@ function SignupPage() {
           </Link>
         </p>
       </section>
-    </div>
+    </main>
   );
 }
 

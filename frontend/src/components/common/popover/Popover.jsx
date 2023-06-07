@@ -72,11 +72,11 @@ const Popover = ({ target, open, onClose, children, anchor, className }) => {
 
     const targetRect = target.current.getBoundingClientRect();
 
-    let left = targetRect.left + targetRect.width / 2;
+    let left = targetRect.left;
     let top = targetRect.bottom + 5;
 
     if (targetRect.left - popoverRef.current.offsetWidth > 0) {
-      left -= popoverRef.current.offsetWidth;
+      left -= popoverRef.current.offsetWidth - targetRect.width;
     }
 
     if (

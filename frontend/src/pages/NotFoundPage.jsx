@@ -3,7 +3,7 @@ import notFoundSvg from "../assets/pageNotFound.svg";
 
 function NotFoundPage() {
   return (
-    <div className="p-10 flex flex-col items-center min-h-screen bg-slate-50">
+    <main className="p-10 flex flex-col items-center min-h-screen bg-slate-50">
       <object
         type="image/svg+xml"
         data={notFoundSvg}
@@ -17,7 +17,7 @@ function NotFoundPage() {
       <Link to={".."} className="btn-primary px-20 rounded-full">
         Take me back!
       </Link>
-    </div>
+    </main>
   );
 }
 

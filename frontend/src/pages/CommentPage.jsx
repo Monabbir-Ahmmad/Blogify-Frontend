@@ -50,7 +50,7 @@ function CommentPage({ blogId, toggleCommentView, open = false }) {
   }, [open]);
 
   return (
-    <div
+    <main
       className={twMerge(
         "z-50 fixed inset-0 bg-black bg-opacity-25 transition-opacity",
         open ? "opacity-100" : "opacity-0 pointer-events-none"
@@ -76,7 +76,7 @@ function CommentPage({ blogId, toggleCommentView, open = false }) {
 
         {open && <CommentTree commentIds={comments.root.children} />}
       </section>
-    </div>
+    </main>
   );
 }
 

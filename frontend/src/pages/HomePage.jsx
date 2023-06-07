@@ -1,15 +1,12 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 import BlogItem from "../components/blog/BlogItem";
 import ConfirmationDialog from "../components/common/dialog/ConfirmationDialog";
 import NoResult from "../components/emptyPlaceholder/NoResult";
 import Pagination from "../components/common/pagination/Pagination";
-import blogService from "../services/blogService";
-import emptyResult from "../assets/emptyResult.svg";
 import { toast } from "react-toastify";
+import useBlogAction from "../hooks/useBlogAction";
 import { useModal } from "../contexts/ModalContext";
-import { useState } from "react";
 
 function HomePage() {
   const [searchParams] = useSearchParams();
@@ -18,22 +15,11 @@ function HomePage() {
   const limit = searchParams.get("limit") || 12;
 
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
   const { openModal, closeModal } = useModal();
 
-  const { data: paginatedData } = useQuery({
-    queryKey: ["getBlogs", { page, limit }],
-    queryFn: async () => await blogService.getList({ page, limit }),
-  });
+  const { fetchBlogs, blogDeleteMutation } = useBlogAction();
 
-  const blogDeleteMutation = useMutation({
-    mutationFn: blogService.delete,
-    onSuccess: (data, variables) => {
-      toast.success("Blog deleted successfully");
-      queryClient.invalidateQueries(["getBlogs", { page, limit }]);
-      queryClient.removeQueries(["getBlog", variables]);
-    },
-  });
+  const { data: paginatedData } = fetchBlogs({ page, limit });
 
   const onEditClick = (id) => navigate(`/blog/edit/${id}`);
 
@@ -42,7 +28,9 @@ function HomePage() {
       <ConfirmationDialog
         type="danger"
         onConfirm={() => {
-          blogDeleteMutation.mutate(id);
+          blogDeleteMutation.mutate(id, {
+            onSuccess: () => toast.success("Blog deleted successfully"),
+          });
           closeModal();
         }}
         onCancel={closeModal}
@@ -55,8 +43,8 @@ function HomePage() {
     );
 
   return (
-    <section className="p-5 w-full inline-flex justify-center">
-      <div className="max-w-[1400px] w-full space-y-5">
+    <main className="p-5 w-full inline-flex justify-center">
+      <section className="container space-y-5">
         <h1 className="text-4xl font-semibold">
           Welcome to <span className="text-primary">Blogify</span>
         </h1>
@@ -85,8 +73,8 @@ function HomePage() {
             onPageChange={(nextPage) => navigate(`?page=${nextPage}`)}
           />
         </div>
-      </div>
-    </section>
+      </section>
+    </main>
   );
 }
 

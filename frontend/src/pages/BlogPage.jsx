@@ -12,9 +12,9 @@ import { CommentContextProvider } from "../contexts/CommentContext";
 import CommentPage from "./CommentPage";
 import ConfirmationDialog from "../components/common/dialog/ConfirmationDialog";
 import RichContentRenderer from "../components/common/richEditor/RichContentRenderer";
-import blogService from "../services/blogService";
 import dayjs from "dayjs";
 import { toast } from "react-toastify";
+import useBlogAction from "../hooks/useBlogAction";
 import { useModal } from "../contexts/ModalContext";
 import { useState } from "react";
 
@@ -26,28 +26,9 @@ function BlogPage() {
 
   const [openComments, setOpenComments] = useState(false);
 
-  const { data } = useQuery({
-    enabled: !!blogId,
-    queryKey: ["getBlog", blogId],
-    queryFn: async () => await blogService.get(blogId),
-  });
+  const { fetchBlog, blogLikeMutation, blogDeleteMutation } = useBlogAction();
 
-  const blogLikeMutation = useMutation({
-    mutationKey: ["skipLoading"],
-    mutationFn: blogService.like,
-    onSuccess: (data) =>
-      queryClient.setQueryData(["getBlog", blogId], () => data),
-  });
-
-  const blogDeleteMutation = useMutation({
-    mutationFn: blogService.delete,
-    onSuccess: () => {
-      toast.success("Blog deleted successfully");
-      queryClient.invalidateQueries(["getBlogs"]);
-      queryClient.removeQueries(["getBlog", blogId]);
-      navigate("..");
-    },
-  });
+  const { data } = fetchBlog(blogId);
 
   const onBlogLike = () => blogLikeMutation.mutate(blogId);
 
@@ -58,7 +39,12 @@ function BlogPage() {
       <ConfirmationDialog
         type="danger"
         onConfirm={() => {
-          blogDeleteMutation.mutate(blogId);
+          blogDeleteMutation.mutate(blogId, {
+            onSuccess: () => {
+              toast.success("Blog deleted successfully");
+              navigate("..");
+            },
+          });
           closeModal();
         }}
         onCancel={closeModal}

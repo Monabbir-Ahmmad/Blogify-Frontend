@@ -23,7 +23,7 @@ function SigninPage() {
   const onSignin = (data) => signinMutation.mutate(data);
 
   return (
-    <div className="flex">
+    <main className="flex">
       <section className="flex flex-col px-6 py-20 gap-5 items-center justify-center flex-1 min-h-screen ">
         <AppLogo className="text-4xl" size={50} />
         <h1 className="text-center text-4xl font-bold">Welcome Back!</h1>
@@ -51,7 +51,7 @@ function SigninPage() {
       <section className="flex-[1.5] p-4 min-h-screen bg-slate-50 border-x border-slate-200 lg:flex items-center justify-center hidden ">
         <object type="image/svg+xml" data={signinImage} className="w-3/4" />
       </section>
-    </div>
+    </main>
   );
 }
 

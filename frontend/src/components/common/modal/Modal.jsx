@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 
 import { twMerge } from "tailwind-merge";
+import { createPortal } from "react-dom";
 
 const Modal = ({ isOpen, onClose, children }) => {
   const modalRef = useRef(null);
@@ -24,7 +25,7 @@ const Modal = ({ isOpen, onClose, children }) => {
     };
   }, []);
 
-  return (
+  return createPortal(
     <div
       className={twMerge(
         "fixed inset-0 flex items-center justify-center z-50 transition-opacity bg-black bg-opacity-25",
@@ -43,7 +44,8 @@ const Modal = ({ isOpen, onClose, children }) => {
       >
         {children}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 

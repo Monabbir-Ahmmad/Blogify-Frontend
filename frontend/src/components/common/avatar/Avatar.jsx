@@ -1,4 +1,4 @@
-import avaterPlaceholder from "../../../assets/avatar.svg";
+import avaterPlaceholder from "../../../assets/avatarPlaceholder.svg";
 import { twMerge } from "tailwind-merge";
 
 function Avatar({
@@ -24,7 +24,7 @@ function Avatar({
     >
       <img
         className={twMerge(
-          "object-cover bg-slate-100 aspect-square",
+          "object-cover bg-background aspect-square",
           rounded,
           avatarSize
         )}

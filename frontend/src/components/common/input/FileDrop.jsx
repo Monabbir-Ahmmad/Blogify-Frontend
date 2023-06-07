@@ -94,7 +94,7 @@ function FileDrop({
             <input
               id="dropzone-file"
               type="file"
-              accept="image/*"
+              accept={allowedMimeTypes.join(",")}
               onChange={handleFileInputChange}
               className="hidden"
             />
