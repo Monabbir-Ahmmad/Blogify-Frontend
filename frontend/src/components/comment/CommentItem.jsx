@@ -26,13 +26,14 @@ import { useNavigate } from "react-router-dom";
 dayjs.extend(relativeTime);
 
 function CommentItem({ comment, level }) {
+  const menuRef = useRef();
   const navigate = useNavigate();
   const { openModal, closeModal } = useModal();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [openReplyInput, setOpenReplyInput] = useState(false);
   const [showReplies, setShowReplies] = useState(false);
   const [showEditInput, setShowEditInput] = useState(false);
-  const menuRef = useRef();
+  const [openReplyInput, setOpenReplyInput] = useState(false);
+  const [pagination, setPagination] = useState({ page: 1, limit: 12 });
   const { authData, isAuthenticated } = useContext(AuthContext);
   const {
     fetchReplies,
@@ -44,7 +45,7 @@ function CommentItem({ comment, level }) {
 
   const { data: paginatedData, refetch: refetchReplies } = fetchReplies(
     comment.id,
-    { page: 1, limit: 5 }
+    pagination
   );
 
   const isLiked = comment?.likes?.some((like) => like?.userId === authData?.id);
@@ -103,7 +104,7 @@ function CommentItem({ comment, level }) {
 
   useEffect(() => {
     if (showReplies) refetchReplies();
-  }, [showReplies]);
+  }, [showReplies, pagination]);
 
   return (
     <div className="space-y-2">
@@ -119,13 +120,15 @@ function CommentItem({ comment, level }) {
           onClick={onCommentatorClick}
         />
 
-        <button
-          ref={menuRef}
-          className="icon-btn-base bg-white rounded-full h-8"
-          onClick={() => setMenuOpen((prev) => !prev)}
-        >
-          <MoreIcon size={20} />
-        </button>
+        {isAuthenticated && (
+          <button
+            ref={menuRef}
+            className="icon-btn-base bg-white rounded-full h-8"
+            onClick={() => setMenuOpen((prev) => !prev)}
+          >
+            <MoreIcon size={20} />
+          </button>
+        )}
 
         <Popover
           target={menuRef}
@@ -180,11 +183,7 @@ function CommentItem({ comment, level }) {
 
         {comment.replyCount > 0 && (
           <button onClick={onToggleRepliesClick}>
-            {showReplies
-              ? "Hide replies"
-              : `View ${comment.replyCount} ${
-                  comment.replyCount > 1 ? "replies" : "reply"
-                }`}
+            {showReplies ? "Hide replies" : "View replies"}
           </button>
         )}
       </div>
@@ -197,7 +196,27 @@ function CommentItem({ comment, level }) {
       )}
 
       {showReplies && (
-        <CommentTree commentIds={comment.children} level={level + 1} />
+        <>
+          <CommentTree commentIds={comment.children} level={level + 1} />
+
+          <button
+            className="btn-base w-full py-2 mt-2"
+            onClick={() =>
+              setPagination((prev) => ({ ...prev, page: prev.page + 1 }))
+            }
+            style={{
+              display: pagination.page >= paginatedData?.totalPages && "none",
+            }}
+          >
+            Load{" "}
+            {Math.min(
+              paginatedData?.pageSize,
+              paginatedData?.totalItems -
+                pagination.page * paginatedData?.pageSize
+            )}{" "}
+            more
+          </button>
+        </>
       )}
     </div>
   );

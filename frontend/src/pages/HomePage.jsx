@@ -9,17 +9,16 @@ import useBlogAction from "../hooks/useBlogAction";
 import { useModal } from "../contexts/ModalContext";
 
 function HomePage() {
-  const [searchParams] = useSearchParams();
-
-  const page = searchParams.get("page") || 1;
+  const [searchParams, setSearchParams] = useSearchParams({ page: 1 });
   const limit = searchParams.get("limit") || 12;
-
   const navigate = useNavigate();
   const { openModal, closeModal } = useModal();
-
   const { fetchBlogs, blogDeleteMutation } = useBlogAction();
 
-  const { data: paginatedData } = fetchBlogs({ page, limit });
+  const { data: paginatedData } = fetchBlogs({
+    page: searchParams.get("page"),
+    limit,
+  });
 
   const onEditClick = (id) => navigate(`/blog/edit/${id}`);
 
@@ -68,9 +67,9 @@ function HomePage() {
 
         <div className="py-4">
           <Pagination
-            currentPage={page}
-            totalPages={paginatedData?.pageCount}
-            onPageChange={(nextPage) => navigate(`?page=${nextPage}`)}
+            currentPage={searchParams.get("page")}
+            totalPages={paginatedData?.totalPages}
+            onPageChange={(page) => setSearchParams({ page })}
           />
         </div>
       </section>

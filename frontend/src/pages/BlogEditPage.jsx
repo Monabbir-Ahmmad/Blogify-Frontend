@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 
 import BlogWriteForm from "../components/blog/BlogWriteForm";
+import NotFoundPage from "./NotFoundPage";
 import { toast } from "react-toastify";
 import useBlogAction from "../hooks/useBlogAction";
 import { useState } from "react";
@@ -12,7 +13,7 @@ function BlogEditPage() {
 
   const { fetchBlog, blogUpdateMutation } = useBlogAction();
 
-  const { data: blogToUpdate } = fetchBlog(blogId);
+  const { data: blogToUpdate, isError } = fetchBlog(blogId);
 
   const onSubmit = (data) =>
     blogUpdateMutation.mutate(
@@ -25,6 +26,8 @@ function BlogEditPage() {
         },
       }
     );
+
+  if (isError) return <NotFoundPage />;
 
   return (
     <div className="w-full p-4">

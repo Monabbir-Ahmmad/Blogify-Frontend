@@ -54,12 +54,6 @@ export function removeHtmlStyles(html) {
     // Remove inline styles
     element.removeAttribute("style");
 
-    // Remove attributes
-    const attributes = element.getAttributeNames();
-    attributes.forEach((attribute) => {
-      element.removeAttribute(attribute);
-    });
-
     // Remove classes
     element.removeAttribute("class");
 

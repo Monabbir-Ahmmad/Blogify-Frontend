@@ -6,6 +6,7 @@ const apiUrl = {
     signout: "/auth/signout",
     refreshToken: "/auth/refresh-token",
     forgotPassword: "/auth/forgot-password",
+    resetPassword: "/auth/reset-password",
   },
   user: {
     get: "/user",

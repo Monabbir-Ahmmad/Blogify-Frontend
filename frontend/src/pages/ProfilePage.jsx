@@ -1,16 +1,16 @@
+import NotFoundPage from "./NotFoundPage";
 import ProfileDetails from "../components/profile/ProfileDetails";
-import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
 import useUserActions from "../hooks/useUserActions";
-import userService from "../services/userService";
 
 function ProfilePage() {
   const { userId } = useParams();
 
   const { fetchUser } = useUserActions();
 
-  const { data: user } = fetchUser(userId);
+  const { data: user, isError } = fetchUser(userId);
+
+  if (isError) return <NotFoundPage />;
 
   return (
     <main className="w-full flex flex-col items-center">

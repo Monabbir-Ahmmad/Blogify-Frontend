@@ -3,14 +3,14 @@ import {
   extractTextFromHtml,
   getRandomImage,
 } from "../utils/commonUtil";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 
 import Avatar from "../components/common/avatar/avatar";
 import BlogFloatingButton from "../components/blog/BlogFloatingButton";
 import { CommentContextProvider } from "../contexts/CommentContext";
 import CommentPage from "./CommentPage";
 import ConfirmationDialog from "../components/common/dialog/ConfirmationDialog";
+import NotFoundPage from "./NotFoundPage";
 import RichContentRenderer from "../components/common/richEditor/RichContentRenderer";
 import dayjs from "dayjs";
 import { toast } from "react-toastify";
@@ -21,14 +21,13 @@ import { useState } from "react";
 function BlogPage() {
   const { blogId } = useParams();
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
   const { openModal, closeModal } = useModal();
 
-  const [openComments, setOpenComments] = useState(false);
+  const [openComments, setOpenComments] = useSearchParams("comments", "open");
 
   const { fetchBlog, blogLikeMutation, blogDeleteMutation } = useBlogAction();
 
-  const { data } = fetchBlog(blogId);
+  const { data, isError } = fetchBlog(blogId);
 
   const onBlogLike = () => blogLikeMutation.mutate(blogId);
 
@@ -42,7 +41,7 @@ function BlogPage() {
           blogDeleteMutation.mutate(blogId, {
             onSuccess: () => {
               toast.success("Blog deleted successfully");
-              navigate("..");
+              navigate(-1);
             },
           });
           closeModal();
@@ -56,14 +55,19 @@ function BlogPage() {
       />
     );
 
-  const toggleCommentView = () => setOpenComments((prev) => !prev);
+  const toggleCommentView = () =>
+    setOpenComments(
+      openComments.get("comments") ? undefined : { comments: "open" }
+    );
+
+  if (isError) return <NotFoundPage />;
 
   return (
     <div className="p-5 sm:p-10">
       <CommentContextProvider>
         <CommentPage
           blogId={blogId}
-          open={openComments}
+          open={!!openComments.get("comments")}
           toggleCommentView={toggleCommentView}
         />
       </CommentContextProvider>
@@ -102,13 +106,15 @@ function BlogPage() {
           <RichContentRenderer content={data?.content} />
         </div>
       </div>
-      <BlogFloatingButton
-        blog={data}
-        onBlogLikeClick={onBlogLike}
-        onBlogCommentClick={toggleCommentView}
-        onBlogEditClick={onBlogEditClick}
-        onBlogDeleteClick={onBlogDelete}
-      />
+      {data && (
+        <BlogFloatingButton
+          blog={data}
+          onBlogLikeClick={onBlogLike}
+          onBlogCommentClick={toggleCommentView}
+          onBlogEditClick={onBlogEditClick}
+          onBlogDeleteClick={onBlogDelete}
+        />
+      )}
     </div>
   );
 }

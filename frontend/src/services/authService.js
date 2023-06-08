@@ -33,12 +33,15 @@ class AuthService {
     storageService.removeAuthData();
   }
 
-  async forgotPassword({ email }) {
+  async forgotPassword(email) {
     await httpClient.post(apiUrl.auth.forgotPassword, { email });
   }
 
-  async resetPassword({ password, token }) {
-    await httpClient.post(apiUrl.auth.resetPassword, { password, token });
+  async resetPassword(newPassword, resetToken) {
+    await httpClient.put(apiUrl.auth.resetPassword, {
+      newPassword,
+      resetToken,
+    });
   }
 
   async refreshAccessToken() {

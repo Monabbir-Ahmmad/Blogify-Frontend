@@ -54,7 +54,7 @@ const Input = forwardRef(
           {StartIcon && (
             <span
               className={twMerge(
-                "peer-focus:text-slate-400 peer-[.is-invalid]:text-error absolute inset-y-0 left-0 inline-flex items-center ml-3 text-slate-300 transition-all"
+                "peer-focus:opacity-100 peer-[.is-invalid]:text-error absolute inset-y-0 left-0 inline-flex items-center ml-3 opacity-50 transition-all"
               )}
             >
               <StartIcon size={20} />

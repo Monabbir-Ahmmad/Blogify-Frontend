@@ -9,8 +9,9 @@ function useCommentAction({ setComments }) {
     useQuery({
       enabled: false,
       queryKey: ["getComments", { blogId, page, limit }],
+      keepPreviousData: true,
       queryFn: async () => {
-        const { data, pageCount } = await commentService.getListByBlog(blogId, {
+        const { data, ...rest } = await commentService.getListByBlog(blogId, {
           page,
           limit,
         });
@@ -29,7 +30,7 @@ function useCommentAction({ setComments }) {
 
           return newComments;
         });
-        return { data, pageCount };
+        return { data, ...rest };
       },
     });
 
@@ -37,8 +38,9 @@ function useCommentAction({ setComments }) {
     useQuery({
       enabled: false,
       queryKey: ["getReplies", { commentId, page, limit }],
+      keepPreviousData: true,
       queryFn: async () => {
-        const { data, pageCount } = await commentService.getReplies(commentId, {
+        const { data, ...rest } = await commentService.getReplies(commentId, {
           page,
           limit,
         });
@@ -57,7 +59,7 @@ function useCommentAction({ setComments }) {
 
           return newComments;
         });
-        return { data, pageCount };
+        return { data, ...rest };
       },
     });
 

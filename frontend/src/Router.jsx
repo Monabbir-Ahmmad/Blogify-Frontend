@@ -4,10 +4,12 @@ import BlogEditPage from "./pages/BlogEditPage";
 import BlogPage from "./pages/BlogPage";
 import BlogWritingPage from "./pages/BlogWritingPage";
 import ErrorPage from "./pages/ErrorPage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import HomePage from "./pages/HomePage";
 import LandingPage from "./pages/LandingPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ProfilePage from "./pages/ProfilePage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 import SearchPage from "./pages/SearchPage";
 import SigninPage from "./pages/SigninPage";
 import SignupPage from "./pages/SignupPage";
@@ -52,6 +54,14 @@ function Router() {
     {
       path: "/signin",
       element: <SigninPage />,
+    },
+    {
+      path: "/forgot-password",
+      element: <ForgotPasswordPage />,
+    },
+    {
+      path: "/reset-password",
+      element: <ResetPasswordPage />,
     },
     {
       path: "*",

@@ -47,7 +47,7 @@ function BlogItem({ blog, onEditClick, onDeleteClick }) {
   };
 
   return (
-    <div className="relative flex flex-col justify-between gap-3 w-full h-96 rounded-3xl bg-white shadow-md hover:shadow-lg transition-shadow">
+    <div className="relative flex flex-col justify-between gap-3 w-full h-80 rounded-3xl bg-white shadow-md hover:shadow-lg transition-shadow">
       <div className="flex p-2 gap-2 justify-between z-10">
         <div className="inline-flex items-center divide-x-2 rounded-full bg-white shadow-md">
           <span
@@ -110,7 +110,7 @@ function BlogItem({ blog, onEditClick, onDeleteClick }) {
         onClick={onBlogClick}
         className="group cursor-pointer overflow-hidden flex flex-col gap-4 p-6 z-0 bg-white rounded-3xl"
       >
-        <h1 className="text-base font-semibold min-h-[4.5em] line-clamp-3">
+        <h1 className="text-base font-semibold min-h-[3em] line-clamp-2">
           {blog?.title}
         </h1>
 

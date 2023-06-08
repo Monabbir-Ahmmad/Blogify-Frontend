@@ -1,6 +1,5 @@
 import {
   MutationCache,
-  QueryCache,
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
@@ -25,9 +24,6 @@ const onHttpError = (error, _variables, _context, mutation) => {
 };
 
 const queryClient = new QueryClient({
-  queryCache: new QueryCache({
-    onError: onHttpError,
-  }),
   mutationCache: new MutationCache({
     onError: onHttpError,
   }),

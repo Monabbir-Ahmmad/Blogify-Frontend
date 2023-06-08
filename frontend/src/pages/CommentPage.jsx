@@ -9,20 +9,17 @@ import { twMerge } from "tailwind-merge";
 import useCommentAction from "../hooks/useCommentAction";
 
 function CommentPage({ blogId, toggleCommentView, open = false }) {
-  const [page, setPage] = useState(1);
-  const limit = 12;
   const commentSectionRef = useRef();
+  const [pagination, setPagination] = useState({ page: 1, limit: 12 });
   const { isAuthenticated } = useContext(AuthContext);
-
   const { comments } = useContext(CommentContext);
-
   const { fetchComments, commentPostMutation } = useCommentAction(
     useContext(CommentContext)
   );
 
   const { data: paginatedData, refetch: refetchComments } = fetchComments(
     blogId,
-    { page, limit }
+    pagination
   );
 
   const onClickOutside = (e) => {
@@ -47,7 +44,7 @@ function CommentPage({ blogId, toggleCommentView, open = false }) {
     if (open) {
       refetchComments();
     }
-  }, [open]);
+  }, [open, pagination]);
 
   return (
     <main
@@ -75,6 +72,24 @@ function CommentPage({ blogId, toggleCommentView, open = false }) {
         {isAuthenticated && <CommentBox onSubmit={onCommentSubmit} />}
 
         {open && <CommentTree commentIds={comments.root.children} />}
+
+        <button
+          className="btn-base w-full py-2 mt-2"
+          onClick={() =>
+            setPagination((prev) => ({ ...prev, page: prev.page + 1 }))
+          }
+          style={{
+            display: pagination.page >= paginatedData?.totalPages && "none",
+          }}
+        >
+          Load{" "}
+          {Math.min(
+            paginatedData?.pageSize,
+            paginatedData?.totalItems -
+              pagination.page * paginatedData?.pageSize
+          )}{" "}
+          more
+        </button>
       </section>
     </main>
   );

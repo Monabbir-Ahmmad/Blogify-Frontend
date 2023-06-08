@@ -118,7 +118,7 @@ const Popover = ({ target, open, onClose, children, anchor, className }) => {
     <menu
       ref={popoverRef}
       className={twMerge(
-        "fixed z-50 overflow-hidden transition-transform cursor-pointer",
+        "fixed z-[900] overflow-hidden transition-transform cursor-pointer",
         className,
         getPopoverOrigin(
           target?.current?.getBoundingClientRect(),
