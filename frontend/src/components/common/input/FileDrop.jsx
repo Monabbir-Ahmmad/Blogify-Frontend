@@ -1,7 +1,5 @@
 import { RiCloseLine as RemoveIcon } from "react-icons/ri";
 import imageUpload from "../../../assets/imageUpload.svg";
-import { twMerge } from "tailwind-merge";
-import { useState } from "react";
 
 function FileDrop({
   maxSizeKB = 1024 * 5,
@@ -9,16 +7,12 @@ function FileDrop({
   onChange,
   value,
 }) {
-  const [dragging, setDragging] = useState(false);
-
   const handleDragEnter = (e) => {
     e.preventDefault();
-    setDragging(true);
   };
 
   const handleDragLeave = (e) => {
     e.preventDefault();
-    setDragging(false);
   };
 
   const handleDragOver = (e) => {
@@ -27,7 +21,6 @@ function FileDrop({
 
   const handleDrop = (e) => {
     e.preventDefault();
-    setDragging(false);
     const file = e.dataTransfer.files[0];
     if (file) {
       validateFile(file);
@@ -59,7 +52,7 @@ function FileDrop({
 
   return (
     <div
-      className={twMerge("drag-drop-container", dragging && "dragging")}
+      className="w-full"
       onDragEnter={handleDragEnter}
       onDragLeave={handleDragLeave}
       onDragOver={handleDragOver}

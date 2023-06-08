@@ -16,7 +16,13 @@ import avatarPlaceholder from "../../assets/avatarPlaceholder.svg";
 import coverImagePlaceholder from "../../assets/coverImagePlaceholder.svg";
 import dayjs from "dayjs";
 
-function ProfileDetails({ user }) {
+function ProfileDetails({
+  user,
+  onEditPrfileImage,
+  onEditCoverImage,
+  onEditProfile,
+  onEditPassword,
+}) {
   const editBtnRef = useRef();
   const [editMenuOpen, setEditMenuOpen] = useState(false);
   return (
@@ -61,19 +67,31 @@ function ProfileDetails({ user }) {
               className="bg-white rounded shadow-xl"
             >
               <div className="text-sm flex flex-col">
-                <span className="inline-flex items-center gap-5 py-4 px-5 hover:bg-primaryLighter hover:text-primary">
+                <span
+                  onClick={onEditPrfileImage}
+                  className="inline-flex items-center gap-5 py-4 px-5 hover:bg-primaryLighter hover:text-primary"
+                >
                   <ProfileImageIcon size={20} />
                   Edit profile image
                 </span>
-                <span className="inline-flex items-center gap-5 py-4 px-5 hover:bg-primaryLighter hover:text-primary">
+                <span
+                  onClick={onEditCoverImage}
+                  className="inline-flex items-center gap-5 py-4 px-5 hover:bg-primaryLighter hover:text-primary"
+                >
                   <CoverImageIcon size={20} />
                   Edit cover image
                 </span>
-                <span className="inline-flex items-center gap-5 py-4 px-5 hover:bg-primaryLighter hover:text-primary">
+                <span
+                  onClick={onEditProfile}
+                  className="inline-flex items-center gap-5 py-4 px-5 hover:bg-primaryLighter hover:text-primary"
+                >
                   <ProfileIcon size={20} />
                   Update info
                 </span>
-                <span className="inline-flex items-center gap-5 py-4 px-5 hover:bg-primaryLighter hover:text-primary">
+                <span
+                  onClick={onEditPassword}
+                  className="inline-flex items-center gap-5 py-4 px-5 hover:bg-primaryLighter hover:text-primary"
+                >
                   <PasswordIcon size={20} />
                   Update passsword
                 </span>
