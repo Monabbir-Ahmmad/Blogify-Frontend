@@ -2,7 +2,7 @@ import {
   RiCake2Line as BirthDateIcon,
   RiCalendar2Line as CalendarIcon,
   RiLandscapeLine as CoverImageIcon,
-  RiEditBoxLine as EditIcon,
+  RiEditLine as EditIcon,
   RiMailLine as EmailIcon,
   RiGenderlessLine as GenderIcon,
   RiShieldKeyholeLine as PasswordIcon,

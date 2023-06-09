@@ -3,6 +3,7 @@ import { createContext, useEffect, useState } from "react";
 import authService from "../services/authService";
 import storageService from "../services/storageService";
 import { useQuery } from "@tanstack/react-query";
+import useUserActions from "../hooks/useUserActions";
 import userService from "../services/userService";
 
 const AuthContext = createContext();
@@ -13,27 +14,20 @@ function AuthContextProvider({ children }) {
     !!storageService.getAuthData()
   );
 
+  const { fetchCurrentUser } = useUserActions();
+
+  const { data: user } = fetchCurrentUser(isAuthenticated);
+
   useEffect(() => {
     if (!isAuthenticated) setAuthData(null);
-    else setAuthData(storageService.getCurrentUser());
-  }, [isAuthenticated]);
+    else setAuthData(user);
+  }, [isAuthenticated, user]);
 
   useEffect(() => {
     try {
       authService.refreshAccessToken();
     } catch (error) {}
   }, []);
-
-  useQuery({
-    enabled: isAuthenticated,
-    queryKey: ["getCurrentUser"],
-    queryFn: async () => {
-      const data = await userService.getCurrentUser();
-      setAuthData(data);
-      return data;
-    },
-    staleTime: 0,
-  });
 
   return (
     <AuthContext.Provider

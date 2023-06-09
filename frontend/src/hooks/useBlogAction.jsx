@@ -29,7 +29,7 @@ function useBlogAction() {
   const blogCreateMutation = useMutation({
     mutationFn: blogService.post,
     onSuccess: () => {
-      queryClient.invalidateQueries("getBlogs");
+      queryClient.removeQueries("getBlogs");
     },
   });
 
@@ -37,7 +37,7 @@ function useBlogAction() {
     mutationKey: ["skipLoading"],
     mutationFn: blogService.like,
     onSuccess: (data, blogId) => {
-      queryClient.invalidateQueries("getBlogs");
+      queryClient.removeQueries("getBlogs");
       queryClient.setQueryData(["getBlog", blogId], () => data);
     },
   });
@@ -47,15 +47,17 @@ function useBlogAction() {
       await blogService.update(blogId, data),
     onSuccess: (data, variables) => {
       queryClient.setQueryData(["getBlog", variables.blogId], () => data);
-      queryClient.invalidateQueries(["getBlogs"]);
+      queryClient.removeQueries(["getUserBlogs", { userId: variables.userId }]);
+      queryClient.removeQueries(["getBlogs"]);
     },
   });
 
   const blogDeleteMutation = useMutation({
     mutationFn: blogService.delete,
     onSuccess: (_, blogId) => {
-      queryClient.invalidateQueries("getBlogs");
+      queryClient.removeQueries(["getBlogs"]);
       queryClient.removeQueries(["getBlog", blogId]);
+      queryClient.removeQueries(["getUserBlogs"]);
     },
   });
 

@@ -34,6 +34,8 @@ class UserService {
       bio,
     });
 
+    storageService.setCurrentUser(res.data);
+
     return res.data;
   }
 
@@ -52,6 +54,8 @@ class UserService {
       { profileImage }
     );
 
+    storageService.setCurrentUser(res.data);
+
     return res.data;
   }
 
@@ -61,6 +65,8 @@ class UserService {
       { coverImage }
     );
 
+    storageService.setCurrentUser(res.data);
+
     return res.data;
   }
 
@@ -68,6 +74,8 @@ class UserService {
     const res = await httpClient.post(apiUrl.user.delete + `/${id}`, {
       password,
     });
+
+    storageService.removeAuthData();
 
     return res.data;
   }

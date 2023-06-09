@@ -63,11 +63,11 @@ function BlogWriteForm({
       onSubmit={handleSubmit(onFormSubmit)}
       className="flex flex-col gap-6 p-4"
     >
-      <div className="flex gap-4 items-center justify-between">
+      <div className="flex flex-col gap-4 items-center justify-between md:flex-row">
         <h1 className="text-3xl font-semibold">
           {isEditMode ? "Edit your blog" : "Write a new blog"}
         </h1>
-        <button type="submit" className="btn-primary px-10">
+        <button type="submit" className="btn-primary px-10 w-full md:w-fit">
           Publish <PublishIcon size={20} />
         </button>
       </div>

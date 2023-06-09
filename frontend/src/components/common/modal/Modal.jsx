@@ -1,11 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 import { createPortal } from "react-dom";
 import { twMerge } from "tailwind-merge";
 
 const Modal = ({ isOpen, onClose, children }) => {
   const modalRef = useRef(null);
-  const [isChildVisible, setIsChildVisible] = useState(false);
 
   const handleKeyDown = (event) => {
     if (event.key === "Escape") {
@@ -26,16 +25,6 @@ const Modal = ({ isOpen, onClose, children }) => {
     };
   }, []);
 
-  useEffect(() => {
-    if (isOpen) {
-      setIsChildVisible(true);
-    } else {
-      setTimeout(() => {
-        setIsChildVisible(false);
-      }, 100);
-    }
-  }, [isOpen]);
-
   return createPortal(
     <div
       className={twMerge(
@@ -48,12 +37,9 @@ const Modal = ({ isOpen, onClose, children }) => {
         role="dialog"
         aria-modal="true"
         ref={modalRef}
-        className={twMerge(
-          "transition-transform",
-          isOpen ? "scale-100" : "scale-0"
-        )}
+        className={twMerge(!isOpen && "hidden")}
       >
-        {isChildVisible && children}
+        {isOpen && children}
       </div>
     </div>,
     document.body
