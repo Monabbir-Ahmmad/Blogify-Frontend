@@ -1,10 +1,10 @@
-import NotFoundPage from "./NotFoundPage";
-import ProfileDetails from "../components/profile/ProfileDetails";
-import { useParams } from "react-router-dom";
-import useUserActions from "../hooks/useUserActions";
-import { useModal } from "../contexts/ModalContext";
 import FormDialog from "../components/common/dialog/FormDialog";
 import ImageEditor from "../components/common/imageEditor/ImageEditor";
+import NotFoundPage from "./NotFoundPage";
+import ProfileDetails from "../components/profile/ProfileDetails";
+import { useModal } from "../contexts/ModalContext";
+import { useParams } from "react-router-dom";
+import useUserActions from "../hooks/useUserActions";
 
 function ProfilePage() {
   const { userId } = useParams();
@@ -21,7 +21,7 @@ function ProfilePage() {
         onCancel={closeModal}
         className="w-[600px]"
       >
-        <div className="p-4 w-full">
+        <div className="w-full">
           <ImageEditor />
         </div>
       </FormDialog>

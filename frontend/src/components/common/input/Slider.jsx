@@ -1,7 +1,7 @@
 function Slider({ label, value, onChange, min, max, step, stepLabel = [] }) {
   return (
     <div className="space-y-2">
-      <span className="block text-sm font-medium">{label}</span>
+      <span className="block text-sm font-semibold uppercase">{label}</span>
       <input
         type="range"
         value={value}

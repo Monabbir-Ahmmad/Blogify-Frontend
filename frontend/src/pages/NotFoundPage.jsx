@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
 import notFoundSvg from "../assets/pageNotFound.svg";
+import { useNavigate } from "react-router-dom";
 
 function NotFoundPage() {
+  const navigate = useNavigate();
   return (
     <main className="p-10 flex flex-col items-center h-full">
       <object
@@ -14,9 +15,12 @@ function NotFoundPage() {
         Looks like we couldn't find that page. Please, make sure you have typed
         the correct URL
       </p>
-      <Link to={".."} className="btn-primary px-20 rounded-full">
+      <button
+        className="btn-primary px-20 rounded-full"
+        onClick={() => navigate(-1)}
+      >
         Take me back!
-      </Link>
+      </button>
     </main>
   );
 }

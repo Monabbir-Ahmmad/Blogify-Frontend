@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
-import { twMerge } from "tailwind-merge";
 import { createPortal } from "react-dom";
+import { twMerge } from "tailwind-merge";
 
 const Modal = ({ isOpen, onClose, children }) => {
   const modalRef = useRef(null);
@@ -32,7 +32,7 @@ const Modal = ({ isOpen, onClose, children }) => {
     } else {
       setTimeout(() => {
         setIsChildVisible(false);
-      }, 200);
+      }, 100);
     }
   }, [isOpen]);
 

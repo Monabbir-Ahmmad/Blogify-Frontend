@@ -9,8 +9,9 @@ import {
   RiAccountCircleLine as ProfileIcon,
   RiCameraLensLine as ProfileImageIcon,
 } from "react-icons/ri";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 
+import { AuthContext } from "../../contexts/AuthContext";
 import Popover from "../common/popover/Popover";
 import avatarPlaceholder from "../../assets/avatarPlaceholder.svg";
 import coverImagePlaceholder from "../../assets/coverImagePlaceholder.svg";
@@ -25,6 +26,8 @@ function ProfileDetails({
 }) {
   const editBtnRef = useRef();
   const [editMenuOpen, setEditMenuOpen] = useState(false);
+  const { authData } = useContext(AuthContext);
+
   return (
     <section className="w-full flex flex-col justify-center items-center">
       {user?.coverImage ? (
@@ -47,15 +50,28 @@ function ProfileDetails({
             src={user?.profileImage ?? avatarPlaceholder}
             className="-top-20 bg-background absolute shadow-xl rounded-full h-40 aspect-square border-none"
           />
-          <div className="w-full pt-10 px-6 flex flex-col gap-6 md:flex-row-reverse mt-24 md:mt-0 md:px-12 items-center justify-between">
-            <button
-              className="w-full px-14 md:w-fit btn-primary self-center"
-              onClick={() => setEditMenuOpen((prev) => !prev)}
-              ref={editBtnRef}
-            >
-              Edit Profile
-              <EditIcon size={20} />
-            </button>
+          <div className="w-full pt-10 px-6 flex flex-col-reverse gap-6 md:flex-row mt-24 md:mt-0 md:px-12 items-center justify-between">
+            <div className="flex gap-10 tracking-wide text-center text-xl uppercase">
+              <div>
+                <span className="font-bold block">89</span>
+                <span className="text-sm uppercase">Posts</span>
+              </div>
+              <div>
+                <span className="font-bold block">89</span>
+                <span className="text-sm uppercase">Comments</span>
+              </div>
+            </div>
+
+            {authData?.id === user?.id && (
+              <button
+                className="w-full px-14 md:w-fit btn-primary self-center"
+                onClick={() => setEditMenuOpen((prev) => !prev)}
+                ref={editBtnRef}
+              >
+                Edit Profile
+                <EditIcon size={20} />
+              </button>
+            )}
 
             <Popover
               target={editBtnRef}
@@ -97,17 +113,6 @@ function ProfileDetails({
                 </span>
               </div>
             </Popover>
-
-            <div className="flex gap-10 tracking-wide text-center text-xl uppercase">
-              <div>
-                <span className="font-bold block">89</span>
-                <span className="text-sm uppercase">Posts</span>
-              </div>
-              <div>
-                <span className="font-bold block">89</span>
-                <span className="text-sm uppercase">Comments</span>
-              </div>
-            </div>
           </div>
         </div>
         <div className="flex flex-col gap-4 items-center justify-center text-center">

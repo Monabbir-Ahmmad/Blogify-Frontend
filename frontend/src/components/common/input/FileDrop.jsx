@@ -6,6 +6,7 @@ function FileDrop({
   allowedMimeTypes = ["image/png", "image/jpg", "image/jpeg"],
   onChange,
   value,
+  compact = false,
 }) {
   const handleDragEnter = (e) => {
     e.preventDefault();
@@ -78,7 +79,9 @@ function FileDrop({
             htmlFor="dropzone-file"
             className="cursor-pointer overflow-hidden w-full p-4 flex flex-col items-center justify-center border-2 border-slate-300 border-dashed rounded bg-slate-50 hover:bg-slate-100 transition-colors duration-200 ease-in-out"
           >
-            <img src={imageUpload} alt="Upload" className="-mt-6 h-44" />
+            {!compact && (
+              <img src={imageUpload} alt="Upload" className="-mt-6 h-44" />
+            )}
             <p className="mb-2 text-sm">
               <span className="font-semibold">Click to upload</span> or drag and
               drop
