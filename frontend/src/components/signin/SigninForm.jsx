@@ -48,13 +48,12 @@ function SigninForm({ onSubmit }) {
           required: "Password is required",
           minLength: {
             value: 8,
-            message: "Password must have at least 8 characters",
+            message: "Invalid password",
           },
           pattern: {
             value:
               /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#.,;+_=\/\\\$%\^&\*\-])/,
-            message:
-              "Password must contain at least one uppercase, one lowercase, one number and one special character",
+            message: "Invalid password",
           },
         }}
         render={({ field, fieldState: { error } }) => (

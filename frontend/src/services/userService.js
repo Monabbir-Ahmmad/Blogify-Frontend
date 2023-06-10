@@ -20,11 +20,12 @@ class UserService {
     return res.data;
   }
 
-  async updateProfile(id, { name, email, gender, birthDate, bio }) {
+  async updateProfile(id, { name, email, gender, birthDate, bio, password }) {
     name = name.trim();
     email = email.trim();
-    gender = gender.trim();
-    bio = bio.trim();
+    gender = gender.trim() ? gender.trim() : null;
+    birthDate = birthDate.trim() ? birthDate.trim() : null;
+    bio = bio.trim() ? bio.trim() : null;
 
     const res = await httpClient.put(apiUrl.user.update + `/${id}`, {
       name,
@@ -32,6 +33,7 @@ class UserService {
       gender,
       birthDate,
       bio,
+      password,
     });
 
     storageService.setCurrentUser(res.data);

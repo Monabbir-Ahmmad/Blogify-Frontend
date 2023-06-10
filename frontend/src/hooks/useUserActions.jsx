@@ -39,7 +39,7 @@ function useUserActions() {
   });
 
   const profileUpdateMutation = useMutation({
-    mutationFn: async ({ userId, data }) =>
+    mutationFn: async ({ userId, ...data }) =>
       await userService.updateProfile(userId, data),
     onSuccess: (data, { userId }) => {
       queryClient.setQueryData(["getUser", userId], (oldData) => data);
