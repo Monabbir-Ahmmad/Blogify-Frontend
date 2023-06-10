@@ -6,7 +6,7 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 
 import ContextWrapper from "./contexts/ContextWrapper";
-import LoadingOverlay from "./components/common/loader/LoadingOverlay";
+import LoadingPage from "./pages/LoadingPage";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Router from "./Router";
 
@@ -39,7 +39,7 @@ function App() {
         <Router />
       </ContextWrapper>
 
-      <LoadingOverlay />
+      <LoadingPage />
 
       <ToastContainer
         position={toast.POSITION.BOTTOM_CENTER}

@@ -1,3 +1,4 @@
+import TextArea from "../common/input/TextArea";
 import { useState } from "react";
 
 function CommentBox({ onSubmit, defaultValue = "", onCancel }) {
@@ -16,9 +17,9 @@ function CommentBox({ onSubmit, defaultValue = "", onCancel }) {
 
   return (
     <form className="space-y-2" onSubmit={handleSubmit}>
-      <textarea
+      <TextArea
         required
-        className="p-4 w-full text-sm rounded-lg border border-slate-400 focus:ring-1 focus:ring-primary outline-none transition-all"
+        className="input-primary"
         placeholder="Write a comment..."
         value={text}
         onChange={(e) => setText(e.target.value)}

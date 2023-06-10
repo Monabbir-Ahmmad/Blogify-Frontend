@@ -94,7 +94,7 @@ function BlogItem({ blog }) {
           <>
             <button
               ref={menuRef}
-              className="icon-btn-base bg-white rounded-full h-10"
+              className="icon-btn-base bg-white rounded-full h-8"
               onClick={onMenuClick}
             >
               <MoreIcon size={20} />

@@ -26,10 +26,7 @@ const Input = forwardRef(
     return (
       <div>
         {label && (
-          <label
-            htmlFor={name}
-            className="block uppercase text-sm font-bold mb-2"
-          >
+          <label htmlFor={name} className="input-label">
             {label}
           </label>
         )}
@@ -42,31 +39,25 @@ const Input = forwardRef(
             ref={ref}
             {...rest}
             className={twMerge(
-              "peer transition-all placeholder:text-slate-300 outline-none bg-slate-50 border border-slate-300 text-sm rounded focus:ring-slate-400 focus:border-slate-400 focus:ring-1 block w-full p-3",
+              "peer input-base",
               className,
               StartIcon && "pl-10",
               type === "password" && "pr-12",
-              error &&
-                "is-invalid border-error focus:border-error focus:ring-error"
+              error && "is-invalid input-error"
             )}
           />
 
           {StartIcon && (
-            <span
-              className={twMerge(
-                "peer-focus:opacity-100 peer-[.is-invalid]:text-error absolute inset-y-0 left-0 inline-flex items-center ml-3 opacity-50 transition-all"
-              )}
-            >
+            <span className="input-icon-start opacity-50 peer-focus:opacity-100 peer-[.is-invalid]:text-error">
               <StartIcon size={20} />
             </span>
           )}
 
           {type === "password" && (
             <span className="p-1 absolute inset-y-0 right-0 inline-flex items-center mr-1">
-              <span
-                className={twMerge(
-                  "icon-btn-base p-2 bg-transparent shadow-none rounded-full"
-                )}
+              <button
+                type="button"
+                className="icon-btn p-2 rounded-full"
                 onClick={() => setShowPassword((prev) => !prev)}
               >
                 {showPassword ? (
@@ -74,7 +65,7 @@ const Input = forwardRef(
                 ) : (
                   <VisibleIcon size={20} />
                 )}
-              </span>
+              </button>
             </span>
           )}
         </div>

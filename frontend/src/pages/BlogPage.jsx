@@ -16,7 +16,6 @@ import dayjs from "dayjs";
 import { toast } from "react-toastify";
 import useBlogAction from "../hooks/useBlogAction";
 import { useModal } from "../contexts/ModalContext";
-import { useState } from "react";
 
 function BlogPage() {
   const { blogId } = useParams();
@@ -77,7 +76,7 @@ function BlogPage() {
           alt=""
           className="w-full h-60 md:h-96 bg-gray-500 lg:rounded-lg rounded-t-lg object-cover"
         />
-        <div className="flex flex-col bg-white w-full gap-6 p-6 pb-12 lg:-mt-28 max-w-5xl sm:p-10 sm:mx-12 lg:rounded-lg">
+        <div className="flex flex-col bg-white w-full gap-6 p-4 pb-12 lg:-mt-28 max-w-5xl sm:p-10 sm:mx-12 lg:rounded-lg">
           <h1 className="text-2xl font-semibold sm:text-3xl">{data?.title}</h1>
 
           <Avatar
@@ -87,22 +86,24 @@ function BlogPage() {
             titleSize="text-lg"
           />
 
-          <div className="inline-flex items-center bg-slate-50 border-l-4 border-slate-300 p-4">
-            <span>
-              <strong>Published</strong>{" "}
-              {dayjs(data?.createdAt).format("DD MMMM, YYYY hh:mma")}
-              <br />
+          <div className="inline-flex items-start sm:items-center gap-2 flex-col sm:flex-row bg-slate-50 border-l-4 border-slate-300 p-4">
+            <div className="flex flex-col gap-2">
+              <p>
+                <strong>Published</strong>{" "}
+                {dayjs(data?.createdAt).format("DD MMMM, YYYY hh:mma")}
+              </p>
+
               {data?.updatedAt !== data?.createdAt && (
-                <>
+                <p>
                   <strong>Updated</strong>{" "}
                   {dayjs(data?.updatedAt).format("DD MMMM, YYYY hh:mma")}
-                </>
+                </p>
               )}
-            </span>
+            </div>
 
-            <span className="ml-auto font-semibold">
+            <p className="sm:ml-auto font-semibold">
               {estimateReadingTime(extractTextFromHtml(data?.content))}
-            </span>
+            </p>
           </div>
 
           <RichContentRenderer content={data?.content} />

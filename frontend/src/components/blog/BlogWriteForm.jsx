@@ -90,7 +90,7 @@ function BlogWriteForm({
             {...field}
             type="text"
             placeholder="Enter your title"
-            className="text-3xl bg-transparent border-0 border-b-8 focus:ring-0"
+            className="input-primary text-3xl bg-transparent border-0 border-b-8 focus:ring-0"
             error={error}
             helperText={error?.message}
           />

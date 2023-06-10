@@ -116,7 +116,7 @@ function ProfileDetails({
             </Popover>
           </div>
         </div>
-        <div className="flex flex-col gap-4 items-center justify-center text-center">
+        <div className="flex flex-col gap-4 items-center justify-center text-center text-sm">
           <h1 className="text-2xl font-semibold">{user?.name}</h1>
           <span className="flex gap-2 font-semibold">
             <EmailIcon size={20} />
@@ -137,7 +137,7 @@ function ProfileDetails({
             Joined on {dayjs(user?.createdAt).format("MMMM DD, YYYY")}
           </span>
         </div>
-        <div className="flex justify-center items-center py-6  sm:px-10 border-t text-center">
+        <div className="flex justify-center items-center py-6 sm:px-10 border-t text-center text-sm">
           <p className="opacity-80 leading-relaxed w-full lg:w-9/12">
             {user?.bio ?? "No bio available"}
           </p>

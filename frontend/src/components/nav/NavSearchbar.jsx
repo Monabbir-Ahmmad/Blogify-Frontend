@@ -12,7 +12,6 @@ function NavSearchbar({ className }) {
       </button>
       <input
         type="search"
-        id="main-search"
         className="w-full pl-14 pr-4 py-2.5 transition-all bg-slate-100 placeholder:text-slate-400 text-sm rounded-full outline-none focus:shadow-md"
         placeholder="Search"
         required

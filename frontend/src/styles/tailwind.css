@@ -53,3 +53,29 @@
     @apply btn-error p-2 aspect-square;
   }
 }
+
+@layer components {
+  .input-label {
+    @apply block uppercase text-sm font-bold mb-2;
+  }
+
+  .input-icon-start {
+    @apply absolute inset-y-0 left-0 inline-flex items-center ml-3 transition-all;
+  }
+
+  .input {
+    @apply block w-full border p-3 text-sm rounded outline-none transition-all focus:ring-1;
+  }
+
+  .input-base {
+    @apply input placeholder:text-slate-300 bg-slate-50 border-slate-300 focus:ring-slate-400 focus:border-slate-400;
+  }
+
+  .input-primary {
+    @apply input-base focus:ring-primary focus:border-primary;
+  }
+
+  .input-error {
+    @apply input-base border-error focus:ring-error focus:border-error;
+  }
+}
