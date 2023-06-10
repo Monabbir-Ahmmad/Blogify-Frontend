@@ -10,14 +10,14 @@ export default defineConfig(({ mode }) => {
     plugins: [react()],
     server: {
       port: 3000,
-      // proxy: {
-      //   [env.VITE_API]: {
-      //     target: env.VITE_API_HOST,
-      //     changeOrigin: true,
-      //     secure: true,
-      //     agent: new http.Agent(),
-      //   },
-      // },
+      proxy: {
+        [env.VITE_API]: {
+          target: env.VITE_API_HOST,
+          changeOrigin: true,
+          secure: true,
+          agent: new http.Agent(),
+        },
+      },
     },
   };
 });
