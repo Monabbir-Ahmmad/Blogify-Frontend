@@ -1,9 +1,9 @@
-import { RouterProvider, createHashRouter } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import ErrorPage from "./pages/ErrorPage";
 
 function Router() {
-  const router = createHashRouter([
+  const router = createBrowserRouter([
     {
       path: "/",
       lazy: async () => ({

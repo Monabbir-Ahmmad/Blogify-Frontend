@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { GiOverInfinity as Logo } from "react-icons/gi";
+import { GiQuill as Logo } from "react-icons/gi";
 import { twMerge } from "tailwind-merge";
 
 function AppLogo({ className, size = 35, hideText = false }) {
