@@ -1,71 +1,83 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createHashRouter } from "react-router-dom";
 
-import BlogEditPage from "./pages/BlogEditPage";
-import BlogPage from "./pages/BlogPage";
-import BlogWritingPage from "./pages/BlogWritingPage";
 import ErrorPage from "./pages/ErrorPage";
-import ForgotPasswordPage from "./pages/ForgotPasswordPage";
-import HomePage from "./pages/HomePage";
-import LandingPage from "./pages/LandingPage";
-import NotFoundPage from "./pages/NotFoundPage";
-import ProfilePage from "./pages/ProfilePage";
-import ResetPasswordPage from "./pages/ResetPasswordPage";
-import SearchPage from "./pages/SearchPage";
-import SigninPage from "./pages/SigninPage";
-import SignupPage from "./pages/SignupPage";
 
 function Router() {
-  const router = createBrowserRouter([
+  const router = createHashRouter([
     {
       path: "/",
-      element: <LandingPage />,
+      lazy: async () => ({
+        Component: (await import("./pages/LandingPage")).default,
+      }),
       errorElement: <ErrorPage />,
       children: [
         {
-          path: "/",
-          element: <HomePage />,
+          index: true,
+          lazy: async () => ({
+            Component: (await import("./pages/HomePage")).default,
+          }),
         },
         {
           path: "/write",
-          element: <BlogWritingPage />,
+          lazy: async () => ({
+            Component: (await import("./pages/BlogWritingPage")).default,
+          }),
         },
         {
           path: "/blog/edit/:blogId",
-          element: <BlogEditPage />,
+          lazy: async () => ({
+            Component: (await import("./pages/BlogEditPage")).default,
+          }),
         },
         {
           path: "/profile/:userId",
-          element: <ProfilePage />,
+          lazy: async () => ({
+            Component: (await import("./pages/ProfilePage")).default,
+          }),
         },
         {
           path: "/blog/:blogId",
-          element: <BlogPage />,
+          lazy: async () => ({
+            Component: (await import("./pages/BlogPage")).default,
+          }),
         },
         {
           path: "/search/:keyword",
-          element: <SearchPage />,
+          lazy: async () => ({
+            Component: (await import("./pages/SearchPage")).default,
+          }),
         },
       ],
     },
     {
       path: "/signup",
-      element: <SignupPage />,
+      lazy: async () => ({
+        Component: (await import("./pages/SignupPage")).default,
+      }),
     },
     {
       path: "/signin",
-      element: <SigninPage />,
+      lazy: async () => ({
+        Component: (await import("./pages/SigninPage")).default,
+      }),
     },
     {
       path: "/forgot-password",
-      element: <ForgotPasswordPage />,
+      lazy: async () => ({
+        Component: (await import("./pages/ForgotPasswordPage")).default,
+      }),
     },
     {
       path: "/reset-password",
-      element: <ResetPasswordPage />,
+      lazy: async () => ({
+        Component: (await import("./pages/ResetPasswordPage")).default,
+      }),
     },
     {
       path: "*",
-      element: <NotFoundPage />,
+      lazy: async () => ({
+        Component: (await import("./pages/NotFoundPage")).default,
+      }),
     },
   ]);
 
