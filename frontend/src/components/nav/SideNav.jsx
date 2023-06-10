@@ -6,7 +6,7 @@ import { useContext, useRef } from "react";
 
 import AppLogo from "../common/AppLogo";
 import { AuthContext } from "../../contexts/AuthContext";
-import Avatar from "../common/avatar/avatar";
+import Avatar from "../common/avatar/Avatar";
 import { NavLink } from "react-router-dom";
 import NavSearchbar from "./NavSearchbar";
 import { twMerge } from "tailwind-merge";

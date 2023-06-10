@@ -14,7 +14,7 @@ import {
 import { useContext, useRef, useState } from "react";
 
 import { AuthContext } from "../../contexts/AuthContext";
-import Avatar from "../common/avatar/avatar";
+import Avatar from "../common/avatar/Avatar";
 import Popover from "../common/popover/Popover";
 import RichContentRenderer from "../common/richEditor/RichContentRenderer";
 import dayjs from "dayjs";
