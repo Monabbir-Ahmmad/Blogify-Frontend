@@ -9,7 +9,7 @@ import { useContext, useState } from "react";
 
 import AppLogo from "../common/AppLogo";
 import { AuthContext } from "../../contexts/AuthContext";
-import Avatar from "../common/avatar/avatar";
+import Avatar from "../common/avatar/Avatar";
 import { NavLink } from "react-router-dom";
 import NavLinks from "./NavLinks";
 import NavSearchbar from "./NavSearchbar";

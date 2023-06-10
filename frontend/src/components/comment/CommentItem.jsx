@@ -9,7 +9,7 @@ import {
 import { useContext, useEffect, useRef, useState } from "react";
 
 import { AuthContext } from "../../contexts/AuthContext";
-import Avatar from "../common/avatar/avatar";
+import Avatar from "../common/avatar/Avatar";
 import CommentBox from "./CommentBox";
 import { CommentContext } from "../../contexts/CommentContext";
 import CommentTree from "./CommentTree";
