@@ -15,21 +15,47 @@ import { useContext, useRef, useState } from "react";
 
 import { AuthContext } from "../../contexts/AuthContext";
 import Avatar from "../common/avatar/Avatar";
+import ConfirmationDialog from "../common/dialog/ConfirmationDialog";
 import Popover from "../common/popover/Popover";
 import RichContentRenderer from "../common/richEditor/RichContentRenderer";
 import dayjs from "dayjs";
 import { twMerge } from "tailwind-merge";
+import useBlogAction from "../../hooks/useBlogAction";
+import { useModal } from "../../contexts/ModalContext";
 import { useNavigate } from "react-router-dom";
 
-function BlogItem({ blog, onEditClick, onDeleteClick }) {
+function BlogItem({ blog }) {
   const navigate = useNavigate();
   const menuRef = useRef();
+  const { openModal, closeModal } = useModal();
   const [menuOpen, setMenuOpen] = useState(false);
   const { authData } = useContext(AuthContext);
+  const { blogDeleteMutation } = useBlogAction();
 
   const isLiked = blog?.likes?.some((like) => like?.userId === authData?.id);
 
-  const onBlogClick = (e) => {
+  const onEditClick = (id) => navigate(`/blog/edit/${id}`);
+
+  const onDeleteClick = (id) =>
+    openModal(
+      <ConfirmationDialog
+        type="danger"
+        onConfirm={() => {
+          blogDeleteMutation.mutate(id, {
+            onSuccess: () => toast.success("Blog deleted successfully"),
+          });
+          closeModal();
+        }}
+        onCancel={closeModal}
+        title="Delete Blog"
+        description="Are you sure you want to delete this blog? This action cannot be undone."
+        confirmText="Delete"
+        cancelText="Cancel"
+        className="max-w-lg w-full"
+      />
+    );
+
+  const onBlogClick = () => {
     navigate("/blog/" + blog?.id);
   };
 
@@ -38,11 +64,11 @@ function BlogItem({ blog, onEditClick, onDeleteClick }) {
     navigate("/profile/" + blog?.user?.id);
   };
 
-  const onMenuClick = (e) => {
+  const onMenuClick = () => {
     setMenuOpen((prev) => !prev);
   };
 
-  const onMenuClose = (e) => {
+  const onMenuClose = () => {
     setMenuOpen(false);
   };
 
