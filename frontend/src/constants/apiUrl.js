@@ -1,5 +1,5 @@
 const apiUrl = {
-  base: "/api",
+  base: import.meta.env.VITE_API,
   auth: {
     signin: "/auth/signin",
     signup: "/auth/signup",
