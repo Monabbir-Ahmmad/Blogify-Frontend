@@ -42,4 +42,6 @@ const apiUrl = {
   },
 };
 
+console.log(apiUrl);
+
 export default apiUrl;
