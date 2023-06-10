@@ -5,7 +5,7 @@ import {
 } from "../utils/commonUtil";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 
-import Avatar from "../components/common/avatar/avatar";
+import Avatar from "../components/common/avatar/Avatar";
 import BlogFloatingButton from "../components/blog/BlogFloatingButton";
 import { CommentContextProvider } from "../contexts/CommentContext";
 import CommentPage from "./CommentPage";
