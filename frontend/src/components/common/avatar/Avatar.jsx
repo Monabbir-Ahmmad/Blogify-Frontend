@@ -17,6 +17,7 @@ function Avatar({
     <div
       className={twMerge(
         "flex items-center gap-4",
+        rounded,
         reversed && "flex-row-reverse text-right",
         className
       )}
@@ -24,21 +25,23 @@ function Avatar({
     >
       <img
         className={twMerge(
-          "object-cover bg-background aspect-square",
+          "object-cover bg-slate-100 aspect-square",
           rounded,
           avatarSize
         )}
         src={image}
         alt={title}
       />
-      <div className="font-semibold truncate">
-        {title && <h5 className={twMerge("truncate", titleSize)}>{title}</h5>}
-        {subtitle && (
-          <h6 className={twMerge("truncate opacity-70", subtitleSize)}>
-            {subtitle}
-          </h6>
-        )}
-      </div>
+      {(title || subtitle) && (
+        <div className="font-semibold truncate">
+          {title && <h5 className={twMerge("truncate", titleSize)}>{title}</h5>}
+          {subtitle && (
+            <h6 className={twMerge("truncate opacity-70", subtitleSize)}>
+              {subtitle}
+            </h6>
+          )}
+        </div>
+      )}
     </div>
   );
 }

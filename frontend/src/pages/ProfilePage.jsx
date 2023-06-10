@@ -98,14 +98,14 @@ function ProfilePage() {
         onEditCoverImage={onEditCoverImage}
       />
 
-      <section className="container space-y-5 px-5">
+      <section className="w-full max-w-5xl space-y-5 px-5 lg:px-0 mt-10">
         <p className="text-base opacity-80 uppercase">Blogs by {user?.name}</p>
 
         <hr />
 
         {paginatedData?.data.length === 0 && <NoResult />}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {paginatedData?.data.map((blog) => (
             <BlogItem
               key={blog.id}

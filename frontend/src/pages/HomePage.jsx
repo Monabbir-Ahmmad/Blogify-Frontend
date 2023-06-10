@@ -48,7 +48,7 @@ function HomePage() {
           Welcome to <span className="text-primary">Blogify</span>
         </h1>
 
-        <p className="text-base opacity-80 uppercase">View recent blogs</p>
+        <p className="text-base opacity-80 uppercase">Latest Blogs</p>
 
         <hr />
 

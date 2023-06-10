@@ -12,8 +12,8 @@ import {
 import { useContext, useRef, useState } from "react";
 
 import { AuthContext } from "../../contexts/AuthContext";
+import Avatar from "../common/avatar/avatar";
 import Popover from "../common/popover/Popover";
-import avatarPlaceholder from "../../assets/avatarPlaceholder.svg";
 import coverImagePlaceholder from "../../assets/coverImagePlaceholder.svg";
 import dayjs from "dayjs";
 
@@ -43,14 +43,15 @@ function ProfileDetails({
           className="w-full h-96"
         />
       )}
-      <div className="container -mt-40 px-6 sm:px-10 relative flex flex-col gap-6 bg-white shadow-xl rounded-lg">
+      <div className="w-full max-w-5xl -mt-40 px-6 sm:px-10 relative flex flex-col gap-6 bg-white shadow-xl rounded-lg">
         <div className="relative flex justify-center">
-          <img
-            alt=""
-            src={user?.profileImage ?? avatarPlaceholder}
-            className="-top-20 bg-background absolute shadow-xl rounded-full h-40 aspect-square border-none"
+          <Avatar
+            image={user?.profileImage}
+            rounded="rounded-full"
+            avatarSize="h-40"
+            className="-top-20 absolute shadow-xl"
           />
-          <div className="w-full pt-10 px-6 flex flex-col-reverse gap-6 md:flex-row mt-24 md:mt-0 md:px-12 items-center justify-between">
+          <div className="w-full pt-6 px-6 flex flex-col-reverse gap-6 md:flex-row mt-24 md:mt-0 md:px-12 items-center justify-between">
             <div className="flex gap-10 tracking-wide text-center text-xl uppercase">
               <div>
                 <span className="font-bold block">89</span>
@@ -116,27 +117,27 @@ function ProfileDetails({
           </div>
         </div>
         <div className="flex flex-col gap-4 items-center justify-center text-center">
-          <h1 className="text-4xl font-semibold">{user?.name}</h1>
-          <h5 className="flex gap-2 mb-6 font-bold opacity-70">
+          <h1 className="text-2xl font-semibold">{user?.name}</h1>
+          <span className="flex gap-2 font-semibold">
             <EmailIcon size={20} />
             {user?.email}
-          </h5>
-          <h6 className="flex gap-2 uppercase">
+          </span>
+          <span className="flex gap-2 uppercase">
             <GenderIcon size={20} />
             {user?.gender ?? "Gender unspecified"}
-          </h6>
-          <h6 className="flex gap-2 uppercase">
+          </span>
+          <span className="flex gap-2 uppercase">
             <BirthDateIcon size={20} />
             {user?.birthDate
               ? `Born on ${dayjs(user?.birthDate).format("MMMM DD, YYYY")}`
               : "Data of birth unspecified"}
-          </h6>
-          <h6 className="flex gap-2 uppercase">
+          </span>
+          <span className="flex gap-2 uppercase">
             <CalendarIcon size={20} />
             Joined on {dayjs(user?.createdAt).format("MMMM DD, YYYY")}
-          </h6>
+          </span>
         </div>
-        <div className="flex justify-center items-center mt-6 pt-10 pb-16 sm:px-10 border-t text-center">
+        <div className="flex justify-center items-center py-6  sm:px-10 border-t text-center">
           <p className="opacity-80 leading-relaxed w-full lg:w-9/12">
             {user?.bio ?? "No bio available"}
           </p>

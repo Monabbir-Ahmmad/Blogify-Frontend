@@ -63,7 +63,7 @@ function BlogPage() {
   if (isError) return <NotFoundPage />;
 
   return (
-    <div className="p-5 sm:p-10">
+    <div className="p-5">
       <CommentContextProvider>
         <CommentPage
           blogId={blogId}
@@ -71,19 +71,21 @@ function BlogPage() {
           toggleCommentView={toggleCommentView}
         />
       </CommentContextProvider>
-      <div className="flex flex-col items-center max-w-5xl mx-auto rounded-lg mb-14">
+      <div className="flex flex-col items-center max-w-7xl mx-auto rounded-lg md:mb-14">
         <img
           src={data?.coverImage ?? getRandomImage(data?.id, { width: 1000 })}
           alt=""
-          className="w-full h-72 sm:h-96 bg-gray-500 sm:rounded-lg rounded-t-lg object-cover"
+          className="w-full h-60 md:h-96 bg-gray-500 lg:rounded-lg rounded-t-lg object-cover"
         />
-        <div className="flex flex-col bg-white w-full gap-6 p-6 pb-12 -mt-16 max-w-4xl sm:p-10 sm:mx-12 rounded-lg">
+        <div className="flex flex-col bg-white w-full gap-6 p-6 pb-12 lg:-mt-28 max-w-5xl sm:p-10 sm:mx-12 lg:rounded-lg">
+          <h1 className="text-2xl font-semibold sm:text-3xl">{data?.title}</h1>
+
           <Avatar
+            image={data?.user.profileImage}
             rounded="rounded-full"
             title={data?.user.name}
             titleSize="text-lg"
           />
-          <h1 className="text-2xl font-semibold sm:text-3xl">{data?.title}</h1>
 
           <div className="inline-flex items-center bg-slate-50 border-l-4 border-slate-300 p-4">
             <span>
