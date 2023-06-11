@@ -1,15 +1,23 @@
-import colors from "tailwindcss/colors";
-
 const themeColors = {
-  primary: colors.violet[500],
-  primaryDark: colors.violet[700],
-  primaryLight: colors.violet[300],
-  primaryLighter: colors.violet[100],
+  text: "var(--color-text)",
 
-  error: colors.red[500],
-  errorDark: colors.red[700],
-  errorLight: colors.red[300],
-  errorLighter: colors.red[100],
+  shadow: "var(--color-shadow)",
+
+  background: "var(--color-background)",
+
+  paper: "var(--color-paper)",
+
+  divider: "var(--color-divider)",
+
+  primary: "var(--color-primary)",
+  primaryDark: "var(--color-primary-dark)",
+  primaryLight: "var(--color-primary-light)",
+  primaryLighter: "var(--color-primary-lighter)",
+
+  error: "var(--color-error)",
+  errorDark: "var(--color-error-dark)",
+  errorLight: "var(--color-error-light)",
+  errorLighter: "var(--color-error-lighter)",
 };
 
 /** @type {import('tailwindcss').Config} */

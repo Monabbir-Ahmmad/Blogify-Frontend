@@ -20,7 +20,7 @@ function NavLinks({ links = [] }) {
             <span>{text}</span>
           </NavLink>
           {index < links.length - 1 && (
-            <div className="mx-8 inline-block h-full min-h-[1.3rem] border-r border-slate-300 dark:opacity-50"></div>
+            <div className="mx-8 inline-block h-full min-h-[1.3rem] border-r border-divider"></div>
           )}
         </div>
       ))}

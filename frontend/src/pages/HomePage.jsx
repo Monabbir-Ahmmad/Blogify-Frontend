@@ -23,7 +23,7 @@ function HomePage() {
 
         <p className="text-base opacity-80 uppercase">Latest Blogs</p>
 
-        <hr />
+        <hr className="border-divider" />
 
         {paginatedData?.data.length === 0 && <NoResult />}
 

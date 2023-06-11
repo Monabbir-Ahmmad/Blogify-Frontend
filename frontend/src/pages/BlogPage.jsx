@@ -74,9 +74,9 @@ function BlogPage() {
         <img
           src={data?.coverImage ?? getRandomImage(data?.id, { width: 1000 })}
           alt=""
-          className="w-full h-60 md:h-96 bg-gray-500 lg:rounded-lg rounded-t-lg object-cover"
+          className="w-full h-60 md:h-96 lg:rounded-lg rounded-t-lg object-cover"
         />
-        <div className="flex flex-col bg-white w-full gap-6 p-4 pb-12 lg:-mt-28 max-w-5xl sm:p-10 sm:mx-12 lg:rounded-lg">
+        <div className="flex flex-col bg-background w-full gap-6 p-4 pb-12 lg:-mt-28 max-w-5xl sm:p-10 sm:mx-12 lg:rounded-lg">
           <h1 className="text-2xl font-semibold sm:text-3xl">{data?.title}</h1>
 
           <Avatar
@@ -86,7 +86,7 @@ function BlogPage() {
             titleSize="text-lg"
           />
 
-          <div className="inline-flex items-start sm:items-center gap-2 flex-col sm:flex-row bg-slate-50 border-l-4 border-slate-300 p-4">
+          <div className="inline-flex items-start sm:items-center gap-2 flex-col sm:flex-row bg-slate-50 dark:bg-neutral-800 border-l-4 border-divider p-4">
             <div className="flex flex-col gap-2">
               <p>
                 <strong>Published</strong>{" "}

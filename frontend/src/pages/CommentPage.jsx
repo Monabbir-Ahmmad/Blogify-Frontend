@@ -57,7 +57,7 @@ function CommentPage({ blogId, toggleCommentView, open = false }) {
       <section
         ref={commentSectionRef}
         className={twMerge(
-          "overflow-y-auto float-right h-screen gap-5 flex flex-col w-full sm:w-5/6 sm:max-w-2xl p-6 bg-white transition-transform",
+          "overflow-y-auto float-right h-screen gap-5 flex flex-col w-full sm:w-5/6 sm:max-w-2xl p-6 bg-paper transition-transform",
           open ? "translate-x-0" : "translate-x-full"
         )}
       >

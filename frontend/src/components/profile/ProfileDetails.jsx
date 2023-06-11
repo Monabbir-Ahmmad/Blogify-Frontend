@@ -43,7 +43,7 @@ function ProfileDetails({
           className="w-full h-96"
         />
       )}
-      <div className="w-full max-w-5xl -mt-40 px-6 sm:px-10 relative flex flex-col gap-6 bg-white shadow-xl rounded-lg">
+      <div className="w-full max-w-5xl -mt-40 px-6 sm:px-10 relative flex flex-col gap-6 bg-paper shadow-xl rounded-lg">
         <div className="relative flex justify-center">
           <Avatar
             image={user?.profileImage}
@@ -81,7 +81,7 @@ function ProfileDetails({
               anchor={{
                 horizontal: "center",
               }}
-              className="bg-white rounded shadow-xl"
+              className="bg-paper rounded shadow-xl shadow-shadow"
             >
               <div className="text-sm flex flex-col">
                 <span
@@ -137,11 +137,12 @@ function ProfileDetails({
             Joined on {dayjs(user?.createdAt).format("MMMM DD, YYYY")}
           </span>
         </div>
-        <div className="flex justify-center items-center py-6 sm:px-10 border-t text-center text-sm">
-          <p className="opacity-80 leading-relaxed w-full lg:w-9/12">
-            {user?.bio ?? "No bio available"}
-          </p>
-        </div>
+
+        <hr className="border-divider" />
+
+        <p className="mx-auto opacity-80 text-center text-sm pb-6 sm:px-10 leading-relaxed w-full lg:w-9/12">
+          {user?.bio ?? "No bio available"}
+        </p>
       </div>
     </section>
   );

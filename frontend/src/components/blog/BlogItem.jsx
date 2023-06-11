@@ -73,19 +73,19 @@ function BlogItem({ blog }) {
   };
 
   return (
-    <div className="relative flex flex-col justify-between gap-3 w-full h-80 rounded-3xl bg-white shadow-md hover:shadow-lg transition-shadow">
+    <div className="relative flex flex-col justify-between gap-3 w-full h-80 rounded-3xl bg-paper shadow-md shadow-shadow hover:shadow-lg transition-shadow">
       <div className="flex p-2 gap-2 justify-between z-10">
-        <div className="inline-flex items-center divide-x-2 rounded-full bg-white shadow-md">
+        <div className="inline-flex items-center divide-x-2 divide-divider rounded-full bg-paper shadow-md shadow-shadow">
           <span
             className={twMerge(
-              "inline-flex items-center gap-2 p-2",
+              "inline-flex items-center gap-2 px-2",
               isLiked && "text-primary"
             )}
           >
             {isLiked ? <LikedIcon size={18} /> : <LikeIcon size={18} />}
             {blog?.likes?.length}
           </span>
-          <span className="inline-flex items-center gap-2 p-2">
+          <span className="inline-flex items-center gap-2 px-2">
             <CommentIcon size={18} />
             {blog?.commentCount}
           </span>
@@ -94,7 +94,7 @@ function BlogItem({ blog }) {
           <>
             <button
               ref={menuRef}
-              className="icon-btn-base bg-white rounded-full h-8"
+              className="icon-btn-base bg-paper rounded-full h-8"
               onClick={onMenuClick}
             >
               <MoreIcon size={20} />
@@ -103,7 +103,7 @@ function BlogItem({ blog }) {
               target={menuRef}
               open={menuOpen}
               onClose={onMenuClose}
-              className="bg-white rounded shadow-xl"
+              className="bg-paper rounded shadow-xl shadow-shadow"
             >
               <div className="text-lg flex flex-col w-44">
                 <span
@@ -134,7 +134,7 @@ function BlogItem({ blog }) {
 
       <div
         onClick={onBlogClick}
-        className="group cursor-pointer overflow-hidden flex flex-col gap-4 p-6 z-0 bg-white rounded-3xl"
+        className="group cursor-pointer overflow-hidden flex flex-col gap-4 p-6 z-0 bg-paper rounded-3xl"
       >
         <h1 className="text-base font-semibold min-h-[3em] line-clamp-2">
           {blog?.title}

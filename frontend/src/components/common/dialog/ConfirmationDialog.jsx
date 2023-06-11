@@ -13,7 +13,7 @@ function ConfirmationDialog({
   return (
     <div
       className={twMerge(
-        "flex flex-col gap-4 bg-white rounded-3xl p-8",
+        "flex flex-col gap-4 bg-paper rounded-3xl p-8",
         className
       )}
     >

@@ -82,7 +82,7 @@ function Pagination({
   };
 
   return (
-    <nav className="flex justify-between border-t font-semibold">
+    <nav className="flex justify-between border-t border-divider font-semibold">
       <div
         className={twMerge(
           "flex py-3 items-center gap-3 cursor-pointer",

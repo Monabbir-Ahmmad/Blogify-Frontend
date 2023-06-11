@@ -11,8 +11,8 @@ function CommentTree({ commentIds, level = 0 }) {
   return (
     <div
       className={twMerge(
-        "divide-y",
-        level > 0 && level < 4 && "ml-4 border-l-2 pl-4"
+        "divide-y divide-divider",
+        level > 0 && level < 4 && "ml-4 border-l-2 pl-4 border-divider"
       )}
     >
       {commentIds.map(

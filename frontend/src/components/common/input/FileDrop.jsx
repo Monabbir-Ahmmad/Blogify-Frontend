@@ -77,7 +77,7 @@ function FileDrop({
         <div>
           <label
             htmlFor="dropzone-file"
-            className="cursor-pointer overflow-hidden w-full p-4 flex flex-col items-center justify-center border-2 border-slate-300 border-dashed rounded bg-slate-50 hover:bg-slate-100 transition-colors duration-200 ease-in-out"
+            className="cursor-pointer overflow-hidden w-full p-4 flex flex-col items-center justify-center border-2 border-divider border-dashed rounded bg-slate-50 hover:bg-slate-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 transition-colors"
           >
             {!compact && (
               <img src={imageUpload} alt="Upload" className="-mt-6 h-44" />
