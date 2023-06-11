@@ -1,8 +1,10 @@
+import { useEffect, useRef, useState } from "react";
+
 import TextArea from "../common/input/TextArea";
-import { useState } from "react";
 
 function CommentBox({ onSubmit, defaultValue = "", onCancel }) {
   const [text, setText] = useState(defaultValue);
+  const ref = useRef();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,8 +17,16 @@ function CommentBox({ onSubmit, defaultValue = "", onCancel }) {
     onCancel?.();
   };
 
+  useEffect(() => {
+    ref.current?.scrollIntoView({ behavior: "smooth" });
+
+    return () => {
+      ref.current = null;
+    };
+  }, []);
+
   return (
-    <form className="space-y-2" onSubmit={handleSubmit}>
+    <form className="space-y-2" onSubmit={handleSubmit} ref={ref}>
       <TextArea
         required
         className="input-primary"
