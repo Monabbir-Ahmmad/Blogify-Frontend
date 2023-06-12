@@ -123,7 +123,7 @@ function CommentItem({ comment, level }) {
         {isAuthenticated && (
           <button
             ref={menuRef}
-            className="icon-btn-base bg-white rounded-full h-8"
+            className="icon-btn rounded-full h-8"
             onClick={() => setMenuOpen((prev) => !prev)}
           >
             <MoreIcon size={20} />
@@ -134,7 +134,7 @@ function CommentItem({ comment, level }) {
           target={menuRef}
           open={menuOpen}
           onClose={() => setMenuOpen(false)}
-          className="bg-white rounded shadow"
+          className="bg-paper shadow-shadow rounded shadow-xl"
         >
           <div className="text-lg flex flex-col w-44">
             <span
@@ -165,7 +165,7 @@ function CommentItem({ comment, level }) {
         <p>{comment.text}</p>
       )}
 
-      <div className="flex gap-2 [&>button]:btn-base [&>button]:rounded-full [&>button]:p-2 [&>button]:bg-transparent [&>button]:shadow-none">
+      <div className="flex gap-2 [&>button]:btn-text [&>button]:rounded-full [&>button]:p-2">
         <button
           onClick={onLikeClick}
           className={twMerge(isLiked && "text-primary")}

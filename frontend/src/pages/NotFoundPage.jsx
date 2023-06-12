@@ -16,10 +16,10 @@ function NotFoundPage() {
         the correct URL
       </p>
       <button
-        className="btn-primary px-20 rounded-full"
-        onClick={() => navigate(-1)}
+        className="btn-primary px-20 rounded-full uppercase"
+        onClick={() => navigate("/")}
       >
-        Take me back!
+        Take me home!
       </button>
     </main>
   );

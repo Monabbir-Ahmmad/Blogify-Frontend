@@ -24,7 +24,7 @@ function SignupPage() {
 
   return (
     <main className="flex">
-      <section className="flex-1 p-4 min-h-screen bg-slate-50 border-x border-slate-200 lg:flex items-center justify-center hidden ">
+      <section className="flex-1 p-4 min-h-screen bg-slate-50 dark:bg-paper border-x border-divider lg:flex items-center justify-center hidden ">
         <object type="image/svg+xml" data={signupImage} className="w-3/4" />
       </section>
       <section className="flex flex-col px-6 py-20 gap-5 items-center justify-center flex-1 min-h-screen">

@@ -38,7 +38,13 @@ class CommentService {
 
   async getListByBlog(blogId, { page, limit }) {
     const res = await httpClient.get(
-      apiUrl.comment.getListByBlog + `/${blogId}?page=${page}&limit=${limit}`
+      apiUrl.comment.getListByBlog + `/${blogId}`,
+      {
+        params: {
+          page,
+          limit,
+        },
+      }
     );
 
     return res.data;
@@ -46,7 +52,13 @@ class CommentService {
 
   async getReplies(commentId, { page, limit }) {
     const res = await httpClient.get(
-      apiUrl.comment.getReplies + `/${commentId}?page=${page}&limit=${limit}`
+      apiUrl.comment.getReplies + `/${commentId}`,
+      {
+        params: {
+          page,
+          limit,
+        },
+      }
     );
 
     return res.data;

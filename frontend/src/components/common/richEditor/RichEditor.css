@@ -1,9 +1,19 @@
 :root {
-  --bg-color: hsl(210, 40%, 98%);
-  --btn-enabled-color: hsl(214, 32%, 91%);
-  --btn-icon-color: hsl(217, 33%, 17%);
-  --btn-icon-disabled-color: hsl(215, 16%, 47%);
-  --txt-color: hsl(217, 33%, 17%);
+  --editor-bg-color: hsl(210, 40%, 98%);
+  --editor-btn-enabled-color: hsl(214, 32%, 91%);
+  --editor-btn-icon-color: hsl(217, 33%, 17%);
+  --editor-btn-icon-disabled-color: hsl(215, 16%, 47%);
+  --editor-txt-color: hsl(217, 33%, 17%);
+  --editor-border-color: hsl(214, 32%, 91%);
+}
+
+:root[class*="dark"] {
+  --editor-bg-color: hsl(0, 0%, 11%);
+  --editor-btn-enabled-color: hsl(0, 0%, 20%);
+  --editor-btn-icon-color: hsl(214, 30%, 91%);
+  --editor-btn-icon-disabled-color: hsl(215, 16%, 47%);
+  --editor-txt-color: hsl(214, 30%, 91%);
+  --editor-border-color: hsl(220, 10%, 35%);
 }
 
 .sun-editor {
@@ -11,7 +21,7 @@
   height: auto;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
-  border: 1px solid hsl(214, 30%, 91%);
+  border: 1px solid var(--editor-border-color);
   color: hsl(217, 33%, 17%);
   user-select: none;
   -o-user-select: none;
@@ -130,7 +140,7 @@
   display: block;
   text-align: center;
   float: none;
-  fill: var(--btn-icon-color);
+  fill: var(--editor-btn-icon-color);
 }
 
 .sun-editor .close > svg,
@@ -239,7 +249,7 @@
   position: relative;
   width: 100%;
   height: 100%;
-  background-color: var(--bg-color);
+  background-color: var(--editor-bg-color);
 }
 
 .sun-editor button {
@@ -260,13 +270,13 @@
 
 .sun-editor .se-btn:enabled:focus,
 .sun-editor .se-btn:enabled:hover {
-  background-color: var(--btn-enabled-color);
+  background-color: var(--editor-btn-enabled-color);
   border-color: lightgray;
   outline: 0 none;
 }
 
 .sun-editor .se-btn:enabled:active {
-  background-color: var(--btn-enabled-color);
+  background-color: var(--editor-btn-enabled-color);
   border-color: lightgray;
   -webkit-box-shadow: 0 3px 5px #c1c1c1;
   box-shadow: 0 3px 5px #c1c1c1;
@@ -320,40 +330,40 @@
 }
 
 .sun-editor .se-btn:enabled.active {
-  background-color: var(--btn-enabled-color);
+  background-color: var(--editor-btn-enabled-color);
   color: #4592ff;
   outline: 0 none;
 }
 
 .sun-editor .se-btn:enabled.active:focus,
 .sun-editor .se-btn:enabled.active:hover {
-  background-color: var(--btn-enabled-color);
+  background-color: var(--editor-btn-enabled-color);
   border-color: lightgray;
   outline: 0 none;
 }
 
 .sun-editor .se-btn:enabled.active:active {
-  background-color: var(--btn-enabled-color);
+  background-color: var(--editor-btn-enabled-color);
   border-color: lightgray;
   -webkit-box-shadow: 0 3px 5px #c1c1c1;
   box-shadow: 0 3px 5px #c1c1c1;
 }
 
 .sun-editor .se-btn:enabled.on {
-  background-color: var(--btn-enabled-color);
+  background-color: var(--editor-btn-enabled-color);
   border-color: lightgray;
   outline: 0 none;
 }
 
 .sun-editor .se-btn:enabled.on:focus,
 .sun-editor .se-btn:enabled.on:hover {
-  background-color: var(--btn-enabled-color);
+  background-color: var(--editor-btn-enabled-color);
   border-color: lightgray;
   outline: 0 none;
 }
 
 .sun-editor .se-btn:enabled.on:active {
-  background-color: var(--btn-enabled-color);
+  background-color: var(--editor-btn-enabled-color);
   border-color: lightgray;
   -webkit-box-shadow: 0 3px 5px #b1b1b1;
   box-shadow: 0 3px 5px #b1b1b1;
@@ -370,7 +380,7 @@
 .sun-editor .se-btn-list:disabled > svg,
 .sun-editor .se-btn:disabled > svg,
 .sun-editor button:disabled > svg {
-  fill: var(--btn-icon-disabled-color);
+  fill: var(--editor-btn-icon-disabled-color);
 }
 
 .sun-editor .se-loading-box {
@@ -455,7 +465,7 @@
   overflow: visible;
   padding: 0;
   margin: 0;
-  outline: 1px solid #dadada;
+  outline: 1px solid var(--editor-border-color);
   z-index: 5;
 }
 
@@ -522,7 +532,7 @@
 }
 
 .sun-editor .se-btn-module-border {
-  border: 1px solid #dadada;
+  border: 1px solid var(--editor-border-color);
   border-radius: 4px;
   margin-left: 1px;
   margin-right: 1px;
@@ -543,7 +553,7 @@
 
 .sun-editor .se-toolbar-more-layer .se-more-layer {
   display: none;
-  border-top: 1px solid #dadada;
+  border-top: 1px solid var(--editor-border-color);
 }
 
 .sun-editor .se-toolbar-more-layer .se-more-layer .se-more-form {
@@ -600,7 +610,7 @@
 .sun-editor .se-btn-select .txt {
   flex: auto;
   text-align: left;
-  color: var(--txt-color);
+  color: var(--editor-txt-color);
 }
 
 .sun-editor .se-btn-select.se-btn-tool-font {
@@ -1129,9 +1139,9 @@
   width: auto;
   height: auto;
   min-height: 16px;
-  border-top: 1px solid #dadada;
+  border-top: 1px solid var(--editor-border-color);
   padding: 0 4px;
-  background-color: var(--bg-color);
+  background-color: var(--editor-bg-color);
   cursor: ns-resize;
 }
 
@@ -2461,7 +2471,7 @@
 .sun-editor-editable {
   font-family: Helvetica Neue;
   font-size: 16px;
-  color: var(--txt-color);
+  color: var(--editor-txt-color);
   line-height: 1.5;
   word-break: normal;
   word-wrap: break-word;
@@ -2735,7 +2745,7 @@
 .sun-editor-editable hr {
   display: flex;
   border-width: 1px 0 0;
-  border-color: var(--txt-color);
+  border-color: var(--editor-txt-color);
   border-image: initial;
   height: 1px;
 }
@@ -2783,7 +2793,7 @@
 }
 
 .sun-editor-editable table th {
-  background-color: var(--btn-enabled-color);
+  background-color: var(--editor-btn-enabled-color);
 }
 
 .sun-editor-editable table td,

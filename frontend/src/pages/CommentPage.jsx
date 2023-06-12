@@ -49,7 +49,7 @@ function CommentPage({ blogId, toggleCommentView, open = false }) {
   return (
     <main
       className={twMerge(
-        "z-50 fixed inset-0 bg-black bg-opacity-25 transition-opacity",
+        "z-50 fixed inset-0 bg-black bg-opacity-25 dark:bg-opacity-50 transition-opacity",
         open ? "opacity-100" : "opacity-0 pointer-events-none"
       )}
       onClick={onClickOutside}
@@ -57,7 +57,7 @@ function CommentPage({ blogId, toggleCommentView, open = false }) {
       <section
         ref={commentSectionRef}
         className={twMerge(
-          "overflow-y-auto float-right h-screen gap-5 flex flex-col w-full sm:w-5/6 sm:max-w-2xl p-6 bg-white transition-transform",
+          "overflow-y-auto float-right h-screen gap-5 flex flex-col w-full sm:w-5/6 sm:max-w-2xl p-6 bg-paper transition-transform",
           open ? "translate-x-0" : "translate-x-full"
         )}
       >

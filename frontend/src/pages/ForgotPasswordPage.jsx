@@ -25,7 +25,7 @@ function ForgotPasswordPage() {
   const onSubmit = (data) => forgotPasswordMutation.mutate(data.email);
 
   return (
-    <div className="flex flex-col gap-5 items-center justify-center p-8">
+    <main className="flex flex-col gap-5 items-center justify-center p-8">
       <AppLogo className="text-4xl" size={50} />
       <object
         type="image/svg+xml"
@@ -68,7 +68,7 @@ function ForgotPasswordPage() {
 
         <button className="btn-primary">Send recovery email</button>
       </form>
-    </div>
+    </main>
   );
 }
 

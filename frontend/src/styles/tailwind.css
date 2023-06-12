@@ -4,15 +4,19 @@
 
 @layer components {
   .btn {
-    @apply inline-flex gap-2 items-center justify-center text-center rounded-lg text-sm font-medium px-5 py-2.5 outline-none transition-all hover:bg-slate-100 hover:shadow-lg active:shadow-none active:bg-slate-100;
+    @apply inline-flex gap-2 items-center justify-center text-center rounded-lg text-sm font-medium px-5 py-2.5 outline-none transition-all shadow-md hover:shadow-lg active:shadow-none shadow-shadow;
+  }
+
+  .btn-text {
+    @apply btn shadow-none hover:bg-slate-200 active:bg-slate-300 dark:hover:bg-neutral-700 dark:active:bg-neutral-700;
   }
 
   .btn-base {
-    @apply btn bg-slate-100 shadow-md hover:bg-slate-200 hover:shadow-lg active:shadow-none active:bg-slate-300;
+    @apply btn bg-slate-100 hover:bg-slate-200 active:bg-slate-300 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:active:bg-neutral-700;
   }
 
   .btn-primary {
-    @apply btn-base text-white bg-primary hover:bg-primaryDark active:bg-primaryDark;
+    @apply btn text-white bg-primary hover:bg-primaryDark active:bg-primaryDark;
   }
 
   .btn-primary-outlined {
@@ -20,25 +24,25 @@
   }
 
   .btn-primary-light {
-    @apply btn-base text-primary bg-primaryLighter hover:bg-primaryLighter active:bg-primaryLighter;
+    @apply btn text-primary bg-primaryLighter hover:bg-primaryLighter active:bg-primaryLighter;
   }
 
   .btn-error {
-    @apply btn-base text-white bg-error hover:bg-errorDark  active:bg-errorDark;
+    @apply btn text-white bg-error hover:bg-errorDark  active:bg-errorDark;
   }
 
   .btn-error-outlined {
-    @apply btn-base text-error border border-error bg-transparent hover:bg-errorLighter active:bg-errorLighter;
+    @apply btn text-error border border-error bg-transparent hover:bg-errorLighter active:bg-errorLighter;
   }
 
   .btn-error-light {
-    @apply btn-base text-error bg-errorLighter hover:bg-errorLighter active:bg-errorLighter;
+    @apply btn text-error bg-errorLighter hover:bg-errorLighter active:bg-errorLighter;
   }
 }
 
 @layer components {
   .icon-btn {
-    @apply btn p-2 aspect-square;
+    @apply inline-flex gap-2 items-center justify-center rounded-lg outline-none transition-all p-2 aspect-square hover:bg-slate-200 active:bg-slate-300 hover:shadow-lg active:shadow-none shadow-shadow dark:hover:bg-neutral-700 dark:active:bg-neutral-700;
   }
 
   .icon-btn-base {
@@ -68,7 +72,7 @@
   }
 
   .input-base {
-    @apply input placeholder:text-slate-300 bg-slate-50 border-slate-300 focus:ring-slate-400 focus:border-slate-400;
+    @apply input placeholder:text-slate-300 bg-slate-50 border-slate-300 focus:ring-slate-400 focus:border-slate-400 dark:placeholder:text-neutral-500 dark:bg-neutral-800 dark:border-neutral-600 dark:focus:ring-slate-500 dark:focus:border-slate-500;
   }
 
   .input-primary {

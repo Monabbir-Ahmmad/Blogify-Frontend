@@ -150,7 +150,7 @@ function ProfilePage() {
       <section className="w-full max-w-5xl space-y-5 px-5 lg:px-0 mt-10">
         <p className="text-base opacity-80 uppercase">Blogs by {user?.name}</p>
 
-        <hr />
+        <hr className="border-divider" />
 
         {paginatedData?.data.length === 0 && <NoResult />}
 

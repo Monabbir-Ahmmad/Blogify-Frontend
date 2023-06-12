@@ -1,4 +1,5 @@
 import { Controller, useForm } from "react-hook-form";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import AppLogo from "../components/common/AppLogo";
 import Input from "../components/common/input/Input";
@@ -7,7 +8,6 @@ import authService from "../services/authService";
 import resetPasswordImage from "../assets/resetPassword.svg";
 import { toast } from "react-toastify";
 import { useMutation } from "@tanstack/react-query";
-import { useNavigate, useSearchParams } from "react-router-dom";
 
 function ForgotPasswordPage() {
   const [searchParams] = useSearchParams();
@@ -31,7 +31,7 @@ function ForgotPasswordPage() {
     });
 
   return (
-    <div className="flex flex-col gap-5 items-center justify-center p-8">
+    <main className="flex flex-col gap-5 items-center justify-center p-8">
       <AppLogo className="text-4xl" size={50} />
       <object
         type="image/svg+xml"
@@ -100,7 +100,7 @@ function ForgotPasswordPage() {
           Submit
         </button>
       </form>
-    </div>
+    </main>
   );
 }
 

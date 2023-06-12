@@ -2,9 +2,7 @@ import { createContext, useEffect, useState } from "react";
 
 import authService from "../services/authService";
 import storageService from "../services/storageService";
-import { useQuery } from "@tanstack/react-query";
 import useUserActions from "../hooks/useUserActions";
-import userService from "../services/userService";
 
 const AuthContext = createContext();
 
@@ -20,7 +18,7 @@ function AuthContextProvider({ children }) {
 
   useEffect(() => {
     if (!isAuthenticated) setAuthData(null);
-    else setAuthData(user);
+    else setAuthData(user ?? storageService.getCurrentUser());
   }, [isAuthenticated, user]);
 
   useEffect(() => {

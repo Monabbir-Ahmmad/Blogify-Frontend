@@ -8,7 +8,7 @@ import AppLogo from "../common/AppLogo";
 import { AuthContext } from "../../contexts/AuthContext";
 import Avatar from "../common/avatar/Avatar";
 import { NavLink } from "react-router-dom";
-import NavSearchbar from "./NavSearchbar";
+import Searchbar from "../search/Searchbar";
 import { twMerge } from "tailwind-merge";
 
 function SideNav({ toggleMenu, links = [], open = false, onLogout }) {
@@ -24,7 +24,7 @@ function SideNav({ toggleMenu, links = [], open = false, onLogout }) {
   return (
     <div
       className={twMerge(
-        "z-50 xl:hidden fixed inset-0 bg-black bg-opacity-25 transition-opacity",
+        "z-50 xl:hidden fixed inset-0 bg-black bg-opacity-25 dark:bg-opacity-50 transition-opacity",
         open ? "opacity-100" : "opacity-0 pointer-events-none"
       )}
       onClick={onClickOutside}
@@ -32,7 +32,7 @@ function SideNav({ toggleMenu, links = [], open = false, onLogout }) {
       <nav
         ref={navRef}
         className={twMerge(
-          "h-screen gap-5 flex flex-col w-4/6 max-w-xs p-6 bg-white transition-transform",
+          "h-screen gap-5 flex flex-col w-4/6 max-w-xs p-6 bg-paper transition-transform",
           open ? "translate-x-0" : "-translate-x-full"
         )}
       >
@@ -52,13 +52,13 @@ function SideNav({ toggleMenu, links = [], open = false, onLogout }) {
           />
         )}
 
-        <NavSearchbar className="sm:hidden mt-6" />
+        <Searchbar className="sm:hidden mt-6" />
 
         <h6 className="mt-6 uppercase text-sm font-semibold opacity-70">
           Navigations
         </h6>
 
-        <hr />
+        <hr className="border-divider" />
 
         <div className="flex flex-col items-stretch gap-3 text-base font-semibold">
           {links.map(({ to, icon: Icon, text }) => (
@@ -66,9 +66,9 @@ function SideNav({ toggleMenu, links = [], open = false, onLogout }) {
               key={text}
               className={({ isActive }) =>
                 twMerge(
-                  "hover:bg-slate-100 hover:tracking-[0.3em] rounded-lg inline-flex gap-7 p-4 transition-all",
+                  "hover:bg-slate-100 dark:hover:bg-neutral-800 hover:tracking-[0.3em] rounded-lg inline-flex gap-7 p-4 transition-all",
                   isActive &&
-                    "hover:bg-primaryLighter bg-primaryLighter text-primary"
+                    "hover:bg-primaryLighter bg-primaryLighter text-primary dark:hover:bg-primaryLighter"
                 )
               }
               to={to}

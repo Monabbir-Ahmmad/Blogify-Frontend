@@ -2,9 +2,11 @@ import { useEffect, useRef } from "react";
 
 import { createPortal } from "react-dom";
 import { twMerge } from "tailwind-merge";
+import { useLocation } from "react-router-dom";
 
 const Modal = ({ isOpen, onClose, children }) => {
   const modalRef = useRef(null);
+  const location = useLocation();
 
   const handleKeyDown = (event) => {
     if (event.key === "Escape") {
@@ -25,10 +27,16 @@ const Modal = ({ isOpen, onClose, children }) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (isOpen) {
+      onClose();
+    }
+  }, [location]);
+
   return createPortal(
     <div
       className={twMerge(
-        "fixed inset-0 flex items-center justify-center z-[999] transition-opacity bg-black bg-opacity-25",
+        "fixed inset-0 flex items-center justify-center z-[999] transition-opacity bg-black bg-opacity-25 dark:bg-opacity-50",
         isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
       )}
       onClick={handleClickOutside}

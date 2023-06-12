@@ -39,17 +39,23 @@ class AuthService {
   }
 
   async getList({ page, limit }) {
-    const res = await httpClient.get(
-      apiUrl.blog.getList + `?page=${page}&limit=${limit}`
-    );
+    const res = await httpClient.get(apiUrl.blog.getList, {
+      params: {
+        page,
+        limit,
+      },
+    });
 
     return res.data;
   }
 
   async getListByUser(id, { page, limit }) {
-    const res = await httpClient.get(
-      apiUrl.blog.getListByUser + `/${id}?page=${page}&limit=${limit}`
-    );
+    const res = await httpClient.get(apiUrl.blog.getListByUser + `/${id}`, {
+      params: {
+        page,
+        limit,
+      },
+    });
 
     return res.data;
   }

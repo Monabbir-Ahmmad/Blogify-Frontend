@@ -7,8 +7,8 @@ import { ToastContainer, toast } from "react-toastify";
 
 import ContextWrapper from "./contexts/ContextWrapper";
 import LoadingPage from "./pages/LoadingPage";
+import { Outlet } from "react-router-dom";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import Router from "./Router";
 
 const onHttpError = (error, _variables, _context, mutation) => {
   // If this has an onError defined, skip this
@@ -36,7 +36,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ContextWrapper>
-        <Router />
+        <Outlet />
       </ContextWrapper>
 
       <LoadingPage />

@@ -48,7 +48,7 @@ function SigninPage() {
           </Link>
         </p>
       </section>
-      <section className="flex-[1.5] p-4 min-h-screen bg-slate-50 border-x border-slate-200 lg:flex items-center justify-center hidden ">
+      <section className="flex-[1.5] p-4 min-h-screen bg-slate-50 dark:bg-paper border-x border-divider lg:flex items-center justify-center hidden ">
         <object type="image/svg+xml" data={signinImage} className="w-3/4" />
       </section>
     </main>

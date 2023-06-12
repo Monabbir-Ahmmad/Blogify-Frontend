@@ -5,7 +5,7 @@ import "./styles/effects.css";
 import "./styles/scrollbar.css";
 import "./styles/toastify.css";
 
-import App from "./App";
 import ReactDOM from "react-dom/client";
+import Router from "./Router";
 
-ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+ReactDOM.createRoot(document.getElementById("root")).render(<Router />);
