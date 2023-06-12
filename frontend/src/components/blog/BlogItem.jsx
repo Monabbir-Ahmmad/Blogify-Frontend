@@ -41,9 +41,7 @@ function BlogItem({ blog }) {
       <ConfirmationDialog
         type="danger"
         onConfirm={() => {
-          blogDeleteMutation.mutate(id, {
-            onSuccess: () => toast.success("Blog deleted successfully"),
-          });
+          blogDeleteMutation.mutate(id);
           closeModal();
         }}
         onCancel={closeModal}

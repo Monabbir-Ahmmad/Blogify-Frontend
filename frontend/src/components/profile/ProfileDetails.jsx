@@ -54,11 +54,11 @@ function ProfileDetails({
           <div className="w-full pt-6 px-6 flex flex-col-reverse gap-6 md:flex-row mt-24 md:mt-0 md:px-12 items-center justify-between">
             <div className="flex gap-10 tracking-wide text-center text-xl uppercase">
               <div>
-                <span className="font-bold block">89</span>
+                <span className="font-bold block">{user?.blogCount}</span>
                 <span className="text-sm uppercase">Posts</span>
               </div>
               <div>
-                <span className="font-bold block">89</span>
+                <span className="font-bold block">{user?.commentCount}</span>
                 <span className="text-sm uppercase">Comments</span>
               </div>
             </div>

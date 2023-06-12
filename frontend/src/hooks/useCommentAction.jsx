@@ -120,8 +120,8 @@ function useCommentAction({ setComments }) {
         return newComments;
       });
       queryClient.invalidateQueries(["getBlog", data.blogId]);
-      queryClient.removeQueries(["getComments"]);
-      queryClient.removeQueries(["getReplies"]);
+      queryClient.invalidateQueries(["getComments"]);
+      queryClient.invalidateQueries(["getReplies"]);
     },
   });
 
@@ -137,8 +137,8 @@ function useCommentAction({ setComments }) {
         };
         return newComments;
       });
-      queryClient.removeQueries(["getComments"]);
-      queryClient.removeQueries(["getReplies"]);
+      queryClient.invalidateQueries(["getComments"]);
+      queryClient.invalidateQueries(["getReplies"]);
     },
   });
 

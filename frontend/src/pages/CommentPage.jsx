@@ -49,7 +49,7 @@ function CommentPage({ blogId, toggleCommentView, open = false }) {
   return (
     <main
       className={twMerge(
-        "z-50 fixed inset-0 bg-black bg-opacity-25 transition-opacity",
+        "z-50 fixed inset-0 bg-black bg-opacity-25 dark:bg-opacity-50 transition-opacity",
         open ? "opacity-100" : "opacity-0 pointer-events-none"
       )}
       onClick={onClickOutside}

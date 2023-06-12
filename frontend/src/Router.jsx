@@ -6,78 +6,86 @@ function Router() {
   const router = createBrowserRouter([
     {
       path: "/",
-      lazy: async () => ({
-        Component: (await import("./pages/LandingPage")).default,
-      }),
       errorElement: <ErrorPage />,
+      lazy: async () => ({
+        Component: (await import("./App")).default,
+      }),
       children: [
         {
-          index: true,
+          path: "/",
           lazy: async () => ({
-            Component: (await import("./pages/HomePage")).default,
+            Component: (await import("./pages/LandingPage")).default,
+          }),
+          children: [
+            {
+              index: true,
+              lazy: async () => ({
+                Component: (await import("./pages/HomePage")).default,
+              }),
+            },
+            {
+              path: "/write",
+              lazy: async () => ({
+                Component: (await import("./pages/BlogWritingPage")).default,
+              }),
+            },
+            {
+              path: "/blog/edit/:blogId",
+              lazy: async () => ({
+                Component: (await import("./pages/BlogEditPage")).default,
+              }),
+            },
+            {
+              path: "/profile/:userId",
+              lazy: async () => ({
+                Component: (await import("./pages/ProfilePage")).default,
+              }),
+            },
+            {
+              path: "/blog/:blogId",
+              lazy: async () => ({
+                Component: (await import("./pages/BlogPage")).default,
+              }),
+            },
+            {
+              path: "/search/:keyword",
+              lazy: async () => ({
+                Component: (await import("./pages/SearchPage")).default,
+              }),
+            },
+          ],
+        },
+        {
+          path: "/signup",
+          lazy: async () => ({
+            Component: (await import("./pages/SignupPage")).default,
           }),
         },
         {
-          path: "/write",
+          path: "/signin",
           lazy: async () => ({
-            Component: (await import("./pages/BlogWritingPage")).default,
+            Component: (await import("./pages/SigninPage")).default,
           }),
         },
         {
-          path: "/blog/edit/:blogId",
+          path: "/forgot-password",
           lazy: async () => ({
-            Component: (await import("./pages/BlogEditPage")).default,
+            Component: (await import("./pages/ForgotPasswordPage")).default,
           }),
         },
         {
-          path: "/profile/:userId",
+          path: "/reset-password",
           lazy: async () => ({
-            Component: (await import("./pages/ProfilePage")).default,
+            Component: (await import("./pages/ResetPasswordPage")).default,
           }),
         },
         {
-          path: "/blog/:blogId",
+          path: "*",
           lazy: async () => ({
-            Component: (await import("./pages/BlogPage")).default,
-          }),
-        },
-        {
-          path: "/search/:keyword",
-          lazy: async () => ({
-            Component: (await import("./pages/SearchPage")).default,
+            Component: (await import("./pages/NotFoundPage")).default,
           }),
         },
       ],
-    },
-    {
-      path: "/signup",
-      lazy: async () => ({
-        Component: (await import("./pages/SignupPage")).default,
-      }),
-    },
-    {
-      path: "/signin",
-      lazy: async () => ({
-        Component: (await import("./pages/SigninPage")).default,
-      }),
-    },
-    {
-      path: "/forgot-password",
-      lazy: async () => ({
-        Component: (await import("./pages/ForgotPasswordPage")).default,
-      }),
-    },
-    {
-      path: "/reset-password",
-      lazy: async () => ({
-        Component: (await import("./pages/ResetPasswordPage")).default,
-      }),
-    },
-    {
-      path: "*",
-      lazy: async () => ({
-        Component: (await import("./pages/NotFoundPage")).default,
-      }),
     },
   ]);
 

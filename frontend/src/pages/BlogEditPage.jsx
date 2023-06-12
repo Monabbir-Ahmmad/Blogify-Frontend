@@ -30,7 +30,7 @@ function BlogEditPage() {
   if (isError) return <NotFoundPage />;
 
   return (
-    <div className="w-full p-4">
+    <main className="w-full p-4">
       <div className="max-w-5xl mx-auto">
         <BlogWriteForm
           onSubmit={onSubmit}
@@ -40,7 +40,7 @@ function BlogEditPage() {
           defaultValues={blogToUpdate}
         />
       </div>
-    </div>
+    </main>
   );
 }
 

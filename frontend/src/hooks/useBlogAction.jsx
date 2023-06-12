@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import blogService from "../services/blogService";
+import { toast } from "react-toastify";
 
 function useBlogAction() {
   const queryClient = useQueryClient();
@@ -29,7 +30,7 @@ function useBlogAction() {
   const blogCreateMutation = useMutation({
     mutationFn: blogService.post,
     onSuccess: () => {
-      queryClient.removeQueries("getBlogs");
+      queryClient.invalidateQueries(["getBlogs"]);
     },
   });
 
@@ -37,8 +38,8 @@ function useBlogAction() {
     mutationKey: ["skipLoading"],
     mutationFn: blogService.like,
     onSuccess: (data, blogId) => {
-      queryClient.removeQueries("getBlogs");
       queryClient.setQueryData(["getBlog", blogId], () => data);
+      queryClient.invalidateQueries(["getBlogs"]);
     },
   });
 
@@ -47,17 +48,18 @@ function useBlogAction() {
       await blogService.update(blogId, data),
     onSuccess: (data, variables) => {
       queryClient.setQueryData(["getBlog", variables.blogId], () => data);
-      queryClient.removeQueries(["getUserBlogs", { userId: variables.userId }]);
-      queryClient.removeQueries(["getBlogs"]);
+      queryClient.invalidateQueries(["getUserBlogs"]);
+      queryClient.invalidateQueries(["getBlogs"]);
     },
   });
 
   const blogDeleteMutation = useMutation({
     mutationFn: blogService.delete,
     onSuccess: (_, blogId) => {
-      queryClient.removeQueries(["getBlogs"]);
+      toast.success("Blog deleted successfully");
       queryClient.removeQueries(["getBlog", blogId]);
-      queryClient.removeQueries(["getUserBlogs"]);
+      queryClient.invalidateQueries(["getBlogs"]);
+      queryClient.invalidateQueries(["getUserBlogs"]);
     },
   });
 

@@ -37,8 +37,8 @@ const apiUrl = {
     getReplies: "/comment/reply",
   },
   search: {
-    getUser: "/search/user",
-    getBlog: "/search/blog",
+    getUsers: "/search/user",
+    getBlogs: "/search/blog",
   },
 };
 

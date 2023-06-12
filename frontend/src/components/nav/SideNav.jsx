@@ -8,7 +8,7 @@ import AppLogo from "../common/AppLogo";
 import { AuthContext } from "../../contexts/AuthContext";
 import Avatar from "../common/avatar/Avatar";
 import { NavLink } from "react-router-dom";
-import NavSearchbar from "./NavSearchbar";
+import Searchbar from "../search/Searchbar";
 import { twMerge } from "tailwind-merge";
 
 function SideNav({ toggleMenu, links = [], open = false, onLogout }) {
@@ -24,7 +24,7 @@ function SideNav({ toggleMenu, links = [], open = false, onLogout }) {
   return (
     <div
       className={twMerge(
-        "z-50 xl:hidden fixed inset-0 bg-black bg-opacity-25 transition-opacity",
+        "z-50 xl:hidden fixed inset-0 bg-black bg-opacity-25 dark:bg-opacity-50 transition-opacity",
         open ? "opacity-100" : "opacity-0 pointer-events-none"
       )}
       onClick={onClickOutside}
@@ -52,7 +52,7 @@ function SideNav({ toggleMenu, links = [], open = false, onLogout }) {
           />
         )}
 
-        <NavSearchbar className="sm:hidden mt-6" />
+        <Searchbar className="sm:hidden mt-6" />
 
         <h6 className="mt-6 uppercase text-sm font-semibold opacity-70">
           Navigations

@@ -1,6 +1,7 @@
 import { Controller, useForm } from "react-hook-form";
 
 import Input from "../common/input/Input";
+import { Link } from "react-router-dom";
 import { RiLock2Line as LockIcon } from "react-icons/ri";
 import { twMerge } from "tailwind-merge";
 
@@ -93,7 +94,12 @@ function PasswordUpdateForm({ onSubmit, className }) {
         )}
       />
 
-      <button className="btn-primary">Confirm Changes</button>
+      <div className="flex gap-2">
+        <button className="btn-primary">Confirm Changes</button>
+        <Link to="forgot-password" className="btn-primary-outlined">
+          Forgot Password?
+        </Link>
+      </div>
     </form>
   );
 }

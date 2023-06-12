@@ -12,7 +12,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import Avatar from "../common/avatar/Avatar";
 import { NavLink } from "react-router-dom";
 import NavLinks from "./NavLinks";
-import NavSearchbar from "./NavSearchbar";
+import Searchbar from "../search/Searchbar";
 import SideNav from "./SideNav";
 
 function Navbar({ onLogout }) {
@@ -44,7 +44,7 @@ function Navbar({ onLogout }) {
       <nav className="sticky top-0 z-50 border-b border-divider w-screen gap-2 p-4 inline-flex items-center bg-background">
         <AppLogo className="mr-4" />
 
-        <NavSearchbar className="hidden sm:block" userId={authData?.id} />
+        <Searchbar className="hidden sm:block" userId={authData?.id} />
 
         <div className="hidden text-base absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 xl:flex mx-auto items-center w-auto">
           <NavLinks links={links} />
