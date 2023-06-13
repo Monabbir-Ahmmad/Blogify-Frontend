@@ -1,26 +1,27 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
 
 import AppLogo from "../components/common/AppLogo";
 import { AuthContext } from "../contexts/AuthContext";
 import SignupForm from "../components/signup/SignupForm";
 import authService from "../services/authService";
 import signupImage from "../assets/signupImage.svg";
-import { useContext } from "react";
 import { useMutation } from "@tanstack/react-query";
 
 function SignupPage() {
   const navigate = useNavigate();
-  const authContext = useContext(AuthContext);
+  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
 
   const signupMutation = useMutation({
     mutationFn: authService.signup,
-    onSuccess: () => {
-      authContext.setIsAuthenticated(true);
-      navigate("/");
-    },
+    onSuccess: () => setIsAuthenticated(true),
   });
 
   const onSignup = (data) => signupMutation.mutate(data);
+
+  useEffect(() => {
+    if (isAuthenticated) navigate("/", { replace: true });
+  }, [isAuthenticated, navigate]);
 
   return (
     <main className="flex">

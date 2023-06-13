@@ -1,5 +1,7 @@
 import {
   RiCloseLine as CloseIcon,
+  RiSunLine as DarkModeIcon,
+  RiMoonClearLine as LightModeIcon,
   RiLogoutCircleRLine as LogoutIcon,
 } from "react-icons/ri";
 import { useContext, useRef } from "react";
@@ -9,9 +11,11 @@ import { AuthContext } from "../../contexts/AuthContext";
 import Avatar from "../common/avatar/Avatar";
 import { NavLink } from "react-router-dom";
 import Searchbar from "../search/Searchbar";
+import { ThemeContext } from "../../contexts/ThemeContext";
 import { twMerge } from "tailwind-merge";
 
 function SideNav({ toggleMenu, links = [], open = false, onLogout }) {
+  const { darkMode, toggleDarkMode } = useContext(ThemeContext);
   const { isAuthenticated, authData } = useContext(AuthContext);
   const navRef = useRef();
 
@@ -79,6 +83,20 @@ function SideNav({ toggleMenu, links = [], open = false, onLogout }) {
           ))}
         </div>
         <div className="mt-auto flex flex-col gap-3 py-4">
+          <button className="btn-base gap-4" onClick={toggleDarkMode}>
+            {darkMode ? (
+              <>
+                <LightModeIcon size={20} className="text-yellow-500" />
+                Enable Light Mode
+              </>
+            ) : (
+              <>
+                <DarkModeIcon size={20} className="text-primary" />
+                Enable Dark Mode
+              </>
+            )}
+          </button>
+
           {isAuthenticated ? (
             <button
               className="btn-base gap-4"
