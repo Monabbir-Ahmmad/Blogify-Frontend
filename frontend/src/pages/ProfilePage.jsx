@@ -1,14 +1,15 @@
 import { useParams, useSearchParams } from "react-router-dom";
 
 import BlogItem from "../components/blog/BlogItem";
+import ErrorPage from "./ErrorPage";
 import FormDialog from "../components/common/dialog/FormDialog";
 import ImagePickerForm from "../components/profile/ImagePickerForm";
 import NoResult from "../components/emptyPlaceholder/NoResult";
-import NotFoundPage from "./NotFoundPage";
 import Pagination from "../components/common/pagination/Pagination";
 import PasswordUpdateForm from "../components/profile/PasswordUpdateForm";
 import ProfileDetails from "../components/profile/ProfileDetails";
 import ProfileUpdateForm from "../components/profile/ProfileUpdateForm";
+import notFoundImg from "../assets/notFound.svg";
 import { toast } from "react-toastify";
 import useBlogAction from "../hooks/useBlogAction";
 import { useModal } from "../contexts/ModalContext";
@@ -135,7 +136,14 @@ function ProfilePage() {
       </FormDialog>
     );
 
-  if (isError) return <NotFoundPage />;
+  if (isError)
+    return (
+      <ErrorPage
+        image={notFoundImg}
+        title="Sorry! User not found"
+        description="The user you are looking for does not exist."
+      />
+    );
 
   return (
     <main className="w-full flex flex-col items-center gap-6">

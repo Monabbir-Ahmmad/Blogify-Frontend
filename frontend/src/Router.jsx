@@ -1,12 +1,13 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import ErrorPage from "./pages/ErrorPage";
+import notFoundImg from "./assets/notFound.svg";
 
 function Router() {
   const router = createBrowserRouter([
     {
       path: "/",
-      errorElement: <ErrorPage />,
+      errorElement: <ErrorPage hideLink={true} />,
       lazy: async () => ({
         Component: (await import("./App")).default,
       }),
@@ -79,13 +80,17 @@ function Router() {
             Component: (await import("./pages/ResetPasswordPage")).default,
           }),
         },
-        {
-          path: "*",
-          lazy: async () => ({
-            Component: (await import("./pages/NotFoundPage")).default,
-          }),
-        },
       ],
+    },
+    {
+      path: "*",
+      element: (
+        <ErrorPage
+          image={notFoundImg}
+          title="Sorry! We couldn't find the page you are looking for."
+          description="Please, make sure you have typed the correct URL."
+        />
+      ),
     },
   ]);
 

@@ -4,18 +4,13 @@ import { useContext, useEffect } from "react";
 import AppLogo from "../components/common/AppLogo";
 import { AuthContext } from "../contexts/AuthContext";
 import SigninForm from "../components/signin/SigninForm";
-import authService from "../services/authService";
 import signinImage from "../assets/signinImage.svg";
-import { useMutation } from "@tanstack/react-query";
+import useAuthAction from "../hooks/useAuthAction";
 
 function SigninPage() {
   const navigate = useNavigate();
-  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
-
-  const signinMutation = useMutation({
-    mutationFn: authService.signin,
-    onSuccess: () => setIsAuthenticated(true),
-  });
+  const { isAuthenticated } = useContext(AuthContext);
+  const { signinMutation } = useAuthAction(useContext(AuthContext));
 
   const onSignin = (data) => signinMutation.mutate(data);
 

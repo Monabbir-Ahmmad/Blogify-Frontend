@@ -5,11 +5,11 @@ function NavLinks({ links = [] }) {
   return (
     <>
       {links.map(
-        ({ to, icon: Icon, text, sideOnly }, index) =>
-          !sideOnly && (
+        ({ to, icon: Icon, text, sideNavOnly }, index) =>
+          !sideNavOnly && (
             <div key={text} className="inline-flex items-center">
               {index > 0 && (
-                <div className="mx-8 inline-block h-full min-h-[1.3rem] border-r border-divider"></div>
+                <div className="mx-8 inline-block h-full min-h-[1.3rem] border-r-2 border-divider"></div>
               )}
               <NavLink
                 to={to}

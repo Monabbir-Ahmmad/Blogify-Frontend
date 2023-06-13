@@ -2,8 +2,9 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import commentService from "../services/commentService";
 
-function useCommentAction({ setComments }) {
+function useCommentAction(commentContext) {
   const queryClient = useQueryClient();
+  const { setComments } = commentContext;
 
   const fetchComments = (blogId, { page = 1, limit = 12 }) =>
     useQuery({

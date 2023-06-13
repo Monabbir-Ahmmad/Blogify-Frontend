@@ -1,15 +1,19 @@
+import { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
+import { AuthContext } from "../contexts/AuthContext";
 import BlogWriteForm from "../components/blog/BlogWriteForm";
-import NotFoundPage from "./NotFoundPage";
+import ErrorPage from "./ErrorPage";
+import forbiddenImg from "../assets/forbidden.svg";
+import notFoundImg from "../assets/notFound.svg";
 import { toast } from "react-toastify";
 import useBlogAction from "../hooks/useBlogAction";
-import { useState } from "react";
 
 function BlogEditPage() {
   const navagate = useNavigate();
   const { blogId } = useParams();
   const [resetForm, setResetForm] = useState(false);
+  const { authData } = useContext(AuthContext);
 
   const { fetchBlog, blogUpdateMutation } = useBlogAction();
 
@@ -27,7 +31,23 @@ function BlogEditPage() {
       }
     );
 
-  if (isError) return <NotFoundPage />;
+  if (isError)
+    return (
+      <ErrorPage
+        image={notFoundImg}
+        title="Sorry! We couldn't find the blog you are looking for."
+        description="Please, make sure you have typed the correct URL."
+      />
+    );
+
+  if (!authData?.id || blogToUpdate?.user?.id !== authData?.id)
+    return (
+      <ErrorPage
+        image={forbiddenImg}
+        title="Sorry! You are not allowed to edit this blog."
+        description="Please, make sure you are logged in and have the permission to edit this blog."
+      />
+    );
 
   return (
     <main className="w-full p-4">
