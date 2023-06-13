@@ -65,22 +65,24 @@ function SideNav({ toggleMenu, links = [], open = false, onLogout }) {
         <hr className="border-divider" />
 
         <div className="flex flex-col items-stretch gap-3 text-base font-semibold">
-          {links.map(({ to, icon: Icon, text }) => (
-            <NavLink
-              key={text}
-              className={({ isActive }) =>
-                twMerge(
-                  "hover:bg-slate-100 dark:hover:bg-neutral-800 hover:tracking-[0.3em] rounded-lg inline-flex gap-7 p-4 transition-all",
-                  isActive &&
-                    "hover:bg-primaryLighter bg-primaryLighter text-primary dark:hover:bg-primaryLighter"
-                )
-              }
-              to={to}
-            >
-              <Icon size={20} />
-              {text}
-            </NavLink>
-          ))}
+          {links.map(({ to, icon: Icon, text, authRequired }) =>
+            authRequired && !isAuthenticated ? null : (
+              <NavLink
+                key={text}
+                className={({ isActive }) =>
+                  twMerge(
+                    "hover:bg-slate-100 dark:hover:bg-neutral-800 hover:tracking-[0.3em] rounded-lg inline-flex gap-7 p-4 transition-all",
+                    isActive &&
+                      "hover:bg-primaryLighter bg-primaryLighter text-primary dark:hover:bg-primaryLighter"
+                  )
+                }
+                to={to}
+              >
+                <Icon size={20} />
+                {text}
+              </NavLink>
+            )
+          )}
         </div>
         <div className="mt-auto flex flex-col gap-3 py-4">
           <button className="btn-base gap-4" onClick={toggleDarkMode}>

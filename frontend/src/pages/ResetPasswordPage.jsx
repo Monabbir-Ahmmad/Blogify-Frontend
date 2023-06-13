@@ -2,33 +2,34 @@ import { Controller, useForm } from "react-hook-form";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 import AppLogo from "../components/common/AppLogo";
+import { AuthContext } from "../contexts/AuthContext";
 import Input from "../components/common/input/Input";
 import { RiLock2Line as LockIcon } from "react-icons/ri";
-import authService from "../services/authService";
 import resetPasswordImage from "../assets/resetPassword.svg";
 import { toast } from "react-toastify";
-import { useMutation } from "@tanstack/react-query";
+import useAuthAction from "../hooks/useAuthAction";
+import { useContext } from "react";
 
 function ForgotPasswordPage() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { control, watch, handleSubmit } = useForm();
 
-  const resetPasswordMutation = useMutation({
-    mutationKey: "forgotPassword",
-    mutationFn: async ({ password, token }) =>
-      await authService.resetPassword(password, token),
-    onSuccess: () => {
-      toast.success("Password reset successful");
-      navigate("/signin", { replace: true });
-    },
-  });
+  const { resetPasswordMutation } = useAuthAction(useContext(AuthContext));
 
   const onSubmit = (data) =>
-    resetPasswordMutation.mutate({
-      password: data.password,
-      token: searchParams.get("token"),
-    });
+    resetPasswordMutation.mutate(
+      {
+        password: data.password,
+        token: searchParams.get("token"),
+      },
+      {
+        onSuccess: () => {
+          toast.success("Password reset successful");
+          navigate("/signin", { replace: true });
+        },
+      }
+    );
 
   return (
     <main className="flex flex-col gap-5 items-center justify-center p-8">

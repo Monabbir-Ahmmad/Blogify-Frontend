@@ -5,22 +5,26 @@ import {
 } from "../utils/commonUtil";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 
+import { AuthContext } from "../contexts/AuthContext";
 import Avatar from "../components/common/avatar/Avatar";
 import BlogFloatingButton from "../components/blog/BlogFloatingButton";
 import { CommentContextProvider } from "../contexts/CommentContext";
 import CommentPage from "./CommentPage";
 import ConfirmationDialog from "../components/common/dialog/ConfirmationDialog";
-import NotFoundPage from "./NotFoundPage";
+import ErrorPage from "./ErrorPage";
 import RichContentRenderer from "../components/common/richEditor/RichContentRenderer";
 import dayjs from "dayjs";
+import notFoundIcon from "../assets/notFound.svg";
 import { toast } from "react-toastify";
 import useBlogAction from "../hooks/useBlogAction";
+import { useContext } from "react";
 import { useModal } from "../contexts/ModalContext";
 
 function BlogPage() {
   const { blogId } = useParams();
   const navigate = useNavigate();
   const { openModal, closeModal } = useModal();
+  const { isAuthenticated } = useContext(AuthContext);
 
   const [openComments, setOpenComments] = useSearchParams("comments", "open");
 
@@ -28,7 +32,14 @@ function BlogPage() {
 
   const { data, isError } = fetchBlog(blogId);
 
-  const onBlogLike = () => blogLikeMutation.mutate(blogId);
+  const onBlogLike = () => {
+    if (!isAuthenticated) {
+      return toast.info("You must be logged in to like a blog", {
+        toastId: "login-to-like-blog",
+      });
+    }
+    blogLikeMutation.mutate(blogId);
+  };
 
   const onBlogEditClick = () => navigate(`/blog/edit/${blogId}`);
 
@@ -59,7 +70,14 @@ function BlogPage() {
       openComments.get("comments") ? undefined : { comments: "open" }
     );
 
-  if (isError) return <NotFoundPage />;
+  if (isError)
+    return (
+      <ErrorPage
+        image={notFoundIcon}
+        title="Sorry, we couldn't find the blog you were looking for."
+        description="It may have been deleted or you may have followed a bad link."
+      />
+    );
 
   return (
     <div className="p-5">

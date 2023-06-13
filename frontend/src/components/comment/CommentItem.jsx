@@ -69,7 +69,13 @@ function CommentItem({ comment, level }) {
 
   const onToggleRepliesClick = () => setShowReplies((prev) => !prev);
 
-  const onLikeClick = () => commentLikeMutation.mutate(comment.id);
+  const onLikeClick = () => {
+    if (!isAuthenticated)
+      return toast.info("Please login to like a comment.", {
+        toastId: "login-to-like-comment",
+      });
+    commentLikeMutation.mutate(comment.id);
+  };
 
   const onEditSubmit = (text) => {
     commentEditMutation.mutate(

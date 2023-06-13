@@ -1,28 +1,28 @@
 import { Controller, useForm } from "react-hook-form";
 
 import AppLogo from "../components/common/AppLogo";
+import { AuthContext } from "../contexts/AuthContext";
 import Input from "../components/common/input/Input";
 import { RiMailLine as MailIcon } from "react-icons/ri";
-import authService from "../services/authService";
 import forgotPasswordImage from "../assets/forgotPassword.svg";
 import { toast } from "react-toastify";
-import { useMutation } from "@tanstack/react-query";
+import useAuthAction from "../hooks/useAuthAction";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 function ForgotPasswordPage() {
   const navigate = useNavigate();
   const { control, handleSubmit } = useForm();
 
-  const forgotPasswordMutation = useMutation({
-    mutationKey: "forgotPassword",
-    mutationFn: authService.forgotPassword,
-    onSuccess: () => {
-      toast.success("A recovery email has been sent to your email address");
-      navigate(-1);
-    },
-  });
+  const { forgotPasswordMutation } = useAuthAction(useContext(AuthContext));
 
-  const onSubmit = (data) => forgotPasswordMutation.mutate(data.email);
+  const onSubmit = (data) =>
+    forgotPasswordMutation.mutate(data.email, {
+      onSuccess: () => {
+        toast.success("A recovery email has been sent to your email address");
+        navigate(-1);
+      },
+    });
 
   return (
     <main className="flex flex-col gap-5 items-center justify-center p-8">

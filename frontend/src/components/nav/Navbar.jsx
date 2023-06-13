@@ -7,21 +7,18 @@ import {
   RiUser6Line as ProfileIcon,
   RiQuillPenLine as WriteIcon,
 } from "react-icons/ri";
-import { Link, NavLink } from "react-router-dom";
-import { useContext, useRef, useState } from "react";
+import { useContext, useState } from "react";
 
 import AppLogo from "../common/AppLogo";
 import { AuthContext } from "../../contexts/AuthContext";
-import Avatar from "../common/avatar/Avatar";
+import { NavLink } from "react-router-dom";
 import NavLinks from "./NavLinks";
-import Popover from "../common/popover/Popover";
+import NavProfileMenu from "./NavProfileMenu";
 import Searchbar from "../search/Searchbar";
 import SideNav from "./SideNav";
 import { ThemeContext } from "../../contexts/ThemeContext";
 
 function Navbar({ onLogout }) {
-  const profileMenuRef = useRef();
-  const [profileMenuOpen, setProfileMenuOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { darkMode, toggleDarkMode } = useContext(ThemeContext);
   const { isAuthenticated, authData } = useContext(AuthContext);
@@ -43,7 +40,8 @@ function Navbar({ onLogout }) {
       to: "/profile/" + authData?.id,
       icon: ProfileIcon,
       text: "Profile",
-      sideOnly: true,
+      sideNavOnly: true,
+      authRequired: true,
     },
   ];
 
@@ -60,56 +58,7 @@ function Navbar({ onLogout }) {
 
         {isAuthenticated ? (
           <div className="hidden ml-auto xl:inline-flex gap-10">
-            <Avatar
-              reversed={true}
-              title={authData?.name}
-              image={authData?.profileImage}
-              rounded="rounded-full"
-              className="max-w-[300px] cursor-pointer"
-              ref={profileMenuRef}
-              onClick={() => setProfileMenuOpen((prev) => !prev)}
-            />
-
-            <Popover
-              target={profileMenuRef}
-              open={profileMenuOpen}
-              onClose={() => setProfileMenuOpen(false)}
-              anchor={{ horizontal: "center" }}
-              className="bg-paper rounded shadow-xl shadow-shadow"
-            >
-              <div className="text-lg flex flex-col w-72">
-                <Link
-                  className="inline-flex items-center gap-5 py-4 px-5 hover:bg-primaryLighter hover:text-primary"
-                  to={"/profile/" + authData?.id}
-                >
-                  <ProfileIcon size={24} />
-                  Profile
-                </Link>
-                <span
-                  className="inline-flex items-center gap-5 py-4 px-5 hover:bg-primaryLighter hover:text-primary"
-                  onClick={toggleDarkMode}
-                >
-                  {darkMode ? (
-                    <>
-                      <LightModeIcon size={24} />
-                      Enable Light Mode
-                    </>
-                  ) : (
-                    <>
-                      <DarkModeIcon size={24} />
-                      Enable Dark Mode
-                    </>
-                  )}
-                </span>
-                <span
-                  className="inline-flex items-center gap-5 py-4 px-5 hover:bg-errorLighter text-error"
-                  onClick={onLogout}
-                >
-                  <LogoutIcon size={24} />
-                  Logout
-                </span>
-              </div>
-            </Popover>
+            <NavProfileMenu onLogout={onLogout} />
           </div>
         ) : (
           <>

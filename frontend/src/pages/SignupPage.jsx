@@ -4,18 +4,13 @@ import { useContext, useEffect } from "react";
 import AppLogo from "../components/common/AppLogo";
 import { AuthContext } from "../contexts/AuthContext";
 import SignupForm from "../components/signup/SignupForm";
-import authService from "../services/authService";
 import signupImage from "../assets/signupImage.svg";
-import { useMutation } from "@tanstack/react-query";
+import useAuthAction from "../hooks/useAuthAction";
 
 function SignupPage() {
   const navigate = useNavigate();
-  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
-
-  const signupMutation = useMutation({
-    mutationFn: authService.signup,
-    onSuccess: () => setIsAuthenticated(true),
-  });
+  const { isAuthenticated } = useContext(AuthContext);
+  const { signupMutation } = useAuthAction(useContext(AuthContext));
 
   const onSignup = (data) => signupMutation.mutate(data);
 
