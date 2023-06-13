@@ -10,7 +10,7 @@ function FormDialog({ onCancel, title, className, children }) {
           <CloseIcon size={24} />
         </button>
       </header>
-      <div className="flex flex-col gap-4 w-full overflow-y-auto max-h-[90vh]">
+      <div className="flex flex-col gap-4 w-full overflow-y-auto max-h-[85vh]">
         {children}
       </div>
     </div>

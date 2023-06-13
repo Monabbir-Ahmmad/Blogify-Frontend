@@ -1,11 +1,14 @@
 import { AuthContextProvider } from "./AuthContext";
 import { ModalContextProvider } from "./ModalContext";
+import { ThemeContextProvider } from "./ThemeContext";
 
 function ContextWrapper({ children }) {
   return (
-    <ModalContextProvider>
-      <AuthContextProvider>{children}</AuthContextProvider>
-    </ModalContextProvider>
+    <ThemeContextProvider>
+      <ModalContextProvider>
+        <AuthContextProvider>{children}</AuthContextProvider>
+      </ModalContextProvider>
+    </ThemeContextProvider>
   );
 }
 

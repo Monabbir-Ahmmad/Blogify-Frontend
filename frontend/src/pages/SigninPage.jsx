@@ -1,26 +1,27 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
 
 import AppLogo from "../components/common/AppLogo";
 import { AuthContext } from "../contexts/AuthContext";
 import SigninForm from "../components/signin/SigninForm";
 import authService from "../services/authService";
 import signinImage from "../assets/signinImage.svg";
-import { useContext } from "react";
 import { useMutation } from "@tanstack/react-query";
 
 function SigninPage() {
   const navigate = useNavigate();
-  const authContext = useContext(AuthContext);
+  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
 
   const signinMutation = useMutation({
     mutationFn: authService.signin,
-    onSuccess: () => {
-      authContext.setIsAuthenticated(true);
-      navigate("/");
-    },
+    onSuccess: () => setIsAuthenticated(true),
   });
 
   const onSignin = (data) => signinMutation.mutate(data);
+
+  useEffect(() => {
+    if (isAuthenticated) navigate("/", { replace: true });
+  }, [isAuthenticated, navigate]);
 
   return (
     <main className="flex">

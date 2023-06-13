@@ -73,7 +73,7 @@ function BlogItem({ blog }) {
   return (
     <div className="relative flex flex-col justify-between gap-3 w-full h-80 rounded-3xl bg-paper shadow-md shadow-shadow hover:shadow-lg transition-shadow">
       <div className="flex p-2 gap-2 justify-between z-10">
-        <div className="inline-flex items-center divide-x-2 divide-divider rounded-full bg-paper shadow-md shadow-shadow">
+        <div className="py-1 inline-flex items-center divide-x-2 divide-divider rounded-full bg-paper shadow-md shadow-shadow">
           <span
             className={twMerge(
               "inline-flex items-center gap-2 px-2",
@@ -139,7 +139,7 @@ function BlogItem({ blog }) {
         </h1>
 
         <RichContentRenderer
-          className="h-0 opacity-0 transition-[height_opacity] duration-500 group-hover:h-[6.25em] group-hover:opacity-70 line-clamp-5"
+          className="h-0 opacity-0 transition-[height_opacity] duration-500 group-hover:h-[5em] group-hover:opacity-70 line-clamp-4"
           unstylized={true}
           content={blog?.content}
         />
@@ -149,11 +149,11 @@ function BlogItem({ blog }) {
             title={blog?.user?.name}
             subtitle={dayjs(blog?.createdAt).format("DD MMM, YYYY hh:mma")}
             image={blog?.user?.profileImage}
-            className="hover:underline flex-[2]"
+            className="hover:underline w-8/12"
             onClick={onAuthorClick}
           />
 
-          <span className="text-sm opacity-70 font-semibold text-end flex-1">
+          <span className="text-sm opacity-70 font-semibold text-end">
             {estimateReadingTime(extractTextFromHtml(blog?.content))}
           </span>
         </div>

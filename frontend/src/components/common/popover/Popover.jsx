@@ -6,42 +6,23 @@ import { twMerge } from "tailwind-merge";
 const getPopoverOrigin = (targetPosition, popoverPosition, anchor) => {
   if (!targetPosition || !popoverPosition) return;
 
-  if (anchor?.horizontal === "center" && anchor?.vertical === "center") {
-    return "origin-center";
+  const { horizontal, vertical } = anchor ?? {};
+
+  if (horizontal === "center" && vertical === "center") {
+    return "center";
   }
 
   const x = targetPosition.left - popoverPosition.left;
   const y = targetPosition.top - popoverPosition.top;
 
-  if (anchor?.horizontal === "center") {
-    if (y >= 0) {
-      return "origin-bottom";
-    } else {
-      return "origin-top";
-    }
-  }
+  let originX = x >= 0 ? "right" : "left";
+  let originY = y >= 0 ? "bottom" : "top";
 
-  if (anchor?.vertical === "center") {
-    if (x >= 0) {
-      return "origin-right";
-    } else {
-      return "origin-left";
-    }
-  }
+  if (horizontal === "center") return originY;
 
-  if (x >= 0) {
-    if (y >= 0) {
-      return "origin-bottom-right";
-    } else {
-      return "origin-top-right";
-    }
-  } else {
-    if (y >= 0) {
-      return "origin-bottom-left";
-    } else {
-      return "origin-top-left";
-    }
-  }
+  if (vertical === "center") return originX;
+
+  return `${originY} ${originX}`;
 };
 
 const Popover = ({ target, open, onClose, children, anchor, className }) => {
@@ -120,14 +101,17 @@ const Popover = ({ target, open, onClose, children, anchor, className }) => {
       className={twMerge(
         "fixed z-[900] overflow-hidden transition-transform cursor-pointer",
         className,
-        getPopoverOrigin(
+
+        open ? "scale-100" : "scale-0"
+      )}
+      style={{
+        ...position,
+        transformOrigin: getPopoverOrigin(
           target?.current?.getBoundingClientRect(),
           position,
           anchor
         ),
-        open ? "scale-100" : "scale-0"
-      )}
-      style={{ ...position }}
+      }}
     >
       {children}
     </menu>,
