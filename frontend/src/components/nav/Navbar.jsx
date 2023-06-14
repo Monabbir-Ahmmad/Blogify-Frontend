@@ -18,6 +18,35 @@ import Searchbar from "../search/Searchbar";
 import SideNav from "./SideNav";
 import { ThemeContext } from "../../contexts/ThemeContext";
 
+const NavRightButtons = ({ darkMode, toggleDarkMode }) => {
+  const ThemeIcon = darkMode ? DarkModeIcon : LightModeIcon;
+  return (
+    <>
+      <button
+        className="hidden xl:inline-block xl:ml-auto icon-btn-base rounded-full"
+        onClick={toggleDarkMode}
+      >
+        <ThemeIcon
+          size={20}
+          className={darkMode ? "text-primary" : "text-secondary"}
+        />
+      </button>
+      <NavLink
+        className="hidden xl:inline-block btn-base rounded-full"
+        to="/signin"
+      >
+        Sign In
+      </NavLink>
+      <NavLink
+        className="hidden xl:inline-block btn-primary rounded-full"
+        to="/signup"
+      >
+        Sign Up
+      </NavLink>
+    </>
+  );
+};
+
 function Navbar({ onLogout }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { darkMode, toggleDarkMode } = useContext(ThemeContext);
@@ -57,34 +86,12 @@ function Navbar({ onLogout }) {
         </div>
 
         {isAuthenticated ? (
-          <div className="hidden ml-auto xl:inline-flex gap-10">
-            <NavProfileMenu onLogout={onLogout} />
-          </div>
+          <NavProfileMenu onLogout={onLogout} className="ml-auto" />
         ) : (
-          <>
-            <button
-              className="hidden xl:inline-block xl:ml-auto icon-btn-base rounded-full"
-              onClick={toggleDarkMode}
-            >
-              {darkMode ? (
-                <DarkModeIcon size={20} className="text-primary" />
-              ) : (
-                <LightModeIcon size={20} className="text-yellow-500" />
-              )}
-            </button>
-            <NavLink
-              className="hidden xl:inline-block btn-base rounded-full"
-              to="/signin"
-            >
-              Sign In
-            </NavLink>
-            <NavLink
-              className="hidden xl:inline-block btn-primary rounded-full"
-              to="/signup"
-            >
-              Sign Up
-            </NavLink>
-          </>
+          <NavRightButtons
+            darkMode={darkMode}
+            toggleDarkMode={toggleDarkMode}
+          />
         )}
 
         <button

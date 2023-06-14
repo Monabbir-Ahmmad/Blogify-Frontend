@@ -75,9 +75,11 @@ function SearchPage() {
 
         <div className="py-4">
           <Pagination
-            currentPage={searchParams.get("page")}
+            currentPage={searchParams.get("page") ?? 1}
             totalPages={searchResult?.totalPages}
-            onPageChange={(page) => setSearchParams({ page })}
+            onPageChange={(page) =>
+              setSearchParams({ page, type: searchParams.get("type") })
+            }
           />
         </div>
       </section>

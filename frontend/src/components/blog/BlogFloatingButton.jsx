@@ -56,24 +56,22 @@ function BlogFloatingButton({
         anchor={{
           horizontal: "center",
         }}
-        className="bg-paper rounded shadow-xl shadow-shadow"
+        className="text-sm flex flex-col w-44 bg-paper rounded shadow-xl shadow-shadow"
       >
-        <div className="text-lg flex flex-col w-44">
-          <span
-            className="inline-flex items-center gap-5 py-4 px-5 hover:bg-primaryLighter hover:text-primary"
-            onClick={() => onBlogEditClick(blog.id)}
-          >
-            <EditIcon size={24} />
-            Edit
-          </span>
-          <span
-            className="inline-flex items-center gap-5 py-4 px-5 hover:bg-errorLighter text-error"
-            onClick={() => onBlogDeleteClick(blog.id)}
-          >
-            <DeleteIcon size={24} />
-            Delete
-          </span>
-        </div>
+        <span
+          className="inline-flex items-center gap-5 py-4 px-5 hover:bg-primaryLighter hover:text-primary"
+          onClick={() => onBlogEditClick(blog.id)}
+        >
+          <EditIcon size={20} />
+          Edit
+        </span>
+        <span
+          className="inline-flex items-center gap-5 py-4 px-5 hover:bg-errorLighter text-error"
+          onClick={() => onBlogDeleteClick(blog.id)}
+        >
+          <DeleteIcon size={20} />
+          Delete
+        </span>
       </Popover>
     </>
   );

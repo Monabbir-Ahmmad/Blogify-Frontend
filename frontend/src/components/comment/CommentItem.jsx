@@ -140,24 +140,22 @@ function CommentItem({ comment, level }) {
           target={menuRef}
           open={menuOpen}
           onClose={() => setMenuOpen(false)}
-          className="bg-paper shadow-shadow rounded shadow-xl"
+          className="text-sm flex flex-col w-44 bg-paper shadow-shadow rounded shadow-xl"
         >
-          <div className="text-lg flex flex-col w-44">
-            <span
-              className="inline-flex items-center gap-5 py-4 px-5 hover:bg-primaryLighter hover:text-primary"
-              onClick={() => setShowEditInput(true)}
-            >
-              <EditIcon size={24} />
-              Edit
-            </span>
-            <span
-              className="inline-flex items-center gap-5 py-4 px-5 hover:bg-errorLighter text-error"
-              onClick={onDeleteClick}
-            >
-              <DeleteIcon size={24} />
-              Delete
-            </span>
-          </div>
+          <span
+            className="inline-flex items-center gap-5 py-4 px-5 hover:bg-primaryLighter hover:text-primary"
+            onClick={() => setShowEditInput(true)}
+          >
+            <EditIcon size={20} />
+            Edit
+          </span>
+          <span
+            className="inline-flex items-center gap-5 py-4 px-5 hover:bg-errorLighter text-error"
+            onClick={onDeleteClick}
+          >
+            <DeleteIcon size={20} />
+            Delete
+          </span>
         </Popover>
       </div>
 
