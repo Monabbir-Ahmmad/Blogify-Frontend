@@ -1,21 +1,20 @@
 import apiUrl from "../constants/apiUrl";
 import authService from "../services/authService";
 import axios from "axios";
-import storageService from "../services/storageService";
 
 const refreshTokenInterceptor = async (err) => {
   const originalConfig = err.config;
 
-  if (err.response?.status === 401 && !originalConfig._retry) {
+  if (
+    err.response?.status === 401 &&
+    !originalConfig._retry &&
+    !originalConfig.url.includes("/auth/")
+  ) {
     try {
-      await authService.refreshAccessToken();
-
       originalConfig._retry = true;
-
+      await authService.refreshAccessToken();
       return await httpClient(originalConfig);
     } catch (error) {
-      storageService.removeAuthData();
-
       return Promise.reject(error);
     }
   }
