@@ -65,7 +65,7 @@ function SideNav({ toggleMenu, links = [], open = false, onLogout }) {
       <nav
         ref={navRef}
         className={twMerge(
-          "h-screen gap-5 flex flex-col w-4/6 max-w-xs p-6 bg-paper transition-transform",
+          "h-screen gap-5 flex flex-col w-4/6 max-w-xs p-6 bg-paper transition-transform overflow-y-auto",
           open ? "translate-x-0" : "-translate-x-full"
         )}
       >
