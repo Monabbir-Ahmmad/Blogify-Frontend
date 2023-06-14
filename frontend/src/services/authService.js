@@ -49,9 +49,21 @@ class AuthService {
 
     if (!refreshToken) return await this.signout();
 
-    await httpClient.post(apiUrl.auth.refreshToken, {
-      refreshToken,
-    });
+    try {
+      await httpClient.post(apiUrl.auth.refreshToken, {
+        refreshToken,
+      });
+    } catch (error) {
+      storageService.removeAuthData();
+      document.dispatchEvent(new Event("logout"));
+
+      if (error.response?.status === 401 && error.response.data) {
+        error.response.data.message =
+          "Your session has expired. Please login again.";
+      }
+
+      throw error;
+    }
   }
 }
 

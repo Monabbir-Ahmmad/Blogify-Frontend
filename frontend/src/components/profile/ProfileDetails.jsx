@@ -43,7 +43,7 @@ function ProfileDetails({
           className="w-full h-96"
         />
       )}
-      <div className="w-full max-w-5xl -mt-40 px-6 sm:px-10 relative flex flex-col gap-6 bg-paper shadow-xl rounded-lg">
+      <div className="w-full max-w-5xl -mt-40 px-6 sm:px-10 relative flex flex-col gap-6 bg-paper shadow-xl rounded-lg shadow-shadow">
         <div className="relative flex justify-center">
           <Avatar
             image={user?.profileImage}

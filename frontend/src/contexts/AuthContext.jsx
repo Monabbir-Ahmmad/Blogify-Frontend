@@ -22,9 +22,13 @@ function AuthContextProvider({ children }) {
   }, [isAuthenticated, user]);
 
   useEffect(() => {
-    try {
-      authService.refreshAccessToken();
-    } catch (error) {}
+    document.addEventListener("logout", () => setIsAuthenticated(false));
+
+    authService.refreshAccessToken();
+
+    return () => {
+      document.removeEventListener("logout", () => setIsAuthenticated(false));
+    };
   }, []);
 
   return (
