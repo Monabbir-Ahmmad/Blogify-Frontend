@@ -31,6 +31,7 @@ function CommentBox({ onSubmit, defaultValue = "", onCancel }) {
         required
         className="input-primary"
         placeholder="Write a comment..."
+        maxLength={500}
         value={text}
         onChange={(e) => setText(e.target.value)}
       />
@@ -46,6 +47,10 @@ function CommentBox({ onSubmit, defaultValue = "", onCancel }) {
         <button type="button" className="btn-base py-2" onClick={handleCancel}>
           Cancel
         </button>
+
+        <p className="ml-auto text-xs opacity-70">
+          {text.length} / {500}
+        </p>
       </div>
     </form>
   );

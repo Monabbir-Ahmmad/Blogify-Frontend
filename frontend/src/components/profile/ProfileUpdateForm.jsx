@@ -109,12 +109,20 @@ function ProfileUpdateForm({ onSubmit, defaultValue = {}, className }) {
         name="bio"
         control={control}
         defaultValue={defaultValue?.bio || ""}
-        render={({ field }) => (
+        rules={{
+          maxLength: {
+            value: 500,
+            message: "Bio can have at most 500 characters",
+          },
+        }}
+        render={({ field, fieldState: { error } }) => (
           <TextArea
             {...field}
             label="Bio (Optional)"
             placeholder="Write a bio about yourself"
             rows={4}
+            error={error}
+            helperText={error?.message}
           />
         )}
       />
@@ -127,6 +135,10 @@ function ProfileUpdateForm({ onSubmit, defaultValue = {}, className }) {
           required: "Password is required",
           minLength: {
             value: 8,
+            message: "Invalid Password",
+          },
+          maxLength: {
+            value: 20,
             message: "Invalid Password",
           },
           pattern: {

@@ -23,6 +23,10 @@ function PasswordUpdateForm({ onSubmit, className }) {
             value: 8,
             message: "Invalid password",
           },
+          maxLength: {
+            value: 20,
+            message: "Invalid Password",
+          },
           pattern: {
             value:
               /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#.,;+_=\/\\\$%\^&\*\-])/,
@@ -51,6 +55,10 @@ function PasswordUpdateForm({ onSubmit, className }) {
           minLength: {
             value: 8,
             message: "Password must have at least 8 characters",
+          },
+          maxLength: {
+            value: 20,
+            message: "Password can have at most 20 characters",
           },
           pattern: {
             value:

@@ -50,6 +50,10 @@ function SigninForm({ onSubmit }) {
             value: 8,
             message: "Invalid password",
           },
+          maxLength: {
+            value: 20,
+            message: "Invalid Password",
+          },
           pattern: {
             value:
               /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#.,;+_=\/\\\$%\^&\*\-])/,

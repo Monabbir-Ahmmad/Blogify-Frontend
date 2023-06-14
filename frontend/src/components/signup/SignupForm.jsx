@@ -73,6 +73,10 @@ function SignupForm({ onSubmit }) {
             value: 8,
             message: "Password must have at least 8 characters",
           },
+          maxLength: {
+            value: 20,
+            message: "Password can have at most 20 characters",
+          },
           pattern: {
             value:
               /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#.,;+_=\/\\\$%\^&\*\-])/,
