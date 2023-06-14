@@ -1,0 +1,9 @@
+:root {
+  --toastify-color-light: rgb(255, 255, 255);
+  --toastify-color-dark: rgb(18, 18, 18);
+  --toastify-color-info: rgb(59, 130, 246);
+  --toastify-color-success: rgb(34, 197, 94);
+  --toastify-color-warning: rgb(234, 179, 8);
+  --toastify-color-error: rgb(239, 68, 68);
+  --toastify-color-transparent: rgba(255, 255, 255, 0.7);
+}

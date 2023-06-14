@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .btn {
+    @apply inline-flex gap-2 items-center justify-center text-center rounded-lg text-sm font-medium px-5 py-2.5 outline-none transition-all shadow-md hover:shadow-lg active:shadow-none shadow-shadow;
+  }
+
+  .btn-text {
+    @apply btn shadow-none hover:bg-slate-200 active:bg-slate-300 dark:hover:bg-neutral-700 dark:active:bg-neutral-700;
+  }
+
+  .btn-base {
+    @apply btn bg-slate-100 hover:bg-slate-200 active:bg-slate-300 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:active:bg-neutral-700;
+  }
+
+  .btn-primary {
+    @apply btn text-white bg-primary hover:bg-primaryDark active:bg-primaryDark;
+  }
+
+  .btn-primary-outlined {
+    @apply btn-primary text-primary border border-primary bg-transparent hover:bg-primaryLighter active:bg-primaryLighter;
+  }
+
+  .btn-primary-light {
+    @apply btn text-primary bg-primaryLighter hover:bg-primaryLighter active:bg-primaryLighter;
+  }
+
+  .btn-error {
+    @apply btn text-white bg-error hover:bg-errorDark  active:bg-errorDark;
+  }
+
+  .btn-error-outlined {
+    @apply btn text-error border border-error bg-transparent hover:bg-errorLighter active:bg-errorLighter;
+  }
+
+  .btn-error-light {
+    @apply btn text-error bg-errorLighter hover:bg-errorLighter active:bg-errorLighter;
+  }
+}
+
+@layer components {
+  .icon-btn {
+    @apply inline-flex gap-2 items-center justify-center rounded-lg outline-none transition-all p-2 aspect-square hover:bg-slate-200 active:bg-slate-300 hover:shadow-lg active:shadow-none shadow-shadow dark:hover:bg-neutral-700 dark:active:bg-neutral-700;
+  }
+
+  .icon-btn-base {
+    @apply btn-base p-2 aspect-square;
+  }
+
+  .icon-btn-primary {
+    @apply btn-primary p-2 aspect-square;
+  }
+
+  .icon-btn-error {
+    @apply btn-error p-2 aspect-square;
+  }
+}
+
+@layer components {
+  .input-label {
+    @apply block uppercase text-sm font-bold mb-2;
+  }
+
+  .input-icon-start {
+    @apply absolute inset-y-0 left-0 inline-flex items-center ml-3 transition-all;
+  }
+
+  .input {
+    @apply block w-full border p-3 text-sm rounded outline-none transition-all focus:ring-1;
+  }
+
+  .input-base {
+    @apply input placeholder:text-slate-300 bg-slate-50 border-slate-300 focus:ring-slate-400 focus:border-slate-400 dark:placeholder:text-neutral-500 dark:bg-neutral-800 dark:border-neutral-600 dark:focus:ring-slate-500 dark:focus:border-slate-500;
+  }
+
+  .input-primary {
+    @apply input-base focus:ring-primary focus:border-primary;
+  }
+
+  .input-error {
+    @apply input-base border-error focus:ring-error focus:border-error;
+  }
+}
