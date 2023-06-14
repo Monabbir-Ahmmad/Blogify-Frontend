@@ -11,15 +11,18 @@ import Avatar from "../common/avatar/Avatar";
 import { Link } from "react-router-dom";
 import Popover from "../common/popover/Popover";
 import { ThemeContext } from "../../contexts/ThemeContext";
+import { twMerge } from "tailwind-merge";
 
-function NavProfileMenu({ onLogout }) {
+function NavProfileMenu({ onLogout, className }) {
   const menuRef = useRef();
   const [menuOpen, setMenuOpen] = useState(false);
   const { darkMode, toggleDarkMode } = useContext(ThemeContext);
   const { authData } = useContext(AuthContext);
 
+  const ThemeIcon = darkMode ? LightModeIcon : DarkModeIcon;
+
   return (
-    <>
+    <div className={twMerge("hidden xl:inline-flex gap-10", className)}>
       <Avatar
         reversed={true}
         title={authData?.name}
@@ -35,42 +38,31 @@ function NavProfileMenu({ onLogout }) {
         open={menuOpen}
         onClose={() => setMenuOpen(false)}
         anchor={{ horizontal: "center" }}
-        className="bg-paper rounded shadow-xl shadow-shadow"
+        className=" text-sm flex flex-col w-64 bg-paper rounded shadow-xl shadow-shadow"
       >
-        <div className="text-lg flex flex-col w-72">
-          <Link
-            className="inline-flex items-center gap-5 py-4 px-5 hover:bg-primaryLighter hover:text-primary"
-            to={"/profile/" + authData?.id}
-          >
-            <ProfileIcon size={24} />
-            Profile
-          </Link>
-          <span
-            className="inline-flex items-center gap-5 py-4 px-5 hover:bg-primaryLighter hover:text-primary"
-            onClick={toggleDarkMode}
-          >
-            {darkMode ? (
-              <>
-                <LightModeIcon size={24} />
-                Enable Light Mode
-              </>
-            ) : (
-              <>
-                <DarkModeIcon size={24} />
-                Enable Dark Mode
-              </>
-            )}
-          </span>
-          <span
-            className="inline-flex items-center gap-5 py-4 px-5 hover:bg-errorLighter text-error"
-            onClick={onLogout}
-          >
-            <LogoutIcon size={24} />
-            Logout
-          </span>
-        </div>
+        <Link
+          className="inline-flex items-center gap-5 py-4 px-5 hover:bg-primaryLighter hover:text-primary"
+          to={"/profile/" + authData?.id}
+        >
+          <ProfileIcon size={20} />
+          Profile
+        </Link>
+        <span
+          className="inline-flex items-center gap-5 py-4 px-5 hover:bg-primaryLighter hover:text-primary"
+          onClick={toggleDarkMode}
+        >
+          <ThemeIcon size={20} />
+          Enable {darkMode ? "Light" : "Dark"} Mode
+        </span>
+        <span
+          className="inline-flex items-center gap-5 py-4 px-5 hover:bg-errorLighter text-error"
+          onClick={onLogout}
+        >
+          <LogoutIcon size={20} />
+          Logout
+        </span>
       </Popover>
-    </>
+    </div>
   );
 }
 

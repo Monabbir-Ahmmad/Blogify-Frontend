@@ -14,6 +14,30 @@ import Searchbar from "../search/Searchbar";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { twMerge } from "tailwind-merge";
 
+const NavThemeButton = ({ darkMode, toggleDarkMode }) => {
+  const ThemeIcon = darkMode ? LightModeIcon : DarkModeIcon;
+  return (
+    <button className="btn-base gap-4" onClick={toggleDarkMode}>
+      Enable {darkMode ? "Light" : "Dark"} Mode
+      <ThemeIcon
+        size={20}
+        className={darkMode ? "text-primary" : "text-yellow-500"}
+      />
+    </button>
+  );
+};
+
+const NavAuthButtons = () => (
+  <>
+    <NavLink className="btn-base" to="/signin">
+      Sign In
+    </NavLink>
+    <NavLink className="btn-primary" to="/signup">
+      Sign Up
+    </NavLink>
+  </>
+);
+
 function SideNav({ toggleMenu, links = [], open = false, onLogout }) {
   const { darkMode, toggleDarkMode } = useContext(ThemeContext);
   const { isAuthenticated, authData } = useContext(AuthContext);
@@ -23,6 +47,11 @@ function SideNav({ toggleMenu, links = [], open = false, onLogout }) {
     if (navRef.current && !navRef.current.contains(e.target)) {
       toggleMenu();
     }
+  };
+
+  const onLogoutClick = () => {
+    onLogout();
+    toggleMenu();
   };
 
   return (
@@ -85,40 +114,15 @@ function SideNav({ toggleMenu, links = [], open = false, onLogout }) {
           )}
         </div>
         <div className="mt-auto flex flex-col gap-3 py-4">
-          <button className="btn-base gap-4" onClick={toggleDarkMode}>
-            {darkMode ? (
-              <>
-                <LightModeIcon size={20} className="text-yellow-500" />
-                Enable Light Mode
-              </>
-            ) : (
-              <>
-                <DarkModeIcon size={20} className="text-primary" />
-                Enable Dark Mode
-              </>
-            )}
-          </button>
+          <NavThemeButton darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
 
           {isAuthenticated ? (
-            <button
-              className="btn-base gap-4"
-              onClick={() => {
-                onLogout();
-                toggleMenu();
-              }}
-            >
+            <button className="btn-base gap-4" onClick={onLogoutClick}>
               Logout
               <LogoutIcon size={20} />
             </button>
           ) : (
-            <>
-              <NavLink className="btn-base" to="/signin">
-                Sign In
-              </NavLink>
-              <NavLink className="btn-primary" to="/signup">
-                Sign Up
-              </NavLink>
-            </>
+            <NavAuthButtons />
           )}
           <p className="text-xs text-center opacity-70">
             <span>Copyright © 2023</span>

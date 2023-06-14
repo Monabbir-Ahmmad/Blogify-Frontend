@@ -1,6 +1,25 @@
 import { RiCloseLine as RemoveIcon } from "react-icons/ri";
 import imageUpload from "../../../assets/imageUpload.svg";
 
+const ImagePreview = ({ image, onRemoveClick }) => {
+  if (!image) return null;
+  return (
+    <div className="relative">
+      <img
+        src={image instanceof File ? URL.createObjectURL(image) : image}
+        alt=""
+        className="object-cover h-64 w-full rounded-xl"
+      />
+      <button
+        onClick={onRemoveClick}
+        className="icon-btn-error absolute top-4 right-4"
+      >
+        <RemoveIcon size={20} />
+      </button>
+    </div>
+  );
+};
+
 function FileDrop({
   maxSizeKB = 1024 * 5,
   allowedMimeTypes = ["image/png", "image/jpg", "image/jpeg"],
@@ -8,17 +27,7 @@ function FileDrop({
   value,
   compact = false,
 }) {
-  const handleDragEnter = (e) => {
-    e.preventDefault();
-  };
-
-  const handleDragLeave = (e) => {
-    e.preventDefault();
-  };
-
-  const handleDragOver = (e) => {
-    e.preventDefault();
-  };
+  const handlePreventDefault = (e) => e.preventDefault();
 
   const handleDrop = (e) => {
     e.preventDefault();
@@ -47,33 +56,19 @@ function FileDrop({
     }
   };
 
-  const handleRemoveImage = () => {
-    onChange(null);
-  };
+  const handleRemoveImage = () => onChange(null);
 
   return (
     <div
       className="w-full"
-      onDragEnter={handleDragEnter}
-      onDragLeave={handleDragLeave}
-      onDragOver={handleDragOver}
+      onDragEnter={handlePreventDefault}
+      onDragLeave={handlePreventDefault}
+      onDragOver={handlePreventDefault}
       onDrop={handleDrop}
     >
-      {value ? (
-        <div className="relative">
-          <img
-            src={value instanceof File ? URL.createObjectURL(value) : value}
-            alt="Selected"
-            className="object-cover h-64 w-full rounded-xl"
-          />
-          <button
-            onClick={handleRemoveImage}
-            className="icon-btn-error absolute top-4 right-4"
-          >
-            <RemoveIcon size={20} />
-          </button>
-        </div>
-      ) : (
+      <ImagePreview image={value} onRemoveClick={handleRemoveImage} />
+
+      {!value && (
         <div>
           <label
             htmlFor="dropzone-file"

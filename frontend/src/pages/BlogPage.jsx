@@ -1,9 +1,14 @@
 import {
+  Link,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
+import {
   estimateReadingTime,
   extractTextFromHtml,
   getRandomImage,
 } from "../utils/commonUtil";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 
 import { AuthContext } from "../contexts/AuthContext";
 import Avatar from "../components/common/avatar/Avatar";
@@ -97,12 +102,14 @@ function BlogPage() {
         <div className="flex flex-col bg-background w-full gap-6 p-4 pb-12 lg:-mt-28 max-w-5xl sm:p-10 sm:mx-12 lg:rounded-lg">
           <h1 className="text-2xl font-semibold sm:text-3xl">{data?.title}</h1>
 
-          <Avatar
-            image={data?.user.profileImage}
-            rounded="rounded-full"
-            title={data?.user.name}
-            titleSize="text-lg"
-          />
+          <Link to={"/profile/" + data?.user?.id} className="hover:underline">
+            <Avatar
+              image={data?.user.profileImage}
+              rounded="rounded-full"
+              title={data?.user.name}
+              titleSize="text-lg"
+            />
+          </Link>
 
           <div className="inline-flex items-start sm:items-center gap-2 flex-col sm:flex-row bg-slate-50 dark:bg-neutral-800 border-l-4 border-divider p-4">
             <div className="flex flex-col gap-2">

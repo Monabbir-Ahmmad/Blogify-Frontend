@@ -81,38 +81,36 @@ function ProfileDetails({
               anchor={{
                 horizontal: "center",
               }}
-              className="bg-paper rounded shadow-xl shadow-shadow"
+              className="text-sm flex flex-col bg-paper rounded shadow-xl shadow-shadow"
             >
-              <div className="text-sm flex flex-col">
-                <span
-                  onClick={onEditPrfileImage}
-                  className="inline-flex items-center gap-5 py-4 px-5 hover:bg-primaryLighter hover:text-primary"
-                >
-                  <ProfileImageIcon size={20} />
-                  Edit profile image
-                </span>
-                <span
-                  onClick={onEditCoverImage}
-                  className="inline-flex items-center gap-5 py-4 px-5 hover:bg-primaryLighter hover:text-primary"
-                >
-                  <CoverImageIcon size={20} />
-                  Edit cover image
-                </span>
-                <span
-                  onClick={onEditProfile}
-                  className="inline-flex items-center gap-5 py-4 px-5 hover:bg-primaryLighter hover:text-primary"
-                >
-                  <ProfileIcon size={20} />
-                  Update info
-                </span>
-                <span
-                  onClick={onEditPassword}
-                  className="inline-flex items-center gap-5 py-4 px-5 hover:bg-primaryLighter hover:text-primary"
-                >
-                  <PasswordIcon size={20} />
-                  Update passsword
-                </span>
-              </div>
+              <span
+                onClick={onEditPrfileImage}
+                className="inline-flex items-center gap-5 py-4 px-5 hover:bg-primaryLighter hover:text-primary"
+              >
+                <ProfileImageIcon size={20} />
+                Edit profile image
+              </span>
+              <span
+                onClick={onEditCoverImage}
+                className="inline-flex items-center gap-5 py-4 px-5 hover:bg-primaryLighter hover:text-primary"
+              >
+                <CoverImageIcon size={20} />
+                Edit cover image
+              </span>
+              <span
+                onClick={onEditProfile}
+                className="inline-flex items-center gap-5 py-4 px-5 hover:bg-primaryLighter hover:text-primary"
+              >
+                <ProfileIcon size={20} />
+                Update info
+              </span>
+              <span
+                onClick={onEditPassword}
+                className="inline-flex items-center gap-5 py-4 px-5 hover:bg-primaryLighter hover:text-primary"
+              >
+                <PasswordIcon size={20} />
+                Update passsword
+              </span>
             </Popover>
           </div>
         </div>

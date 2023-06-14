@@ -89,39 +89,36 @@ function BlogItem({ blog }) {
           </span>
         </div>
         {authData?.id === blog?.user?.id && (
-          <>
-            <button
-              ref={menuRef}
-              className="icon-btn-base bg-paper rounded-full h-8"
-              onClick={onMenuClick}
-            >
-              <MoreIcon size={20} />
-            </button>
-            <Popover
-              target={menuRef}
-              open={menuOpen}
-              onClose={onMenuClose}
-              className="bg-paper rounded shadow-xl shadow-shadow"
-            >
-              <div className="text-lg flex flex-col w-44">
-                <span
-                  className="inline-flex items-center gap-5 py-4 px-5 hover:bg-primaryLighter hover:text-primary"
-                  onClick={() => onEditClick(blog.id)}
-                >
-                  <EditIcon size={24} />
-                  Edit
-                </span>
-                <span
-                  className="inline-flex items-center gap-5 py-4 px-5 hover:bg-errorLighter text-error"
-                  onClick={() => onDeleteClick(blog.id)}
-                >
-                  <DeleteIcon size={24} />
-                  Delete
-                </span>
-              </div>
-            </Popover>
-          </>
+          <button
+            ref={menuRef}
+            className="icon-btn-base bg-paper rounded-full h-8"
+            onClick={onMenuClick}
+          >
+            <MoreIcon size={20} />
+          </button>
         )}
+
+        <Popover
+          target={menuRef}
+          open={menuOpen}
+          onClose={onMenuClose}
+          className="text-sm flex flex-col w-44 bg-paper rounded shadow-xl shadow-shadow"
+        >
+          <span
+            className="inline-flex items-center gap-5 py-4 px-5 hover:bg-primaryLighter hover:text-primary"
+            onClick={() => onEditClick(blog.id)}
+          >
+            <EditIcon size={20} />
+            Edit
+          </span>
+          <span
+            className="inline-flex items-center gap-5 py-4 px-5 hover:bg-errorLighter text-error"
+            onClick={() => onDeleteClick(blog.id)}
+          >
+            <DeleteIcon size={20} />
+            Delete
+          </span>
+        </Popover>
       </div>
 
       <img
