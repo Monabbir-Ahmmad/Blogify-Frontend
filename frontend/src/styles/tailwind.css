@@ -68,18 +68,18 @@
   }
 
   .input {
-    @apply block w-full border p-3 text-sm rounded outline-none transition-all focus:ring-1;
+    @apply block w-full border p-3 text-sm rounded outline-none transition-all focus:ring-1 placeholder:text-slate-300 dark:placeholder:text-neutral-500;
   }
 
   .input-base {
-    @apply input placeholder:text-slate-300 bg-slate-50 border-slate-300 focus:ring-slate-400 focus:border-slate-400 dark:placeholder:text-neutral-500 dark:bg-neutral-800 dark:border-neutral-600 dark:focus:ring-slate-500 dark:focus:border-slate-500;
+    @apply input bg-slate-50 border-slate-300 focus:ring-slate-400 focus:border-slate-400 dark:bg-neutral-800 dark:border-neutral-600 dark:focus:ring-slate-500 dark:focus:border-slate-500;
   }
 
   .input-primary {
-    @apply input-base focus:ring-primary focus:border-primary;
+    @apply input-base focus:ring-primary focus:border-primary dark:focus:ring-primary dark:focus:border-primary;
   }
 
   .input-error {
-    @apply input-base border-error focus:ring-error focus:border-error;
+    @apply input-base border-error focus:ring-error focus:border-error dark:border-error dark:focus:ring-error dark:focus:border-error;
   }
 }

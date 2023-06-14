@@ -126,7 +126,7 @@ function CommentItem({ comment, level }) {
           onClick={onCommentatorClick}
         />
 
-        {isAuthenticated && (
+        {authData?.id === comment.user.id && (
           <button
             ref={menuRef}
             className="icon-btn rounded-full h-8"
