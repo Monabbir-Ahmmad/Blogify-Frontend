@@ -138,7 +138,7 @@ function ProfileDetails({
 
         <hr className="border-divider" />
 
-        <p className="mx-auto opacity-80 text-center text-sm pb-6 sm:px-10 leading-relaxed w-full lg:w-9/12">
+        <p className="whitespace-pre-wrap mx-auto opacity-80 text-center text-sm pb-6 sm:px-10 leading-relaxed w-full lg:w-9/12">
           {user?.bio ?? "No bio available"}
         </p>
       </div>

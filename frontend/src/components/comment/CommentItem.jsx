@@ -166,7 +166,7 @@ function CommentItem({ comment, level }) {
           onCancel={() => setShowEditInput(false)}
         />
       ) : (
-        <p>{comment.text}</p>
+        <p className="whitespace-pre-wrap text-sm">{comment.text}</p>
       )}
 
       <div className="flex gap-2 [&>button]:btn-text [&>button]:rounded-full [&>button]:p-2">
