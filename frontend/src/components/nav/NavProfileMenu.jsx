@@ -37,7 +37,6 @@ function NavProfileMenu({ onLogout, className }) {
         target={menuRef}
         open={menuOpen}
         onClose={() => setMenuOpen(false)}
-        anchor={{ horizontal: "center" }}
         className=" text-sm flex flex-col w-64 bg-paper rounded shadow-xl shadow-shadow"
       >
         <Link
