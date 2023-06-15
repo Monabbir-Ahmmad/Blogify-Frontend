@@ -86,7 +86,7 @@ function Pagination({
       <div
         className={twMerge(
           "flex py-3 items-center gap-3 cursor-pointer",
-          currentPage <= 1 && "pointer-events-none text-slate-300",
+          currentPage <= 1 && "pointer-events-none opacity-50",
           currentPage !== 1 && "hover:text-primary"
         )}
         onClick={() => onPageChange(currentPage - 1)}
@@ -116,7 +116,7 @@ function Pagination({
       <div
         className={twMerge(
           "flex py-3 items-center gap-3 cursor-pointer",
-          currentPage >= totalPages && "pointer-events-none text-slate-300",
+          currentPage >= totalPages && "pointer-events-none opacity-50",
           currentPage !== totalPages && "hover:text-primary"
         )}
         onClick={() => onPageChange(currentPage + 1)}
