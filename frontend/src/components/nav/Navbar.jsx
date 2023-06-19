@@ -1,3 +1,5 @@
+import "../../styles/navbar.css"
+
 import {
   RiMoonClearLine as DarkModeIcon,
   RiHome3Line as HomeIcon,

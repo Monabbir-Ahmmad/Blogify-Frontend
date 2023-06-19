@@ -7,7 +7,7 @@ const ImagePreview = ({ image, onRemoveClick }) => {
     <div className="relative">
       <img
         src={image instanceof File ? URL.createObjectURL(image) : image}
-        alt=""
+        alt="image preview"
         className="object-cover h-64 w-full rounded-xl"
       />
       <button
@@ -60,6 +60,7 @@ function FileDrop({
 
   return (
     <div
+      data-testid="dropzone"
       className="w-full"
       onDragEnter={handlePreventDefault}
       onDragLeave={handlePreventDefault}

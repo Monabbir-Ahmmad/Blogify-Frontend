@@ -26,13 +26,13 @@ const Input = forwardRef(
     return (
       <div>
         {label && (
-          <label htmlFor={name} className="input-label">
+          <label htmlFor={label} className="input-label">
             {label}
           </label>
         )}
         <div className="relative">
           <input
-            id={name}
+            id={label}
             name={name}
             type={showPassword ? "text" : type}
             placeholder={placeholder}

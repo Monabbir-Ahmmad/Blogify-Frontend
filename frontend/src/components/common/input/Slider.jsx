@@ -1,8 +1,20 @@
-function Slider({ label, value, onChange, min, max, step, stepLabel = [] }) {
+function Slider({
+  name,
+  label,
+  value,
+  onChange,
+  min,
+  max,
+  step,
+  stepLabel = [],
+}) {
   return (
     <div className="space-y-2">
-      <span className="block text-sm font-semibold uppercase">{label}</span>
+      <label htmlFor={label} className="block text-sm font-semibold uppercase">
+        {label}
+      </label>
       <input
+        id={label}
         type="range"
         value={value}
         min={min}
@@ -14,7 +26,7 @@ function Slider({ label, value, onChange, min, max, step, stepLabel = [] }) {
       {stepLabel.length && (
         <div className="flex justify-between text-sm">
           {stepLabel.map((label) => (
-            <span key={label}>{label}</span>
+            <h6 key={label}>{label}</h6>
           ))}
         </div>
       )}

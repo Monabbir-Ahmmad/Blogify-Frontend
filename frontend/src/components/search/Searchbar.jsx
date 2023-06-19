@@ -14,7 +14,10 @@ function Searchbar({ className }) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    navigate(`/search/${search}?type=${searchParams.get("type")}`);
+
+    if (!search.trim()) return setSearch("");
+
+    navigate(`/search/${search.trim()}?type=${searchParams.get("type")}`);
   };
 
   useEffect(() => {
@@ -23,6 +26,7 @@ function Searchbar({ className }) {
 
   return (
     <form
+      data-testid="search-form"
       className={twMerge("relative max-w-lg", className)}
       onSubmit={onSubmit}
     >

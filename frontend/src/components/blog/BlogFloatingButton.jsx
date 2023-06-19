@@ -31,7 +31,7 @@ function BlogFloatingButton({
 
   return (
     <>
-      <div className="bg-paper overflow-hidden z-10 shadow-lg shadow-shadow border border-divider fixed bottom-0 left-0 w-full sm:w-fit sm:bottom-5 sm:left-1/2 sm:-translate-x-1/2 sm:rounded-full divide-x-2 divide-divider [&>button]:bg-paper [&>button]:rounded-none [&>button]:shadow-none [&>button]:btn-base [&>button]:text-lg flex [&>button]:flex-1">
+      <div className="bg-paper overflow-hidden z-10 shadow-lg shadow-shadow border border-divider sticky bottom-5 rounded-lg left-0 w-full sm:w-fit sm:left-1/2 sm:-translate-x-1/2 divide-x-2 divide-divider [&>button]:bg-paper [&>button]:rounded-none [&>button]:shadow-none [&>button]:btn-base [&>button]:text-lg flex [&>button]:flex-1">
         <button
           className={twMerge(isLiked && "text-primary")}
           onClick={onBlogLikeClick}
