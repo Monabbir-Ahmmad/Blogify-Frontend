@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
 
-import AppLogo from "../components/common/AppLogo";
+import AppLogo from "../components/common/logo/AppLogo";
 import { AuthContext } from "../contexts/AuthContext";
 import SignupForm from "../components/signup/SignupForm";
 import signupImage from "../assets/signupImage.svg";

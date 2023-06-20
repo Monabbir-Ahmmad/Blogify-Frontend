@@ -1,6 +1,6 @@
 import { Controller, useForm } from "react-hook-form";
 
-import AppLogo from "../components/common/AppLogo";
+import AppLogo from "../components/common/logo/AppLogo";
 import { AuthContext } from "../contexts/AuthContext";
 import Input from "../components/common/input/Input";
 import { RiMailLine as MailIcon } from "react-icons/ri";

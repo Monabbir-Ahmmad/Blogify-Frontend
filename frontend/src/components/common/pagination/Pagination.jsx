@@ -83,23 +83,26 @@ function Pagination({
 
   return (
     <nav className="flex justify-between border-t border-divider font-semibold">
-      <div
+      <button
+        data-testid="previous-button"
+        disabled={currentPage <= 1}
         className={twMerge(
           "flex py-3 items-center gap-3 cursor-pointer",
-          currentPage <= 1 && "pointer-events-none opacity-50",
           currentPage !== 1 && "hover:text-primary"
         )}
         onClick={() => onPageChange(currentPage - 1)}
       >
         <LeftArrowIcon size={20} />
-        Previous
-      </div>
+        <span className="hidden sm:block">Previous</span>
+      </button>
+
       <div className="py-3 md:hidden">
         Page {currentPage} of {totalPages}
       </div>
+
       <div className="hidden md:flex justify-center gap-3">
         {getPageNumbers().map((pageNumber, index) => (
-          <span
+          <button
             key={index}
             className={twMerge(
               "cursor-pointer p-3 border-t-4 border-transparent",
@@ -110,20 +113,21 @@ function Pagination({
             onClick={() => pageNumber !== "..." && onPageChange(pageNumber)}
           >
             {pageNumber}
-          </span>
+          </button>
         ))}
       </div>
-      <div
+      <button
+        data-testid="next-button"
+        disabled={currentPage >= totalPages}
         className={twMerge(
           "flex py-3 items-center gap-3 cursor-pointer",
-          currentPage >= totalPages && "pointer-events-none opacity-50",
           currentPage !== totalPages && "hover:text-primary"
         )}
         onClick={() => onPageChange(currentPage + 1)}
       >
-        Next
+        <span className="hidden sm:block">Next</span>
         <RightArrowIcon size={20} />
-      </div>
+      </button>
     </nav>
   );
 }

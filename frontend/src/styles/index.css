@@ -7,8 +7,6 @@
 
   --color-paper: hsl(0, 0%, 100%);
 
-  --color-disabled: hsl(0, 0%, 73%);
-
   --color-divider: hsl(220, 10%, 90%);
 
   --color-shadow: hsla(0, 0%, 0%, 0.1);
@@ -30,8 +28,6 @@
   --color-background: #1a1a1a;
 
   --color-paper: #1c1c1c;
-
-  --color-disabled: #333333;
 
   --color-divider: hsl(220, 10%, 35%);
 
@@ -75,8 +71,8 @@ button:disabled:hover,
 button:disabled:focus,
 button:disabled:active {
   cursor: not-allowed;
-  background: var(--color-disabled);
-  color: var(--color-background);
+  pointer-events: none;
+  opacity: 0.5;
 }
 
 ::-webkit-slider-thumb {
