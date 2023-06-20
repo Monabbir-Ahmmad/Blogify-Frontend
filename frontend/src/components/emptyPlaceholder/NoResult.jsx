@@ -4,6 +4,7 @@ function NoResult() {
   return (
     <div className="flex flex-col items-center justify-center gap-4">
       <object
+        data-testid="empty-result-image"
         type="image/svg+xml"
         data={emptyResult}
         className="max-w-3xl w-full"

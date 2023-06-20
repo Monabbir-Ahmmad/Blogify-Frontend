@@ -36,7 +36,7 @@ const Avatar = forwardRef(
             avatarSize
           )}
           src={image}
-          alt={title}
+          alt="Avatar"
         />
         {(title || subtitle) && (
           <div className="font-semibold truncate">

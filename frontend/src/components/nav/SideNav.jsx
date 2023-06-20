@@ -6,7 +6,7 @@ import {
 } from "react-icons/ri";
 import { useContext, useRef } from "react";
 
-import AppLogo from "../common/AppLogo";
+import AppLogo from "../common/logo/AppLogo";
 import { AuthContext } from "../../contexts/AuthContext";
 import Avatar from "../common/avatar/Avatar";
 import { NavLink } from "react-router-dom";

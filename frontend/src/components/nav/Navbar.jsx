@@ -1,3 +1,5 @@
+import "../../styles/navbar.css";
+
 import {
   RiMoonClearLine as DarkModeIcon,
   RiHome3Line as HomeIcon,
@@ -9,7 +11,7 @@ import {
 } from "react-icons/ri";
 import { useContext, useState } from "react";
 
-import AppLogo from "../common/AppLogo";
+import AppLogo from "../common/logo/AppLogo";
 import { AuthContext } from "../../contexts/AuthContext";
 import { NavLink } from "react-router-dom";
 import NavLinks from "./NavLinks";

@@ -1,7 +1,7 @@
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-import AppLogo from "../components/common/AppLogo";
+import AppLogo from "../components/common/logo/AppLogo";
 import { AuthContext } from "../contexts/AuthContext";
 import Input from "../components/common/input/Input";
 import { RiLock2Line as LockIcon } from "react-icons/ri";

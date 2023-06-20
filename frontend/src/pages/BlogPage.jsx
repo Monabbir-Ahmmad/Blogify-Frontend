@@ -85,7 +85,7 @@ function BlogPage() {
     );
 
   return (
-    <div className="p-5">
+    <div className="p-5 relative">
       <CommentContextProvider>
         <CommentPage
           blogId={blogId}
@@ -93,7 +93,7 @@ function BlogPage() {
           toggleCommentView={toggleCommentView}
         />
       </CommentContextProvider>
-      <div className="flex flex-col items-center max-w-7xl mx-auto rounded-lg md:mb-14">
+      <div className="flex flex-col items-center max-w-7xl mx-auto rounded-lg">
         <img
           src={data?.coverImage ?? getRandomImage(data?.id, { width: 1000 })}
           alt=""

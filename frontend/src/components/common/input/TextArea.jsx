@@ -9,12 +9,12 @@ const TextArea = forwardRef(
     return (
       <div>
         {label && (
-          <label htmlFor={name} className="input-label">
+          <label htmlFor={label} className="input-label">
             {label}
           </label>
         )}
         <textarea
-          id={name}
+          id={label}
           name={name}
           placeholder={placeholder}
           ref={ref}
