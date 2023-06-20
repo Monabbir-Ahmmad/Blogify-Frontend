@@ -3,14 +3,15 @@ import { render, screen } from "@testing-library/react";
 import Avatar from "./Avatar";
 
 describe("Avatar", () => {
-  it("should render the avatar with title and subtitle correctly", () => {
-    const title = "John Doe";
-    const subtitle = "Software Engineer";
+  const image = "avatar-image.jpg";
+  const title = "John Doe";
+  const subtitle = "Software Engineer";
 
-    render(<Avatar title={title} subtitle={subtitle} />);
+  it("should render the avatar with title and subtitle correctly", () => {
+    render(<Avatar image={image} title={title} subtitle={subtitle} />);
 
     const avatarImage = screen.getByAltText("Avatar");
-    const titleElement = screen.getByRole("heading", { level: 5, name: title });
+    const titleElement = screen.getByText(title);
     const subtitleElement = screen.getByText(subtitle);
 
     expect(avatarImage).toBeInTheDocument();
@@ -18,12 +19,24 @@ describe("Avatar", () => {
     expect(subtitleElement).toBeInTheDocument();
   });
 
-  it("should render the avatar without title and subtitle correctly", () => {
-    render(<Avatar />);
+  it("should render the avatar without subtitle correctly", () => {
+    render(<Avatar image={image} title={title} />);
 
     const avatarImage = screen.getByAltText("Avatar");
-    const titleElement = screen.queryByRole("heading");
-    const subtitleElement = screen.queryByText(/subtitle/i);
+    const titleElement = screen.getByText(title);
+    const subtitleElement = screen.queryByText(subtitle);
+
+    expect(avatarImage).toBeInTheDocument();
+    expect(titleElement).toBeInTheDocument();
+    expect(subtitleElement).not.toBeInTheDocument();
+  });
+
+  it("should render the avatar without title and subtitle correctly", () => {
+    render(<Avatar image={image} />);
+
+    const avatarImage = screen.getByAltText("Avatar");
+    const titleElement = screen.queryByText(title);
+    const subtitleElement = screen.queryByText(subtitle);
 
     expect(avatarImage).toBeInTheDocument();
     expect(titleElement).not.toBeInTheDocument();
