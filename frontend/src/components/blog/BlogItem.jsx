@@ -34,14 +34,14 @@ function BlogItem({ blog }) {
 
   const isLiked = blog?.likes?.some((like) => like?.userId === authData?.id);
 
-  const onEditClick = (id) => navigate(`/blog/edit/${id}`);
+  const onEditClick = () => navigate(`/blog/edit/${blog?.id}`);
 
-  const onDeleteClick = (id) =>
+  const onDeleteClick = () =>
     openModal(
       <ConfirmationDialog
         type="danger"
         onConfirm={() => {
-          blogDeleteMutation.mutate(id);
+          blogDeleteMutation.mutate(blog?.id);
           closeModal();
         }}
         onCancel={closeModal}
@@ -90,6 +90,7 @@ function BlogItem({ blog }) {
         </div>
         {authData?.id === blog?.user?.id && (
           <button
+            data-testid="menu-button"
             ref={menuRef}
             className="icon-btn-base bg-paper rounded-full h-8"
             onClick={onMenuClick}
@@ -105,15 +106,17 @@ function BlogItem({ blog }) {
           className="text-sm flex flex-col w-44 bg-paper rounded shadow-xl shadow-shadow"
         >
           <span
+            role="menuitem"
             className="inline-flex items-center gap-5 py-4 px-5 hover:bg-primaryLighter hover:text-primary"
-            onClick={() => onEditClick(blog.id)}
+            onClick={onEditClick}
           >
             <EditIcon size={20} />
             Edit
           </span>
           <span
+            role="menuitem"
             className="inline-flex items-center gap-5 py-4 px-5 hover:bg-errorLighter text-error"
-            onClick={() => onDeleteClick(blog.id)}
+            onClick={onDeleteClick}
           >
             <DeleteIcon size={20} />
             Delete
@@ -128,6 +131,7 @@ function BlogItem({ blog }) {
       />
 
       <div
+        data-testid="blog-item-click-area"
         onClick={onBlogClick}
         className="group cursor-pointer overflow-hidden flex flex-col gap-4 p-6 z-0 bg-paper rounded-3xl"
       >

@@ -60,7 +60,7 @@ function FileDrop({
 
   return (
     <div
-      data-testid="dropzone"
+      data-testid="file-drop"
       className="w-full"
       onDragEnter={handlePreventDefault}
       onDragLeave={handlePreventDefault}
@@ -72,7 +72,7 @@ function FileDrop({
       {!value && (
         <div>
           <label
-            htmlFor="dropzone-file"
+            htmlFor="file-drop-input"
             className="cursor-pointer overflow-hidden w-full p-4 flex flex-col items-center justify-center border-2 border-divider border-dashed rounded bg-slate-50 hover:bg-slate-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 transition-colors"
           >
             {!compact && (
@@ -84,7 +84,7 @@ function FileDrop({
             </p>
             <p className="text-xs">PNG, JPG or JPEG (MAX. 5MB)</p>
             <input
-              id="dropzone-file"
+              id="file-drop-input"
               type="file"
               accept={allowedMimeTypes.join(",")}
               onChange={handleFileInputChange}

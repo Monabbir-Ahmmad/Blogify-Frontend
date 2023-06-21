@@ -33,6 +33,7 @@ function BlogFloatingButton({
     <>
       <div className="bg-paper overflow-hidden z-10 shadow-lg shadow-shadow border border-divider sticky bottom-5 rounded-lg left-0 w-full sm:w-fit sm:left-1/2 sm:-translate-x-1/2 divide-x-2 divide-divider [&>button]:bg-paper [&>button]:rounded-none [&>button]:shadow-none [&>button]:btn-base [&>button]:text-lg flex [&>button]:flex-1">
         <button
+          data-testid="like-button"
           className={twMerge(isLiked && "text-primary")}
           onClick={onBlogLikeClick}
         >
@@ -40,11 +41,11 @@ function BlogFloatingButton({
           {blog?.likes?.length}
         </button>
         {blog?.user.id === authData?.id && (
-          <button ref={menuRef} onClick={onMenuClick}>
+          <button data-testid="menu-button" ref={menuRef} onClick={onMenuClick}>
             <MoreIcon size={26} />
           </button>
         )}
-        <button onClick={onBlogCommentClick}>
+        <button data-testid="comment-button" onClick={onBlogCommentClick}>
           <CommentIcon size={26} />
           {blog?.commentCount}
         </button>
@@ -59,6 +60,7 @@ function BlogFloatingButton({
         className="text-sm flex flex-col w-44 bg-paper rounded shadow-xl shadow-shadow"
       >
         <span
+          role="menuitem"
           className="inline-flex items-center gap-5 py-4 px-5 hover:bg-primaryLighter hover:text-primary"
           onClick={() => onBlogEditClick(blog.id)}
         >
@@ -66,6 +68,7 @@ function BlogFloatingButton({
           Edit
         </span>
         <span
+          role="menuitem"
           className="inline-flex items-center gap-5 py-4 px-5 hover:bg-errorLighter text-error"
           onClick={() => onBlogDeleteClick(blog.id)}
         >

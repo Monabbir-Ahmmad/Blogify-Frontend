@@ -23,32 +23,42 @@ describe("Searchbar", () => {
   });
 
   it("should render the searchbar correctly", () => {
-    const inputElement = screen.getByPlaceholderText("Search");
-    const formElement = screen.getByTestId("search-form");
+    const searchForm = screen.getByTestId("search-form");
+    const searchInput = screen.getByPlaceholderText("Search");
 
-    expect(inputElement).toBeInTheDocument();
-    expect(formElement).toBeInTheDocument();
+    expect(searchForm).toBeInTheDocument();
+    expect(searchInput).toBeInTheDocument();
   });
 
-  it("should update the search value correctly", () => {
-    const inputElement = screen.getByPlaceholderText("Search");
+  it("should update the search input value correctly", () => {
+    const searchInput = screen.getByPlaceholderText("Search");
 
-    fireEvent.change(inputElement, { target: { value: "example" } });
+    fireEvent.change(searchInput, { target: { value: "react" } });
 
-    expect(inputElement.value).toBe("example");
+    expect(searchInput.value).toBe("react");
   });
 
-  it("should submit the search form with the correct URL", () => {
-    const mockNavigate = vi.fn();
+  it("should navigate to the search results page on form submission", () => {
+    const navigateMock = vi.fn();
+    useNavigate.mockImplementation(() => navigateMock);
 
-    useNavigate.mockReturnValue(mockNavigate);
+    const searchForm = screen.getByTestId("search-form");
+    const searchInput = screen.getByPlaceholderText("Search");
 
-    const inputElement = screen.getByPlaceholderText("Search");
-    const formElement = screen.getByTestId("search-form");
+    fireEvent.change(searchInput, { target: { value: "react" } });
+    fireEvent.submit(searchForm);
 
-    fireEvent.change(inputElement, { target: { value: "example" } });
-    fireEvent.submit(formElement);
+    expect(navigateMock).toHaveBeenCalledWith("/search/react?type=blog");
+  });
 
-    expect(mockNavigate).toHaveBeenCalledWith("/search/example?type=blog");
+  it("should not navigate on form submission if search input is empty", () => {
+    const navigateMock = vi.fn();
+    useNavigate.mockImplementation(() => navigateMock);
+
+    const searchForm = screen.getByTestId("search-form");
+
+    fireEvent.submit(searchForm);
+
+    expect(navigateMock).not.toHaveBeenCalled();
   });
 });

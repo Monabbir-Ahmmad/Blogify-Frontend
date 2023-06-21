@@ -2,9 +2,14 @@ import { useEffect, useRef, useState } from "react";
 
 import TextArea from "../common/input/TextArea";
 
-function CommentBox({ onSubmit, defaultValue = "", onCancel }) {
+function CommentBox({
+  onSubmit,
+  onCancel,
+  defaultValue = "",
+  maxLength = 500,
+}) {
   const [text, setText] = useState(defaultValue);
-  const ref = useRef();
+  const ref = useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,10 +33,11 @@ function CommentBox({ onSubmit, defaultValue = "", onCancel }) {
   return (
     <form className="space-y-2" onSubmit={handleSubmit} ref={ref}>
       <TextArea
+        name="commentBox"
         required
         className="input-primary"
         placeholder="Write a comment..."
-        maxLength={500}
+        maxLength={maxLength}
         value={text}
         onChange={(e) => setText(e.target.value)}
       />
@@ -49,7 +55,7 @@ function CommentBox({ onSubmit, defaultValue = "", onCancel }) {
         </button>
 
         <p className="ml-auto text-xs opacity-70">
-          {text.length} / {500}
+          {text.length} / {maxLength}
         </p>
       </div>
     </form>

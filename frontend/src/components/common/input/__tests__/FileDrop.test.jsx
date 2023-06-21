@@ -13,7 +13,7 @@ describe("FileDrop", () => {
   it("should render the FileDrop component correctly", () => {
     render(<FileDrop onChange={onChangeMock} value={null} />);
 
-    const dropzone = screen.getByTestId("dropzone");
+    const dropzone = screen.getByTestId("file-drop");
 
     expect(dropzone).toBeInTheDocument();
   });
@@ -22,7 +22,7 @@ describe("FileDrop", () => {
     const file = new File(["test file"], "test.png", { type: "image/png" });
     render(<FileDrop onChange={onChangeMock} value={null} />);
 
-    const dropzone = screen.getByTestId("dropzone");
+    const dropzone = screen.getByTestId("file-drop");
 
     fireEvent.drop(dropzone, {
       dataTransfer: {
@@ -40,7 +40,7 @@ describe("FileDrop", () => {
     window.alert = vi.fn();
     render(<FileDrop onChange={onChangeMock} value={null} />);
 
-    const dropzone = screen.getByTestId("dropzone");
+    const dropzone = screen.getByTestId("file-drop");
 
     fireEvent.drop(dropzone, {
       dataTransfer: {
@@ -62,7 +62,7 @@ describe("FileDrop", () => {
     window.alert = vi.fn();
     render(<FileDrop onChange={onChangeMock} value={null} />);
 
-    const dropzone = screen.getByTestId("dropzone");
+    const dropzone = screen.getByTestId("file-drop");
 
     fireEvent.drop(dropzone, {
       dataTransfer: {
