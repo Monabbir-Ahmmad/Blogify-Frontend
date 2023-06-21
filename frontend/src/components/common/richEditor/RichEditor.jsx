@@ -1,6 +1,6 @@
 import "./RichEditor.css";
 
-import { default as Editor } from "suneditor-react";
+import Editor from "suneditor-react";
 import { buttonListResponsive } from "./buttonList";
 import { forwardRef } from "react";
 
