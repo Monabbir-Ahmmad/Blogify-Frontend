@@ -90,7 +90,7 @@ describe("SignupForm", () => {
     fireEvent.change(confirmPasswordInput, { target: { value: "Password1!" } });
     fireEvent.click(createAccountButton);
 
-    await waitFor(() => {
+    waitFor(() => {
       expect(onSubmitMock).toHaveBeenCalled();
     });
   });

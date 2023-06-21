@@ -31,8 +31,8 @@ function CommentItem({ comment, level }) {
   const { openModal, closeModal } = useModal();
   const [menuOpen, setMenuOpen] = useState(false);
   const [showReplies, setShowReplies] = useState(false);
-  const [showEditInput, setShowEditInput] = useState(false);
-  const [openReplyInput, setOpenReplyInput] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [isReplyMode, setIsReplyMode] = useState(false);
   const [pagination, setPagination] = useState({ page: 1, limit: 12 });
   const { authData, isAuthenticated } = useContext(AuthContext);
   const {
@@ -60,7 +60,7 @@ function CommentItem({ comment, level }) {
       {
         onSuccess: () => {
           setShowReplies(true);
-          setOpenReplyInput(false);
+          setIsReplyMode(false);
         },
       }
     );
@@ -82,7 +82,7 @@ function CommentItem({ comment, level }) {
       { commentId: comment.id, text },
       {
         onSuccess: () => {
-          setShowEditInput(false);
+          setIsEditMode(false);
           toast.success("Comment edited successfully!");
         },
       }
@@ -128,6 +128,7 @@ function CommentItem({ comment, level }) {
 
         {authData?.id === comment.user.id && (
           <button
+            data-testid="menu-button"
             ref={menuRef}
             className="icon-btn rounded-full h-8"
             onClick={() => setMenuOpen((prev) => !prev)}
@@ -143,13 +144,15 @@ function CommentItem({ comment, level }) {
           className="text-sm flex flex-col w-44 bg-paper shadow-shadow rounded shadow-xl"
         >
           <span
+            role="menuitem"
             className="inline-flex items-center gap-5 py-4 px-5 hover:bg-primaryLighter hover:text-primary"
-            onClick={() => setShowEditInput(true)}
+            onClick={() => setIsEditMode(true)}
           >
             <EditIcon size={20} />
             Edit
           </span>
           <span
+            role="menuitem"
             className="inline-flex items-center gap-5 py-4 px-5 hover:bg-errorLighter text-error"
             onClick={onDeleteClick}
           >
@@ -159,11 +162,11 @@ function CommentItem({ comment, level }) {
         </Popover>
       </div>
 
-      {showEditInput ? (
+      {isEditMode ? (
         <CommentBox
           defaultValue={comment.text}
           onSubmit={onEditSubmit}
-          onCancel={() => setShowEditInput(false)}
+          onCancel={() => setIsEditMode(false)}
         />
       ) : (
         <p className="whitespace-pre-wrap text-sm">{comment.text}</p>
@@ -171,6 +174,7 @@ function CommentItem({ comment, level }) {
 
       <div className="flex gap-2 [&>button]:btn-text [&>button]:rounded-full [&>button]:p-2">
         <button
+          data-testid="like-button"
           onClick={onLikeClick}
           className={twMerge(isLiked && "text-primary")}
         >
@@ -179,7 +183,10 @@ function CommentItem({ comment, level }) {
         </button>
 
         {isAuthenticated && (
-          <button onClick={() => setOpenReplyInput(true)}>
+          <button
+            data-testid="reply-button"
+            onClick={() => setIsReplyMode(true)}
+          >
             <CommentIcon size={20} />
             Reply
           </button>
@@ -192,10 +199,10 @@ function CommentItem({ comment, level }) {
         )}
       </div>
 
-      {openReplyInput && (
+      {isReplyMode && (
         <CommentBox
           onSubmit={onReplySubmit}
-          onCancel={() => setOpenReplyInput(false)}
+          onCancel={() => setIsReplyMode(false)}
         />
       )}
 

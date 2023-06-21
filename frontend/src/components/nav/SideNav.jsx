@@ -72,7 +72,11 @@ function SideNav({ toggleMenu, links = [], open = false, onLogout }) {
         <div className="inline-flex items-center mb-8">
           <AppLogo />
 
-          <button className="ml-auto icon-btn-base" onClick={toggleMenu}>
+          <button
+            data-testid="close-button"
+            className="ml-auto icon-btn-base"
+            onClick={toggleMenu}
+          >
             <CloseIcon size={20} />
           </button>
         </div>

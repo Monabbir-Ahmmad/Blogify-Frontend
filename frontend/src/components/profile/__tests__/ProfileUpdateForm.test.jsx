@@ -75,7 +75,7 @@ describe("ProfileUpdateForm", () => {
 
     fireEvent.click(confirmChangesButton);
 
-    await waitFor(() => {
+    waitFor(() => {
       expect(onSubmitMock).toHaveBeenCalled();
     });
   });

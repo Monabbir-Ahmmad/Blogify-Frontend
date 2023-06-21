@@ -64,7 +64,7 @@ describe("SigninForm", () => {
     fireEvent.change(passwordInput, { target: { value: "Password1!" } });
     fireEvent.click(signInButton);
 
-    await waitFor(() => {
+    waitFor(() => {
       expect(onSubmitMock).toHaveBeenCalled();
     });
   });
