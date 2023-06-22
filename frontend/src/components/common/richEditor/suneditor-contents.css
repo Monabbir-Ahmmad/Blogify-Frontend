@@ -99,7 +99,6 @@
   display: block;
   padding: 8px;
   margin: 0 0 10px;
-  font-family: monospace;
   color: #666;
   line-height: 1.45;
   background-color: var(--color-lighter-gray);
@@ -291,7 +290,7 @@
 .sun-editor-editable hr {
   display: flex;
   border-width: 1px 0 0;
-  border-color: black;
+  border-color: var(--color-light-gray);
   border-image: initial;
   height: 1px;
 }
@@ -314,7 +313,7 @@
 .sun-editor-editable table {
   display: table;
   table-layout: auto !important;
-  border: 1px solid rgb(204, 204, 204);
+  border: 1px solid var(--color-light-gray);
   width: 100%;
   max-width: 100%;
   margin: 0 0 10px;
@@ -634,7 +633,6 @@
 /* Code */
 .sun-editor-editable .__se__t-code,
 .sun-editor .__se__t-code {
-  font-family: monospace;
   color: #666;
   background-color: rgba(27, 31, 35, 0.05);
   border-radius: 6px;

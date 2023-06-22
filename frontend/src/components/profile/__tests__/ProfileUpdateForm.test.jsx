@@ -1,17 +1,16 @@
-import { afterEach, beforeEach, expect, vi } from "vitest";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 import ProfileUpdateForm from "../ProfileUpdateForm";
 
 describe("ProfileUpdateForm", () => {
-  const onSubmitMock = vi.fn();
+  const onSubmitMock = vitest.fn();
 
   beforeEach(() => {
     render(<ProfileUpdateForm onSubmit={onSubmitMock} />);
   });
 
   afterEach(() => {
-    vi.clearAllMocks();
+    vitest.clearAllMocks();
   });
 
   it("should render the profile update form correctly", () => {

@@ -1,14 +1,13 @@
-import { afterEach, vi } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 import Popover from "./Popover";
 
 describe("Popover", () => {
   const targetRef = { current: document.createElement("div") };
-  const onCloseMock = vi.fn();
+  const onCloseMock = vitest.fn();
 
   afterEach(() => {
-    vi.clearAllMocks();
+    vitest.clearAllMocks();
   });
 
   it("should render the popover component with children", () => {

@@ -78,7 +78,10 @@ function Navbar({ onLogout }) {
 
   return (
     <>
-      <nav className="sticky top-0 z-50 border-b border-divider w-screen gap-2 p-4 inline-flex items-center bg-background">
+      <nav
+        data-testid="navbar"
+        className="sticky top-0 z-50 border-b border-divider w-screen gap-2 p-4 inline-flex items-center bg-background"
+      >
         <AppLogo className="mr-4" />
 
         <Searchbar className="hidden sm:block" userId={authData?.id} />
@@ -97,6 +100,7 @@ function Navbar({ onLogout }) {
         )}
 
         <button
+          data-testid="menu-button"
           className="xl:hidden ml-auto icon-btn-base text-primary"
           onClick={toggleMenu}
         >

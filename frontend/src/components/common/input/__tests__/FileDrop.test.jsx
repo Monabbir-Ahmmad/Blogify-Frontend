@@ -1,10 +1,9 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 
 import FileDrop from "../FileDrop";
-import { vi } from "vitest";
 
 describe("FileDrop", () => {
-  const onChangeMock = vi.fn();
+  const onChangeMock = vitest.fn();
 
   beforeEach(() => {
     onChangeMock.mockClear();
@@ -37,7 +36,7 @@ describe("FileDrop", () => {
     const invalidFile = new File(["test file"], "test.pdf", {
       type: "application/pdf",
     });
-    window.alert = vi.fn();
+    window.alert = vitest.fn();
     render(<FileDrop onChange={onChangeMock} value={null} />);
 
     const dropzone = screen.getByTestId("file-drop");
@@ -59,7 +58,7 @@ describe("FileDrop", () => {
       type: "image/png",
     });
     Object.defineProperty(largeFile, "size", { value: 10 * 1024 * 1024 }); // 10MB
-    window.alert = vi.fn();
+    window.alert = vitest.fn();
     render(<FileDrop onChange={onChangeMock} value={null} />);
 
     const dropzone = screen.getByTestId("file-drop");

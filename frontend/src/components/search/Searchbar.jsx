@@ -31,6 +31,7 @@ function Searchbar({ className }) {
       onSubmit={onSubmit}
     >
       <button
+        disabled={!search.trim()}
         type="submit"
         className="icon-btn-base text-slate-400 hover:text-slate-600 dark:hover:text-slate-400 dark:text-slate-500 flex rounded-full absolute inset-y-0 left-0 items-center p-2.5 m-[2px]"
       >

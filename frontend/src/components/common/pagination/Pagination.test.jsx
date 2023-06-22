@@ -1,10 +1,9 @@
-import { expect, vi } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 import Pagination from "./Pagination";
 
 describe("Pagination", () => {
-  const onPageChangeMock = vi.fn();
+  const onPageChangeMock = vitest.fn();
 
   const totalPages = 10;
 

@@ -63,6 +63,7 @@ function SideNav({ toggleMenu, links = [], open = false, onLogout }) {
       onClick={onClickOutside}
     >
       <nav
+        data-testid="side-nav"
         ref={navRef}
         className={twMerge(
           "h-screen gap-5 flex flex-col w-4/6 max-w-xs p-6 bg-paper transition-transform overflow-y-auto",

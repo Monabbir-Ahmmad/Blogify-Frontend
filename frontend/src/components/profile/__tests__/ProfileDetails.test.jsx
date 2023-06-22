@@ -3,7 +3,6 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { AuthContext } from "../../../contexts/AuthContext";
 import ProfileDetails from "../ProfileDetails";
 import dayjs from "dayjs";
-import { vi } from "vitest";
 
 describe("ProfileDetails", () => {
   const user = {
@@ -20,10 +19,10 @@ describe("ProfileDetails", () => {
     coverImage: "cover-image.jpg",
   };
 
-  const onEditPrfileImageMock = vi.fn();
-  const onEditCoverImageMock = vi.fn();
-  const onEditProfileMock = vi.fn();
-  const onEditPasswordMock = vi.fn();
+  const onEditPrfileImageMock = vitest.fn();
+  const onEditCoverImageMock = vitest.fn();
+  const onEditProfileMock = vitest.fn();
+  const onEditPasswordMock = vitest.fn();
 
   it("should render the profile details correctly", () => {
     render(

@@ -1,8 +1,10 @@
 import "./RichEditor.css";
 
-import Editor from "suneditor-react";
+import { forwardRef, useEffect, useRef } from "react";
+
+import SunEditor from "suneditor";
+import plugins from "suneditor/src/plugins";
 import { buttonListResponsive } from "./buttonList";
-import { forwardRef } from "react";
 
 const RichEditor = forwardRef(
   (
@@ -18,35 +20,36 @@ const RichEditor = forwardRef(
     },
     ref
   ) => {
-    const getSunEditorInstance = (sunEditor) => {
-      sunEditor.setContents(defaultValue);
-      if (ref) ref.current = sunEditor;
-    };
+    const textAreaRef = useRef(null);
 
-    return (
-      <Editor
-        getSunEditorInstance={getSunEditorInstance}
-        setOptions={{
-          placeholder: "Start writing here...",
-          defaultStyle: "font-size:16px; font-family:'Poppins';",
-          showPathLabel: false,
-          display: "block",
-          popupDisplay: "full",
-          charCounter: true,
-          charCounterLabel: "Characters :",
-          fontSize: [18, 20, 22, 24, 26, 28, 36, 48, 72],
-          formats: ["p", "div", "pre", "h1", "h2", "h3"],
-          imageFileInput: false,
-          buttonList: buttons,
-          height,
-          minHeight,
-          maxHeight,
-          maxCharCount,
-          ...options,
-        }}
-        {...rest}
-      />
-    );
+    useEffect(() => {
+      ref.current = SunEditor.create(textAreaRef.current, {
+        plugins,
+        buttonList: buttons,
+        placeholder: "Start writing here...",
+        defaultStyle: "font-size:16px; font-family:'Poppins';",
+        showPathLabel: false,
+        display: "block",
+        popupDisplay: "full",
+        charCounter: true,
+        charCounterLabel: "Characters :",
+        fontSize: [18, 20, 22, 24, 26, 28, 36, 48, 72],
+        formats: ["p", "div", "pre", "h1", "h2", "h3"],
+        imageFileInput: false,
+        height,
+        minHeight,
+        maxHeight,
+        maxCharCount,
+        ...options,
+        ...rest,
+      });
+
+      return () => {
+        ref.current.destroy();
+      };
+    }, []);
+
+    return <textarea ref={textAreaRef} style={{ visibility: "hidden" }} />;
   }
 );
 

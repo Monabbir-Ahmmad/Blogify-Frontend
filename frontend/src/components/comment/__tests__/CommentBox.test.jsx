@@ -1,12 +1,11 @@
-import { afterEach, beforeEach, vi } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 import CommentBox from "../CommentBox";
 
 describe("CommentBox", () => {
-  const onSubmitMock = vi.fn();
-  const onCancelMock = vi.fn();
-  const scrollIntoViewMock = vi.fn();
+  const onSubmitMock = vitest.fn();
+  const onCancelMock = vitest.fn();
+  const scrollIntoViewMock = vitest.fn();
 
   beforeEach(() => {
     Element.prototype.scrollIntoView = scrollIntoViewMock;
@@ -16,7 +15,7 @@ describe("CommentBox", () => {
 
   afterEach(() => {
     delete Element.prototype.scrollIntoView;
-    vi.clearAllMocks();
+    vitest.clearAllMocks();
   });
 
   it("should render the comment box correctly", () => {

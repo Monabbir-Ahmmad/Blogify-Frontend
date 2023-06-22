@@ -1,11 +1,10 @@
-import { afterEach, beforeEach, expect, vi } from "vitest";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 import { MemoryRouter } from "react-router-dom";
 import SignupForm from "./SignupForm";
 
 describe("SignupForm", () => {
-  const onSubmitMock = vi.fn();
+  const onSubmitMock = vitest.fn();
 
   beforeEach(() => {
     render(
@@ -16,7 +15,7 @@ describe("SignupForm", () => {
   });
 
   afterEach(() => {
-    vi.clearAllMocks();
+    vitest.clearAllMocks();
   });
 
   it("should render the signup form correctly", () => {

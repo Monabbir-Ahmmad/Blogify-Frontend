@@ -97,6 +97,7 @@ const Popover = ({ target, open, onClose, children, anchor, className }) => {
 
   return createPortal(
     <menu
+      role="menu"
       ref={popoverRef}
       className={twMerge(
         "fixed z-[900] overflow-hidden transition-transform cursor-pointer",

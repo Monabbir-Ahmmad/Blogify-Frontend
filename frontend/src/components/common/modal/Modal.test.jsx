@@ -1,14 +1,13 @@
-import { afterEach, it, vi } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 import { MemoryRouter } from "react-router-dom";
 import Modal from "./Modal";
 
 describe("Modal", () => {
-  const onCloseMock = vi.fn();
+  const onCloseMock = vitest.fn();
 
   afterEach(() => {
-    vi.clearAllMocks();
+    vitest.clearAllMocks();
   });
 
   it("should render the Modal component with children when isOpen is true", () => {

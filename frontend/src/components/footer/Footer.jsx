@@ -2,7 +2,10 @@ import { Link } from "react-router-dom";
 
 function Footer() {
   return (
-    <footer className="bg-background border-t border-divider text-sm opacity-70 p-6 mt-auto">
+    <footer
+      data-testid="footer"
+      className="bg-background border-t border-divider text-sm opacity-70 p-6 mt-auto"
+    >
       <div className="w-full mx-auto max-w-screen-xl flex flex-col-reverse md:flex-row items-center justify-between gap-4">
         <span>
           © 2023{" "}
