@@ -796,6 +796,7 @@
 
 .sun-editor .se-list-layer.se-list-line hr {
   border-width: 1px 0 0;
+  border-color: #000;
   height: 1px;
 }
 

@@ -2,9 +2,9 @@ import "./RichEditor.css";
 
 import { forwardRef, useEffect, useRef } from "react";
 
-import SunEditor from "suneditor";
 import { buttonListResponsive } from "./buttonList";
 import plugins from "suneditor/src/plugins";
+import sunEditor from "suneditor";
 
 const RichEditor = forwardRef(
   (
@@ -22,7 +22,7 @@ const RichEditor = forwardRef(
     const textAreaRef = useRef(null);
 
     useEffect(() => {
-      ref.current = SunEditor.create(textAreaRef.current, {
+      const editor = sunEditor.create(textAreaRef.current, {
         plugins,
         buttonList: buttons,
         placeholder: "Start writing here...",
@@ -30,8 +30,6 @@ const RichEditor = forwardRef(
         showPathLabel: false,
         display: "block",
         popupDisplay: "full",
-        charCounter: true,
-        charCounterLabel: "Characters :",
         fontSize: [18, 20, 22, 24, 26, 28, 36, 48, 72],
         formats: ["p", "div", "pre", "h1", "h2", "h3"],
         imageFileInput: false,
@@ -39,11 +37,15 @@ const RichEditor = forwardRef(
         minHeight,
         maxHeight,
         maxCharCount,
+        charCounterLabel: "Characters :",
+        value: defaultValue,
         ...rest,
       });
 
+      if (ref) ref.current = editor;
+
       return () => {
-        ref.current.destroy();
+        editor.destroy();
       };
     }, []);
 
