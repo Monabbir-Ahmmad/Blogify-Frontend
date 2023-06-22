@@ -3,8 +3,8 @@ import "./RichEditor.css";
 import { forwardRef, useEffect, useRef } from "react";
 
 import SunEditor from "suneditor";
-import plugins from "suneditor/src/plugins";
 import { buttonListResponsive } from "./buttonList";
+import plugins from "suneditor/src/plugins";
 
 const RichEditor = forwardRef(
   (
@@ -14,7 +14,6 @@ const RichEditor = forwardRef(
       maxHeight = "80vh",
       height = "auto",
       maxCharCount = 5000,
-      options = {},
       defaultValue = "",
       ...rest
     },
@@ -40,7 +39,6 @@ const RichEditor = forwardRef(
         minHeight,
         maxHeight,
         maxCharCount,
-        ...options,
         ...rest,
       });
 

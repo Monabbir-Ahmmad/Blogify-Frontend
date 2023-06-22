@@ -575,20 +575,17 @@
 
 /** -- Paragraph styles custom -- */
 /* Bordered */
-.sun-editor-editable .__se__p-bordered,
-.sun-editor .__se__p-bordered {
+.sun-editor-editable .__se__p-bordered {
   border-top: solid 1px var(--color-dark-gray-2);
   border-bottom: solid 1px var(--color-dark-gray-2);
   padding: 4px 0;
 }
 /* Spaced */
-.sun-editor-editable .__se__p-spaced,
-.sun-editor .__se__p-spaced {
+.sun-editor-editable .__se__p-spaced {
   letter-spacing: 1px;
 }
 /* Neon (https://codepen.io/GeorgePark/pen/MrjbEr) */
-.sun-editor-editable .__se__p-neon,
-.sun-editor .__se__p-neon {
+.sun-editor-editable .__se__p-neon {
   font-weight: 200;
   font-style: italic;
   background: var(--color-black);
@@ -624,15 +621,13 @@
 
 /* -- Text styles custom -- */
 /* Shadow */
-.sun-editor-editable .__se__t-shadow,
-.sun-editor .__se__t-shadow {
+.sun-editor-editable .__se__t-shadow {
   text-shadow: -0.2rem -0.2rem 1rem var(--color-white),
     0.2rem 0.2rem 1rem var(--color-white), 0 0 0.2rem #999, 0 0 0.4rem #888,
     0 0 0.6rem #777, 0 0 0.8rem #666, 0 0 1rem #555;
 }
 /* Code */
-.sun-editor-editable .__se__t-code,
-.sun-editor .__se__t-code {
+.sun-editor-editable .__se__t-code {
   color: #666;
   background-color: rgba(27, 31, 35, 0.05);
   border-radius: 6px;
