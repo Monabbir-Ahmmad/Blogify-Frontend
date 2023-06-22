@@ -11,7 +11,12 @@ function ErrorPage({
 }) {
   return (
     <main className="p-10 flex flex-col items-center h-full">
-      <object type="image/svg+xml" data={image} className="max-h-[500px] " />
+      <object
+        role="img"
+        type="image/svg+xml"
+        data={image}
+        className="max-h-[500px] "
+      />
       <h2 className="text-3xl my-5">{title}</h2>
       <p className="mb-8 opacity-70">{description}</p>
       {!hideLink && (

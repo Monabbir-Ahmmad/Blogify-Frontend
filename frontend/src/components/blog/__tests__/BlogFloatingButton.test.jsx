@@ -1,4 +1,3 @@
-import { afterEach, beforeEach, vi } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 import { AuthContext } from "../../../contexts/AuthContext";
@@ -18,13 +17,13 @@ describe("BlogFloatingButton", () => {
     id: 123,
   };
 
-  const onBlogLikeClick = vi.fn();
-  const onBlogCommentClick = vi.fn();
-  const onBlogEditClick = vi.fn();
-  const onBlogDeleteClick = vi.fn();
+  const onBlogLikeClick = vitest.fn();
+  const onBlogCommentClick = vitest.fn();
+  const onBlogEditClick = vitest.fn();
+  const onBlogDeleteClick = vitest.fn();
 
   afterEach(() => {
-    vi.clearAllMocks();
+    vitest.clearAllMocks();
   });
 
   it("should render the floating button correctly", () => {

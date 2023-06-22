@@ -1,10 +1,9 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 
 import FormDialog from "../FormDialog";
-import { vi } from "vitest";
 
 describe("FormDialog", () => {
-  const onCancel = vi.fn();
+  const onCancel = vitest.fn();
   const title = "Edit Profile";
   const childElement = <input type="text" placeholder="Username" />;
 

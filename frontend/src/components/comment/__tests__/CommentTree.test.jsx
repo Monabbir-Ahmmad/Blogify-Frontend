@@ -41,7 +41,7 @@ const comments = {
   },
 };
 
-const renderWithWrapper = (ui) => {
+const renderWithWrapper = (ui, { ...renderOptions } = {}) => {
   const Wrapper = ({ children }) => {
     return (
       <BrowserRouter>
@@ -64,7 +64,7 @@ const renderWithWrapper = (ui) => {
     );
   };
 
-  return render(ui, { wrapper: Wrapper });
+  return render(ui, { wrapper: Wrapper, ...renderOptions });
 };
 
 describe("CommentTree", () => {

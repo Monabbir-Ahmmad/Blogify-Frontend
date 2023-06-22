@@ -1,19 +1,11 @@
-import { BrowserRouter, useNavigate } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { afterEach, beforeEach, expect, vi } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 import { AuthContext } from "../../../contexts/AuthContext";
 import { CommentContext } from "../../../contexts/CommentContext";
 import CommentItem from "../CommentItem";
 import { ModalContextProvider } from "../../../contexts/ModalContext";
-
-const authContextData = {
-  authData: {
-    id: 123,
-  },
-  isAuthenticated: true,
-};
 
 const comment = {
   id: 1,
@@ -56,19 +48,19 @@ const comments = {
   2: reply,
 };
 
-const fetchReplies = vi.fn(() => ({
+const fetchReplies = vitest.fn(() => ({
   data: {
     data: [],
   },
-  refetch: vi.fn(),
+  refetch: vitest.fn(),
 }));
-const replyPostMutation = { mutate: vi.fn() };
-const commentLikeMutation = { mutate: vi.fn() };
-const commentDeleteMutation = { mutate: vi.fn() };
-const commentEditMutation = { mutate: vi.fn() };
+const replyPostMutation = { mutate: vitest.fn() };
+const commentLikeMutation = { mutate: vitest.fn() };
+const commentDeleteMutation = { mutate: vitest.fn() };
+const commentEditMutation = { mutate: vitest.fn() };
 
-vi.mock("../../../hooks/useCommentAction", () => ({
-  default: vi.fn(() => ({
+vitest.mock("../../../hooks/useCommentAction", () => ({
+  default: vitest.fn(() => ({
     fetchReplies,
     replyPostMutation,
     commentLikeMutation,
@@ -77,44 +69,53 @@ vi.mock("../../../hooks/useCommentAction", () => ({
   })),
 }));
 
-const renderWithWrapper = (ui) => {
+const renderWithWrapper = (
+  ui,
+  {
+    authContextData = {
+      authData: {
+        id: 123,
+      },
+      isAuthenticated: true,
+    },
+    ...renderOptions
+  } = {}
+) => {
   const Wrapper = ({ children }) => {
     return (
       <BrowserRouter>
         <QueryClientProvider client={new QueryClient()}>
           <ModalContextProvider>
-            <CommentContext.Provider
-              value={{
-                comments,
-              }}
-            >
-              {children}
-            </CommentContext.Provider>
+            <AuthContext.Provider value={authContextData}>
+              <CommentContext.Provider
+                value={{
+                  comments,
+                }}
+              >
+                {children}
+              </CommentContext.Provider>
+            </AuthContext.Provider>
           </ModalContextProvider>
         </QueryClientProvider>
       </BrowserRouter>
     );
   };
 
-  return render(ui, { wrapper: Wrapper });
+  return render(ui, { wrapper: Wrapper, ...renderOptions });
 };
 
 describe("CommentItem", () => {
   beforeEach(() => {
-    Element.prototype.scrollIntoView = vi.fn();
+    Element.prototype.scrollIntoView = vitest.fn();
   });
 
   afterEach(() => {
     delete Element.prototype.scrollIntoView;
-    vi.clearAllMocks();
+    vitest.clearAllMocks();
   });
 
   it("should render the comment correctly when user is logged in", () => {
-    renderWithWrapper(
-      <AuthContext.Provider value={authContextData}>
-        <CommentItem comment={comment} level={0} />
-      </AuthContext.Provider>
-    );
+    renderWithWrapper(<CommentItem comment={comment} level={0} />);
 
     const commentatorName = screen.getByText("John Doe");
     const commentText = screen.getByText("Test comment");
@@ -132,22 +133,16 @@ describe("CommentItem", () => {
   });
 
   it("should render the comment correctly when user is not logged in", () => {
-    renderWithWrapper(
-      <AuthContext.Provider value={{}}>
-        <CommentItem comment={comment} level={0} />
-      </AuthContext.Provider>
-    );
+    renderWithWrapper(<CommentItem comment={comment} level={0} />, {
+      authContextData: {},
+    });
 
     expect(screen.queryByTestId("menu-button")).not.toBeInTheDocument();
     expect(screen.queryByTestId("reply-button")).not.toBeInTheDocument();
   });
 
   it("should navigate to the commentator's profile when the commentator's name is clicked", () => {
-    renderWithWrapper(
-      <AuthContext.Provider value={authContextData}>
-        <CommentItem comment={comment} level={0} />
-      </AuthContext.Provider>
-    );
+    renderWithWrapper(<CommentItem comment={comment} level={0} />);
 
     const commentatorName = screen.getByText("John Doe");
     fireEvent.click(commentatorName);
@@ -156,11 +151,7 @@ describe("CommentItem", () => {
   });
 
   it("should call the commentLikeMutation when the like button is clicked", () => {
-    renderWithWrapper(
-      <AuthContext.Provider value={authContextData}>
-        <CommentItem comment={comment} level={0} />
-      </AuthContext.Provider>
-    );
+    renderWithWrapper(<CommentItem comment={comment} level={0} />);
 
     const likeButton = screen.getByTestId("like-button");
     fireEvent.click(likeButton);
@@ -169,11 +160,7 @@ describe("CommentItem", () => {
   });
 
   it("should open the reply input when the reply button is clicked", () => {
-    renderWithWrapper(
-      <AuthContext.Provider value={authContextData}>
-        <CommentItem comment={comment} level={0} />
-      </AuthContext.Provider>
-    );
+    renderWithWrapper(<CommentItem comment={comment} level={0} />);
 
     const replyButton = screen.getByTestId("reply-button");
     fireEvent.click(replyButton);
@@ -183,11 +170,7 @@ describe("CommentItem", () => {
   });
 
   it("should toggle the visibility of replies when the view replies button is clicked", () => {
-    renderWithWrapper(
-      <AuthContext.Provider value={authContextData}>
-        <CommentItem comment={comment} level={0} />
-      </AuthContext.Provider>
-    );
+    renderWithWrapper(<CommentItem comment={comment} level={0} />);
 
     const viewRepliesButton = screen.getByRole("button", {
       name: "View replies",
@@ -202,21 +185,13 @@ describe("CommentItem", () => {
   });
 
   it("should not show menu button when the user is not the comment owner", () => {
-    renderWithWrapper(
-      <AuthContext.Provider value={authContextData}>
-        <CommentItem comment={reply} level={0} />
-      </AuthContext.Provider>
-    );
+    renderWithWrapper(<CommentItem comment={reply} level={0} />);
 
     expect(screen.queryByTestId("menu-button")).not.toBeInTheDocument();
   });
 
   it("should open the edit input when the edit button is clicked", () => {
-    renderWithWrapper(
-      <AuthContext.Provider value={authContextData}>
-        <CommentItem comment={comment} level={0} />
-      </AuthContext.Provider>
-    );
+    renderWithWrapper(<CommentItem comment={comment} level={0} />);
 
     const menuButton = screen.getByTestId("menu-button");
     fireEvent.click(menuButton);
@@ -229,11 +204,7 @@ describe("CommentItem", () => {
   });
 
   it("should call the commentEditMutation when the edit form is submitted", () => {
-    renderWithWrapper(
-      <AuthContext.Provider value={authContextData}>
-        <CommentItem comment={comment} level={0} />
-      </AuthContext.Provider>
-    );
+    renderWithWrapper(<CommentItem comment={comment} level={0} />);
 
     const menuButton = screen.getByTestId("menu-button");
     fireEvent.click(menuButton);
@@ -258,11 +229,7 @@ describe("CommentItem", () => {
   });
 
   it("should call the commentDeleteMutation when the delete button is clicked and confirmed", () => {
-    renderWithWrapper(
-      <AuthContext.Provider value={authContextData}>
-        <CommentItem comment={comment} level={0} />
-      </AuthContext.Provider>
-    );
+    renderWithWrapper(<CommentItem comment={comment} level={0} />);
 
     const menuButton = screen.getByTestId("menu-button");
     fireEvent.click(menuButton);
@@ -280,11 +247,7 @@ describe("CommentItem", () => {
   });
 
   it("should call the commentLikeMutation when the like button is clicked by logged in user", () => {
-    renderWithWrapper(
-      <AuthContext.Provider value={authContextData}>
-        <CommentItem comment={comment} level={0} />
-      </AuthContext.Provider>
-    );
+    renderWithWrapper(<CommentItem comment={comment} level={0} />);
 
     const likeButton = screen.getByTestId("like-button");
     fireEvent.click(likeButton);

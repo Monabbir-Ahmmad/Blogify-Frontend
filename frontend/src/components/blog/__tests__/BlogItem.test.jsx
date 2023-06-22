@@ -1,6 +1,6 @@
-import { BrowserRouter, useActionData } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { expect, vi } from "vitest";
+
 import { fireEvent, render, screen } from "@testing-library/react";
 
 import { AuthContext } from "../../../contexts/AuthContext";
@@ -26,10 +26,10 @@ const blog = {
   content: "<p>Test content</p>",
 };
 
-vi.mock("../../../hooks/useBlogAction", () => ({
-  default: vi.fn(() => ({
+vitest.mock("../../../hooks/useBlogAction", () => ({
+  default: vitest.fn(() => ({
     blogDeleteMutation: {
-      mutate: vi.fn(),
+      mutate: vitest.fn(),
     },
   })),
 }));
@@ -51,7 +51,7 @@ const renderWithWrapper = (ui, { ...renderOptions } = {}) => {
 
 describe("BlogItem", () => {
   afterEach(() => {
-    vi.clearAllMocks();
+    vitest.clearAllMocks();
   });
 
   it("should render the blog item correctly", () => {
@@ -110,7 +110,7 @@ describe("BlogItem", () => {
   it("should open the delete confirmation dialog when delete option is clicked", () => {
     renderWithWrapper(<BlogItem blog={blog} />);
 
-    const mutateMock = vi.fn();
+    const mutateMock = vitest.fn();
 
     useBlogAction.mockImplementation(() => ({
       blogDeleteMutation: {

@@ -22,7 +22,10 @@ function NavProfileMenu({ onLogout, className }) {
   const ThemeIcon = darkMode ? LightModeIcon : DarkModeIcon;
 
   return (
-    <div className={twMerge("hidden xl:inline-flex gap-10", className)}>
+    <div
+      data-testid="nav-profile-menu"
+      className={twMerge("hidden xl:inline-flex gap-10", className)}
+    >
       <Avatar
         reversed={true}
         title={authData?.name}
@@ -47,6 +50,7 @@ function NavProfileMenu({ onLogout, className }) {
           Profile
         </Link>
         <span
+          role="menuitem"
           className="inline-flex items-center gap-5 py-4 px-5 hover:bg-primaryLighter hover:text-primary"
           onClick={toggleDarkMode}
         >
@@ -54,6 +58,7 @@ function NavProfileMenu({ onLogout, className }) {
           Enable {darkMode ? "Light" : "Dark"} Mode
         </span>
         <span
+          role="menuitem"
           className="inline-flex items-center gap-5 py-4 px-5 hover:bg-errorLighter text-error"
           onClick={onLogout}
         >

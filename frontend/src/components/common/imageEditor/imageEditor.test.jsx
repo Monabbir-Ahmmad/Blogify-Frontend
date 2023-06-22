@@ -1,15 +1,14 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 
 import ImageEditor from "./ImageEditor";
-import { vi } from "vitest";
 
 describe("ImageEditor", () => {
   const imageUrl = "https://example.com/image.jpg";
-  const onChange = vi.fn();
+  const onChange = vitest.fn();
 
   beforeEach(() => {
     onChange.mockClear();
-    vi.clearAllMocks();
+    vitest.clearAllMocks();
   });
 
   it("should render the image editor correctly", () => {

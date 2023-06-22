@@ -1,12 +1,11 @@
 import { MemoryRouter, useNavigate } from "react-router-dom";
-import { afterEach, beforeEach, vi } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 import Searchbar from "../Searchbar";
 
-vi.mock("react-router-dom", async () => ({
-  ...(await vi.importActual("react-router-dom")),
-  useNavigate: vi.fn(),
+vitest.mock("react-router-dom", async () => ({
+  ...(await vitest.importActual("react-router-dom")),
+  useNavigate: vitest.fn(),
 }));
 
 describe("Searchbar", () => {
@@ -19,7 +18,7 @@ describe("Searchbar", () => {
   });
 
   afterEach(() => {
-    vi.clearAllMocks();
+    vitest.clearAllMocks();
   });
 
   it("should render the searchbar correctly", () => {
@@ -39,7 +38,7 @@ describe("Searchbar", () => {
   });
 
   it("should navigate to the search results page on form submission", () => {
-    const navigateMock = vi.fn();
+    const navigateMock = vitest.fn();
     useNavigate.mockImplementation(() => navigateMock);
 
     const searchForm = screen.getByTestId("search-form");
@@ -52,7 +51,7 @@ describe("Searchbar", () => {
   });
 
   it("should not navigate on form submission if search input is empty", () => {
-    const navigateMock = vi.fn();
+    const navigateMock = vitest.fn();
     useNavigate.mockImplementation(() => navigateMock);
 
     const searchForm = screen.getByTestId("search-form");

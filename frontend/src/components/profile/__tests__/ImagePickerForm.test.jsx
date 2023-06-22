@@ -1,11 +1,10 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 
 import ImagePickerForm from "../ImagePickerForm";
-import { vi } from "vitest";
 
 describe("ImagePickerForm", () => {
   const defaultImage = "default-image.jpg";
-  const onSubmitMock = vi.fn();
+  const onSubmitMock = vitest.fn();
 
   it("should render the image picker form correctly", () => {
     render(

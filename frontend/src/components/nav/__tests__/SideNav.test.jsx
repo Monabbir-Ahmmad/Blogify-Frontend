@@ -1,4 +1,3 @@
-import { beforeEach, expect, vi } from "vitest";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 import { AuthContext } from "../../../contexts/AuthContext";
@@ -12,8 +11,8 @@ const links = [
   { to: "/profile", icon: RiCloseLine, text: "Profile", authRequired: true },
 ];
 
-const toggleDarkMode = vi.fn();
-const toggleMenu = vi.fn();
+const toggleDarkMode = vitest.fn();
+const toggleMenu = vitest.fn();
 
 const authContextValue = { isAuthenticated: false, authData: null };
 const themeContextValue = { darkMode: false, toggleDarkMode };
@@ -122,7 +121,7 @@ describe("SideNav", () => {
   });
 
   it("should handle the onLogout function", () => {
-    const onLogout = vi.fn();
+    const onLogout = vitest.fn();
 
     render(
       <BrowserRouter>

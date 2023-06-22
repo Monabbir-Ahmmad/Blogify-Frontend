@@ -1,13 +1,12 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 
 import Slider from "../Slider";
-import { vi } from "vitest";
 
 describe("Slider", () => {
   it("should render the Slider component with label and value", () => {
     const label = "Brightness";
     const value = 50;
-    const onChange = vi.fn();
+    const onChange = vitest.fn();
 
     render(
       <Slider
@@ -35,7 +34,7 @@ describe("Slider", () => {
       <Slider
         label="Opacity"
         value={50}
-        onChange={vi.fn()}
+        onChange={vitest.fn()}
         min={0}
         max={100}
         step={1}

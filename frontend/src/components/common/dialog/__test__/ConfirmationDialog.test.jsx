@@ -1,11 +1,10 @@
-import { afterEach, vi } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 import ConfirmationDialog from "../ConfirmationDialog";
 
 describe("ConfirmationDialog", () => {
-  const onCancel = vi.fn();
-  const onConfirm = vi.fn();
+  const onCancel = vitest.fn();
+  const onConfirm = vitest.fn();
   const title = "Delete Item";
   const description = "Are you sure you want to delete this item?";
   const confirmText = "Confirm";
@@ -25,7 +24,7 @@ describe("ConfirmationDialog", () => {
   });
 
   afterEach(() => {
-    vi.clearAllMocks();
+    vitest.clearAllMocks();
   });
 
   it("should render the confirmation dialog correctly", () => {
