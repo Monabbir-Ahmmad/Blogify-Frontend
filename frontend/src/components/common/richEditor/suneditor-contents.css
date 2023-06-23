@@ -1,30 +1,38 @@
-/* All classes used must begin with "__se__". */
-/* used color #000 , #fff , #CCC, #f9f9f9 */
-/* font color #333, background color: #fff */
-/* grey color #e1e1e1 , #d1d1d1 , #c1c1c1 , #b1b1b1 */
-/* blue color #c7deff , #80bdff , #3f9dff , #4592ff */
-
 :root {
-  --color-black: #000;
-  --color-white: #fff;
-  --color-light-gray: #ccc;
-  --color-lighter-gray: #f9f9f9;
-  --color-dark-gray: #333;
   --color-lighter-blue: #c7deff;
   --color-light-blue: #80bdff;
   --color-blue: #3f9dff;
   --color-darker-blue: #4592ff;
   --color-lighter-light-gray: #e1e1e1;
-  --color-light-gray-2: #d1d1d1;
-  --color-gray: #c1c1c1;
-  --color-dark-gray-2: #b1b1b1;
   --color-link: #004cff;
   --color-link-hover: #0093ff;
   --color-link-background: #e8f7ff;
 }
 
+:root {
+  --color-border: #e3e5e8;
+  --color-dark-bg: #f1f5f9;
+}
+
+:root[class*="dark"] {
+  --color-border: #505662;
+  --color-dark-bg: #262626;
+}
+
+.unstyled * {
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.unstyled iframe {
+  width: 0 !important;
+  height: 0 !important;
+}
+
 /* suneditor contents */
 .sun-editor-editable {
+  color: inherit;
   word-break: normal;
   word-wrap: break-word;
   margin: 0;
@@ -99,10 +107,9 @@
   display: block;
   padding: 8px;
   margin: 0 0 10px;
-  color: #666;
   line-height: 1.45;
-  background-color: var(--color-lighter-gray);
-  border: 1px solid var(--color-lighter-light-gray);
+  background-color: var(--color-dark-bg);
+  border: 1px solid var(--color-border);
   border-radius: 2px;
   white-space: pre-wrap !important;
   word-wrap: break-word;
@@ -193,7 +200,7 @@
   display: block;
   font-family: inherit;
   font-size: inherit;
-  color: #999;
+  color: #898f9a;
   margin-block-start: 1em;
   margin-block-end: 1em;
   margin-inline-start: 0;
@@ -202,20 +209,20 @@
   border-width: 0;
   padding-top: 0;
   padding-bottom: 0;
-  border-color: var(--color-dark-gray-2);
+  border-color: var(--color-border);
   padding-left: 20px;
   padding-right: 5px;
   border-left-width: 5px;
   border-right-width: 0px;
 }
 .sun-editor-editable blockquote blockquote {
-  border-color: var(--color-gray);
+  border-color: var(--color-border);
 }
 .sun-editor-editable blockquote blockquote blockquote {
-  border-color: var(--color-light-gray-2);
+  border-color: var(--color-border);
 }
 .sun-editor-editable blockquote blockquote blockquote blockquote {
-  border-color: var(--color-lighter-light-gray);
+  border-color: var(--color-border);
 }
 /* RTL - blockquote */
 .sun-editor-editable.se-rtl blockquote {
@@ -290,7 +297,7 @@
 .sun-editor-editable hr {
   display: flex;
   border-width: 1px 0 0;
-  border-color: var(--color-light-gray);
+  border-color: var(--color-border);
   border-image: initial;
   height: 1px;
 }
@@ -313,7 +320,7 @@
 .sun-editor-editable table {
   display: table;
   table-layout: auto !important;
-  border: 1px solid var(--color-light-gray);
+  border: 1px solid var(--color-border);
   width: 100%;
   max-width: 100%;
   margin: 0 0 10px;
@@ -328,17 +335,17 @@
 }
 
 .sun-editor-editable table thead {
-  border-bottom: 2px solid var(--color-dark-gray);
+  border-bottom: 2px solid var(--color-border);
 }
 .sun-editor-editable table tr {
-  border: 1px solid #efefef;
+  border: 1px solid var(--color-border);
 }
 .sun-editor-editable table th {
-  background-color: #f3f3f3;
+  background-color: var(--color-dark-bg);
 }
 .sun-editor-editable table th,
 .sun-editor-editable table td {
-  border: 1px solid var(--color-lighter-light-gray);
+  border: 1px solid var(--color-border);
   padding: 0.4em;
   background-clip: padding-box;
 }
@@ -464,7 +471,7 @@
 .sun-editor-editable figure figcaption {
   padding: 1em 0.5em;
   margin: 0;
-  background-color: var(--color-lighter-gray);
+  background-color: var(--color-dark-bg);
   outline: none;
 }
 .sun-editor-editable figure figcaption p {
@@ -482,7 +489,7 @@
 /** video */
 .sun-editor-editable .se-video-container iframe,
 .sun-editor-editable .se-video-container video {
-  outline: 1px solid #9e9e9e;
+  outline: 1px solid var(--color-border);
   position: absolute;
   top: 0;
   left: 0;
@@ -576,22 +583,22 @@
 /** -- Paragraph styles custom -- */
 /* Bordered */
 .sun-editor-editable .__se__p-bordered {
-  border-top: solid 1px var(--color-dark-gray-2);
-  border-bottom: solid 1px var(--color-dark-gray-2);
+  border-top: solid 1px var(--color-border);
+  border-bottom: solid 1px var(--color-border);
   padding: 4px 0;
 }
 /* Spaced */
 .sun-editor-editable .__se__p-spaced {
-  letter-spacing: 1px;
+  letter-spacing: 6px;
 }
 /* Neon (https://codepen.io/GeorgePark/pen/MrjbEr) */
 .sun-editor-editable .__se__p-neon {
   font-weight: 200;
   font-style: italic;
-  background: var(--color-black);
-  color: var(--color-white);
+  background: #000;
+  color: #fff;
   padding: 6px 4px;
-  border: 2px solid var(--color-white);
+  border: 2px solid #fff;
   border-radius: 6px;
   text-transform: uppercase;
   animation: neonFlicker 1.5s infinite alternate;
@@ -605,11 +612,10 @@
   54%,
   56%,
   100% {
-    text-shadow: -0.2rem -0.2rem 1rem var(--color-white),
-      0.2rem 0.2rem 1rem var(--color-white), 0 0 2px #f40, 0 0 4px #f40,
-      0 0 6px #f40, 0 0 8px #f40, 0 0 10px #f40;
-    box-shadow: 0 0 0.5px var(--color-white), inset 0 0 0.5px var(--color-white),
-      0 0 2px #08f, inset 0 0 2px #08f, 0 0 4px #08f, inset 0 0 4px #08f;
+    text-shadow: -0.2rem -0.2rem 1rem #fff, 0.2rem 0.2rem 1rem #fff,
+      0 0 2px #f40, 0 0 4px #f40, 0 0 6px #f40, 0 0 8px #f40, 0 0 10px #f40;
+    box-shadow: 0 0 0.5px #fff, inset 0 0 0.5px #fff, 0 0 2px #08f,
+      inset 0 0 2px #08f, 0 0 4px #08f, inset 0 0 4px #08f;
   }
   20%,
   24%,
@@ -622,14 +628,14 @@
 /* -- Text styles custom -- */
 /* Shadow */
 .sun-editor-editable .__se__t-shadow {
-  text-shadow: -0.2rem -0.2rem 1rem var(--color-white),
-    0.2rem 0.2rem 1rem var(--color-white), 0 0 0.2rem #999, 0 0 0.4rem #888,
-    0 0 0.6rem #777, 0 0 0.8rem #666, 0 0 1rem #555;
+  text-shadow: -0.2rem -0.2rem 1rem #fff, 0.2rem 0.2rem 1rem #fff,
+    0 0 0.2rem #999, 0 0 0.4rem #888, 0 0 0.6rem #777, 0 0 0.8rem #666,
+    0 0 1rem #555;
 }
 /* Code */
 .sun-editor-editable .__se__t-code {
-  color: #666;
-  background-color: rgba(27, 31, 35, 0.05);
+  background-color: var(--color-dark-bg);
+  opacity: 0.7;
   border-radius: 6px;
   padding: 0.2em 0.4em;
 }
