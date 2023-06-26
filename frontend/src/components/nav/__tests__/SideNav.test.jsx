@@ -96,7 +96,7 @@ describe("SideNav", () => {
     expect(toggleMenu).toHaveBeenCalledTimes(1);
   });
 
-  it("should handle the toggleDarkMode function", () => {
+  it("should handle the toggleDarkMode function",async () => {
     render(
       <BrowserRouter>
         <AuthContext.Provider value={authContextValue}>
@@ -115,7 +115,7 @@ describe("SideNav", () => {
 
     expect(toggleDarkMode).toHaveBeenCalledTimes(1);
 
-    waitFor(() => {
+   await waitFor(() => {
       expect(document.documentElement.classList.contains("dark")).toBe(true);
     });
   });

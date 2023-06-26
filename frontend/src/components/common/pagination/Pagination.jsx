@@ -82,7 +82,10 @@ function Pagination({
   };
 
   return (
-    <nav className="flex justify-between border-t border-divider font-semibold">
+    <nav
+      data-testid="pagination"
+      className="flex justify-between border-t border-divider font-semibold"
+    >
       <button
         data-testid="previous-button"
         disabled={currentPage <= 1}
