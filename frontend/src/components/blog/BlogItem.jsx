@@ -71,7 +71,10 @@ function BlogItem({ blog }) {
   };
 
   return (
-    <div className="relative flex flex-col justify-between gap-3 w-full h-80 rounded-3xl bg-paper shadow-md shadow-shadow hover:shadow-lg transition-shadow">
+    <div
+      data-testid="blog-item"
+      className="relative flex flex-col justify-between gap-3 w-full h-80 rounded-3xl bg-paper shadow-md shadow-shadow hover:shadow-lg transition-shadow"
+    >
       <div className="flex p-2 gap-2 justify-between z-10">
         <div className="py-1 inline-flex items-center divide-x-2 divide-divider rounded-full bg-paper shadow-md shadow-shadow">
           <span

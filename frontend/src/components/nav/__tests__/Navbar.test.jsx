@@ -31,7 +31,6 @@ const renderWithWrapper = (
 };
 
 describe("Navbar", () => {
-  const toggleDarkMode = vitest.fn();
   const onLogout = vitest.fn();
 
   afterEach(() => {

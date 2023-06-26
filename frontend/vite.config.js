@@ -22,7 +22,7 @@ export default defineConfig(({ mode }) => {
     test: {
       globals: true,
       environment: "jsdom",
-      setupFiles: "./testSetup.js",
+      setupFiles: "setupTests.js",
       coverage: {
         functions: 100,
         lines: 100,

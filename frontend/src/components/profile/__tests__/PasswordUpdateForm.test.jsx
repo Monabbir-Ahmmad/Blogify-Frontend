@@ -92,7 +92,7 @@ describe("PasswordUpdateForm", () => {
     });
     fireEvent.click(confirmChangesButton);
 
-    waitFor(() => {
+    await waitFor(() => {
       expect(onSubmitMock).toHaveBeenCalled();
     });
   });
