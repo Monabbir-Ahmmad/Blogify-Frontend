@@ -54,7 +54,7 @@ describe("SignupPage", () => {
     vitest.clearAllMocks();
   });
 
-  it("should render the SignupForm component", () => {
+  it("should render the form component", () => {
     renderWithWrapper(<SignupPage />);
 
     expect(screen.getByTestId("signup-form")).toBeInTheDocument();
