@@ -112,4 +112,12 @@ describe("SignupPage", () => {
 
     expect(window.location.pathname).toBe("/");
   });
+
+  it("should navigate to '/' when the use is authenticated", () => {
+    renderWithWrapper(<SignupPage />, {
+      authContextData: { isAuthenticated: true },
+    });
+
+    expect(mockUseNavigate).toHaveBeenCalledWith("/", { replace: true });
+  });
 });

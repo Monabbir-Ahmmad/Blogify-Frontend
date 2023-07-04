@@ -10,7 +10,10 @@ function ErrorPage({
   linkText = "Take me home!",
 }) {
   return (
-    <main className="p-10 flex flex-col items-center h-full">
+    <main
+      data-testid="error-page"
+      className="p-10 flex flex-col items-center h-full"
+    >
       <object
         role="img"
         type="image/svg+xml"

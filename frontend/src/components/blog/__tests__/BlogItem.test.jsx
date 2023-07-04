@@ -1,10 +1,9 @@
-import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
 import { fireEvent, render, screen } from "@testing-library/react";
 
 import { AuthContext } from "../../../contexts/AuthContext";
 import BlogItem from "../BlogItem";
+import { BrowserRouter } from "react-router-dom";
 import { ModalContextProvider } from "../../../contexts/ModalContext";
 import useBlogAction from "../../../hooks/useBlogAction";
 
@@ -15,6 +14,8 @@ const authData = {
 const blog = {
   id: 1,
   title: "Test Blog",
+  content: "<p>Test content</p>",
+  createdAt: "2023-06-19T12:00:00.000Z",
   likes: [],
   commentCount: 0,
   user: {
@@ -22,8 +23,6 @@ const blog = {
     name: "John Doe",
     profileImage: "profile.jpg",
   },
-  createdAt: "2023-06-19T12:00:00.000Z",
-  content: "<p>Test content</p>",
 };
 
 vitest.mock("../../../hooks/useBlogAction", () => ({
