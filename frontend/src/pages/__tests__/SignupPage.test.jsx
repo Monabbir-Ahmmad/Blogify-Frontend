@@ -4,7 +4,7 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 import { AuthContext } from "../../contexts/AuthContext";
 import { ModalContextProvider } from "../../contexts/ModalContext";
-import SigninPage from "../SigninPage";
+import SignupPage from "../SignupPage";
 import { ThemeContextProvider } from "../../contexts/ThemeContext";
 import useAuthAction from "../../hooks/useAuthAction";
 
@@ -35,18 +35,18 @@ vitest.mock("react-router-dom", async () => ({
 
 vitest.mock("../../hooks/useAuthAction", () => ({
   default: vitest.fn(() => ({
-    signinMutation: { mutate: vitest.fn() },
+    signupMutation: { mutate: vitest.fn() },
   })),
 }));
 
-describe("SigninPage", () => {
+describe("SignupPage", () => {
   const mockUseNavigate = vitest.fn();
-  const mockSigninMutate = vitest.fn();
+  const mockSignupMutate = vitest.fn();
 
   beforeEach(() => {
     useNavigate.mockImplementation(() => mockUseNavigate);
     useAuthAction.mockImplementation(() => ({
-      signinMutation: { mutate: mockSigninMutate },
+      signupMutation: { mutate: mockSignupMutate },
     }));
   });
 
@@ -54,51 +54,58 @@ describe("SigninPage", () => {
     vitest.clearAllMocks();
   });
 
-  it("should render the SigninForm component", () => {
-    renderWithWrapper(<SigninPage />);
+  it("should render the SignupForm component", () => {
+    renderWithWrapper(<SignupPage />);
 
-    expect(screen.getByTestId("signin-form")).toBeInTheDocument();
+    expect(screen.getByTestId("signup-form")).toBeInTheDocument();
   });
 
-  it("should call signinMutation when the form is submitted", async () => {
-    renderWithWrapper(<SigninPage />);
+  it("should call signupMutation when the form is submitted", async () => {
+    renderWithWrapper(<SignupPage />);
 
+    const nameInput = screen.getByLabelText("Name");
     const emailInput = screen.getByLabelText("Email");
     const passwordInput = screen.getByLabelText("Password");
-    const signinButton = screen.getByText("Sign In");
+    const confirmPasswordInput = screen.getByLabelText("Confirm Password");
+    const signupButton = screen.getByText("Create Account");
 
+    fireEvent.change(nameInput, { target: { value: "Test User" } });
     fireEvent.change(emailInput, { target: { value: "test@example.com" } });
     fireEvent.change(passwordInput, { target: { value: "Password1!" } });
-    fireEvent.click(signinButton);
+    fireEvent.change(confirmPasswordInput, {
+      target: { value: "Password1!" },
+    });
+    fireEvent.click(signupButton);
 
     await waitFor(() => {
-      expect(mockSigninMutate).toHaveBeenCalledWith({
+      expect(mockSignupMutate).toHaveBeenCalledWith({
+        name: "Test User",
         email: "test@example.com",
         password: "Password1!",
-        remember: false,
+        confirmPassword: "Password1!",
       });
     });
   });
 
-  it("should navigate to '/' when the user is authenticated", () => {
-    renderWithWrapper(<SigninPage />, {
+  it("should navigate to '/' when the user is created", () => {
+    renderWithWrapper(<SignupPage />, {
       authContextData: { isAuthenticated: true },
     });
 
     expect(mockUseNavigate).toHaveBeenCalledWith("/", { replace: true });
   });
 
-  it("should navigate to '/signup' when the 'Sign Up' link is clicked", () => {
-    renderWithWrapper(<SigninPage />);
+  it("should navigate to '/signin' when the 'Sign In' link is clicked", () => {
+    renderWithWrapper(<SignupPage />);
 
-    const signupLink = screen.getByText("Sign Up");
-    fireEvent.click(signupLink);
+    const signinLink = screen.getByText("Sign In");
+    fireEvent.click(signinLink);
 
-    expect(window.location.pathname).toBe("/signup");
+    expect(window.location.pathname).toBe("/signin");
   });
 
   it("should navigate to '/' when the 'continue as Guest' link is clicked", () => {
-    renderWithWrapper(<SigninPage />);
+    renderWithWrapper(<SignupPage />);
 
     const continueAsGuestLink = screen.getByText("continue as Guest");
     fireEvent.click(continueAsGuestLink);
