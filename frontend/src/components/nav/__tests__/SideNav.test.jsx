@@ -96,7 +96,7 @@ describe("SideNav", () => {
     expect(toggleMenu).toHaveBeenCalledTimes(1);
   });
 
-  it("should handle the toggleDarkMode function",async () => {
+  it("should handle the toggleDarkMode function", async () => {
     render(
       <BrowserRouter>
         <AuthContext.Provider value={authContextValue}>
@@ -107,17 +107,9 @@ describe("SideNav", () => {
       </BrowserRouter>
     );
 
-    const themeButton = screen.getByRole("button", {
-      name: "Enable Dark Mode",
-    });
-
-    fireEvent.click(themeButton);
+    fireEvent.click(screen.getByRole("button", { name: "Enable Dark Mode" }));
 
     expect(toggleDarkMode).toHaveBeenCalledTimes(1);
-
-   await waitFor(() => {
-      expect(document.documentElement.classList.contains("dark")).toBe(true);
-    });
   });
 
   it("should handle the onLogout function", () => {

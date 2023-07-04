@@ -1,9 +1,4 @@
-import {
-  BrowserRouter,
-  useNavigate,
-  useParams,
-  useSearchParams,
-} from "react-router-dom";
+import { BrowserRouter, useNavigate, useParams } from "react-router-dom";
 import { ModalContextProvider, useModal } from "../../contexts/ModalContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { fireEvent, render, screen } from "@testing-library/react";
@@ -38,7 +33,6 @@ vitest.mock("react-router-dom", async () => ({
   ...(await vitest.importActual("react-router-dom")),
   useParams: vitest.fn(),
   useNavigate: vitest.fn(),
-  useSearchParams: vitest.fn(),
 }));
 
 vitest.mock("react-toastify", async () => ({
@@ -81,12 +75,7 @@ describe("BlogPage", () => {
   };
   const mockParams = { blogId: 1 };
   const mockNavigate = vitest.fn();
-  const mockUseSearchParams = [
-    {
-      get: vitest.fn(() => 1),
-    },
-    vitest.fn(),
-  ];
+
   const mockFetchBlog = vitest.fn(() => ({
     data: mockData,
     isError: false,
@@ -100,7 +89,6 @@ describe("BlogPage", () => {
     Element.prototype.scrollIntoView = vitest.fn();
     useParams.mockReturnValue(mockParams);
     useNavigate.mockReturnValue(mockNavigate);
-    useSearchParams.mockReturnValue(mockUseSearchParams);
     useBlogAction.mockImplementation(() => ({
       fetchBlog: mockFetchBlog,
       blogLikeMutation: mockBlogLikeMutation,

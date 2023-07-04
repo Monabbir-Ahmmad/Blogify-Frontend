@@ -65,7 +65,11 @@ function CommentPage({ blogId, toggleCommentView, open = false }) {
         <div className="inline-flex items-center mb-4">
           <h1 className="text-xl font-semibold">Comments</h1>
 
-          <button className="ml-auto icon-btn-base" onClick={toggleCommentView}>
+          <button
+            data-testid="close-button"
+            className="ml-auto icon-btn-base"
+            onClick={toggleCommentView}
+          >
             <CloseIcon size={20} />
           </button>
         </div>
