@@ -1,16 +1,14 @@
-import { useContext, useState } from "react";
-
 import { AuthContext } from "../contexts/AuthContext";
 import BlogWriteForm from "../components/blog/BlogWriteForm";
 import ErrorPage from "./ErrorPage";
 import loginRequiredImg from "../assets/loginRequired.svg";
 import { toast } from "react-toastify";
 import useBlogAction from "../hooks/useBlogAction";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 function BlogWritingPage() {
   const navigate = useNavigate();
-  const [resetForm, setResetForm] = useState(false);
   const { isAuthenticated } = useContext(AuthContext);
 
   const { blogCreateMutation } = useBlogAction();
@@ -19,7 +17,6 @@ function BlogWritingPage() {
     blogCreateMutation.mutate(data, {
       onSuccess: (blog) => {
         toast.success("Blog created successfully");
-        setResetForm(true);
         navigate(`/blog/${blog.id}`);
       },
     });
@@ -38,11 +35,7 @@ function BlogWritingPage() {
   return (
     <div className="w-full p-4">
       <div className="max-w-5xl mx-auto">
-        <BlogWriteForm
-          onSubmit={onSubmit}
-          resetForm={resetForm}
-          onFormReset={() => setResetForm(false)}
-        />
+        <BlogWriteForm onSubmit={onSubmit} />
       </div>
     </div>
   );

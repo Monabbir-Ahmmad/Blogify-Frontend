@@ -1,4 +1,3 @@
-import { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { AuthContext } from "../contexts/AuthContext";
@@ -8,11 +7,11 @@ import forbiddenImg from "../assets/forbidden.svg";
 import notFoundImg from "../assets/notFound.svg";
 import { toast } from "react-toastify";
 import useBlogAction from "../hooks/useBlogAction";
+import { useContext } from "react";
 
 function BlogEditPage() {
   const navagate = useNavigate();
   const { blogId } = useParams();
-  const [resetForm, setResetForm] = useState(false);
   const { authData } = useContext(AuthContext);
 
   const { fetchBlog, blogUpdateMutation } = useBlogAction();
@@ -25,7 +24,6 @@ function BlogEditPage() {
       {
         onSuccess: () => {
           toast.success("Blog updated successfully");
-          setResetForm(true);
           navagate(`/blog/${blogId}`);
         },
       }
@@ -54,8 +52,6 @@ function BlogEditPage() {
       <div className="max-w-5xl mx-auto">
         <BlogWriteForm
           onSubmit={onSubmit}
-          resetForm={resetForm}
-          onFormReset={() => setResetForm(false)}
           isEditMode={true}
           defaultValues={blogToUpdate}
         />
