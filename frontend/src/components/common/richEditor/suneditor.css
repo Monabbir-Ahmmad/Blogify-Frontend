@@ -235,8 +235,8 @@
 
 /* arrow down */
 .sun-editor .se-arrow.se-arrow-down {
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
   margin-left: -11px;
   border-bottom-width: 0;
   border-top-color: #dadada;
@@ -545,7 +545,7 @@
 /* sticky toolbar */
 .sun-editor .se-toolbar.se-toolbar-sticky {
   position: fixed;
-  top: 0px;
+  top: 0;
 }
 
 .sun-editor .se-toolbar-sticky-dummy {
@@ -1051,7 +1051,7 @@
   width: auto;
   height: 33px;
   font-size: 12px;
-  margin: 1px 0 1px 0;
+  margin: 1px 0;
   padding: 0;
   border-radius: 0.25rem;
   border: 1px solid #ccc;
@@ -1332,7 +1332,7 @@
 
 .sun-editor .se-dialog .se-dialog-inner .se-dialog-header {
   height: 50px;
-  padding: 6px 15px 6px 15px;
+  padding: 6px 15px;
   border-bottom: 1px solid #e5e5e5;
 }
 
@@ -1376,18 +1376,14 @@
   width: 100%;
 }
 
+.sun-editor .se-dialog .se-dialog-inner .se-dialog-size-text .size-h,
 .sun-editor .se-dialog .se-dialog-inner .se-dialog-size-text .size-w {
   width: 70px;
   text-align: center;
 }
 
-.sun-editor .se-dialog .se-dialog-inner .se-dialog-size-text .size-h {
-  width: 70px;
-  text-align: center;
-}
-
 .sun-editor .se-dialog .se-dialog-inner .se-dialog-size-x {
-  margin: 0 8px 0 8px;
+  margin: 0 8px;
   width: 25px;
   text-align: center;
 }
@@ -2110,7 +2106,7 @@
 .sun-editor .se-file-browser .se-file-browser-header {
   height: auto;
   min-height: 50px;
-  padding: 6px 15px 6px 15px;
+  padding: 6px 15px;
   border-bottom: 1px solid #e5e5e5;
 }
 
@@ -2388,9 +2384,8 @@
   bottom: 100%;
   left: 50%;
   margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent transparent #333 transparent;
+  border: 5px solid transparent;
+  border-bottom-color: #333;
 }
 
 .sun-editor .se-tooltip:hover .se-tooltip-inner {
@@ -2438,9 +2433,7 @@
   margin: -1px 0 0 10px;
 }
 /* button - se-menu-list - li */
-.sun-editor.se-rtl .se-menu-list:not(.se-menu-dir-fix) {
-  float: right;
-}
+.sun-editor.se-rtl .se-menu-list:not(.se-menu-dir-fix),
 .sun-editor.se-rtl .se-menu-list:not(.se-menu-dir-fix) li {
   float: right;
 }

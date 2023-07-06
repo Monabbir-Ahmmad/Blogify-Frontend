@@ -1,4 +1,4 @@
-import "./suneditor-contents.css";
+import "./suneditor-content.css";
 
 import { removeHtmlStyles } from "../../../utils/commonUtil";
 import { twMerge } from "tailwind-merge";

@@ -1,4 +1,5 @@
-import "./RichEditor.css";
+import "./suneditor.css";
+import "./suneditor-content.css";
 
 import { forwardRef, useEffect, useRef } from "react";
 
