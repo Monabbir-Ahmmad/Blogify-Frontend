@@ -2550,7 +2550,7 @@
 /* suneditor contents */
 
 .sun-editor-editable {
-  line-height: 1.5;
+  color: inherit;
   word-break: normal;
   word-wrap: break-word;
   margin: 0;
@@ -2570,31 +2570,20 @@
   direction: rtl;
 }
 
-.sun-editor-editable audio,
-.sun-editor-editable figcaption,
-.sun-editor-editable figure,
-.sun-editor-editable iframe,
-.sun-editor-editable img,
+.sun-editor-editable .se-component > figure {
+  direction: initial;
+}
+
+/** controllers on tag */
 .sun-editor-editable td,
 .sun-editor-editable th,
-.sun-editor-editable video {
+.sun-editor-editable figure,
+.sun-editor-editable figcaption,
+.sun-editor-editable img,
+.sun-editor-editable iframe,
+.sun-editor-editable video,
+.sun-editor-editable audio {
   position: relative;
-}
-
-.sun-editor-editable .__se__float-left {
-  float: left;
-}
-
-.sun-editor-editable .__se__float-right {
-  float: right;
-}
-
-.sun-editor-editable .__se__float-center {
-  float: center;
-}
-
-.sun-editor-editable .__se__float-none {
-  float: none;
 }
 
 /** span */
@@ -2646,10 +2635,6 @@
 }
 
 /* ol, ul */
-.sun-editor-editable ol {
-  list-style-type: decimal;
-}
-
 .sun-editor-editable ol,
 .sun-editor-editable ul {
   list-style-position: outside;
@@ -2661,16 +2646,18 @@
   padding-inline-start: 40px;
 }
 
+.sun-editor-editable ol {
+  list-style-type: decimal;
+}
+
 .sun-editor-editable ul {
   list-style-type: disc;
 }
-
 .sun-editor-editable li {
   display: list-item;
   text-align: -webkit-match-parent;
   margin-bottom: 5px;
 }
-
 /* nested list ol, ul */
 .sun-editor-editable ol ol,
 .sun-editor-editable ol ul,
@@ -2678,23 +2665,19 @@
 .sun-editor-editable ul ul {
   margin: 0;
 }
-
 .sun-editor-editable ol ol,
 .sun-editor-editable ul ol {
   list-style-type: lower-alpha;
 }
-
 .sun-editor-editable ol ol ol,
 .sun-editor-editable ul ol ol,
 .sun-editor-editable ul ul ol {
   list-style-type: upper-roman;
 }
-
 .sun-editor-editable ul ul,
 .sun-editor-editable ol ul {
   list-style-type: circle;
 }
-
 .sun-editor-editable ul ul ul,
 .sun-editor-editable ol ul ul,
 .sun-editor-editable ol ol ul {
@@ -2707,11 +2690,9 @@
   font-size: 75%;
   line-height: 0;
 }
-
 .sun-editor-editable sub {
   vertical-align: sub;
 }
-
 .sun-editor-editable sup {
   vertical-align: super;
 }
@@ -2746,19 +2727,15 @@
   padding-right: 5px;
   border-left-width: 5px;
 }
-
 .sun-editor-editable blockquote blockquote {
   border-color: var(--color-border);
 }
-
 .sun-editor-editable blockquote blockquote blockquote {
   border-color: var(--color-border);
 }
-
 .sun-editor-editable blockquote blockquote blockquote blockquote {
   border-color: var(--color-border);
 }
-
 /* RTL - blockquote */
 .sun-editor-editable.se-rtl blockquote {
   padding-left: 5px;
@@ -2767,6 +2744,7 @@
   border-right-width: 5px;
 }
 
+/* h1 */
 .sun-editor-editable h1 {
   display: block;
   font-size: 2em;
@@ -2776,7 +2754,7 @@
   margin-inline-end: 0px;
   font-weight: bold;
 }
-
+/* h2 */
 .sun-editor-editable h2 {
   display: block;
   font-size: 1.5em;
@@ -2786,7 +2764,7 @@
   margin-inline-end: 0px;
   font-weight: bold;
 }
-
+/* h3 */
 .sun-editor-editable h3 {
   display: block;
   font-size: 1.17em;
@@ -2796,7 +2774,7 @@
   margin-inline-end: 0px;
   font-weight: bold;
 }
-
+/* h4 */
 .sun-editor-editable h4 {
   display: block;
   font-size: 1em;
@@ -2806,7 +2784,7 @@
   margin-inline-end: 0px;
   font-weight: bold;
 }
-
+/* h5 */
 .sun-editor-editable h5 {
   display: block;
   font-size: 0.83em;
@@ -2816,7 +2794,7 @@
   margin-inline-end: 0px;
   font-weight: bold;
 }
-
+/* h6 */
 .sun-editor-editable h6 {
   display: block;
   font-size: 0.67em;
@@ -2827,6 +2805,7 @@
   font-weight: bold;
 }
 
+/* hr */
 .sun-editor-editable hr {
   display: flex;
   border-width: 1px 0 0;
@@ -2834,25 +2813,22 @@
   border-image: initial;
   height: 1px;
 }
-
 .sun-editor-editable hr.__se__solid {
   border-style: solid none none;
 }
-
 .sun-editor-editable hr.__se__dotted {
   border-style: dotted none none;
 }
-
 .sun-editor-editable hr.__se__dashed {
   border-style: dashed none none;
 }
-
 .sun-editor-editable hr.on {
   border-color: var(--color-darker-blue);
   -webkit-box-shadow: 0 0 0 0.1rem var(--color-lighter-blue);
   box-shadow: 0 0 0 0.1rem var(--color-lighter-blue);
 }
 
+/* table */
 .sun-editor-editable table {
   display: table;
   table-layout: auto !important;
@@ -2865,6 +2841,7 @@
   border-collapse: collapse;
 }
 
+/* RTL - table */
 .sun-editor-editable.se-rtl table {
   margin: 0 0 10px auto;
 }
@@ -2884,28 +2861,24 @@
   padding: 0.4em;
   background-clip: padding-box;
 }
-
+/** table style class */
 .sun-editor-editable table.se-table-size-auto {
   width: auto !important;
 }
-
 .sun-editor-editable table.se-table-size-100 {
   width: 100% !important;
 }
-
 .sun-editor-editable table.se-table-layout-auto {
   table-layout: auto !important;
 }
-
 .sun-editor-editable table.se-table-layout-fixed {
   table-layout: fixed !important;
 }
-
+/** table - select class */
 .sun-editor-editable table td.se-table-selected-cell,
 .sun-editor-editable table th.se-table-selected-cell {
   outline: 1px double var(--color-darker-blue);
 }
-
 .sun-editor-editable.se-disabled * {
   user-select: none;
   -o-user-select: none;
@@ -2915,22 +2888,23 @@
   -ms-user-select: none;
 }
 
+/** component (image, iframe video) */
 .sun-editor-editable .se-component {
   display: flex;
   padding: 1px;
   margin: 0 0 10px;
 }
-
 .sun-editor-editable[contenteditable="true"] .se-component {
   outline: 1px dashed var(--color-lighter-light-gray);
 }
-
+/** component copy effect */
 .sun-editor-editable[contenteditable="true"] .se-component.se-component-copy {
   -webkit-box-shadow: 0 0 0 0.2rem var(--color-light-blue);
   box-shadow: 0 0 0 0.2rem var(--color-blue);
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
+/* float */
 .sun-editor-editable .__se__float-left {
   float: left;
   margin-right: 4px;
@@ -2946,6 +2920,7 @@
   float: none;
 }
 
+/** image, video .. */
 .sun-editor-editable img,
 .sun-editor-editable iframe,
 .sun-editor-editable video,
@@ -2957,7 +2932,7 @@
   height: auto;
   max-width: 100%;
 }
-
+/*  image, video - select index  */
 .sun-editor-editable[contenteditable="true"]:not(.se-read-only) figure::after {
   position: absolute;
   content: "";
@@ -2970,19 +2945,16 @@
   display: block;
   background: rgba(0, 0, 0, 0);
 }
-
 .sun-editor-editable[contenteditable="true"] figure a,
 .sun-editor-editable[contenteditable="true"] figure img,
 .sun-editor-editable[contenteditable="true"] figure iframe,
 .sun-editor-editable[contenteditable="true"] figure video {
   z-index: 0;
 }
-
 .sun-editor-editable[contenteditable="true"] figure figcaption {
   display: block;
   z-index: 2;
 }
-
 .sun-editor-editable[contenteditable="true"] figure figcaption:focus {
   border-color: var(--color-light-blue);
   outline: 0;
@@ -2990,44 +2962,43 @@
   box-shadow: 0 0 0 0.2rem var(--color-lighter-blue);
 }
 
+/** image, video iframe figure cover */
 .sun-editor-editable .se-image-container,
 .sun-editor-editable .se-video-container {
   width: auto;
   height: auto;
   max-width: 100%;
 }
-
 .sun-editor-editable figure {
   display: block;
   outline: none;
   padding: 0;
   margin: 0;
 }
-
 .sun-editor-editable .__se__float-left figure,
 .sun-editor-editable .__se__float-right figure,
 .sun-editor-editable .__se__float-center figure {
   margin: auto !important;
 }
-
 .sun-editor-editable figure figcaption {
   padding: 1em 0.5em;
   margin: 0;
   background-color: var(--color-dark-bg);
   outline: none;
 }
-
 .sun-editor-editable figure figcaption p {
   line-height: 2;
   margin: 0;
 }
 
+/* image */
 .sun-editor-editable .se-image-container a img {
   padding: 1px;
   margin: 1px;
   outline: 1px solid var(--color-darker-blue);
 }
 
+/** video */
 .sun-editor-editable .se-video-container iframe,
 .sun-editor-editable .se-video-container video {
   outline: 1px solid var(--color-border);
@@ -3038,22 +3009,22 @@
   width: 100%;
   height: 100%;
 }
-
 .sun-editor-editable .se-video-container figure {
   left: 0px;
   width: 100%;
   max-width: 100%;
 }
 
+/** audio */
 .sun-editor-editable audio {
   width: 300px;
   height: 54px;
 }
-
 .sun-editor-editable audio.active {
   outline: 2px solid var(--color-light-blue);
 }
 
+/** --- show blocks mode */
 .sun-editor-editable.se-show-block p,
 .sun-editor-editable.se-show-block div,
 .sun-editor-editable.se-show-block h1,
@@ -3069,81 +3040,70 @@
   border: 1px dashed var(--color-blue) !important;
   padding: 14px 8px 8px 8px !important;
 }
-
 .sun-editor-editable.se-show-block ol,
 .sun-editor-editable.se-show-block ul {
   border: 1px dashed #d539ff !important;
 }
-
 .sun-editor-editable.se-show-block pre {
   border: 1px dashed #27c022 !important;
 }
-
 .se-show-block p {
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAPAQMAAAAF7dc0AAAABlBMVEWAgID////n1o2sAAAAAnRSTlP/AOW3MEoAAAAaSURBVAjXY/j/gwGCPvxg+F4BQiAGDP1HQQByxxw0gqOzIwAAAABJRU5ErkJggg==")
     no-repeat;
 }
-
 .se-show-block div {
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAPAQMAAAAxlBYoAAAABlBMVEWAgID////n1o2sAAAAAnRSTlP/AOW3MEoAAAAmSURBVAjXY/j//wcDDH+8XsHwDYi/hwNx1A8w/nYLKH4XoQYJAwCXnSgcl2MOPgAAAABJRU5ErkJggg==")
     no-repeat;
 }
-
 .se-show-block h1 {
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAPAQMAAAA4f7ZSAAAABlBMVEWAgID////n1o2sAAAAAnRSTlP/AOW3MEoAAAAfSURBVAjXY/j/v4EBhr+9B+LzEPrDeygfhI8j1CBhAEhmJGY4Rf6uAAAAAElFTkSuQmCC")
     no-repeat;
 }
-
 .se-show-block h2 {
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAPAQMAAAA4f7ZSAAAABlBMVEWAgID////n1o2sAAAAAnRSTlP/AOW3MEoAAAAmSURBVAjXY/j/v4EBhr+dB+LtQPy9geEDEH97D8T3gbgdoQYJAwA51iPuD2haEAAAAABJRU5ErkJggg==")
     no-repeat;
 }
-
 .se-show-block h3 {
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAPAQMAAAA4f7ZSAAAABlBMVEWAgID////n1o2sAAAAAnRSTlP/AOW3MEoAAAAiSURBVAjXY/j/v4EBhr+dB+LtQPy9geHDeQgN5p9HqEHCADeWI+69VG2MAAAAAElFTkSuQmCC")
     no-repeat;
 }
-
 .se-show-block h4 {
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAPAQMAAADTSA1RAAAABlBMVEWAgID////n1o2sAAAAAnRSTlP/AOW3MEoAAAAiSURBVAjXY/j//wADDH97DsTXIfjDdiDdDMTfIRhZHRQDAKJOJ6L+K3y7AAAAAElFTkSuQmCC")
     no-repeat;
 }
-
 .se-show-block h5 {
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAPAQMAAAA4f7ZSAAAABlBMVEWAgID////n1o2sAAAAAnRSTlP/AOW3MEoAAAAlSURBVAjXY/j/v4EBhr+1A/F+IO5vYPiwHUh/B2IQfR6hBgkDABlWIy5uM+9GAAAAAElFTkSuQmCC")
     no-repeat;
 }
-
 .se-show-block h6 {
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAPAQMAAAA4f7ZSAAAABlBMVEWAgID////n1o2sAAAAAnRSTlP/AOW3MEoAAAAiSURBVAjXY/j/v4EBhr+dB+LtQLy/geFDP5S9HSKOrA6KAR9GIza1ptJnAAAAAElFTkSuQmCC")
     no-repeat;
 }
-
 .se-show-block li {
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAYAAADkmO9VAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAA7SURBVDhPYxgFcNDQ0PAfykQBIHEYhgoRB/BpwCfHBKWpBkaggYxQGgOgBzyQD1aLLA4TGwWDGjAwAACR3RcEU9Ui+wAAAABJRU5ErkJggg==")
     no-repeat;
 }
-
 .se-show-block ol {
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAYAAABiDJ37AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABHSURBVDhPYxgFcNDQ0PAfhKFcFIBLHCdA1oBNM0kGEmMAPgOZoDTVANUNxAqQvURMECADRiiNAWCagDSGGhyW4DRrMAEGBgAu0SX6WpGgjAAAAABJRU5ErkJggg==")
     no-repeat;
 }
-
 .se-show-block ul {
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAYAAABiDJ37AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAA1SURBVDhPYxgFDA0NDf+hTBSALI5LDQgwQWmqgVEDKQcsUBoF4ItFGEBXA+QzQpmDGjAwAAA8DQ4Lni6gdAAAAABJRU5ErkJggg==")
     no-repeat;
 }
 
+/** -- Paragraph styles custom -- */
+/* Bordered */
 .sun-editor-editable .__se__p-bordered {
   border-top: solid 1px var(--color-border);
   border-bottom: solid 1px var(--color-border);
   padding: 4px 0;
 }
-
+/* Spaced */
 .sun-editor-editable .__se__p-spaced {
   letter-spacing: 6px;
 }
-
+/* Neon (https://codepen.io/GeorgePark/pen/MrjbEr) */
 .sun-editor-editable .__se__p-neon {
   font-weight: 200;
   font-style: italic;
@@ -3155,7 +3115,6 @@
   text-transform: uppercase;
   animation: neonFlicker 1.5s infinite alternate;
 }
-
 @keyframes neonFlicker {
   0%,
   19%,
@@ -3178,12 +3137,14 @@
   }
 }
 
+/* -- Text styles custom -- */
+/* Shadow */
 .sun-editor-editable .__se__t-shadow {
   text-shadow: -0.2rem -0.2rem 1rem #fff, 0.2rem 0.2rem 1rem #fff,
     0 0 0.2rem #999, 0 0 0.4rem #888, 0 0 0.6rem #777, 0 0 0.8rem #666,
     0 0 1rem #555;
 }
-
+/* Code */
 .sun-editor-editable .__se__t-code {
   background-color: var(--color-dark-bg);
   opacity: 0.7;
