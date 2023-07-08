@@ -5,6 +5,7 @@ import { RiCloseLine as CloseIcon } from "react-icons/ri";
 import CommentBox from "../components/comment/CommentBox";
 import { CommentContext } from "../contexts/CommentContext";
 import CommentTree from "../components/comment/CommentTree";
+import NoResult from "../components/emptyPlaceholder/NoResult";
 import { twMerge } from "tailwind-merge";
 import useCommentAction from "../hooks/useCommentAction";
 
@@ -42,7 +43,10 @@ function CommentPage({ blogId, toggleCommentView, open = false }) {
 
   useEffect(() => {
     if (open) {
+      document.body.classList.add("no-scroll");
       refetchComments();
+    } else if (!open) {
+      document.body.classList.remove("no-scroll");
     }
   }, [open, pagination]);
 
@@ -58,11 +62,11 @@ function CommentPage({ blogId, toggleCommentView, open = false }) {
       <section
         ref={commentSectionRef}
         className={twMerge(
-          "overflow-y-auto float-right h-screen gap-5 flex flex-col w-full sm:w-5/6 sm:max-w-2xl p-6 bg-paper transition-transform",
+          "overflow-y-auto float-right h-screen w-full sm:w-5/6 sm:max-w-2xl bg-paper transition-transform",
           open ? "translate-x-0" : "translate-x-full"
         )}
       >
-        <div className="inline-flex items-center mb-4">
+        <div className="w-full inline-flex items-center p-6 sticky top-0 bg-paper z-10">
           <h1 className="text-xl font-semibold">Comments</h1>
 
           <button
@@ -74,27 +78,38 @@ function CommentPage({ blogId, toggleCommentView, open = false }) {
           </button>
         </div>
 
-        {isAuthenticated && <CommentBox onSubmit={onCommentSubmit} />}
+        <div className="flex flex-col gap-4 px-6 py-3">
+          {isAuthenticated && <CommentBox onSubmit={onCommentSubmit} />}
 
-        {open && <CommentTree commentIds={comments.root.children} />}
+          {open && !!paginatedData?.data?.length && (
+            <CommentTree commentIds={comments.root.children} />
+          )}
 
-        <button
-          className="btn-base w-full py-2 mt-2"
-          onClick={() =>
-            setPagination((prev) => ({ ...prev, page: prev.page + 1 }))
-          }
-          style={{
-            display: pagination.page >= paginatedData?.totalPages && "none",
-          }}
-        >
-          Load{" "}
-          {Math.min(
-            paginatedData?.pageSize,
-            paginatedData?.totalItems -
-              pagination.page * paginatedData?.pageSize
-          )}{" "}
-          more
-        </button>
+          {open && !paginatedData?.data?.length && (
+            <NoResult
+              title="No Comments Yet!!!"
+              subtitle="Be the first person to comment"
+            />
+          )}
+
+          <button
+            className="btn-base w-full py-2 mt-2"
+            onClick={() =>
+              setPagination((prev) => ({ ...prev, page: prev.page + 1 }))
+            }
+            style={{
+              display: pagination.page >= paginatedData?.totalPages && "none",
+            }}
+          >
+            Load{" "}
+            {Math.min(
+              paginatedData?.pageSize,
+              paginatedData?.totalItems -
+                pagination.page * paginatedData?.pageSize
+            )}{" "}
+            more
+          </button>
+        </div>
       </section>
     </main>
   );
