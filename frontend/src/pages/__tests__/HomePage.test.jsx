@@ -9,19 +9,23 @@ import { ThemeContextProvider } from "../../contexts/ThemeContext";
 import useBlogAction from "../../hooks/useBlogAction";
 import { vitest } from "vitest";
 
-const renderWithWrapper = (ui, { ...renderOptions } = {}) => {
+const renderWithWrapper = (
+  ui,
+  {
+    authContextData = {
+      authData: {
+        id: 1,
+      },
+      isAuthenticated: true,
+    },
+    ...renderOptions
+  } = {}
+) => {
   const Wrapper = ({ children }) => {
     return (
       <BrowserRouter>
         <QueryClientProvider client={new QueryClient()}>
-          <AuthContext.Provider
-            value={{
-              authData: {
-                id: 1,
-              },
-              isAuthenticated: true,
-            }}
-          >
+          <AuthContext.Provider value={authContextData}>
             <ModalContextProvider>
               <ThemeContextProvider>{children}</ThemeContextProvider>
             </ModalContextProvider>
@@ -32,6 +36,11 @@ const renderWithWrapper = (ui, { ...renderOptions } = {}) => {
   };
   return render(ui, { wrapper: Wrapper, ...renderOptions });
 };
+
+vitest.mock("react-router-dom", async () => ({
+  ...(await vitest.importActual("react-router-dom")),
+  useNavigate: vitest.fn(),
+}));
 
 vitest.mock("../../hooks/useBlogAction", () => ({
   default: vitest.fn(() => ({
@@ -55,7 +64,7 @@ describe("HomePage", () => {
               content: "content",
               user: {
                 id: 1,
-                username: "username",
+                name: "username",
               },
             },
           ],

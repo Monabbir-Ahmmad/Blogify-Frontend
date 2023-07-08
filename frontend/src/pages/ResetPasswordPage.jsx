@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import useAuthAction from "../hooks/useAuthAction";
 import { useContext } from "react";
 
-function ForgotPasswordPage() {
+function ResetPasswordPage() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { control, watch, handleSubmit } = useForm();
@@ -105,4 +105,4 @@ function ForgotPasswordPage() {
   );
 }
 
-export default ForgotPasswordPage;
+export default ResetPasswordPage;

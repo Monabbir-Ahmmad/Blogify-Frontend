@@ -12,6 +12,7 @@ function SignupForm({ onSubmit }) {
 
   return (
     <form
+      data-testid="signup-form"
       className="flex flex-col gap-5 w-full"
       onSubmit={handleSubmit(onSubmit)}
     >

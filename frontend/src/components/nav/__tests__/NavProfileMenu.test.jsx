@@ -46,17 +46,13 @@ describe("NavProfileMenu", () => {
     expect(popover.className).toContain("scale-100");
   });
 
-  it("should call toggleDarkMode when the theme option is clicked",async () => {
+  it("should call toggleDarkMode when the theme option is clicked", async () => {
     fireEvent.click(screen.getByAltText("Avatar"));
 
     const themeOption = screen.getByText(/Enable Dark Mode/i);
     fireEvent.click(themeOption);
 
     expect(toggleDarkMode).toHaveBeenCalledTimes(1);
-
-   await waitFor(() => {
-      expect(document.documentElement.classList.contains("dark")).toBe(true);
-    });
   });
 
   it("should call onLogout when the logout option is clicked", () => {

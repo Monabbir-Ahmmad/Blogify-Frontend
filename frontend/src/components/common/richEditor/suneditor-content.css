@@ -117,25 +117,23 @@
 }
 
 /* ol, ul */
-.sun-editor-editable ol {
-  list-style-position: outside;
-  display: block;
-  list-style-type: decimal;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  padding-inline-start: 40px;
-}
+.sun-editor-editable ol,
 .sun-editor-editable ul {
   list-style-position: outside;
   display: block;
-  list-style-type: disc;
   margin-block-start: 1em;
   margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
   padding-inline-start: 40px;
+}
+
+.sun-editor-editable ol {
+  list-style-type: decimal;
+}
+
+.sun-editor-editable ul {
+  list-style-type: disc;
 }
 .sun-editor-editable li {
   display: list-item;
@@ -206,14 +204,10 @@
   margin-inline-start: 0;
   margin-inline-end: 0;
   border-style: solid;
-  border-width: 0;
-  padding-top: 0;
-  padding-bottom: 0;
   border-color: var(--color-border);
   padding-left: 20px;
   padding-right: 5px;
   border-left-width: 5px;
-  border-right-width: 0px;
 }
 .sun-editor-editable blockquote blockquote {
   border-color: var(--color-border);

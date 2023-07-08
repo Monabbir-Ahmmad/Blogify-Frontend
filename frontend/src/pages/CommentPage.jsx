@@ -48,6 +48,7 @@ function CommentPage({ blogId, toggleCommentView, open = false }) {
 
   return (
     <main
+      data-testid="comment-page"
       className={twMerge(
         "z-50 fixed inset-0 bg-black bg-opacity-25 dark:bg-opacity-50 transition-opacity",
         open ? "opacity-100" : "opacity-0 pointer-events-none"
@@ -64,7 +65,11 @@ function CommentPage({ blogId, toggleCommentView, open = false }) {
         <div className="inline-flex items-center mb-4">
           <h1 className="text-xl font-semibold">Comments</h1>
 
-          <button className="ml-auto icon-btn-base" onClick={toggleCommentView}>
+          <button
+            data-testid="close-button"
+            className="ml-auto icon-btn-base"
+            onClick={toggleCommentView}
+          >
             <CloseIcon size={20} />
           </button>
         </div>

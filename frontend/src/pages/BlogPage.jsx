@@ -96,7 +96,7 @@ function BlogPage() {
       <div className="flex flex-col items-center max-w-7xl mx-auto rounded-lg">
         <img
           src={data?.coverImage ?? getRandomImage(data?.id, { width: 1000 })}
-          alt=""
+          alt="Cover Image"
           className="w-full h-60 md:h-96 lg:rounded-lg rounded-t-lg object-cover"
         />
         <div className="flex flex-col bg-background w-full gap-6 p-4 pb-12 lg:-mt-28 max-w-5xl sm:p-10 sm:mx-12 lg:rounded-lg">

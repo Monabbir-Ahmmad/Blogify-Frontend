@@ -7,13 +7,7 @@ import { RiUpload2Line as PublishIcon } from "react-icons/ri";
 import RichEditor from "../common/richEditor/RichEditor";
 import { toast } from "react-toastify";
 
-function BlogWriteForm({
-  onSubmit,
-  resetForm,
-  onFormReset,
-  isEditMode = false,
-  defaultValues,
-}) {
+function BlogWriteForm({ onSubmit, isEditMode = false, defaultValues }) {
   const { control, handleSubmit, reset } = useForm();
   const editorRef = useRef();
   const [coverImage, setCoverImage] = useState();
@@ -27,13 +21,6 @@ function BlogWriteForm({
       title: defaultValues?.title,
     });
   }, [defaultValues]);
-
-  useEffect(() => {
-    if (resetForm) {
-      resetFields();
-      onFormReset();
-    }
-  }, [resetForm]);
 
   const onCoverImageChange = (file) => setCoverImage(file);
 
@@ -50,12 +37,6 @@ function BlogWriteForm({
       content: editorRef.current.getContents(),
       coverImage,
     });
-  };
-
-  const resetFields = () => {
-    reset({ title: "" });
-    editorRef.current.setContents("");
-    setCoverImage(null);
   };
 
   return (
