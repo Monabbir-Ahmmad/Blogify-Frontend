@@ -92,6 +92,20 @@ describe("CommentPage", () => {
     ).toBe(true);
   });
 
+  it("should show no result when no data is available", () => {
+    renderWithWrapper(
+      <CommentPage
+        blogId={blogId}
+        toggleCommentView={toggleCommentViewMock}
+        open={true}
+      />
+    );
+
+    expect(screen.getByTestId("empty-result-image")).toBeInTheDocument();
+
+    expect(screen.getByText("No Comments Yet!!!")).toBeInTheDocument();
+  });
+
   it("should call toggleCommentView when close button is clicked", () => {
     renderWithWrapper(
       <CommentPage

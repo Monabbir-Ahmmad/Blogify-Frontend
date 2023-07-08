@@ -66,6 +66,10 @@ html {
   background: var(--color-background);
 }
 
+body.no-scroll::-webkit-scrollbar {
+  width: 0px;
+}
+
 button:disabled,
 button:disabled:hover,
 button:disabled:focus,
