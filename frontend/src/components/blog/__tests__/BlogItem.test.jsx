@@ -131,7 +131,9 @@ describe("BlogItem", () => {
 
     fireEvent.click(confirmButton);
 
-    expect(mutateMock).toHaveBeenCalledWith(blog.id);
+    expect(mutateMock).toHaveBeenCalledWith(blog.id, {
+      onSuccess: expect.any(Function),
+    });
   });
 
   it("should show the blog as liked when the user has liked the blog", () => {

@@ -1,7 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import blogService from "../services/blogService";
-import { toast } from "react-toastify";
 
 function useBlogAction() {
   const queryClient = useQueryClient();
@@ -56,7 +55,6 @@ function useBlogAction() {
   const blogDeleteMutation = useMutation({
     mutationFn: blogService.delete,
     onSuccess: (_, blogId) => {
-      toast.success("Blog deleted successfully");
       queryClient.removeQueries(["getBlog", blogId]);
       queryClient.invalidateQueries(["getBlogs"]);
       queryClient.invalidateQueries(["getUserBlogs"]);
