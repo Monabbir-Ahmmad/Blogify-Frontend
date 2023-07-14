@@ -32,6 +32,7 @@
 
 /* suneditor contents */
 .sun-editor-editable {
+  line-height: 1;
   color: inherit;
   word-break: normal;
   word-wrap: break-word;
