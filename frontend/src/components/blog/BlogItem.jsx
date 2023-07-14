@@ -19,6 +19,7 @@ import ConfirmationDialog from "../common/dialog/ConfirmationDialog";
 import Popover from "../common/popover/Popover";
 import RichContentRenderer from "../common/richEditor/RichContentRenderer";
 import dayjs from "dayjs";
+import { toast } from "react-toastify";
 import { twMerge } from "tailwind-merge";
 import useBlogAction from "../../hooks/useBlogAction";
 import { useModal } from "../../contexts/ModalContext";
@@ -41,7 +42,11 @@ function BlogItem({ blog }) {
       <ConfirmationDialog
         type="danger"
         onConfirm={() => {
-          blogDeleteMutation.mutate(blog?.id);
+          blogDeleteMutation.mutate(blog?.id, {
+            onSuccess: () => {
+              toast.success("Blog deleted successfully");
+            },
+          });
           closeModal();
         }}
         onCancel={closeModal}

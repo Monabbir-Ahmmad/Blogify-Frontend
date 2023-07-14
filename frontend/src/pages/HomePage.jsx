@@ -25,7 +25,7 @@ function HomePage() {
 
         <hr className="border-divider" />
 
-        {paginatedData?.data.length === 0 && <NoResult />}
+        {!paginatedData?.data?.length && <NoResult />}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {paginatedData?.data.map((blog) => (

@@ -56,7 +56,7 @@ function BlogPage() {
           blogDeleteMutation.mutate(blogId, {
             onSuccess: () => {
               toast.success("Blog deleted successfully");
-              navigate(-1);
+              navigate("/");
             },
           });
           closeModal();
@@ -89,7 +89,7 @@ function BlogPage() {
       <CommentContextProvider>
         <CommentPage
           blogId={blogId}
-          open={!!openComments.get("comments")}
+          open={openComments.get("comments") === "open"}
           toggleCommentView={toggleCommentView}
         />
       </CommentContextProvider>
