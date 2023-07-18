@@ -23,7 +23,11 @@ function CommentBox({
   };
 
   useEffect(() => {
-    ref.current?.scrollIntoView({ behavior: "smooth" });
+    ref.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+      inline: "nearest",
+    });
 
     return () => {
       ref.current = null;
