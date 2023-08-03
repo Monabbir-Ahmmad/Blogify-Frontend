@@ -1,7 +1,7 @@
 import apiUrl from "../constants/apiUrl";
 import httpClient from "../utils/httpClient";
 
-class AuthService {
+class BlogService {
   async post({ title, content, coverImage }) {
     title = title.trim();
 
@@ -67,4 +67,4 @@ class AuthService {
   }
 }
 
-export default new AuthService();
+export default new BlogService();
